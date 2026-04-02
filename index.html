@@ -1,0 +1,363 @@
+<style>* {
+  box-sizing: border-box;
+}
+
+body {
+  background: #f0f4f5;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  padding: 15px;
+  font-family: "Montserrat", sans-serif;
+}
+
+.app-container {
+  width: 100vw; /* Occupa tutta la larghezza dello schermo */
+  height: 100vh; /* Occupa tutta l'altezza dello schermo */
+  max-width: none; /* Rimuoviamo il limite dei 380px per il caricamento online */
+  border-radius: 0; /* Su tutto lo schermo i bordi arrotondati non servono più */
+  /* ... resto del codice ... */
+  background: white;
+  width: 100%;
+  max-width: 380px;
+  padding: 25px;
+  border-radius: 30px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  min-height: 600px; /* Evita che il contenitore salti quando cambi scena */
+}
+
+.scena {
+  display: none;
+  width: 100%;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+h1 {
+  color: #008080;
+  font-weight: 700;
+  font-size: 1.8rem;
+  margin: 0;
+}
+
+.qr-frame {
+  border: 6px solid #d4af37;
+  border-radius: 25px;
+  padding: 15px;
+  display: inline-block;
+  margin: 20px 0;
+}
+
+.btn-main {
+  background: #008080;
+  color: white;
+  border: none;
+  padding: 18px;
+  border-radius: 15px;
+  width: 100%;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+/* --- TABELLA REGISTRO (MIGLIORATA) --- */
+#tabella-pazienti {
+  width: 100%;
+  border-collapse: separate; /* FONDAMENTALE per distanziare le righe */
+  border-spacing: 0 12px; /* Crea lo spazio tra un paziente e l'altro */
+  margin-top: 15px;
+}
+
+#tabella-pazienti td {
+  padding: 18px 12px;
+  background: #f9f9f9; /* Grigio chiarissimo per far risaltare il bianco di fondo */
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+}
+
+#tabella-pazienti td:first-child {
+  border-left: 1px solid #eee;
+  border-radius: 15px 0 0 15px;
+  font-weight: 700;
+  color: #333;
+  text-align: left;
+}
+
+#tabella-pazienti td:last-child {
+  border-right: 1px solid #eee;
+  border-radius: 0 15px 15px 0;
+  text-align: right;
+}
+
+/* --- BADGE STATO --- */
+.badge {
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 0.65rem;
+  border: 1px solid;
+  cursor: pointer;
+}
+
+.wait {
+  background: #fff9e6;
+  color: #d4af37;
+  border-color: #d4af37;
+}
+.ok {
+  background: #eaffea;
+  color: #27ae60;
+  border-color: #27ae60;
+}
+
+/* --- INPUT GROUP --- */
+.input-group {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 5px;
+}
+
+.input-group input {
+  flex: 1;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  font-family: "Montserrat", sans-serif;
+  outline: none;
+}
+
+.input-group button {
+  background: #008080;
+  color: white;
+  border: none;
+  padding: 0 15px;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+/* --- IL NUOVO VECCHIO REGALO (TEAL & YELLOW) --- */
+
+.gift-box-container {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  margin: 0 auto 25px auto;
+}
+
+/* Scatola Teal */
+.gift-box-teal {
+  background-color: #008080;
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  bottom: 0;
+  left: 10px;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0, 128, 128, 0.2);
+  overflow: hidden; /* Mantiene i nastri dentro */
+}
+
+/* Nastri Gialli sulla scatola */
+.ribbon-vertical {
+  position: absolute;
+  left: 42px; /* Centrato */
+  width: 16px;
+  height: 100%;
+  background-color: #f1d57e;
+  border-left: 2px solid #d4af37;
+  border-right: 2px solid #d4af37;
+}
+
+.ribbon-horizontal {
+  position: absolute;
+  top: 42px; /* Centrato verticalmente */
+  width: 100%;
+  height: 16px;
+  background-color: #f1d57e;
+  border-top: 2px solid #d4af37;
+  border-bottom: 2px solid #d4af37;
+}
+
+/* Fiocco SVG sopra la scatola */
+.gift-bow {
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+}
+
+/* Badge Sconto Giallo */
+.discount-badge-yellow {
+  background: #fdf9ea;
+  padding: 20px;
+  border-radius: 20px;
+  border: 3px dashed #d4af37; /* Bordo tratteggiato oro */
+  color: #d4af37;
+  margin-bottom: 15px;
+}
+
+.discount-badge-yellow span {
+  font-size: 2.8rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.discount-badge-yellow p {
+  margin: 5px 0 0 0;
+  font-weight: 600;
+  color: #b8962f;
+}</style>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+<div class="app-container">
+
+  <div id="scena-osteopata" class="scena" style="display: block;">
+    <h1>OsteoSpeak</h1>
+    <div class="qr-frame">
+      <div id="qrcode"></div>
+      <p class="qr-label">SCANSIONA</p>
+    </div>
+    <div class="stats-box">
+      <p>Pazienti Invitati: 5 / 10</p>
+      <div class="progress-bg">
+        <div class="progress-fill"></div>
+      </div>
+    </div>
+    <button class="btn-main" onclick="cambiaScena('lista')"><i class="fas fa-users"></i> GESTISCI PAZIENTI</button>
+
+  </div>
+
+  <div id="scena-paziente" class="scena">
+
+    <h2 style="color: #008080; margin-bottom: 20px;">Un Regalo per Te</h2>
+
+    <div class="gift-box-container">
+      <div class="gift-box-teal">
+        <div class="ribbon-vertical"></div>
+        <div class="ribbon-horizontal"></div>
+      </div>
+      <div class="gift-bow">
+        <svg width="80" height="50" viewBox="0 0 100 60">
+          <ellipse cx="30" cy="25" rx="22" ry="16" style="fill:#f1d57e; stroke:#d4af37; stroke-width:3" />
+          <ellipse cx="70" cy="25" rx="22" ry="16" style="fill:#f1d57e; stroke:#d4af37; stroke-width:3" />
+          <circle cx="50" cy="25" r="9" style="fill:#d4af37;" />
+          <path d="M 42 35 L 32 58 M 58 35 L 68 58" style="stroke:#d4af37; stroke-width:6; stroke-linecap:round;" />
+        </svg>
+      </div>
+    </div>
+
+    <div class="discount-badge-yellow">
+      <span>-10€</span>
+      <p>Sulla prima seduta</p>
+    </div>
+
+    <button class="btn-main" style="margin-top: 25px;" onclick="window.open('https://wa.me/393336740278?text=Ciao!%20Ho%20ricevuto%20lo%20sconto.')">
+      <i class="fab fa-whatsapp"></i> PRENOTA ORA
+    </button>
+
+    <div class="info-studio">
+      <p><strong><i class="fas fa-user-md"></i> Dr. Luca Ginevri</strong></p>
+      <p><i class="fas fa-location-dot"></i> Viale di Villa Pamphili,89 Roma</p>
+      <div class="social-row">
+        <i class="fab fa-facebook"></i>
+        <i class="fab fa-instagram"></i>
+      </div>
+    </div>
+
+    <p class="btn-back-minimal" onclick="cambiaScena('osteopata')" style="margin-top: 30px; cursor: pointer; color: #888;">
+      ← Torna alla Dashboard
+    </p>
+  </div>
+  <div id="scena-lista" class="scena">
+    <h2 style="margin-bottom: 20px;">Registro Sconti</h2>
+    <div class="input-group">
+      <input type="text" id="nuovo-paziente" placeholder="Nome paziente...">
+      <button onclick="aggiungiPaziente()"><i class="fas fa-plus"></i></button>
+    </div>
+    <table id="tabella-pazienti">
+      <thead>
+        <tr>
+          <th style="text-align: left; padding-left: 10px; font-size: 0.7rem; color: #aaa;">PAZIENTE</th>
+          <th style="text-align: right; padding-right: 10px; font-size: 0.7rem; color: #aaa;">STATO</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+    <p class="btn-back-minimal" onclick="cambiaScena('osteopata')" style="margin-top: 30px; cursor: pointer; color: #008080; font-weight: bold;">
+      ← TORNA ALLA DASHBOARD
+    </p>
+  </div>
+
+</div>
+<script>const urlGoogleSheet =
+  "https://script.google.com/macros/s/AKfycbwcQk1sogiuPVVlz2bSKzytK_trwICRYDVKblsHbWb_dpSbFpQwDHOLlyseLp2M0mlu/exec";
+
+// Genera QR
+setTimeout(() => {
+  new QRCode(document.getElementById("qrcode"), {
+    text: window.location.href,
+    width: 150,
+    height: 150
+  });
+}, 300);
+
+// Navigazione
+function cambiaScena(id) {
+  document
+    .querySelectorAll(".scena")
+    .forEach((s) => (s.style.display = "none"));
+  document.getElementById("scena-" + id).style.display = "block";
+}
+
+// CAMBIO STATO AL CLICK
+function toggleStato(elemento) {
+  if (elemento.innerText === "ATTESA") {
+    elemento.innerText = "USATO";
+    elemento.classList.replace("wait", "ok");
+  } else {
+    elemento.innerText = "ATTESA";
+    elemento.classList.replace("ok", "wait");
+  }
+}
+
+// AGGIUNTA PAZIENTE
+async function aggiungiPaziente() {
+  const input = document.getElementById("nuovo-paziente");
+  const nome = input.value.trim();
+  if (!nome) return;
+
+  const tabella = document.querySelector("#tabella-pazienti tbody");
+  const riga = document.createElement("tr");
+  riga.innerHTML = `<td><strong>${nome}</strong></td><td style="text-align:right"><span class="badge wait" onclick="toggleStato(this)">INVIO...</span></td>`;
+  tabella.prepend(riga);
+  input.value = "";
+
+  try {
+    if (urlGoogleSheet.includes("exec")) {
+      await fetch(urlGoogleSheet, {
+        method: "POST",
+        mode: "no-cors",
+        body: JSON.stringify({ nome: nome })
+      });
+    }
+    riga.querySelector(".badge").innerText = "ATTESA";
+  } catch (e) {
+    riga.querySelector(".badge").innerText = "ATTESA";
+  }
+}
+</script>
