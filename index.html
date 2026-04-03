@@ -196,30 +196,29 @@
     }
 
     function nuovoPaziente() {
-        if(!isPro && pazienti.length >= 10) return;
-        const nome = document.getElementById('new-nome').value.trim();
-        const tel = document.getElementById('new-tel').value.trim();
-        const premio = document.getElementById('new-premio').value;
-        
-        if(!nome || !tel) { alert("Inserisci Nome e Cellulare!"); return; }
+    if(!isPro && pazienti.length >= 10) return;
+    const nome = document.getElementById('new-nome').value;
+    const telPaziente = document.getElementById('new-tel').value; // Prende il numero dal campo input
+    const premio = document.getElementById('new-premio').value;
+    
+    if(!nome || !telPaziente) return alert("Inserisci Nome e Cellulare del paziente!");
 
-        const p = { 
-            id: "PX" + Math.floor(Math.random() * 9000), 
-            nome: nome, 
-            tel: tel, 
-            ref: 0, 
-            waStudio: config.w, 
-            att: config.n, 
-            premio: premio,
-            owner: deviceId 
-        };
-        
-        pazienti.push(p);
-        sync(p);
-        
-        document.getElementById('new-nome').value = "";
-        document.getElementById('new-tel').value = "";
-    }
+    const p = { 
+        id: "PX" + Math.floor(Math.random()*9000), 
+        nome: nome, 
+        tel: telPaziente, // <--- IMPORTANTE: stiamo salvando il numero del PAZIENTE
+        ref: 0, 
+        waStudio: config.w, 
+        att: config.n, 
+        premio: premio, 
+        owner: deviceId 
+    };
+    pazienti.push(p);
+    sync(p);
+    document.getElementById('new-nome').value = ""; 
+    document.getElementById('new-tel').value = "";
+}
+
 
     function renderDash() {
         const cont = document.getElementById('lista-pazienti');
@@ -342,11 +341,12 @@
     }
 
     function resetApp() {
-    // Se l'esercente vuole cambiare studio o resettare la vista
-    if(confirm("Vuoi tornare alla gestione principale?")) {
-        window.location.href = window.location.pathname;
+    if (confirm("Vuoi uscire dalla gestione attuale e tornare alla configurazione dello studio? (I dati dei pazienti rimarranno salvati)")) {
+        localStorage.removeItem('spich_cfg'); // Cancella solo il nome studio e il WA dello studio
+        location.href = location.pathname;    // Ricarica la pagina pulita
     }
 }
+
 
 </script>
 </body>
