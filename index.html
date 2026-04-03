@@ -10,28 +10,26 @@
     <style>
         :root { --primary: #008080; --gold: #d4af37; --bg: #fdfdfd; --danger: #e74c3c; --success: #2ecc71; }
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; margin: 0; padding: 0; }
-        body { background: #f4f6f7; font-family: 'Montserrat', sans-serif; color: #2c3e50; }
+        body { background: #f4f6f7; font-family: 'Montserrat', sans-serif; color: #2c3e50; overflow-x: hidden; }
         .app-container { background: var(--bg); width: 100vw; min-height: 100vh; max-width: 450px; margin: 0 auto; display: flex; flex-direction: column; box-shadow: 0 0 30px rgba(0,0,0,0.1); }
         .header { padding: 20px; text-align: center; background: white; border-bottom: 1px solid #eee; cursor: pointer; }
         .logo { font-family: 'Comfortaa', cursive; font-size: 2.2rem; color: var(--primary); }
         .logo span { color: var(--gold); }
         .scena { display: none; padding: 20px; flex: 1; }
-        .active { display: block; animation: fadeIn 0.3s ease; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        .stat-card { background: white; padding: 20px; border-radius: 18px; text-align: center; border-bottom: 5px solid var(--gold); margin-bottom: 20px; position: relative; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        .active { display: block !important; }
+        .stat-card { background: white; padding: 20px; border-radius: 18px; text-align: center; border-bottom: 5px solid var(--gold); margin-bottom: 20px; position: relative; }
         .stat-card b { font-size: 2.8rem; color: var(--primary); display: block; }
         .badge-pro { background: #999; color: white; padding: 4px 10px; border-radius: 6px; font-size: 0.7rem; position: absolute; top: 10px; right: 10px; font-weight: 800; }
         .badge-pro.is-pro { background: var(--success); }
         .form-box { background: white; padding: 18px; border-radius: 18px; border: 1px solid #eee; margin-bottom: 25px; }
-        label { font-size: 0.75rem; font-weight: 800; color: var(--primary); text-transform: uppercase; margin-left: 5px; }
-        input, select { width: 100%; padding: 14px; margin: 8px 0 15px 0; border-radius: 12px; border: 1.5px solid #eee; font-family: inherit; font-size: 1rem; outline: none; }
+        label { font-size: 0.75rem; font-weight: 800; color: var(--primary); text-transform: uppercase; margin-left: 5px; display: block; margin-top: 10px; }
+        input, select { width: 100%; padding: 14px; margin: 5px 0 10px 0; border-radius: 12px; border: 1.5px solid #eee; font-family: inherit; font-size: 1rem; outline: none; }
         .btn-teal { background: var(--primary); color: white; border: none; padding: 18px; border-radius: 15px; font-weight: 800; width: 100%; cursor: pointer; font-size: 1.1rem; }
-        .btn-wa { background: #25D366; color: white; border: none; padding: 10px; border-radius: 50%; width: 45px; height: 45px; cursor: pointer; display: flex; align-items: center; justify-content: center; text-decoration: none; }
-        .btn-ref { background: var(--gold); border: none; padding: 10px 15px; border-radius: 12px; color: white; font-weight: 800; margin-left: 10px; cursor: pointer; }
         .p-item { background: white; padding: 15px; border-radius: 15px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; border: 1px solid #eee; position: relative; }
-        .btn-del { position: absolute; top: -8px; right: -8px; background: var(--danger); color: white; border: none; border-radius: 50%; width: 24px; height: 24px; font-size: 0.8rem; cursor: pointer; }
-        .lock-box { background: #fff5f5; border: 2px dashed var(--danger); border-radius: 15px; padding: 20px; text-align: center; display: none; margin-top: 15px; }
-        .btn-contact { background: var(--danger); color: white; padding: 12px; border-radius: 10px; text-decoration: none; display: inline-block; margin-top: 10px; font-weight: 800; border: none; width: 100%; cursor: pointer; }
+        .btn-wa { background: #25D366; color: white; border: none; padding: 10px; border-radius: 50%; width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; text-decoration: none; }
+        .btn-ref { background: var(--gold); border: none; padding: 10px 15px; border-radius: 12px; color: white; font-weight: 800; margin-left: 10px; cursor: pointer; }
+        .lock-box { background: #fff5f5; border: 2px dashed var(--danger); border-radius: 15px; padding: 20px; text-align: center; display: none; }
+        .btn-contact { background: var(--danger); color: white; padding: 12px; border-radius: 10px; font-weight: 800; border: none; width: 100%; cursor: pointer; margin-top: 10px; }
         .banner-oro { background: var(--gold); color: white; padding: 15px; border-radius: 10px; font-weight: 800; text-align: center; margin-top: 15px; }
         .footer-id { font-size: 0.65rem; color: #bbb; text-align: center; padding: 20px; }
     </style>
@@ -41,40 +39,45 @@
     <div class="header" onclick="resetApp()"><h1 class="logo">SPICH<span>.</span></h1></div>
 
     <div id="scena-setup" class="scena">
-        <h2 style="text-align:center; color:var(--primary); margin-bottom:20px;">Configura Attività</h2>
+        <h2 style="text-align:center; color:var(--primary); margin-bottom:20px;">Configura</h2>
         <div class="form-box">
             <label>Nome Attività</label>
-            <input type="text" id="set-att" placeholder="Es: Studio Rossi">
-            <label>WhatsApp Business</label>
-            <input type="tel" id="set-wa" placeholder="Es: 39333...">
+            <input type="text" id="set-att" placeholder="Esempio: Studio Rossi">
+            <label>WhatsApp (39...)</label>
+            <input type="tel" id="set-wa" placeholder="Esempio: 393331234567">
             <label>Categoria</label>
             <select id="set-cat">
                 <option value="pazienti">Studio Medico</option>
                 <option value="clienti">Centro Estetico</option>
                 <option value="ospiti">Ristorazione</option>
             </select>
-            <button class="btn-teal" onclick="registraEsercente()">ATTIVA ORA</button>
+            <button class="btn-teal" onclick="registraEsercente()">ATTIVA</button>
         </div>
     </div>
 
     <div id="scena-dash" class="scena">
-        <div class="stat-card"><div id="pro-tag" class="badge-pro">FREE</div><b id="count-clienti">0</b><span id="label-contatore">Contatti</span></div>
+        <div class="stat-card">
+            <div id="pro-tag" class="badge-pro">FREE</div>
+            <b id="count-clienti">0</b>
+            <span id="label-contatore">Contatti Attivi</span>
+        </div>
         <div class="form-box">
             <label id="label-nome-input">Nome</label>
             <input type="text" id="new-nome" placeholder="Nome">
             <label>Cellulare</label>
             <input type="tel" id="new-tel" placeholder="Cellulare">
-            <label>Premio Referral</label>
+            <label>Premio</label>
             <select id="new-premio" onchange="checkCustom()">
                 <option value="Sconto 20%">Sconto 20%</option>
+                <option value="Sconto 50%">Sconto 50%</option>
                 <option value="Omaggio">Omaggio</option>
-                <option value="CUSTOM">-- Scrivi Premio (PRO) --</option>
+                <option value="CUSTOM">-- Premio Personalizzato (PRO) --</option>
             </select>
-            <input type="text" id="new-custom" placeholder="Premio Personalizzato" style="display:none;">
+            <input type="text" id="new-custom" placeholder="Scrivi il premio..." style="display:none;">
             <button id="btn-add" class="btn-teal" onclick="nuovoPaziente()">AGGIUNGI</button>
             <div id="msg-lock" class="lock-box">
-                <p style="color:var(--danger); font-weight:800;">LIMITE RAGGIUNTO!</p>
-                <button onclick="richiediPro()" class="btn-contact">PASSA A PRO</button>
+                <p style="color:var(--danger); font-weight:800;">LIMITE 10 RAGGIUNTO</p>
+                <button onclick="richiediPro()" class="btn-contact">ATTIVA PRO</button>
             </div>
         </div>
         <div id="lista-pazienti"></div>
@@ -84,7 +87,7 @@
     <div id="scena-regalo" class="scena">
         <div style="text-align:center;">
             <h2 id="reg-att"></h2>
-            <div id="qrcode" style="margin:20px 0; display:inline-block; background:white; padding:10px; border-radius:10px;"></div>
+            <div id="qrcode" style="margin:20px 0; display:inline-block; background:white; padding:10px; border-radius:10px; border:1px solid #eee;"></div>
             <div id="reg-premio" class="banner-oro"></div>
             <div id="area-prenota" style="display:none; margin-top:20px;">
                 <button class="btn-teal" onclick="prenotaAmico()">PRENOTA ORA</button>
@@ -94,6 +97,7 @@
 </div>
 
 <script>
+    // --- INSERISCI QUI IL TUO URL DI GOOGLE ---
     const API_URL = "https://script.google.com/macros/s/AKfycbysSent-QNgWGOiLWmNrWwhzFPfJr6ZIUNz7dJuKqrZDSj2E_SmGwi5uIC67PPOT8u2/exec"; 
 
     let deviceId = localStorage.getItem('spich_dev_id') || ('SP-' + Math.floor(1000 + Math.random() * 8999));
@@ -102,37 +106,46 @@
     let pazienti = JSON.parse(localStorage.getItem('spich_cli')) || [];
     let isPro = false;
 
-    window.onload = async function() {
+    // Funzione principale: Carica la pagina PRIMA di fare controlli lenti
+    window.onload = function() {
         document.getElementById('dev-id').innerText = deviceId;
         const p = new URLSearchParams(window.location.search);
-        if (p.get('v') === 'gift') { mostra('regalo'); initCliente(p); }
-        else {
-            await verificaStatoPro();
-            if (!config) mostra('setup');
-            else { mostra('dash'); aggiornaTesti(); renderDash(); }
+        
+        if (p.get('v') === 'gift') {
+            mostra('regalo');
+            initCliente(p);
+        } else if (!config) {
+            mostra('setup');
+        } else {
+            mostra('dash');
+            aggiornaTesti();
+            renderDash();
+            // Controlla lo stato PRO in background senza bloccare la pagina
+            verificaStatoPro();
         }
     };
 
     async function verificaStatoPro() {
+        if (!API_URL.includes("http")) return;
         try {
             const resp = await fetch(API_URL + "?checkPro=" + deviceId);
             const data = await resp.json();
-            isPro = (data.isPro === true);
-            if(isPro) {
+            if(data.isPro) {
+                isPro = true;
                 document.getElementById('pro-tag').innerText = "PRO";
                 document.getElementById('pro-tag').classList.add('is-pro');
             }
-        } catch(e) { console.log("Offline"); }
+        } catch(e) { console.log("C'è un problema con il link Google Script o sei offline."); }
     }
 
     function registraEsercente() {
         const n = document.getElementById('set-att').value.trim();
         const w = document.getElementById('set-wa').value.trim();
         const c = document.getElementById('set-cat').value;
-        if(!n || !w) return alert("Dati mancanti!");
+        if(!n || !w) return alert("Compila tutto!");
         config = { n, w, cat: c };
         localStorage.setItem('spich_cfg', JSON.stringify(config));
-        fetch(API_URL, { method: "POST", mode: "no-cors", body: JSON.stringify({tipo:'REG_ESERCENTE', deviceId: deviceId, nomeAtt: n, wa: w}) });
+        fetch(API_URL, { method: "POST", mode: "no-cors", body: JSON.stringify({tipo:'REG_ESERCENTE', deviceId, nomeAtt: n, wa: w}) });
         location.reload();
     }
 
@@ -146,72 +159,6 @@
         const val = document.getElementById('new-premio').value;
         const field = document.getElementById('new-custom');
         if(val === "CUSTOM") {
-            if(!isPro) { alert("Solo per PRO!"); document.getElementById('new-premio').value = "Sconto 20%"; }
-            else { field.style.display = "block"; }
-        } else { field.style.display = "none"; }
-    }
-
-    function nuovoPaziente() {
-        if(!isPro && pazienti.length >= 10) return;
-        const nome = document.getElementById('new-nome').value.trim();
-        const tel = document.getElementById('new-tel').value.trim();
-        let premio = document.getElementById('new-premio').value;
-        if(premio === "CUSTOM") premio = document.getElementById('new-custom').value;
-        if(!nome || !tel || !premio) return alert("Mancano dati!");
-        const p = { id: "PX"+Math.floor(Math.random()*9000), nome, tel, ref: 0, waStudio: config.w, att: config.n, premio, owner: deviceId };
-        pazienti.push(p);
-        saveSync(p);
-        document.getElementById('new-nome').value = "";
-        document.getElementById('new-tel').value = "";
-    }
-
-    function renderDash() {
-        const cont = document.getElementById('lista-pazienti');
-        cont.innerHTML = "";
-        pazienti.forEach((p, i) => {
-            const delBtn = isPro ? `<button class="btn-del" onclick="cancellaPaz(${i})">X</button>` : "";
-            cont.innerHTML += `<div class="p-item">${delBtn}<div><b>${p.nome}</b><br><small>${p.ref}/5 Amici</small></div>
-            <div style="display:flex; align-items:center;"><a class="btn-wa" href="${generaLink(p)}" target="_blank">📲</a><button class="btn-ref" onclick="addRef(${i})">+1</button></div></div>`;
-        });
-        document.getElementById('count-clienti').innerText = pazienti.length;
-        if(!isPro && pazienti.length >= 10) { document.getElementById('btn-add').style.display = "none"; document.getElementById('msg-lock').style.display = "block"; }
-    }
-
-    function generaLink(p) {
-        const base = window.location.origin + window.location.pathname;
-        const url = base + "?v=gift&id="+p.id+"&paz="+encodeURIComponent(p.nome)+"&dr="+encodeURIComponent(config.n)+"&wa="+config.w+"&pre="+encodeURIComponent(p.premio);
-        return "https://wa.me/"+p.tel+"?text="+encodeURIComponent("Ciao "+p.nome+"! Ecco il tuo PASS: "+url);
-    }
-
-    function saveSync(p) {
-        localStorage.setItem('spich_cli', JSON.stringify(pazienti));
-        renderDash();
-        if(p) fetch(API_URL, { method: "POST", mode: "no-cors", body: JSON.stringify({tipo:'ADD_PAZIENTE', ...p}) });
-    }
-
-    function addRef(i) { pazienti[i].ref++; saveSync(pazienti[i]); }
-    function cancellaPaz(i) { if(confirm("Eliminare?")) { pazienti.splice(i,1); saveSync(); } }
-
-    function richiediPro() {
-        fetch(API_URL, { method: "POST", mode: "no-cors", body: JSON.stringify({tipo:'RICHIESTA_PRO', deviceId, nomeAtt: config.n, wa: config.w}) });
-        alert("Richiesta inviata! Ti contatteremo su spich.admin@gmail.com.");
-    }
-
-    function initCliente(p) {
-        document.getElementById('reg-att').innerText = p.get('dr');
-        document.getElementById('reg-premio').innerText = p.get('pre');
-        if(window.location.hash === "#amico") { document.getElementById('area-prenota').style.display = "block"; }
-        else { new QRCode(document.getElementById("qrcode"), { text: window.location.href + "#amico", width: 150, height: 150 }); }
-    }
-
-    function prenotaAmico() {
-        const p = new URLSearchParams(window.location.search);
-        window.open("https://wa.me/"+p.get('wa')+"?text="+encodeURIComponent("Vorrei prenotare il regalo di "+p.get('paz')));
-    }
-
-    function resetApp() { if(confirm("Tornare al setup?")) { localStorag ioe.removeItem('spich_cfg'); location.reload(); } }
-    function mostra(id) { document.querySelectorAll('.scena').forEach(s => s.classList.remove('active')); document.getElementById('scena-'+id).classList.add('active'); }
-</script>
-</body>
-    </html>
-                                                                                 
+            if(!isPro) {
+                alert("Prem
+    
