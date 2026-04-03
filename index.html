@@ -342,10 +342,12 @@
     }
 
     function resetApp() {
-        if(!new URLSearchParams(window.location.search).get('v')) {
-            window.location.href = window.location.pathname;
-        }
+    // Se l'esercente vuole cambiare studio o resettare la vista
+    if(confirm("Vuoi tornare alla gestione principale?")) {
+        window.location.href = window.location.pathname;
     }
+}
+
 </script>
 </body>
 </html>
