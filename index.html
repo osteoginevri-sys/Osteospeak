@@ -172,7 +172,63 @@
                     <button onclick="addRef(${i})" style="margin-left:10px; background:var(--gold); color:white; border:none; padding:10px 15px; border-radius:10px; font-weight:800;">+1</button>
                 </div>
             </div>`;
+        });
+        document.getElementById('count-r').innerText = tot;
+    }
 
-    function nuovoCliente() {
-        const nome = document.getElementById('new-nome').value;
-        const premio = document.getElementById('new-premio
+    function addRef(i) {
+        if(clienti[i].ref < 5) {
+            clienti[i].ref++;
+            sync(clienti[i]);
+        }
+    }
+
+    function inviaWA(i) {
+        const c = clienti[i];
+        const link = window.location.origin + window.location.pathname + "?v=gift&id=" + c.id + "&paz=" + encodeURIComponent(c.nome) + "&dr=" + encodeURIComponent(config.n) + "&wa=" + config.w + "&pre=" + encodeURIComponent(c.premio);
+        window.open("https://wa.me/?text=" + encodeURIComponent("Ciao " + c.nome + "! Ecco il tuo SPICH PASS personale: " + link));
+    }
+
+    async function initCliente(p) {
+        document.getElementById('reg-att').innerText = p.get('dr') || "SPICH Studio";
+        document.getElementById('reg-cliente').innerText = p.get('paz') || "Cliente";
+        document.getElementById('reg-premio').innerText = p.get('pre') || "Sconto Speciale";
+        
+        let r = 0;
+        try {
+            const resp = await fetch(API_URL + "?id=" + p.get('id'));
+            const data = await resp.json();
+            r = data.ref || 0;
+        } catch(e) { console.log("Offline mode"); }
+
+        const barra = document.getElementById('barra-cerchi');
+        barra.innerHTML = "";
+        for(let i=1; i<=5; i++) {
+            const attivo = i <= r ? 'attivo' : '';
+            barra.innerHTML += `<div class="cerchio ${attivo}">${i <= r ? '★' : i}</div>`;
+        }
+
+        if(window.location.hash === "#amico") {
+            document.getElementById('area-prenota').style.display = "block";
+            document.getElementById('msg-stato').innerText = "Hai ricevuto un regalo!";
+        } else {
+            document.getElementById('area-qr').style.display = "block";
+            document.getElementById('msg-stato').innerText = r < 5 ? "Ti mancano " + (5-r) + " amici!" : "PREMIO SBLOCCATO!";
+            new QRCode(document.getElementById("qrcode"), { text: window.location.href + "#amico", width: 140, height: 140 });
+        }
+    }
+
+    function prenotaAmico() {
+        const p = new URLSearchParams(window.location.search);
+        const msg = encodeURIComponent("Ciao! Vorrei prenotare per riscattare il regalo di " + p.get('paz'));
+        window.open("https://wa.me/" + p.get('wa') + "?text=" + msg);
+    }
+
+    function sync(c) {
+        localStorage.setItem('spich_cli', JSON.stringify(clienti));
+        renderDash();
+        fetch(API_URL, { method: "POST", mode: "no-cors", body: JSON.stringify(c) });
+    }
+</script>
+</body>
+</html>
