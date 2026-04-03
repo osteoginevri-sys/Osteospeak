@@ -3,54 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>OsteoSpeak - Referral System</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+    <title>OsteoSpeak - Dr. Luca Ginevri</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
     <style>
-        :root { --primary: #008080; --gold: linear-gradient(135deg, #d4af37, #f1d57e, #b8962f); --bg: #f8fafb; }
+        :root { --primary: #008080; --gold: #d4af37; --bg: #f4f7f8; }
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         body { background: var(--bg); margin: 0; font-family: 'Montserrat', sans-serif; }
         .app-container { background: white; width: 100vw; min-height: 100vh; max-width: 500px; margin: 0 auto; padding: 20px; }
         
-        .scena { display: none; animation: fadeIn 0.3s ease; }
+        .scena { display: none; }
+        .active { display: block; animation: fadeIn 0.3s; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
         /* DASHBOARD */
-        .profile-header { display: flex; justify-content: space-between; align-items: center; padding-bottom: 15px; border-bottom: 1px solid #eee; }
-        .stats-box { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 20px 0; }
-        .stat-card { background: white; border: 2px solid var(--primary); border-radius: 20px; padding: 15px; text-align: center; }
+        .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 20px 0; }
+        .stat-card { border: 2px solid var(--primary); border-radius: 15px; padding: 15px; text-align: center; }
         .stat-card b { display: block; font-size: 1.5rem; color: var(--primary); }
 
         /* QR AREA */
-        .qr-section { background: #f0f4f5; border-radius: 30px; padding: 25px; text-align: center; margin-bottom: 25px; border: 1px solid #e0e6e8; }
-        #qrcode { display: inline-block; padding: 15px; background: white; border-radius: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+        .qr-card { background: #f0f4f5; border-radius: 25px; padding: 20px; text-align: center; margin-bottom: 20px; }
+        #qrcode { display: inline-block; padding: 10px; background: white; border-radius: 15px; }
 
-        /* GRAFICA REGALO (GOLD CENTRATO) */
-        .gold-circle { 
-            width: 180px; height: 180px; background: var(--gold); border-radius: 50%; 
-            margin: 30px auto; display: flex; flex-direction: column; justify-content: center; 
-            align-items: center; color: white; box-shadow: 0 10px 25px rgba(184, 150, 47, 0.4);
-            border: 4px solid rgba(255,255,255,0.3);
+        /* IL PACCO REGALO (FISSO) */
+        .gift-container { position: relative; width: 140px; height: 140px; margin: 30px auto; }
+        .gift-bow { 
+            position: absolute; top: -15px; left: 50%; transform: translateX(-50%);
+            width: 60px; height: 30px; background: var(--gold); border-radius: 30px 30px 0 0; z-index: 2;
         }
-        .gold-circle big { font-size: 1.6rem; font-weight: 800; line-height: 1.1; margin: 5px 0; text-align: center; padding: 0 10px; }
-        .gold-circle small { font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+        .gift-box { width: 110px; height: 110px; background: var(--primary); margin: 0 auto; border-radius: 15px; position: relative; overflow: hidden; }
+        .ribbon-v { position: absolute; left: 42%; width: 16%; height: 100%; background: var(--gold); }
+        .ribbon-h { position: absolute; top: 42%; width: 100%; height: 16%; background: var(--gold); }
+        
+        .discount-circle { 
+            width: 100px; height: 100px; border: 4px double var(--gold); border-radius: 50%; 
+            margin: 15px auto; display: flex; align-items: center; justify-content: center;
+            font-weight: 900; color: var(--gold); background: white; font-size: 1.2rem;
+        }
 
         /* LISTA PAZIENTI */
-        .patient-card { background: white; border: 1px solid #eee; border-radius: 18px; padding: 15px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; }
-        .patient-info b { font-size: 0.9rem; color: var(--primary); }
-        .patient-info span { font-size: 0.7rem; color: #999; }
-        .actions { text-align: right; }
-        
-        /* BOTTONI */
-        .btn { width: 100%; padding: 16px; border-radius: 15px; border: none; font-weight: 700; cursor: pointer; font-size: 1rem; }
-        .btn-primary { background: var(--primary); color: white; }
-        .btn-add-friend { background: #eaffea; color: #27ae60; border: 1px solid #c3e6cb; padding: 5px 10px; border-radius: 8px; font-size: 0.7rem; margin-top: 5px; display: inline-block; }
-        
-        .badge { padding: 6px 10px; border-radius: 8px; font-size: 0.6rem; font-weight: 800; text-transform: uppercase; cursor: pointer; }
-        .badge-wait { background: #fff9e6; color: #d4a017; border: 1px solid #f1d57e; }
-        .badge-done { background: #eaffea; color: #27ae60; border: 1px solid #c3e6cb; }
+        .p-card { background: white; border: 1px solid #eee; border-radius: 15px; padding: 15px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; }
+        .badge { padding: 5px 10px; border-radius: 8px; font-size: 0.6rem; font-weight: 800; cursor: pointer; border: none; }
+        .badge-wait { background: #fff9e6; color: #d4a017; }
+        .badge-done { background: #eaffea; color: #27ae60; }
+
+        .btn-main { width: 100%; padding: 18px; border-radius: 15px; border: none; font-weight: 800; cursor: pointer; font-size: 1rem; background: var(--primary); color: white; }
     </style>
 </head>
 <body>
@@ -58,60 +57,46 @@
 <div class="app-container">
 
     <div id="scena-setup" class="scena">
-        <div style="padding: 20px;">
-            <h2 style="color:var(--primary)">Benvenuto su OsteoSpeak</h2>
-            <p>Configura il tuo studio per iniziare.</p>
-            <input type="text" id="setup-nome" placeholder="Il tuo nome (es: Dr. Luca Ginevri)" style="width:100%; padding:15px; margin:10px 0; border-radius:10px; border:1px solid #ddd;">
-            <input type="text" id="setup-studio" placeholder="Indirizzo (es: Viale Villa Pamphili 89)" style="width:100%; padding:15px; margin:10px 0; border-radius:10px; border:1px solid #ddd;">
-            <input type="tel" id="setup-wa" placeholder="WhatsApp (es: 39333...)" style="width:100%; padding:15px; margin:10px 0; border-radius:10px; border:1px solid #ddd;">
-            <button class="btn btn-primary" onclick="salvaProfilo()">ATTIVA ACCOUNT</button>
-        </div>
+        <h2>Configura Studio</h2>
+        <input type="text" id="s-nome" placeholder="Nome Dottore" style="width:100%; padding:15px; margin:10px 0;">
+        <input type="text" id="s-studio" placeholder="Indirizzo Studio" style="width:100%; padding:15px; margin:10px 0;">
+        <input type="tel" id="s-wa" placeholder="WhatsApp (es: 39333...)" style="width:100%; padding:15px; margin:10px 0;">
+        <button class="btn-main" onclick="salvaProfilo()">ATTIVA</button>
     </div>
 
     <div id="scena-dashboard" class="scena">
-        <div class="profile-header">
-            <div>
-                <b id="dash-nome" style="font-size:1.1rem">Dr. Nome</b>
-                <div style="color:var(--gold); font-size:0.7rem"><i class="fas fa-star"></i> 5.0 Professional</div>
-            </div>
-            <i class="fas fa-cog" style="color:#ccc; cursor:pointer" onclick="resetProfilo()"></i>
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+            <b id="d-nome">Dr. Ginevri</b>
+            <i class="fas fa-cog" onclick="localStorage.clear(); location.reload();"></i>
         </div>
-
-        <div class="stats-box">
-            <div class="stat-card"><b id="stat-p">0</b><span>Pazienti (Max 5)</span></div>
-            <div class="stat-card"><b id="stat-a">0</b><span>Amici Portati</span></div>
+        <div class="stats-grid">
+            <div class="stat-card"><b id="stat-p">0</b>Pazienti</div>
+            <div class="stat-card"><b id="stat-r">0</b>Amici</div>
         </div>
-
-        <div class="qr-section">
+        <div class="qr-card">
             <div id="qrcode"></div>
-            <p style="font-size:0.7rem; font-weight:700; margin-top:10px;" id="qr-label">REGALO GENERALE</p>
-            <select id="servizio" class="btn" style="background:white; border:1px solid #ddd; margin-top:10px;" onchange="aggiornaQR()">
+            <select id="svc-select" class="btn-main" style="background:white; color:var(--primary); border:1px solid var(--primary); margin-top:15px;" onchange="aggiornaQR()">
                 <option value="Sconto 10€">Sconto 10€</option>
-                <option value="Linfodrenaggio">Linfodrenaggio Omaggio</option>
-                <option value="Massaggio Sportivo">Massaggio Sportivo</option>
-                <option value="Analisi Posturale">Analisi Posturale</option>
+                <option value="Linfodrenaggio -25%">Linfodrenaggio -25%</option>
+                <option value="Massaggio Sportivo -25%">Massaggio Sportivo -25%</option>
+                <option value="Analisi Posturale -25%">Analisi Posturale -25%</option>
             </select>
         </div>
-
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
-            <h3 style="margin:0; font-size:1rem;">I tuoi Pazienti</h3>
-            <button onclick="nuovoPaziente()" style="background:var(--primary); color:white; border:none; border-radius:50%; width:35px; height:35px; font-weight:800;">+</button>
-        </div>
-        
-        <div id="lista-pazienti"></div>
-        <button class="btn" style="background:#eee; color:#666; margin-top:15px;" onclick="cambiaScena('paziente')">Anteprima Regalo</button>
+        <button class="btn-main" onclick="nuovoPaziente()">AGGIUNGI PAZIENTE +</button>
+        <div id="lista-pazienti" style="margin-top:20px;"></div>
     </div>
 
-    <div id="scena-paziente" class="scena">
-        <div style="text-align:center; padding-top:30px;">
-            <h2 id="regalo-dr" style="color:var(--primary); margin:0;">Dr. Luca Ginevri</h2>
-            <div class="gold-circle">
-                <small>Ti ha regalato un</small>
-                <big id="regalo-svc">SCONTO</big>
-                <small>Valido 30 giorni</small>
+    <div id="scena-regalo" class="scena">
+        <div style="text-align:center; padding-top:20px;">
+            <h2 id="r-dr">Dr. Luca Ginevri</h2>
+            <p>Ti ha inviato un regalo professionale</p>
+            <div class="gift-container">
+                <div class="gift-bow"></div>
+                <div class="gift-box"><div class="ribbon-v"></div><div class="ribbon-h"></div></div>
             </div>
-            <button class="btn btn-primary" onclick="prenotaWA()"><i class="fab fa-whatsapp"></i> RICEVI IL REGALO</button>
-            <p id="regalo-loc" style="font-size:0.7rem; color:#999; margin-top:20px;">Indirizzo Studio</p>
+            <div class="discount-circle" id="r-svc">10€</div>
+            <button class="btn-main" onclick="prenotaPaziente()">PRENOTA ORA</button>
+            <p id="r-studio" style="font-size:0.8rem; color:#888; margin-top:20px;"></p>
         </div>
     </div>
 
@@ -119,118 +104,94 @@
 
 <script>
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwcQk1sogiuPVVlz2bSKzytK_trwICRYDVKblsHbWb_dpSbFpQwDHOLlyseLp2M0mlu/exec";
-    let profilo = JSON.parse(localStorage.getItem('osteo_profilo')) || null;
-    let pazienti = JSON.parse(localStorage.getItem('osteo_pazienti')) || [];
+    let profilo = JSON.parse(localStorage.getItem('osteo_p')) || null;
+    let pazienti = JSON.parse(localStorage.getItem('osteo_l')) || [];
     let currentID = "INVITO";
 
     window.onload = () => {
-        if(!profilo) cambiaScena('setup');
-        else if(window.location.hash.includes("#paziente")) mostraRegalo();
-        else inizializzaDashboard();
+        if(window.location.hash.includes("#regalo")) mostraRegalo();
+        else if(!profilo) attivaScena('setup');
+        else iniziaDash();
     };
 
-    function cambiaScena(id) {
-        document.querySelectorAll('.scena').forEach(s => s.style.display = 'none');
-        document.getElementById('scena-' + id).style.display = 'block';
+    function attivaScena(id) {
+        document.querySelectorAll('.scena').forEach(s => s.classList.remove('active'));
+        document.getElementById('scena-' + id).classList.add('active');
     }
 
     function salvaProfilo() {
-        profilo = {
-            nome: document.getElementById('setup-nome').value,
-            studio: document.getElementById('setup-studio').value,
-            wa: document.getElementById('setup-wa').value
-        };
-        if(!profilo.nome || !profilo.wa) return alert("Inserisci Nome e WhatsApp");
-        localStorage.setItem('osteo_profilo', JSON.stringify(profilo));
-        inizializzaDashboard();
+        profilo = { n: document.getElementById('s-nome').value, s: document.getElementById('s-studio').value, w: document.getElementById('s-wa').value };
+        localStorage.setItem('osteo_p', JSON.stringify(profilo));
+        iniziaDash();
     }
 
-    function inizializzaDashboard() {
-        cambiaScena('dashboard');
-        document.getElementById('dash-nome').innerText = profilo.nome;
-        aggiornaLista();
+    function iniziaDash() {
+        attivaScena('dashboard');
+        document.getElementById('d-nome').innerText = profilo.n;
+        renderLista();
         aggiornaQR();
     }
 
     function aggiornaQR() {
-        const svc = document.getElementById('servizio').value;
-        const link = window.location.origin + window.location.pathname + "#paziente?ref=" + currentID + "&svc=" + encodeURIComponent(svc);
+        const svc = document.getElementById('svc-select').value;
+        const link = window.location.origin + window.location.pathname + "#regalo?ref=" + currentID + "&svc=" + encodeURIComponent(svc) + "&dr=" + encodeURIComponent(profilo.n) + "&wa=" + profilo.w + "&loc=" + encodeURIComponent(profilo.s);
         document.getElementById("qrcode").innerHTML = "";
         new QRCode(document.getElementById("qrcode"), { text: link, width: 150, height: 150, colorDark: "#008080" });
     }
 
     function nuovoPaziente() {
-        if(pazienti.length >= 5) return alert("Limite versione Free! Passa a Pro.");
-        const nome = prompt("Nome del Paziente:");
+        if(pazienti.length >= 5) return alert("Limite Free raggiunto!");
+        const nome = prompt("Nome Paziente:");
         if(!nome) return;
         const id = nome.substring(0,3).toUpperCase() + Math.floor(1000+Math.random()*9000);
-        const p = { id: id, nome: nome, stato: 'ATTESA', servizio: document.getElementById('servizio').value, amici: 0, data: new Date().toLocaleDateString() };
+        const p = { id: id, nome: nome, stato: 'ATTESA', svc: document.getElementById('svc-select').value, ref: 0, d: new Date().toLocaleDateString() };
         pazienti.push(p);
-        salvaTutto(p);
+        sync(p);
     }
 
-    function aggiornaLista() {
+    function renderLista() {
         const div = document.getElementById('lista-pazienti');
         div.innerHTML = "";
-        let amiciTotali = 0;
+        let rTot = 0;
         pazienti.forEach((p, i) => {
-            amiciTotali += p.amici;
+            rTot += p.ref;
             div.innerHTML += `
-                <div class="patient-card">
-                    <div class="patient-info" onclick="selezionaPaziente('${p.id}', '${p.nome}')">
-                        <b>${p.nome}</b><br>
-                        <span>ID: ${p.id} • Amici: ${p.amici}</span>
+                <div class="p-card">
+                    <div onclick="currentID='${p.id}'; aggiornaQR(); alert('QR aggiornato!');">
+                        <b>${p.nome}</b><br><small>ID: ${p.id} | Amici: ${p.ref}</small>
                     </div>
-                    <div class="actions">
-                        <span class="badge ${p.stato=='ATTESA'?'badge-wait':'badge-done'}" onclick="toggleStato(${i})">${p.stato}</span><br>
-                        <div class="btn-add-friend" onclick="aggiungiAmico(${i})">+1 Amico</div>
+                    <div style="text-align:right">
+                        <button class="badge ${p.stato=='ATTESA'?'badge-wait':'badge-done'}" onclick="toggleS(${i})">${p.stato}</button><br>
+                        <small onclick="addR(${i})" style="color:var(--primary); cursor:pointer">+1 Amico</small>
                     </div>
-                </div>
-            `;
+                </div>`;
         });
         document.getElementById('stat-p').innerText = pazienti.length;
-        document.getElementById('stat-a').innerText = amiciTotali;
+        document.getElementById('stat-r').innerText = rTot;
     }
 
-    function selezionaPaziente(id, nome) {
-        currentID = id;
-        document.getElementById('qr-label').innerText = "REGALO PER PAZIENTI DI: " + nome.toUpperCase();
-        aggiornaQR();
-        window.scrollTo(0,0);
-    }
+    function addR(i) { pazienti[i].ref++; sync(pazienti[i]); }
+    function toggleS(i) { pazienti[i].stato = pazienti[i].stato == 'ATTESA' ? 'USATO' : 'ATTESA'; sync(pazienti[i]); }
 
-    function aggiungiAmico(i) {
-        pazienti[i].amici++;
-        salvaTutto(pazienti[i]);
-    }
-
-    function toggleStato(i) {
-        pazienti[i].stato = pazienti[i].stato == 'ATTESA' ? 'USATO' : 'ATTESA';
-        salvaTutto(pazienti[i]);
-    }
-
-    function salvaTutto(p) {
-        localStorage.setItem('osteo_pazienti', JSON.stringify(pazienti));
-        aggiornaLista();
+    function sync(p) {
+        localStorage.setItem('osteo_l', JSON.stringify(pazienti));
+        renderLista();
         fetch(SCRIPT_URL, { method: "POST", mode: "no-cors", body: JSON.stringify(p) });
     }
 
     function mostraRegalo() {
-        cambiaScena('paziente');
-        const p = profilo || { nome: "Il tuo Osteopata", studio: "Studio Professionale", wa: "39" };
+        attivaScena('regalo');
         const params = new URLSearchParams(window.location.hash.split('?')[1]);
-        document.getElementById('regalo-dr').innerText = p.nome;
-        document.getElementById('regalo-loc').innerText = p.studio;
-        document.getElementById('regalo-svc').innerText = (params.get('svc') || "SCONTO").toUpperCase();
+        document.getElementById('r-dr').innerText = params.get('dr') || "Il tuo Osteopata";
+        document.getElementById('r-svc').innerText = params.get('svc') || "SCONTO";
+        document.getElementById('r-studio').innerText = params.get('loc') || "";
     }
 
-    function prenotaWA() {
-        const p = new URLSearchParams(window.location.hash.split('?')[1]);
-        const msg = encodeURIComponent("Ciao! Ho ricevuto il tuo regalo: " + p.get('svc') + ". Mi ha invitato: " + p.get('ref'));
-        window.open("https://wa.me/" + profilo.wa + "?text=" + msg);
+    function prenotaPaziente() {
+        const params = new URLSearchParams(window.location.hash.split('?')[1]);
+        const msg = encodeURIComponent("Ciao! Ho ricevuto il regalo " + params.get('svc') + ". Mi ha invitato: " + params.get('ref'));
+        window.open("https://wa.me/" + params.get('wa') + "?text=" + msg);
     }
-
-    function resetProfilo() { if(confirm("Vuoi resettare i dati e tornare al setup?")) { localStorage.clear(); location.reload(); } }
 </script>
 </body>
 </html>
