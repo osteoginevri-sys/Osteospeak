@@ -1,164 +1,313 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="it">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>SPICH. - Business Panel</title>
+    <title>SPICH. - Panel</title>
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&family=Montserrat:wght@400;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <style>
         :root { --primary: #008080; --gold: #d4af37; --bg: #fdfdfd; --danger: #e74c3c; --success: #2ecc71; }
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; margin: 0; padding: 0; }
-        body { background: #f4f6f7; font-family: 'Montserrat', sans-serif; color: #2c3e50; overflow-x: hidden; }
-        .app-container { background: var(--bg); width: 100vw; min-height: 100vh; max-width: 450px; margin: 0 auto; display: flex; flex-direction: column; box-shadow: 0 0 30px rgba(0,0,0,0.1); }
+        body { background: #f4f6f7; font-family: 'Montserrat', sans-serif; color: #2c3e50; min-height: 100vh; }
+        .app-container { background: var(--bg); width: 100%; min-height: 100vh; max-width: 450px; margin: 0 auto; display: flex; flex-direction: column; box-shadow: 0 0 30px rgba(0,0,0,0.1); }
+        
+        /* Header fisso */
         .header { padding: 20px; text-align: center; background: white; border-bottom: 1px solid #eee; cursor: pointer; }
         .logo { font-family: 'Comfortaa', cursive; font-size: 2.2rem; color: var(--primary); }
         .logo span { color: var(--gold); }
-        .scena { display: none; padding: 20px; flex: 1; }
+
+        /* Scene */
+        .scena { display: none; padding: 20px; }
         .active { display: block !important; }
-        .stat-card { background: white; padding: 20px; border-radius: 18px; text-align: center; border-bottom: 5px solid var(--gold); margin-bottom: 20px; position: relative; }
-        .stat-card b { font-size: 2.8rem; color: var(--primary); display: block; }
-        .badge-pro { background: #999; color: white; padding: 4px 10px; border-radius: 6px; font-size: 0.7rem; position: absolute; top: 10px; right: 10px; font-weight: 800; }
+
+        /* Card e Box */
+        .stat-card { background: white; padding: 20px; border-radius: 18px; text-align: center; border-bottom: 5px solid var(--gold); margin-bottom: 20px; position: relative; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        .stat-card b { font-size: 2.5rem; color: var(--primary); display: block; }
+        .badge-pro { background: #bbb; color: white; padding: 4px 10px; border-radius: 6px; font-size: 0.7rem; position: absolute; top: 10px; right: 10px; font-weight: 800; }
         .badge-pro.is-pro { background: var(--success); }
-        .form-box { background: white; padding: 18px; border-radius: 18px; border: 1px solid #eee; margin-bottom: 25px; }
-        label { font-size: 0.75rem; font-weight: 800; color: var(--primary); text-transform: uppercase; margin-left: 5px; display: block; margin-top: 10px; }
-        input, select { width: 100%; padding: 14px; margin: 5px 0 10px 0; border-radius: 12px; border: 1.5px solid #eee; font-family: inherit; font-size: 1rem; outline: none; }
-        .btn-teal { background: var(--primary); color: white; border: none; padding: 18px; border-radius: 15px; font-weight: 800; width: 100%; cursor: pointer; font-size: 1.1rem; }
-        .p-item { background: white; padding: 15px; border-radius: 15px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; border: 1px solid #eee; position: relative; }
-        .btn-wa { background: #25D366; color: white; border: none; padding: 10px; border-radius: 50%; width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; text-decoration: none; }
-        .btn-ref { background: var(--gold); border: none; padding: 10px 15px; border-radius: 12px; color: white; font-weight: 800; margin-left: 10px; cursor: pointer; }
+
+        .form-box { background: white; padding: 15px; border-radius: 18px; border: 1px solid #eee; margin-bottom: 20px; }
+        label { font-size: 0.7rem; font-weight: 800; color: var(--primary); text-transform: uppercase; margin-top: 10px; display: block; padding-left: 5px; }
+        input, select { width: 100%; padding: 12px; margin: 5px 0 12px 0; border-radius: 12px; border: 1px solid #ddd; font-family: inherit; font-size: 1rem; outline: none; }
+
+        /* Bottoni */
+        .btn-teal { background: var(--primary); color: white; border: none; padding: 16px; border-radius: 15px; font-weight: 800; width: 100%; cursor: pointer; font-size: 1rem; }
+        .p-item { background: white; padding: 15px; border-radius: 15px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; border: 1px solid #eee; }
+        .btn-wa { background: #25D366; color: white; width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 1.2rem; }
+        .btn-ref { background: var(--gold); border: none; padding: 10px 15px; border-radius: 12px; color: white; font-weight: 800; margin-left: 8px; cursor: pointer; }
+        
+        /* Lock PRO */
         .lock-box { background: #fff5f5; border: 2px dashed var(--danger); border-radius: 15px; padding: 20px; text-align: center; display: none; }
-        .btn-contact { background: var(--danger); color: white; padding: 12px; border-radius: 10px; font-weight: 800; border: none; width: 100%; cursor: pointer; margin-top: 10px; }
-        .banner-oro { background: var(--gold); color: white; padding: 15px; border-radius: 10px; font-weight: 800; text-align: center; margin-top: 15px; }
-        .footer-id { font-size: 0.65rem; color: #bbb; text-align: center; padding: 20px; }
+        .btn-pro { background: var(--danger); color: white; padding: 12px; border-radius: 10px; border: none; width: 100%; font-weight: 800; margin-top: 10px; cursor: pointer; }
+
+        .banner-oro { background: var(--gold); color: white; padding: 15px; border-radius: 12px; font-weight: 800; text-align: center; margin-top: 15px; }
+        .footer { font-size: 0.6rem; color: #ccc; text-align: center; padding: 20px; }
     </style>
 </head>
 <body>
+
 <div class="app-container">
-    <div class="header" onclick="resetApp()"><h1 class="logo">SPICH<span>.</span></h1></div>
+    <div class="header" onclick="location.href=location.pathname">
+        <h1 class="logo">SPICH<span>.</span></h1>
+    </div>
 
     <div id="scena-setup" class="scena">
-        <h2 style="text-align:center; color:var(--primary); margin-bottom:20px;">Configura</h2>
+        <h3 style="text-align:center; margin-bottom:15px;">Benvenuto su Spich</h3>
         <div class="form-box">
-            <label>Nome Attività</label>
-            <input type="text" id="set-att" placeholder="Esempio: Studio Rossi">
-            <label>WhatsApp (39...)</label>
-            <input type="tel" id="set-wa" placeholder="Esempio: 393331234567">
-            <label>Categoria</label>
+            <label>Nome della tua attività</label>
+            <input type="text" id="set-att" placeholder="Esempio: Studio Medico Rossi">
+            <label>Il tuo WhatsApp (es. 39347...)</label>
+            <input type="tel" id="set-wa" placeholder="39...">
+            <label>Cosa gestisci?</label>
             <select id="set-cat">
-                <option value="pazienti">Studio Medico</option>
-                <option value="clienti">Centro Estetico</option>
-                <option value="ospiti">Ristorazione</option>
+                <option value="Pazienti">Studio Medico (Pazienti)</option>
+                <option value="Clienti">Estetica/Negozio (Clienti)</option>
+                <option value="Ospiti">Ristorazione (Ospiti)</option>
             </select>
-            <button class="btn-teal" onclick="registraEsercente()">ATTIVA</button>
+            <button class="btn-teal" onclick="salvaSetup()">CONFIGURA ORA</button>
         </div>
     </div>
 
     <div id="scena-dash" class="scena">
         <div class="stat-card">
-            <div id="pro-tag" class="badge-pro">FREE</div>
-            <b id="count-clienti">0</b>
-            <span id="label-contatore">Contatti Attivi</span>
+            <div id="badge-pro" class="badge-pro">FREE</div>
+            <b id="contatore">0</b>
+            <span id="label-cat">Contatti</span>
         </div>
+
         <div class="form-box">
-            <label id="label-nome-input">Nome</label>
-            <input type="text" id="new-nome" placeholder="Nome">
+            <label id="label-nome">Nome</label>
+            <input type="text" id="new-nome" placeholder="Inserisci nome">
             <label>Cellulare</label>
-            <input type="tel" id="new-tel" placeholder="Cellulare">
-            <label>Premio</label>
-            <select id="new-premio" onchange="checkCustom()">
+            <input type="tel" id="new-tel" placeholder="39...">
+            <label>Premio per Referral</label>
+            <select id="new-premio" onchange="checkPremio()">
                 <option value="Sconto 20%">Sconto 20%</option>
                 <option value="Sconto 50%">Sconto 50%</option>
-                <option value="Omaggio">Omaggio</option>
-                <option value="CUSTOM">-- Premio Personalizzato (PRO) --</option>
+                <option value="Omaggio">Trattamento Omaggio</option>
+                <option value="CUSTOM">-- Scrivi premio (Solo PRO) --</option>
             </select>
-            <input type="text" id="new-custom" placeholder="Scrivi il premio..." style="display:none;">
-            <button id="btn-add" class="btn-teal" onclick="nuovoPaziente()">AGGIUNGI</button>
-            <div id="msg-lock" class="lock-box">
-                <p style="color:var(--danger); font-weight:800;">LIMITE 10 RAGGIUNTO</p>
-                <button onclick="richiediPro()" class="btn-contact">ATTIVA PRO</button>
+            <input type="text" id="new-custom" placeholder="Scrivi il tuo premio..." style="display:none;">
+            
+            <button id="btn-add" class="btn-teal" onclick="aggiungiContatto()">AGGIUNGI</button>
+            
+            <div id="box-lock" class="lock-box">
+                <p style="color:var(--danger); font-weight:800; font-size:0.8rem;">LIMITE 10 CONTATTI RAGGIUNTO</p>
+                <button onclick="chiediPro()" class="btn-pro">PASSA A VERSIONE PRO</button>
             </div>
         </div>
-        <div id="lista-pazienti"></div>
-        <div class="footer-id">ID: <span id="dev-id"></span></div>
+
+        <div id="lista-contatti"></div>
     </div>
 
     <div id="scena-regalo" class="scena">
         <div style="text-align:center;">
-            <h2 id="reg-att"></h2>
-            <div id="qrcode" style="margin:20px 0; display:inline-block; background:white; padding:10px; border-radius:10px; border:1px solid #eee;"></div>
+            <h2 id="reg-studio" style="color:var(--primary);"></h2>
+            <p style="margin-bottom:20px;">Ti ha inviato un regalo!</p>
+            <div id="qrcode" style="margin:0 auto; padding:10px; background:white; display:inline-block; border:1px solid #ddd; border-radius:10px;"></div>
             <div id="reg-premio" class="banner-oro"></div>
-            <div id="area-prenota" style="display:none; margin-top:20px;">
-                <button class="btn-teal" onclick="prenotaAmico()">PRENOTA ORA</button>
+            <div id="box-prenota" style="display:none; margin-top:20px;">
+                <p style="font-size:0.8rem; margin-bottom:10px;">Mostra questo codice alla reception o prenota ora:</p>
+                <button class="btn-teal" onclick="prenotaOra()">PRENOTA SU WHATSAPP</button>
             </div>
         </div>
     </div>
+
+    <div class="footer">Device ID: <span id="dev-id"></span></div>
 </div>
 
 <script>
-    // --- INSERISCI QUI IL TUO URL DI GOOGLE ---
-    const API_URL = "https://script.google.com/macros/s/AKfycbysSent-QNgWGOiLWmNrWwhzFPfJr6ZIUNz7dJuKqrZDSj2E_SmGwi5uIC67PPOT8u2/exec"; 
+    // --- CONFIGURAZIONE ---
+    const API_URL = "https://script.google.com/macros/s/AKfycbysSent-QNgWGOiLWmNrWwhzFPfJr6ZIUNz7dJuKqrZDSj2E_SmGwi5uIC67PPOT8u2/exec";
 
-    let deviceId = localStorage.getItem('spich_dev_id') || ('SP-' + Math.floor(1000 + Math.random() * 8999));
-    localStorage.setItem('spich_dev_id', deviceId);
-    let config = JSON.parse(localStorage.getItem('spich_cfg')) || null;
-    let pazienti = JSON.parse(localStorage.getItem('spich_cli')) || [];
+    // Dati iniziali
+    let deviceId = localStorage.getItem('spich_id') || ('SP' + Math.floor(Math.random()*9000));
+    localStorage.setItem('spich_id', deviceId);
+
+    let config = null;
+    try { config = JSON.parse(localStorage.getItem('spich_cfg')); } catch(e) { config = null; }
+
+    let contatti = [];
+    try { contatti = JSON.parse(localStorage.getItem('spich_list')) || []; } catch(e) { contatti = []; }
+
     let isPro = false;
 
-    // Funzione principale: Carica la pagina PRIMA di fare controlli lenti
+    // AVVIO DELL'APP
     window.onload = function() {
         document.getElementById('dev-id').innerText = deviceId;
-        const p = new URLSearchParams(window.location.search);
+        const urlParams = new URLSearchParams(window.location.search);
         
-        if (p.get('v') === 'gift') {
-            mostra('regalo');
-            initCliente(p);
-        } else if (!config) {
-            mostra('setup');
-        } else {
-            mostra('dash');
-            aggiornaTesti();
-            renderDash();
-            // Controlla lo stato PRO in background senza bloccare la pagina
-            verificaStatoPro();
+        // Caso 1: È il link di un regalo
+        if (urlParams.get('v') === 'gift') {
+            mostraScena('regalo');
+            caricaRegalo(urlParams);
+        } 
+        // Caso 2: App non configurata
+        else if (!config) {
+            mostraScena('setup');
+        } 
+        // Caso 3: Dashboard normale
+        else {
+            mostraScena('dash');
+            inizializzaDash();
+            checkStatoPro();
         }
     };
 
-    async function verificaStatoPro() {
-        if (!API_URL.includes("http")) return;
-        try {
-            const resp = await fetch(API_URL + "?checkPro=" + deviceId);
-            const data = await resp.json();
-            if(data.isPro) {
-                isPro = true;
-                document.getElementById('pro-tag').innerText = "PRO";
-                document.getElementById('pro-tag').classList.add('is-pro');
-            }
-        } catch(e) { console.log("C'è un problema con il link Google Script o sei offline."); }
+    // FUNZIONI CORE
+    function mostraScena(id) {
+        document.querySelectorAll('.scena').forEach(s => s.classList.remove('active'));
+        document.getElementById('scena-' + id).classList.add('active');
     }
 
-    function registraEsercente() {
+    function inizializzaDash() {
+        document.getElementById('label-cat').innerText = config.cat;
+        document.getElementById('label-nome').innerText = "Nome " + config.cat.slice(0, -1);
+        renderLista();
+    }
+
+    async function checkStatoPro() {
+        try {
+            const r = await fetch(API_URL + "?checkPro=" + deviceId);
+            const d = await r.json();
+            if (d.isPro) {
+                isPro = true;
+                const b = document.getElementById('badge-pro');
+                b.innerText = "PRO";
+                b.classList.add('is-pro');
+            }
+        } catch(e) { console.log("Controllo PRO offline"); }
+    }
+
+    function salvaSetup() {
         const n = document.getElementById('set-att').value.trim();
         const w = document.getElementById('set-wa').value.trim();
         const c = document.getElementById('set-cat').value;
-        if(!n || !w) return alert("Compila tutto!");
+        if (!n || !w) return alert("Inserisci tutti i dati");
+        
         config = { n, w, cat: c };
         localStorage.setItem('spich_cfg', JSON.stringify(config));
-        fetch(API_URL, { method: "POST", mode: "no-cors", body: JSON.stringify({tipo:'REG_ESERCENTE', deviceId, nomeAtt: n, wa: w}) });
+        
+        // Registra su Google
+        fetch(API_URL, { 
+            method: "POST", 
+            mode: "no-cors", 
+            body: JSON.stringify({tipo:'REG_ESERCENTE', deviceId, nomeAtt: n, wa: w}) 
+        });
+        
         location.reload();
     }
 
-    function aggiornaTesti() {
-        const c = config.cat || 'pazienti';
-        document.getElementById('label-contatore').innerText = c.charAt(0).toUpperCase() + c.slice(1) + " Attivi";
-        document.getElementById('label-nome-input').innerText = "Nome " + c.slice(0,-1);
+    function checkPremio() {
+        const sel = document.getElementById('new-premio').value;
+        const cust = document.getElementById('new-custom');
+        if (sel === 'CUSTOM') {
+            if (!isPro) {
+                alert("Il premio personalizzato è solo per la versione PRO!");
+                document.getElementById('new-premio').value = "Sconto 20%";
+            } else { cust.style.display = 'block'; }
+        } else { cust.style.display = 'none'; }
     }
 
-    function checkCustom() {
-        const val = document.getElementById('new-premio').value;
-        const field = document.getElementById('new-custom');
-        if(val === "CUSTOM") {
-            if(!isPro) {
-                alert("Prem
+    function aggiungiContatto() {
+        if (!isPro && contatti.length >= 10) return;
+
+        const nome = document.getElementById('new-nome').value.trim();
+        const tel = document.getElementById('new-tel').value.trim();
+        let premio = document.getElementById('new-premio').value;
+        if (premio === 'CUSTOM') premio = document.getElementById('new-custom').value;
+
+        if (!nome || !tel) return alert("Compila i campi");
+
+        const nuovo = {
+            id: 'PX' + Math.floor(Math.random()*899) + 100,
+            nome, tel, premio, ref: 0,
+            owner: deviceId, att: config.n, wa: config.w
+        };
+
+        contatti.push(nuovo);
+        salvaEInvia(nuovo);
+        
+        document.getElementById('new-nome').value = "";
+        document.getElementById('new-tel').value = "";
+    }
+
+    function renderLista() {
+        const div = document.getElementById('lista-contatti');
+        div.innerHTML = "";
+        contatti.forEach((p, index) => {
+            div.innerHTML += `
+                <div class="p-item">
+                    <div><b>${p.nome}</b><br><small>${p.ref}/5 Segnalazioni</small></div>
+                    <div style="display:flex; align-items:center;">
+                        <a class="btn-wa" href="${generaLinkWA(p)}" target="_blank">📲</a>
+                        <button class="btn-ref" onclick="aggiungiPunto(${index})">+1</button>
+                    </div>
+                </div>`;
+        });
+        document.getElementById('contatore').innerText = contatti.length;
+        
+        if (!isPro && contatti.length >= 10) {
+            document.getElementById('btn-add').style.display = 'none';
+            document.getElementById('box-lock').style.display = 'block';
+        }
+    }
+
+    function generaLinkWA(p) {
+        const base = window.location.href.split('?')[0];
+        const giftUrl = `${base}?v=gift&id=${p.id}&n=${encodeURIComponent(p.nome)}&st=${encodeURIComponent(config.n)}&wa=${config.w}&pr=${encodeURIComponent(p.premio)}`;
+        const testo = `Ciao ${p.nome}! Ecco il tuo regalo da ${config.n}. Clicca qui per attivarlo: ${giftUrl}`;
+        return `https://wa.me/${p.tel}?text=${encodeURIComponent(testo)}`;
+    }
+
+    function aggiungiPunto(i) {
+        contatti[i].ref++;
+        salvaEInvia(contatti[i]);
+    }
+
+    function salvaEInvia(p) {
+        localStorage.setItem('spich_list', JSON.stringify(contatti));
+        renderLista();
+        // Sincronizza con Google
+        fetch(API_URL, { 
+            method: "POST", 
+            mode: "no-cors", 
+            body: JSON.stringify({tipo:'ADD_PAZIENTE', ...p}) 
+        });
+    }
+
+    function chiediPro() {
+        fetch(API_URL, { 
+            method: "POST", 
+            mode: "no-cors", 
+            body: JSON.stringify({tipo:'RICHIESTA_PRO', deviceId, nomeAtt: config.n, wa: config.w}) 
+        });
+        alert("Richiesta inviata! Riceverai una mail a spich.admin@gmail.com appena attivato.");
+    }
+
+    // GESTIONE REGALO (Per l'amico)
+    function caricaRegalo(params) {
+        document.getElementById('reg-studio').innerText = params.get('st');
+        document.getElementById('reg-premio').innerText = "PREMIO: " + params.get('pr');
+        
+        if (window.location.hash === '#prenota') {
+            document.getElementById('box-prenota').style.display = 'block';
+        } else {
+            const qrUrl = window.location.href + '#prenota';
+            new QRCode(document.getElementById("qrcode"), { text: qrUrl, width: 160, height: 160 });
+        }
+    }
+
+    function prenotaOra() {
+        const params = new URLSearchParams(window.location.search);
+        const wa = params.get('wa');
+        const chi = params.get('n');
+        const msg = `Ciao! Mi ha invitato ${chi}, vorrei prenotare il mio regalo.`;
+        window.open(`https://wa.me/${wa}?text=${encodeURIComponent(msg)}`);
+    }
+</script>
+
+</body>
+    </html>
     
