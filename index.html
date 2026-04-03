@@ -3,100 +3,126 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>SPICH. - Referral Pass</title>
+    <title>SPICH. - Business Panel</title>
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&family=Montserrat:wght@400;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
     <style>
-        :root { --primary: #008080; --gold: #d4af37; --bg: #fdfdfd; --gray: #e8e8e8; --gold-bright: #ffcc33; }
-        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-        body { background: #f4f6f7; margin: 0; font-family: 'Montserrat', sans-serif; color: #2c3e50; overflow-x: hidden; }
+        :root { --primary: #008080; --gold: #d4af37; --bg: #fdfdfd; --danger: #e74c3c; --success: #2ecc71; --gray: #e8e8e8; }
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; margin: 0; padding: 0; }
+        body { background: #f4f6f7; font-family: 'Montserrat', sans-serif; color: #2c3e50; line-height: 1.5; }
         
         .app-container { background: var(--bg); width: 100vw; min-height: 100vh; max-width: 450px; margin: 0 auto; display: flex; flex-direction: column; box-shadow: 0 0 30px rgba(0,0,0,0.1); }
-        
-        .header { padding: 20px; text-align: center; background: white; border-bottom: 1px solid #eee; position: sticky; top: 0; z-index: 100; }
-        .logo { font-family: 'Comfortaa', cursive; font-size: 2.2rem; color: var(--primary); margin: 0; }
+        .header { padding: 20px; text-align: center; background: white; border-bottom: 1px solid #eee; cursor: pointer; position: sticky; top: 0; z-index: 100; }
+        .logo { font-family: 'Comfortaa', cursive; font-size: 2.2rem; color: var(--primary); }
         .logo span { color: var(--gold); }
 
-        .scena { display: none; padding: 20px; flex: 1; opacity: 0; }
-        .active { display: block; opacity: 1; transition: opacity 0.3s ease; }
+        .scena { display: none; padding: 20px; flex: 1; width: 100%; }
+        .active { display: block; animation: fadeIn 0.3s ease; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        /* DASHBOARD */
-        .stat-card { background: white; padding: 18px; border-radius: 18px; text-align: center; border-bottom: 5px solid var(--gold); margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
-        .stat-card b { font-size: 2.2rem; color: var(--primary); display: block; }
-        .p-item { background: white; padding: 15px; border-radius: 15px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; border: 1px solid #eee; }
+        /* DASHBOARD CARDS */
+        .stat-card { background: white; padding: 20px; border-radius: 18px; text-align: center; border-bottom: 5px solid var(--gold); margin-bottom: 20px; position: relative; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        .stat-card b { font-size: 2.5rem; color: var(--primary); display: block; line-height: 1; }
+        .badge-pro { background: #999; color: white; padding: 4px 10px; border-radius: 6px; font-size: 0.7rem; position: absolute; top: 10px; right: 10px; font-weight: 800; }
+        .badge-pro.is-pro { background: var(--success); }
+
+        /* LISTA PAZIENTI */
+        .p-item { background: white; padding: 15px; border-radius: 15px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; border: 1px solid #eee; position: relative; }
+        .btn-del { position: absolute; top: -8px; right: -8px; background: var(--danger); color: white; border: none; border-radius: 50%; width: 24px; height: 24px; font-size: 0.8rem; cursor: pointer; display: none; z-index: 5; }
+
+        /* INPUT & PULSANTI */
+        .form-box { background: white; padding: 18px; border-radius: 18px; border: 1px solid #eee; margin-bottom: 25px; }
+        input, select { width: 100%; padding: 14px; margin: 8px 0; border-radius: 12px; border: 1.5px solid #eee; font-family: inherit; font-size: 1rem; outline: none; transition: border 0.2s; }
+        input:focus { border-color: var(--primary); }
         
-        /* IL PACCO REGALO & FIOCCO (Check finale: asole integre) */
-        .gift-box-container { position: relative; width: 100px; height: 100px; margin: 50px auto 20px; }
-        .fiocco-wrap { position: absolute; top: -25px; left: 50%; transform: translateX(-50%); width: 70px; height: 30px; z-index: 10; display: flex; justify-content: center; }
-        .asola { width: 35px; height: 25px; border: 6px solid var(--gold); border-radius: 50% 50% 0 50%; transform: rotate(-10deg); background: transparent; }
+        .btn-teal { background: var(--primary); color: white; border: none; padding: 18px; border-radius: 15px; font-weight: 800; width: 100%; cursor: pointer; font-size: 1.1rem; box-shadow: 0 4px 10px rgba(0,128,128,0.2); }
+        .btn-wa { background: #25D366; color: white; border: none; padding: 10px; border-radius: 50%; width: 45px; height: 45px; cursor: pointer; display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 1.2rem; }
+        .btn-ref { background: var(--gold); border: none; padding: 10px 15px; border-radius: 12px; color: white; font-weight: 800; margin-left: 10px; cursor: pointer; }
+
+        /* VISTA REGALO */
+        .gift-box-container { position: relative; width: 110px; height: 110px; margin: 30px auto; }
+        .fiocco-wrap { position: absolute; top: -22px; left: 50%; transform: translateX(-50%); width: 75px; height: 30px; display: flex; justify-content: center; z-index: 10; }
+        .asola { width: 32px; height: 22px; border: 6px solid var(--gold); border-radius: 50% 50% 0 50%; transform: rotate(-10deg); }
         .asola.right { border-radius: 50% 50% 50% 0%; transform: rotate(10deg); }
-        .pacco { width: 100%; height: 100%; background: var(--primary); border-radius: 10px; position: relative; overflow: hidden; }
+        .pacco { width: 100%; height: 100%; background: var(--primary); border-radius: 12px; position: relative; overflow: hidden; }
         .nastro-v { position: absolute; left: 42%; width: 16%; height: 100%; background: var(--gold); }
         .nastro-h { position: absolute; top: 42%; width: 100%; height: 16%; background: var(--gold); }
 
-        /* BARRA 5 AMICI (Check finale: tondi oro) */
-        .progresso-container { display: flex; justify-content: center; gap: 12px; margin: 30px 0; }
-        .cerchio { width: 48px; height: 48px; border-radius: 50%; border: 3px solid var(--gray); display: flex; align-items: center; justify-content: center; font-weight: 800; color: #ccc; }
-        .cerchio.attivo { border-color: var(--gold); background: var(--gold); color: white; transform: scale(1.1); box-shadow: 0 4px 10px rgba(212, 175, 55, 0.3); }
+        .progresso-container { display: flex; justify-content: center; gap: 10px; margin: 20px 0; }
+        .cerchio { width: 45px; height: 45px; border-radius: 50%; border: 3px solid var(--gray); display: flex; align-items: center; justify-content: center; font-weight: 800; color: #ccc; }
+        .cerchio.attivo { border-color: var(--gold); background: var(--gold); color: white; }
 
-        /* PULSANTI */
-        .btn-teal { background: var(--primary); color: white; border: none; padding: 18px; border-radius: 15px; font-weight: 800; width: 100%; cursor: pointer; font-size: 1rem; }
-        .btn-wa { background: #25D366; color: white; border: none; padding: 10px; border-radius: 50%; width: 42px; height: 42px; cursor: pointer; }
-        .btn-prenota { background: var(--gold-bright); color: #000; border: none; padding: 20px; border-radius: 15px; font-weight: 900; width: 100%; cursor: pointer; text-transform: uppercase; margin-top: 20px; box-shadow: 0 8px 15px rgba(255,204,51,0.3); }
-        
-        .banner-oro { background: var(--gold); color: white; padding: 18px; border-radius: 12px; margin: 25px auto; width: 90%; font-weight: 800; text-align: center; text-transform: uppercase; }
-        input, select { width: 100%; padding: 15px; margin: 8px 0; border-radius: 12px; border: 1px solid #ddd; font-family: 'Montserrat'; font-size: 1rem; }
+        .btn-prenota { background: #ffcc33; color: #000; border: none; padding: 22px; border-radius: 18px; font-weight: 900; width: 100%; cursor: pointer; text-transform: uppercase; font-size: 1.2rem; margin-top: 20px; box-shadow: 0 8px 20px rgba(255,204,51,0.4); }
+        .banner-oro { background: var(--gold); color: white; padding: 18px; border-radius: 12px; font-weight: 800; text-align: center; margin-top: 15px; text-transform: uppercase; letter-spacing: 1px; }
+
+        .lock-msg { color: var(--danger); font-weight: 800; text-align: center; display: none; padding: 15px; border: 2px dashed var(--danger); border-radius: 12px; margin-top: 15px; font-size: 0.9rem; background: #fff5f5; }
+        .footer-id { font-size: 0.65rem; color: #bbb; text-align: center; padding: 20px; }
     </style>
 </head>
 <body>
 
 <div class="app-container">
-    <div class="header"><h1 class="logo">SPICH<span>.</span></h1></div>
+    <div class="header" onclick="resetApp()">
+        <h1 class="logo">SPICH<span>.</span></h1>
+    </div>
 
     <div id="scena-setup" class="scena">
-        <h2 style="text-align:center; color:var(--primary);">Configura Studio</h2>
-        <input type="text" id="set-att" placeholder="Nome Attività">
-        <input type="tel" id="set-wa" placeholder="WhatsApp (es. 39333...)">
-        <button class="btn-teal" onclick="salvaSetup()">CONFIGURA ORA</button>
+        <h2 style="text-align:center; margin-bottom:10px; color:var(--primary);">Benvenuto Professionista</h2>
+        <p style="text-align:center; font-size:0.9rem; margin-bottom:20px; padding:0 10px;">Attiva il tuo panel per gestire i referral e premiare i tuoi pazienti.</p>
+        <div class="form-box">
+            <input type="text" id="set-att" placeholder="Nome Studio / Attività">
+            <input type="tel" id="set-wa" placeholder="WhatsApp Studio (es. 39333...)">
+            <button class="btn-teal" onclick="registraEsercente()">ATTIVA ORA</button>
+        </div>
     </div>
 
     <div id="scena-dash" class="scena">
-        <div class="stat-card"><b id="count-r">0</b><span>Amici Portati</span></div>
-        <div style="background:white; padding:15px; border-radius:15px; border:1px solid #eee; margin-bottom:20px;">
-            <input type="text" id="new-nome" placeholder="Nome cliente">
+        <div class="stat-card">
+            <div id="pro-tag" class="badge-pro">FREE</div>
+            <b id="count-clienti">0</b>
+            <span id="label-limite">Pazienti Attivi (Limite 10)</span>
+        </div>
+
+        <div id="form-container" class="form-box">
+            <input type="text" id="new-nome" placeholder="Nome Paziente">
+            <input type="tel" id="new-tel" placeholder="Cellulare Paziente (es. 39...)">
             <select id="new-premio">
                 <option value="Sconto 20%">Sconto 20%</option>
                 <option value="Sconto 50%">Sconto 50%</option>
-                <option value="Drink Omaggio">Drink Omaggio</option>
-                <option value="Seduta Omaggio">Seduta Omaggio</option>
+                <option value="Trattamento Omaggio">Trattamento Omaggio</option>
             </select>
-            <button class="btn-teal" onclick="nuovoCliente()">AGGIUNGI CLIENTE</button>
+            <button id="btn-add" class="btn-teal" onclick="nuovoPaziente()">+ AGGIUNGI PAZIENTE</button>
+            <div id="msg-lock" class="lock-msg">
+                LIMITE 10 PAZIENTI RAGGIUNTO!<br>Contatta l'assistenza per sbloccare la versione PRO.
+            </div>
         </div>
-        <div id="lista-clienti"></div>
+
+        <div id="lista-pazienti"></div>
+        <div class="footer-id">DEVICE ID: <span id="dev-id">...</span></div>
     </div>
 
     <div id="scena-regalo" class="scena">
         <div style="text-align:center;">
-            <h2 id="reg-att" style="color:var(--primary);">...</h2>
-            <p>GIFT PASS DI: <b id="reg-cliente" style="color:var(--gold)">...</b></p>
+            <h2 id="reg-att" style="color:var(--primary); font-size:1.8rem;">...</h2>
+            <p id="label-pass" style="margin-bottom:10px;">PASS DI: <b id="reg-cliente" style="color:var(--gold)">...</b></p>
             
             <div class="gift-box-container">
                 <div class="fiocco-wrap"><div class="asola"></div><div class="asola right"></div></div>
                 <div class="pacco"><div class="nastro-v"></div><div class="nastro-h"></div></div>
             </div>
 
-            <div class="progresso-container" id="barra-cerchi"></div>
-            <p id="msg-stato" style="font-weight:800; color:var(--primary);"></p>
-
-            <div id="area-qr" style="display:none; margin-top:20px;">
-                <div id="qrcode" style="display:inline-block; padding:10px; background:white; border:1px solid #eee; border-radius:10px;"></div>
-                <p style="font-size:0.7rem; color:#aaa; margin-top:10px;">FAI INQUADRARE AI TUOI AMICI</p>
+            <div id="sezione-progresso">
+                <div class="progresso-container" id="barra-cerchi"></div>
+                <p id="msg-stato" style="font-weight:800; color:var(--primary);"></p>
+                <div id="qrcode" style="display:inline-block; padding:15px; background:white; border:1px solid #eee; margin-top:15px; border-radius:12px;"></div>
+                <p style="font-size:0.75rem; color:#888; margin-top:10px;">Mostra questo codice ai tuoi amici!</p>
             </div>
 
             <div id="area-prenota" style="display:none;">
-                <button class="btn-prenota" onclick="prenotaAmico()">PRENOTA IL TUO REGALO</button>
+                <h3 style="margin-top:10px;">Un regalo esclusivo per te!</h3>
+                <button class="btn-prenota" onclick="prenotaAmico()">PRENOTA ORA</button>
             </div>
 
             <div class="banner-oro" id="reg-premio">...</div>
@@ -105,27 +131,32 @@
 </div>
 
 <script>
-    // URL DATABASE
+    // Configurazione Link Database
     const API_URL = "https://script.google.com/macros/s/AKfycbxFUjiCtsl4dM10L7Mz_URnUJvK8EqAnmCS4PQj-DYVCH7jqnw6vMXkaRV3yHdeZlBw/exec";
     
-    // Inizializzazione sicura
-    let config = null;
-    let clienti = [];
+    // Inizializzazione Identità
+    let deviceId = localStorage.getItem('spich_dev_id') || ('SP-' + Math.floor(1000 + Math.random() * 8999));
+    localStorage.setItem('spich_dev_id', deviceId);
 
-    try {
-        config = JSON.parse(localStorage.getItem('spich_cfg'));
-        clienti = JSON.parse(localStorage.getItem('spich_cli')) || [];
-    } catch(e) {
-        console.error("Errore storage, reset...");
-        localStorage.clear();
-    }
+    let config = JSON.parse(localStorage.getItem('spich_cfg')) || null;
+    let pazienti = JSON.parse(localStorage.getItem('spich_cli')) || [];
+    let isPro = false;
 
-    window.onload = function() {
+    window.onload = async function() {
+        document.getElementById('dev-id').innerText = deviceId;
         const p = new URLSearchParams(window.location.search);
+        
+        // Se è la vista regalo, non serve controllare il PRO dell'esercente
         if (p.get('v') === 'gift') {
             mostra('regalo');
             initCliente(p);
-        } else if (!config) {
+            return;
+        }
+
+        // Dashboard: Controllo Stato PRO
+        await verificaStatoPro();
+
+        if (!config) {
             mostra('setup');
         } else {
             mostra('dash');
@@ -133,101 +164,187 @@
         }
     };
 
+    async function verificaStatoPro() {
+        try {
+            const resp = await fetch(API_URL + "?checkPro=" + deviceId);
+            const data = await resp.json();
+            isPro = (data.isPro === true);
+            if(isPro) {
+                const tag = document.getElementById('pro-tag');
+                tag.innerText = "PRO";
+                tag.classList.add('is-pro');
+                document.getElementById('label-limite').innerText = "Pazienti Gestiti (Illimitati)";
+            }
+        } catch(e) { console.warn("Sync Offline"); }
+    }
+
+    function registraEsercente() {
+        const n = document.getElementById('set-att').value.trim();
+        const w = document.getElementById('set-wa').value.trim();
+        if(!n || !w) { alert("Compila tutti i campi!"); return; }
+        
+        config = { n: n, w: w, id: deviceId };
+        localStorage.setItem('spich_cfg', JSON.stringify(config));
+        
+        fetch(API_URL, { 
+            method: "POST", 
+            mode: "no-cors", 
+            body: JSON.stringify({tipo: 'REG_ESERCENTE', deviceId: deviceId, nomeAtt: n, wa: w}) 
+        });
+        
+        setTimeout(() => location.reload(), 500);
+    }
+
+    function nuovoPaziente() {
+        if(!isPro && pazienti.length >= 10) return;
+        const nome = document.getElementById('new-nome').value.trim();
+        const tel = document.getElementById('new-tel').value.trim();
+        const premio = document.getElementById('new-premio').value;
+        
+        if(!nome || !tel) { alert("Inserisci Nome e Cellulare!"); return; }
+
+        const p = { 
+            id: "PX" + Math.floor(Math.random() * 9000), 
+            nome: nome, 
+            tel: tel, 
+            ref: 0, 
+            waStudio: config.w, 
+            att: config.n, 
+            premio: premio,
+            owner: deviceId 
+        };
+        
+        pazienti.push(p);
+        sync(p);
+        
+        document.getElementById('new-nome').value = "";
+        document.getElementById('new-tel').value = "";
+    }
+
+    function renderDash() {
+        const cont = document.getElementById('lista-pazienti');
+        cont.innerHTML = "";
+        
+        // Auto-pulizia chi ha finito i 5 amici
+        pazienti = pazienti.filter(p => p.ref < 5);
+        localStorage.setItem('spich_cli', JSON.stringify(pazienti));
+
+        pazienti.forEach((p, i) => {
+            const displayX = isPro ? "block" : "none";
+            cont.innerHTML += `<div class="p-item">
+                <button class="btn-del" style="display:${displayX}" onclick="cancellaPaziente(${i})">X</button>
+                <div>
+                    <b>${p.nome}</b><br>
+                    <small style="color:#888;">${p.tel} • ${p.ref}/5 Amici</small>
+                </div>
+                <div style="display:flex; align-items:center;">
+                    <a class="btn-wa" href="${generaLinkWA(p)}" target="_blank">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                    <button class="btn-ref" onclick="addRef(${i})">+1</button>
+                </div>
+            </div>`;
+        });
+
+        document.getElementById('count-clienti').innerText = pazienti.length;
+        
+        if(!isPro && pazienti.length >= 10) {
+            document.getElementById('btn-add').style.display = "none";
+            document.getElementById('msg-lock').style.display = "block";
+        } else {
+            document.getElementById('btn-add').style.display = "block";
+            document.getElementById('msg-lock').style.display = "none";
+        }
+    }
+
+    function generaLinkWA(p) {
+        const linkApp = window.location.origin + window.location.pathname + 
+                        "?v=gift&id=" + p.id + 
+                        "&paz=" + encodeURIComponent(p.nome) + 
+                        "&dr=" + encodeURIComponent(config.n) + 
+                        "&wa=" + config.w + 
+                        "&pre=" + encodeURIComponent(p.premio);
+        
+        const testo = "Ciao " + p.nome + "! Ecco il tuo SPICH PASS personale per " + config.n + ". Condividilo con i tuoi amici: " + linkApp;
+        return "https://wa.me/" + p.tel + "?text=" + encodeURIComponent(testo);
+    }
+
+    function addRef(i) {
+        pazienti[i].ref++;
+        sync(pazienti[i]);
+    }
+
+    function cancellaPaziente(i) {
+        if(confirm("Vuoi davvero eliminare questo paziente?")) {
+            pazienti.splice(i, 1);
+            localStorage.setItem('spich_cli', JSON.stringify(pazienti));
+            renderDash();
+        }
+    }
+
+    function sync(p) {
+        localStorage.setItem('spich_cli', JSON.stringify(pazienti));
+        renderDash();
+        fetch(API_URL, { 
+            method: "POST", 
+            mode: "no-cors", 
+            body: JSON.stringify({tipo: 'ADD_PAZIENTE', ...p}) 
+        });
+    }
+
+    async function initCliente(p) {
+        document.getElementById('reg-att').innerText = p.get('dr') || "Studio Professionale";
+        document.getElementById('reg-cliente').innerText = p.get('paz') || "Cliente";
+        document.getElementById('reg-premio').innerText = p.get('pre') || "Sconto Esclusivo";
+        
+        const isAmico = (window.location.hash === "#amico");
+
+        if (isAmico) {
+            document.getElementById('sezione-progresso').style.display = "none";
+            document.getElementById('area-prenota').style.display = "block";
+            document.getElementById('label-pass').innerHTML = "UN REGALO PER TE DA: <b style='color:var(--gold)'>" + p.get('paz') + "</b>";
+        } else {
+            let r = 0;
+            try {
+                const resp = await fetch(API_URL + "?id=" + p.get('id'));
+                const data = await resp.json();
+                r = data.ref || 0;
+            } catch(e) { console.warn("Offline"); }
+
+            const barra = document.getElementById('barra-cerchi');
+            barra.innerHTML = "";
+            for(let i=1; i<=5; i++) {
+                const attivo = i <= r ? 'attivo' : '';
+                barra.innerHTML += `<div class="cerchio ${attivo}">${i <= r ? '★' : i}</div>`;
+            }
+            document.getElementById('msg-stato').innerText = r < 5 ? "Porta ancora " + (5-r) + " amici!" : "PREMIO SBLOCCATO!";
+            
+            new QRCode(document.getElementById("qrcode"), {
+                text: window.location.href + "#amico",
+                width: 130,
+                height: 130,
+                colorDark : "#008080",
+                colorLight : "#ffffff"
+            });
+        }
+    }
+
+    function prenotaAmico() {
+        const p = new URLSearchParams(window.location.search);
+        const msg = "Ciao! Sono un amico di " + p.get('paz') + " e vorrei prenotare per riscattare il mio regalo presso " + p.get('dr');
+        window.open("https://wa.me/" + p.get('wa') + "?text=" + encodeURIComponent(msg));
+    }
+
     function mostra(id) {
         document.querySelectorAll('.scena').forEach(s => s.classList.remove('active'));
         const target = document.getElementById('scena-' + id);
         if(target) target.classList.add('active');
     }
 
-    function salvaSetup() {
-        const n = document.getElementById('set-att').value;
-        const w = document.getElementById('set-wa').value;
-        if(!n || !w) return alert("Inserisci Nome e WhatsApp");
-        config = { n: n, w: w };
-        localStorage.setItem('spich_cfg', JSON.stringify(config));
-        location.reload();
-    }
-
-    function nuovoCliente() {
-        const nome = document.getElementById('new-nome').value;
-        const premio = document.getElementById('new-premio').value;
-        if(!nome) return alert("Nome mancante");
-        const id = "SP" + Math.floor(1000 + Math.random() * 9000);
-        const c = { id: id, nome: nome, ref: 0, waStudio: config.w, att: config.n, premio: premio };
-        clienti.push(c);
-        sync(c);
-        document.getElementById('new-nome').value = "";
-    }
-
-    function renderDash() {
-        const cont = document.getElementById('lista-clienti');
-        cont.innerHTML = "";
-        let tot = 0;
-        clienti.forEach((c, i) => {
-            tot += c.ref;
-            cont.innerHTML += `<div class="p-item">
-                <div><b>${c.nome}</b><br><small>${c.ref}/5 Amici • ${c.premio}</small></div>
-                <div style="display:flex; align-items:center;">
-                    <button class="btn-wa" onclick="inviaWA(${i})"><i class="fab fa-whatsapp"></i></button>
-                    <button onclick="addRef(${i})" style="margin-left:10px; background:var(--gold); color:white; border:none; padding:10px 15px; border-radius:10px; font-weight:800;">+1</button>
-                </div>
-            </div>`;
-        });
-        document.getElementById('count-r').innerText = tot;
-    }
-
-    function addRef(i) {
-        if(clienti[i].ref < 5) {
-            clienti[i].ref++;
-            sync(clienti[i]);
+    function resetApp() {
+        if(!new URLSearchParams(window.location.search).get('v')) {
+            window.location.href = window.location.pathname;
         }
-    }
-
-    function inviaWA(i) {
-        const c = clienti[i];
-        const link = window.location.origin + window.location.pathname + "?v=gift&id=" + c.id + "&paz=" + encodeURIComponent(c.nome) + "&dr=" + encodeURIComponent(config.n) + "&wa=" + config.w + "&pre=" + encodeURIComponent(c.premio);
-        window.open("https://wa.me/?text=" + encodeURIComponent("Ciao " + c.nome + "! Ecco il tuo SPICH PASS personale: " + link));
-    }
-
-    async function initCliente(p) {
-        document.getElementById('reg-att').innerText = p.get('dr') || "SPICH Studio";
-        document.getElementById('reg-cliente').innerText = p.get('paz') || "Cliente";
-        document.getElementById('reg-premio').innerText = p.get('pre') || "Sconto Speciale";
-        
-        let r = 0;
-        try {
-            const resp = await fetch(API_URL + "?id=" + p.get('id'));
-            const data = await resp.json();
-            r = data.ref || 0;
-        } catch(e) { console.log("Offline mode"); }
-
-        const barra = document.getElementById('barra-cerchi');
-        barra.innerHTML = "";
-        for(let i=1; i<=5; i++) {
-            const attivo = i <= r ? 'attivo' : '';
-            barra.innerHTML += `<div class="cerchio ${attivo}">${i <= r ? '★' : i}</div>`;
-        }
-
-        if(window.location.hash === "#amico") {
-            document.getElementById('area-prenota').style.display = "block";
-            document.getElementById('msg-stato').innerText = "Hai ricevuto un regalo!";
-        } else {
-            document.getElementById('area-qr').style.display = "block";
-            document.getElementById('msg-stato').innerText = r < 5 ? "Ti mancano " + (5-r) + " amici!" : "PREMIO SBLOCCATO!";
-            new QRCode(document.getElementById("qrcode"), { text: window.location.href + "#amico", width: 140, height: 140 });
-        }
-    }
-
-    function prenotaAmico() {
-        const p = new URLSearchParams(window.location.search);
-        const msg = encodeURIComponent("Ciao! Vorrei prenotare per riscattare il regalo di " + p.get('paz'));
-        window.open("https://wa.me/" + p.get('wa') + "?text=" + msg);
-    }
-
-    function sync(c) {
-        localStorage.setItem('spich_cli', JSON.stringify(clienti));
-        renderDash();
-        fetch(API_URL, { method: "POST", mode: "no-cors", body: JSON.stringify(c) });
     }
 </script>
 </body>
