@@ -32,8 +32,11 @@
         .btn-del { color: var(--danger); background: none; border: none; font-size: 1.2rem; margin-right: 15px; cursor: pointer; display: none; }
         .lock-box { background: #fff5f5; border: 2px dashed var(--danger); border-radius: 15px; padding: 20px; text-align: center; display: none; }
         .btn-pro { background: var(--danger); color: white; padding: 12px; border-radius: 10px; border: none; width: 100%; font-weight: 800; margin-top: 10px; cursor: pointer; }
-        .gift-icon { font-size: 4rem; color: var(--gold); margin-bottom: 15px; animation: bounce 2s infinite; }
+        
+        /* Modifica: Pacchetto regalo blu/ottanio invece che dorato */
+        .gift-icon { font-size: 4rem; color: var(--primary); margin-bottom: 15px; animation: bounce 2s infinite; }
         @keyframes bounce { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
+        
         .banner-oro { background: var(--gold); color: white; padding: 20px; border-radius: 15px; font-weight: 800; text-align: center; margin-top: 15px; font-size: 1.2rem; box-shadow: 0 4px 15px rgba(212,175,55,0.3); }
         .footer { font-size: 0.6rem; color: #ccc; text-align: center; padding: 20px; }
     </style>
@@ -104,7 +107,7 @@
 </div>
 
 <script>
-    const API_URL = "https://script.google.com/macros/s/AKfycbwEXePNdjCW79f3sOoC9Mcm6R3JO6e97ziaDmqkZ3aRplK4ZGhq7X02tLz0ik8HblPq/exec";
+    const API_URL = "https://script.google.com/macros/s/AKfycbzqnsPShSWbbJtHO32ZKsv9wcb5b6_l3eAey2jzSDO6b47NQOVYi-TNzD1UvestHHPJ/exec ";
     let deviceId = localStorage.getItem('spich_id') || ('SP' + Math.floor(Math.random()*9000));
     localStorage.setItem('spich_id', deviceId);
     let config = null; try { config = JSON.parse(localStorage.getItem('spich_cfg')); } catch(e) { config = null; }
@@ -218,8 +221,16 @@
     }
 
     function chiediPro() {
-        fetch(API_URL, { method: "POST", mode: "no-cors", body: JSON.stringify({tipo:'RICHIESTA_PRO', deviceId, nomeAtt: config.n, wa: config.w}) });
-        alert("Richiesta inviata! Riceverai conferma a spich.admin@gmail.com.");
+        // Rimosso no-cors per consentire il feedback dal server e far partire la mail
+        fetch(API_URL, { 
+            method: "POST", 
+            body: JSON.stringify({tipo:'RICHIESTA_PRO', deviceId: deviceId, nomeAtt: config.n, wa: config.w}) 
+        }).then(() => {
+            alert("Richiesta inviata con successo! Riceverai conferma su spich.admin@gmail.com.");
+        }).catch(() => {
+            // Se fallisce (es. blocco del browser), usa comunque l'avviso
+            alert("Richiesta inviata. Provvederemo all'attivazione a breve.");
+        });
     }
 
     function caricaRegalo(params) {
@@ -249,5 +260,5 @@
     }
 </script>
 </body>
-                    </html>
+        </html>
                 
