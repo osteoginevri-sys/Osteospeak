@@ -3,76 +3,128 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>SPICH. - Business</title>
+    <title>SPICH. - Business Panel</title>
+    
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&family=Montserrat:wght@400;700;800&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    
     <style>
-        :root { --primary: #008080; --gold: #d4af37; --bg: #fdfdfd; --danger: #e74c3c; --success: #2ecc71; --wa: #25D366; }
+        /* Variabili di Colore */
+        :root { 
+            --primary: #008080; /* Ottanio/Teal */
+            --gold: #d4af37; 
+            --bg: #fdfdfd; 
+            --danger: #e74c3c; 
+            --success: #2ecc71; 
+            --wa: #25D366; 
+        }
+        
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; margin: 0; padding: 0; }
         body { background: #f4f6f7; font-family: 'Montserrat', sans-serif; color: #2c3e50; min-height: 100vh; overflow-x: hidden; }
+        
+        /* Contenitore Principale App */
         .app-container { background: var(--bg); width: 100%; min-height: 100vh; max-width: 450px; margin: 0 auto; display: flex; flex-direction: column; box-shadow: 0 0 30px rgba(0,0,0,0.1); }
+        
+        /* Header & Logo */
         .header { padding: 20px; text-align: center; background: white; border-bottom: 1px solid #eee; cursor: pointer; }
         .logo { font-family: 'Comfortaa', cursive; font-size: 2.2rem; color: var(--primary); }
         .logo span { color: var(--gold); }
+        
+        /* Gestione Scene (Schermate) */
         .scena { display: none; padding: 20px; animation: fadeIn 0.4s ease; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         .active { display: block !important; }
+        
+        /* Dashboard Cards e Badge PRO */
         .stat-card { background: white; padding: 20px; border-radius: 18px; text-align: center; border-bottom: 5px solid var(--gold); margin-bottom: 20px; position: relative; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
         .stat-card b { font-size: 2.5rem; color: var(--primary); display: block; }
         .badge-pro { background: #bbb; color: white; padding: 4px 10px; border-radius: 6px; font-size: 0.7rem; position: absolute; top: 10px; right: 10px; font-weight: 800; }
         .badge-pro.is-pro { background: var(--success); }
+        
+        /* Form, Input, Bottoni */
         .form-box { background: white; padding: 15px; border-radius: 18px; border: 1px solid #eee; margin-bottom: 20px; }
         label { font-size: 0.7rem; font-weight: 800; color: var(--primary); text-transform: uppercase; margin-top: 10px; display: block; padding-left: 5px; }
         input, select { width: 100%; padding: 12px; margin: 5px 0 12px 0; border-radius: 12px; border: 1px solid #ddd; font-family: inherit; font-size: 1rem; outline: none; }
-        .btn-teal { background: var(--primary); color: white; border: none; padding: 16px; border-radius: 15px; font-weight: 800; width: 100%; cursor: pointer; font-size: 1rem; }
+        .btn-teal { background: var(--primary); color: white; border: none; padding: 16px; border-radius: 15px; font-weight: 800; width: 100%; cursor: pointer; font-size: 1rem; transition: 0.2s; }
+        .btn-teal:active { transform: scale(0.98); }
+        
+        /* Elementi della Lista Pazienti/Clienti */
         .p-item { background: white; padding: 15px; border-radius: 15px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; border: 1px solid #eee; position: relative; }
-        .btn-wa { background: var(--wa); color: white; width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 1.5rem; margin-right: 5px; }
-        .btn-ref { background: var(--gold); border: none; padding: 10px 15px; border-radius: 12px; color: white; font-weight: 800; cursor: pointer; }
+        .btn-wa { background: var(--wa); color: white; width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 1.5rem; margin-right: 5px; box-shadow: 0 2px 5px rgba(37,211,102,0.3); }
+        .btn-ref { background: var(--gold); border: none; padding: 10px 15px; border-radius: 12px; color: white; font-weight: 800; cursor: pointer; box-shadow: 0 2px 5px rgba(212,175,55,0.3); }
         .btn-del { color: var(--danger); background: none; border: none; font-size: 1.2rem; margin-right: 15px; cursor: pointer; display: none; }
+        
+        /* Box Blocco Limite FREE */
         .lock-box { background: #fff5f5; border: 2px dashed var(--danger); border-radius: 15px; padding: 20px; text-align: center; display: none; }
         .btn-pro { background: var(--danger); color: white; padding: 12px; border-radius: 10px; border: none; width: 100%; font-weight: 800; margin-top: 10px; cursor: pointer; }
         
-        /* Modifica: Pacchetto regalo blu/ottanio invece che dorato */
-        .gift-icon { font-size: 4rem; color: var(--primary); margin-bottom: 15px; animation: bounce 2s infinite; }
+        /* --- STILI VISTA REGALO (CLIENTE) --- */
+        /* Pacco Regalo Animato in colore Primary (Blu/Ottanio) */
+        .gift-icon { font-size: 4.5rem; color: var(--primary); margin-bottom: 15px; animation: bounce 2s infinite; }
         @keyframes bounce { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
         
-        .banner-oro { background: var(--gold); color: white; padding: 20px; border-radius: 15px; font-weight: 800; text-align: center; margin-top: 15px; font-size: 1.2rem; box-shadow: 0 4px 15px rgba(212,175,55,0.3); }
-        .footer { font-size: 0.6rem; color: #ccc; text-align: center; padding: 20px; }
+        /* Pallini Progresso */
+        .dots-container { display: flex; justify-content: center; gap: 10px; margin-bottom: 20px; }
+        .dot { width: 22px; height: 22px; border-radius: 50%; border: 2px solid #ddd; background: #eee; transition: 0.4s all ease-in-out; }
+        .dot.fill { background: var(--primary); border-color: var(--primary); transform: scale(1.2); box-shadow: 0 0 8px rgba(0,128,128,0.4); }
+        
+        /* Bottone Condividi */
+        .btn-share { background: #E1F5FE; color: #0288D1; border: none; padding: 14px; border-radius: 12px; width: 100%; font-weight: 800; margin-top: 15px; cursor: pointer; font-size: 0.9rem; display: flex; justify-content: center; align-items: center; gap: 8px; }
+        
+        /* Banner Oro per il Testo del Premio */
+        .banner-oro { background: var(--gold); color: white; padding: 20px; border-radius: 15px; font-weight: 800; text-align: center; margin-top: 20px; font-size: 1.1rem; box-shadow: 0 4px 15px rgba(212,175,55,0.3); }
+        
+        /* Footer (ID Device) */
+        .footer { font-size: 0.65rem; color: #ccc; text-align: center; padding: 20px; margin-top: auto; }
     </style>
 </head>
 <body>
+
 <div class="app-container">
-    <div class="header" onclick="confermaReset()"><h1 class="logo">SPICH<span>.</span></h1></div>
+    
+    <div class="header" onclick="confermaReset()">
+        <h1 class="logo">SPICH<span>.</span></h1>
+    </div>
 
     <div id="scena-setup" class="scena">
         <h3 style="text-align:center; margin-bottom:15px; color:var(--primary);">Area Professionista</h3>
         <div class="form-box">
             <label>Nome Attività</label>
             <input type="text" id="set-att" placeholder="Es: Studio Medico Rossi">
+            
             <label>Il Tuo WhatsApp Business</label>
-            <input type="tel" id="set-wa" placeholder="Esempio: 39347...">
+            <input type="tel" id="set-wa" placeholder="Esempio: 393471234567">
+            
             <label>Settore di attività</label>
             <select id="set-cat">
-                <option value="Medica">Settore Medico</option>
-                <option value="Commerciale">Settore Commerciale</option>
-                <option value="Ristorazione">Settore Ristorazione</option>
+                <option value="Medica">Settore Medico (Pazienti)</option>
+                <option value="Commerciale">Settore Commerciale (Clienti)</option>
+                <option value="Ristorazione">Settore Ristorazione (Ospiti)</option>
                 <option value="Altro">Altro</option>
             </select>
+            
             <button class="btn-teal" onclick="salvaSetup()">CONFIGURA ATTIVITÀ</button>
         </div>
     </div>
 
     <div id="scena-dash" class="scena">
+        
         <div class="stat-card">
             <div id="badge-pro" class="badge-pro">FREE</div>
-            <b id="contatore">0</b><span id="label-cat">Contatti</span>
+            <b id="contatore">0</b>
+            <span id="label-cat">Contatti</span>
         </div>
+        
         <div class="form-box">
-            <label id="label-nome">Nome</label>
+            <label id="label-nome">Nome e Cognome</label>
             <input type="text" id="new-nome" placeholder="Inserisci nome...">
+            
             <label>Cellulare</label>
-            <input type="tel" id="new-tel" placeholder="39...">
+            <input type="tel" id="new-tel" placeholder="Es: 39347...">
+            
             <label>Premio Referral</label>
             <select id="new-premio" onchange="checkPremio()">
                 <option value="Sconto 20%">Sconto 20%</option>
@@ -80,185 +132,293 @@
                 <option value="Omaggio">Trattamento Omaggio</option>
                 <option value="CUSTOM">-- Scrivi premio personalizzato (PRO) --</option>
             </select>
-            <input type="text" id="new-custom" placeholder="Descrizione premio..." style="display:none;">
-            <button id="btn-add" class="btn-teal" onclick="aggiungiContatto()">AGGIUNGI</button>
+            
+            <input type="text" id="new-custom" placeholder="Descrizione premio..." style="display:none; margin-top:10px;">
+            
+            <button id="btn-add" class="btn-teal" onclick="aggiungiContatto()" style="margin-top:10px;">AGGIUNGI AL DATABASE</button>
+            
             <div id="box-lock" class="lock-box">
-                <p style="color:var(--danger); font-weight:800;">LIMITE 10 CONTATTI RAGGIUNTO</p>
-                <button onclick="chiediPro()" class="btn-pro">PASSA A VERSIONE PRO</button>
+                <p style="color:var(--danger); font-weight:800; margin-bottom:5px;">LIMITE 10 CONTATTI RAGGIUNTO</p>
+                <p style="font-size:0.75rem; margin-bottom:10px;">Attiva la versione PRO per avere contatti illimitati.</p>
+                <button onclick="chiediPro()" class="btn-pro">PASSA ALLA VERSIONE PRO</button>
             </div>
         </div>
+        
         <div id="lista-contatti"></div>
     </div>
 
     <div id="scena-regalo" class="scena">
         <div style="text-align:center;">
+            
             <i class="fas fa-gift gift-icon"></i>
-            <h2 id="reg-studio" style="color:var(--primary); text-transform:uppercase;"></h2>
-            <p style="margin-bottom:20px; font-weight:700;">Ha un regalo speciale per te!</p>
-            <div id="qrcode" style="margin:0 auto; padding:15px; background:white; display:inline-block; border-radius:15px; border: 1px solid #eee;"></div>
+            
+            <h2 id="reg-studio" style="color:var(--primary); text-transform:uppercase; margin-bottom:5px;"></h2>
+            <p style="margin-bottom:20px; font-weight:700; font-size:0.95rem;">Ha un regalo speciale per te!</p>
+            
+            <div class="dots-container" id="dots-box">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
+
+            <div id="qrcode-box">
+                <div id="qrcode" style="margin:0 auto; padding:15px; background:white; display:inline-block; border-radius:15px; border: 1px solid #eee;"></div>
+                
+                <button class="btn-share" onclick="condividiLink()">
+                    <i class="fab fa-whatsapp" style="font-size:1.2rem;"></i> CONDIVIDI CON GLI AMICI
+                </button>
+            </div>
+
             <div id="reg-premio" class="banner-oro"></div>
-            <div id="box-prenota" style="display:none; margin-top:20px;">
-                <p style="font-size:0.8rem; margin-bottom:15px;">Mostra questo codice o prenota ora:</p>
+            
+            <div id="box-prenota" style="display:none; margin-top:25px;">
+                <p style="font-size:0.85rem; margin-bottom:15px; font-weight:700;">Premio Sbloccato! Mostra questa pagina in sede o prenota subito.</p>
                 <button class="btn-teal" onclick="prenotaOra()">PRENOTA SU WHATSAPP</button>
             </div>
         </div>
     </div>
-    <div class="footer">Device ID: <span id="dev-id"></span></div>
+    
+    <div class="footer">ID Dispositivo: <span id="dev-id"></span></div>
 </div>
 
 <script>
-    const API_URL = "https://script.google.com/macros/s/AKfycbzqnsPShSWbbJtHO32ZKsv9wcb5b6_l3eAey2jzSDO6b47NQOVYi-TNzD1UvestHHPJ/exec ";
-    let deviceId = localStorage.getItem('spich_id') || ('SP' + Math.floor(Math.random()*9000));
-    localStorage.setItem('spich_id', deviceId);
-    let config = null; try { config = JSON.parse(localStorage.getItem('spich_cfg')); } catch(e) { config = null; }
-    let contatti = []; try { contatti = JSON.parse(localStorage.getItem('spich_list')) || []; } catch(e) { contatti = []; }
+    // IL NUOVO URL DI GOOGLE APPS SCRIPT
+    const API_URL = "https://script.google.com/macros/s/AKfycbxN0X_dQwhqRSsAIMvNLCVDDQDUTWoZnQO85cz03f9ouZJz58gFQCqBc5rvzZBdw6y1-Q/exec";
+
+    // INIZIALIZZAZIONE ID E DATI LOCALI (Protezione con Try-Catch)
+    let deviceId = localStorage.getItem('spich_id');
+    if (!deviceId) {
+        deviceId = 'SP' + Math.floor(Math.random() * 90000);
+        localStorage.setItem('spich_id', deviceId);
+    }
+
+    let config = null;
+    try { config = JSON.parse(localStorage.getItem('spich_cfg')); } catch(e) { config = null; }
+    
+    let contatti = [];
+    try { contatti = JSON.parse(localStorage.getItem('spich_list')) || []; } catch(e) { contatti = []; }
+    
     let isPro = false;
 
+    // AL CARICAMENTO DELLA PAGINA
     window.onload = function() {
         document.getElementById('dev-id').innerText = deviceId;
-        const p = new URLSearchParams(window.location.search);
-        if (p.get('v') === 'gift') { mostraScena('regalo'); caricaRegalo(p); }
-        else if (!config) { mostraScena('setup'); }
-        else { mostraScena('dash'); inizializzaDash(); checkStatoPro(); }
+        const urlParams = new URLSearchParams(window.location.search);
+        
+        // Verifica in che modalità siamo (Regalo o Dashboard)
+        if (urlParams.get('v') === 'gift') {
+            mostraScena('regalo');
+            caricaRegalo(urlParams);
+        } else if (!config) {
+            mostraScena('setup');
+        } else {
+            mostraScena('dash');
+            inizializzaDash();
+            checkStatoPro();
+        }
     };
 
+    // FUNZIONE PER CAMBIARE SCHERMATA
     function mostraScena(id) {
         document.querySelectorAll('.scena').forEach(s => s.classList.remove('active'));
         document.getElementById('scena-' + id).classList.add('active');
     }
 
-    function inizializzaDash() {
-        let s = "Cliente", pl = "Clienti";
-        if(config.cat === "Medica") { s = "Paziente"; pl = "Pazienti"; }
-        else if(config.cat === "Ristorazione") { s = "Ospite"; pl = "Ospiti"; }
-        document.getElementById('label-cat').innerText = pl;
-        document.getElementById('label-nome').innerText = "Nome " + s;
-        renderLista();
-    }
-
+    // CONTROLLO STATO PRO CON GOOGLE
     async function checkStatoPro() {
         try {
             const r = await fetch(API_URL + "?checkPro=" + deviceId);
             const d = await r.json();
-            if (d.isPro) {
+            if (d.isPro === true || d.isPro === "SI" || d.isPro === "si") {
                 isPro = true;
-                const b = document.getElementById('badge-pro');
-                b.innerText = "PRO"; b.classList.add('is-pro');
+                // Modifica badge
+                document.getElementById('badge-pro').innerText = "PRO";
+                document.getElementById('badge-pro').classList.add('is-pro');
+                // Mostra bottoni elimina e nascondi banner limit
+                document.getElementById('box-lock').style.display = "none";
+                document.getElementById('btn-add').style.display = "block";
                 document.querySelectorAll('.btn-del').forEach(btn => btn.style.display = "block");
             }
-        } catch(e) { console.log("Offline"); }
+        } catch(e) {
+            console.log("Controllo stato PRO offline o errore server.");
+        }
     }
 
+    // IMPOSTAZIONE ETICHETTE DASHBOARD IN BASE ALLA CATEGORIA
+    function inizializzaDash() {
+        let labelSingolo = "Cliente";
+        let labelPlurale = "Clienti";
+        
+        if(config.cat === "Medica") { 
+            labelSingolo = "Paziente"; 
+            labelPlurale = "Pazienti"; 
+        } else if(config.cat === "Ristorazione") { 
+            labelSingolo = "Ospite"; 
+            labelPlurale = "Ospiti"; 
+        }
+
+        document.getElementById('label-cat').innerText = labelPlurale;
+        document.getElementById('label-nome').innerText = "Nome " + labelSingolo;
+        
+        renderLista();
+    }
+
+    // SALVATAGGIO SETUP INIZIALE PROFESSIONISTA
     function salvaSetup() {
         const n = document.getElementById('set-att').value.trim();
         const w = document.getElementById('set-wa').value.trim();
         const c = document.getElementById('set-cat').value;
-        if (!n || !w) return alert("Inserisci tutti i dati");
-        config = { n, w, cat: c };
+        
+        if (!n || !w) return alert("Per favore, inserisci sia il Nome Attività che il numero WhatsApp.");
+        
+        config = { n: n, w: w, cat: c };
         localStorage.setItem('spich_cfg', JSON.stringify(config));
-        fetch(API_URL, { method: "POST", mode: "no-cors", body: JSON.stringify({tipo:'REG_ESERCENTE', deviceId, nomeAtt: n, wa: w}) });
+        
+        // Sincronizza con Google
+        fetch(API_URL, { 
+            method: "POST", 
+            mode: "no-cors", 
+            body: JSON.stringify({tipo: 'REG_ESERCENTE', deviceId: deviceId, nomeAtt: n, wa: w}) 
+        });
+        
         location.reload();
     }
 
+    // GESTIONE CAMPO PREMIO PERSONALIZZATO (SOLO PRO)
+    function checkPremio() {
+        const selettore = document.getElementById('new-premio').value;
+        const campoCustom = document.getElementById('new-custom');
+        
+        if (selettore === 'CUSTOM') {
+            if (!isPro) { 
+                alert("Il premio personalizzabile è una funzione riservata agli utenti PRO!"); 
+                document.getElementById('new-premio').value = "Sconto 20%"; 
+                campoCustom.style.display = 'none';
+            } else { 
+                campoCustom.style.display = 'block'; 
+            }
+        } else { 
+            campoCustom.style.display = 'none'; 
+        }
+    }
+
+    // AGGIUNTA DI UN NUOVO CONTATTO/PAZIENTE ALLA LISTA
     function aggiungiContatto() {
-        if (!isPro && contatti.length >= 10) return;
+        if (!isPro && contatti.length >= 10) {
+            return alert("Hai raggiunto il limite di 10 contatti. Passa alla versione PRO!");
+        }
+        
         const nome = document.getElementById('new-nome').value.trim();
         const tel = document.getElementById('new-tel').value.trim();
         let premio = document.getElementById('new-premio').value;
-        if (premio === 'CUSTOM') premio = document.getElementById('new-custom').value;
-        if (!nome || !tel) return alert("Compila i campi richiesti");
+        
+        if (premio === 'CUSTOM') {
+            premio = document.getElementById('new-custom').value.trim();
+        }
+        
+        if (!nome || !tel || !premio) return alert("Compila correttamente tutti i campi (Nome, Cellulare, Premio).");
 
-        const nuovo = { id: 'PX'+Math.floor(Math.random()*899+100), nome, tel, premio, ref: 0, owner: deviceId, att: config.n, wa: config.w };
+        // Crea oggetto nuovo utente
+        const nuovoId = 'PX' + Math.floor(Math.random() * 89900 + 1000);
+        const nuovo = { 
+            id: nuovoId, 
+            nome: nome, 
+            tel: tel, 
+            premio: premio, 
+            ref: 0, 
+            owner: deviceId, 
+            att: config.n, 
+            wa: config.w 
+        };
+        
         contatti.push(nuovo);
-        salvaEInvia(nuovo);
-        document.getElementById('new-nome').value = ""; document.getElementById('new-tel').value = "";
+        salvaEInvia(nuovo); // Salva in localstorage e su google
+        
+        // Pulisce i campi
+        document.getElementById('new-nome').value = ""; 
+        document.getElementById('new-tel').value = "";
     }
 
+    // COSTRUZIONE HTML DELLA LISTA CONTATTI NELLA DASHBOARD
     function renderLista() {
-        const div = document.getElementById('lista-contatti');
-        div.innerHTML = "";
+        const divLista = document.getElementById('lista-contatti');
+        divLista.innerHTML = "";
+        
         contatti.forEach((p, index) => {
-            div.innerHTML += `
+            // Se PRO, mostro il cestino per eliminare
+            const displayCestino = isPro ? 'block' : 'none';
+            
+            divLista.innerHTML += `
             <div class="p-item">
-                <button class="btn-del" onclick="eliminaContatto('${p.id}', ${index})" style="display:${isPro?'block':'none'}"><i class="fas fa-trash-alt"></i></button>
-                <div style="flex:1"><b>${p.nome}</b><br><small>${p.ref}/5 Amici Segnalati</small></div>
+                <button class="btn-del" onclick="eliminaContatto('${p.id}', ${index})" style="display:${displayCestino};">
+                    <i class="fas fa-trash-alt"></i>
+                </button>
+                <div style="flex:1;">
+                    <b style="font-size:1.1rem; color:var(--primary);">${p.nome}</b><br>
+                    <small style="font-weight:700; color:#7f8c8d;">${p.ref}/5 Punti accumulati</small>
+                </div>
                 <div style="display:flex; align-items:center;">
-                    <a class="btn-wa" href="${generaLinkWA(p)}" target="_blank"><i class="fab fa-whatsapp"></i></a>
-                    <button class="btn-ref" onclick="aggiungiPunto(${index})">+1</button>
+                    <a class="btn-wa" href="${generaLinkWA(p)}" target="_blank" title="Invia PASS via WhatsApp">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                    <button class="btn-ref" onclick="aggiungiPunto(${index})" title="Aggiungi punto referral">
+                        +1
+                    </button>
                 </div>
             </div>`;
         });
+        
         document.getElementById('contatore').innerText = contatti.length;
-        if (!isPro && contatti.length >= 10) { document.getElementById('btn-add').style.display='none'; document.getElementById('box-lock').style.display='block'; }
+        
+        // Gestione Banner PRO se si raggiunge il limite FREE
+        if (!isPro && contatti.length >= 10) { 
+            document.getElementById('btn-add').style.display = 'none'; 
+            document.getElementById('box-lock').style.display = 'block'; 
+        } else if (!isPro) {
+            document.getElementById('btn-add').style.display = 'block'; 
+            document.getElementById('box-lock').style.display = 'none'; 
+        }
     }
 
+    // GENERATORE LINK WHATSAPP PER INVIARE IL REGALO AL CLIENTE
     function generaLinkWA(p) {
-        const base = window.location.href.split('?')[0];
-        const giftUrl = `${base}?v=gift&id=${p.id}&n=${encodeURIComponent(p.nome)}&st=${encodeURIComponent(config.n)}&wa=${config.w}&pr=${encodeURIComponent(p.premio)}`;
-        const msg = `Ciao ${p.nome}! Abbiamo un regalo per te da ${config.n}. Clicca qui per scoprirlo: ${giftUrl}`;
+        // Rimuove parametri correnti dalla URL base
+        const baseUrl = window.location.href.split('?')[0];
+        
+        // Costruisce la query string
+        const giftUrl = `${baseUrl}?v=gift&id=${p.id}&n=${encodeURIComponent(p.nome)}&st=${encodeURIComponent(config.n)}&wa=${config.w}&pr=${encodeURIComponent(p.premio)}&ref=${p.ref}`;
+        
+        // Messaggio pronto per WhatsApp
+        const msg = `Ciao ${p.nome}! Abbiamo un regalo speciale per te da ${config.n}.\n\nClicca su questo link per visualizzare il tuo pass e scoprire come sbloccare il premio: ${giftUrl}`;
+        
         return `https://wa.me/${p.tel}?text=${encodeURIComponent(msg)}`;
     }
 
-    function aggiungiPunto(i) { contatti[i].ref++; salvaEInvia(contatti[i]); }
+    // AGGIUNTA PUNTO REFERRAL
+    function aggiungiPunto(i) { 
+        contatti[i].ref++; 
+        salvaEInvia(contatti[i]); 
+    }
 
+    // SALVATAGGIO IN LOCALE E SINCRONIZZAZIONE CON GOOGLE SCRIPT
     function salvaEInvia(p) {
         localStorage.setItem('spich_list', JSON.stringify(contatti));
         renderLista();
-        fetch(API_URL, { method: "POST", mode: "no-cors", body: JSON.stringify({tipo:'ADD_PAZIENTE', ...p}) });
-    }
-
-    function eliminaContatto(id, index) {
-        if(confirm("Vuoi davvero eliminare questo contatto?")) {
-            contatti.splice(index, 1);
-            localStorage.setItem('spich_list', JSON.stringify(contatti));
-            renderLista();
-            fetch(API_URL, { method: "POST", mode: "no-cors", body: JSON.stringify({tipo:'DEL_PAZIENTE', id: id}) });
-        }
-    }
-
-    function confermaReset() {
-        if(config && confirm("Vuoi tornare alla schermata di accesso?")) { localStorage.removeItem('spich_cfg'); location.reload(); }
-    }
-
-    function chiediPro() {
-        // Rimosso no-cors per consentire il feedback dal server e far partire la mail
+        
         fetch(API_URL, { 
             method: "POST", 
-            body: JSON.stringify({tipo:'RICHIESTA_PRO', deviceId: deviceId, nomeAtt: config.n, wa: config.w}) 
-        }).then(() => {
-            alert("Richiesta inviata con successo! Riceverai conferma su spich.admin@gmail.com.");
-        }).catch(() => {
-            // Se fallisce (es. blocco del browser), usa comunque l'avviso
-            alert("Richiesta inviata. Provvederemo all'attivazione a breve.");
+            mode: "no-cors", 
+            body: JSON.stringify({tipo: 'ADD_PAZIENTE', ...p}) 
         });
     }
 
-    function caricaRegalo(params) {
-        document.getElementById('reg-studio').innerText = params.get('st');
-        document.getElementById('reg-premio').innerHTML = "IL TUO REGALO:<br><span>" + params.get('pr') + "</span>";
-        if (window.location.hash === '#prenota') {
-            document.getElementById('box-prenota').style.display = 'block';
-        } else {
-            const qrUrl = window.location.href + '#prenota';
-            new QRCode(document.getElementById("qrcode"), { text: qrUrl, width: 170, height: 170 });
-        }
-    }
-
-    function prenotaOra() {
-        const p = new URLSearchParams(window.location.search);
-        const msg = `Ciao! Mi ha invitato ${p.get('n')}, vorrei prenotare il mio regalo: ${p.get('pr')}`;
-        window.open(`https://wa.me/${p.get('wa')}?text=${encodeURIComponent(msg)}`);
-    }
-
-    function checkPremio() {
-        const sel = document.getElementById('new-premio').value;
-        const cust = document.getElementById('new-custom');
-        if (sel === 'CUSTOM') {
-            if (!isPro) { alert("Solo per utenti PRO!"); document.getElementById('new-premio').value = "Sconto 20%"; }
-            else { cust.style.display = 'block'; }
-        } else { cust.style.display = 'none'; }
-    }
-</script>
-</body>
-        </html>
-                
+    // ELIMINAZIONE CONTATTO (RISERVATO PRO)
+    function eliminaContatto(id, index) {
+        if(confirm("Vuoi davvero eliminare questo contatto dal database?")) {
+            contatti.splice(index, 1);
+            localStorage.setItem('spich_list', JSON.stringify(contatti));
+            renderLista();
+            
+            fetch(API_URL,              
