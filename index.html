@@ -532,7 +532,7 @@
 
     // 4. GESTIONE LATO PROFESSIONISTA (SETUP E DASHBOARD)
     
-    function eseguiSetup() {
+        function eseguiSetup() {
         const nomeA = document.getElementById('setup-nome').value.trim();
         const waA = document.getElementById('setup-wa').value.trim();
         const settoreA = document.getElementById('setup-settore').value;
@@ -541,6 +541,28 @@
             alert("Attenzione: devi inserire il nome dell'attività e il numero WhatsApp Business.");
             return;
         }
+        
+        businessConfig = { n: nomeA, w: waA, s: settoreA };
+        localStorage.setItem('spich_cfg', JSON.stringify(businessConfig));
+        
+        // INVIO DATI A GOOGLE
+        fetch(GOOGLE_SCRIPT_URL, { 
+            method: "POST", 
+            mode: "no-cors", 
+            body: JSON.stringify({
+                tipo: 'REG_ESERCENTE', 
+                deviceId: deviceId, 
+                nomeAtt: nomeA, 
+                wa: waA
+            }) 
+        }).then(() => {
+            // Questo comando forza l'app ad entrare in Dashboard subito
+            location.reload();
+        });
+    }
+ rimosso il comando window.open che apriva WhatsApp.
+    
+
         
         businessConfig = { 
             n: nomeA, 
@@ -641,7 +663,7 @@
             return;
         }
         
-        const nome = document.getElementById('p-nome').value.trim();
+        const nome = document.getElementBnyId('p-nome').value.trim();
         const tel = document.getElementById('p-tel').value.trim();
         let premio = document.getElementById('p-premio').value;
         
@@ -752,10 +774,9 @@
         });
     }
 
-    function invioRichiestaPro() {
-        const text = `Ciao! Richiedo attivazione PRO per la mia attività: ${businessConfig.n} (ID Dispositivo: ${deviceId})`;
+        function invioRichiestaPro() {
+        alert("Richiesta inviata! Verrai attivato entro breve e riceverai una mail di conferma.");
         
-        // Log cloud della richiesta
         fetch(GOOGLE_SCRIPT_URL, { 
             method: "POST", 
             mode: "no-cors", 
@@ -766,10 +787,9 @@
                 wa: businessConfig.w
             }) 
         });
-        
-        // Apre WhatsApp per parlare con noi
-        window.open(`https://wa.me/393471234567?text=${encodeURIComponent(text)}`);
+        // WhatsApp rimosso per evitare stress!
     }
+
 
     function confermaLogout() {
         if (businessConfig && confirm("Vuoi uscire dal profilo attività e resettare il pannello?")) {
