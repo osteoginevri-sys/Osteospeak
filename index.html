@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>SPICH. - Business System & Referral</title>
+    <title>SPICH. - Business System</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&family=Montserrat:wght@400;700;800&display=swap" rel="stylesheet">
     
@@ -13,7 +13,7 @@
     
     <style>
         /* ==============================================
-           1. VARIABILI E DESIGN SYSTEM
+           1. DESIGN SYSTEM E VARIABILI
            ============================================== */
         :root { 
             --primary: #008080; /* Teal SPICH */
@@ -23,7 +23,7 @@
             --success: #2ecc71; 
             --wa: #25D366; 
             --light-blue: #E1F5FE;
-            --shadow: 0 4px 15px rgba(0,0,0,0.08);
+            --shadow-soft: 0 4px 20px rgba(0,0,0,0.06);
         }
         
         * { 
@@ -34,29 +34,28 @@
         }
         
         body { 
-            background: #f4f6f7; 
+            background: #f4f7f8; 
             font-family: 'Montserrat', sans-serif; 
             color: #2c3e50; 
             min-height: 100vh; 
             overflow-x: hidden; 
         }
         
-        /* Layout Mobile-First */
         .app-container { 
             background: var(--bg); 
             width: 100%; 
             min-height: 100vh; 
-            max-width: 450px; 
+            max-width: 480px; 
             margin: 0 auto; 
             display: flex; 
             flex-direction: column; 
-            box-shadow: 0 0 30px rgba(0,0,0,0.1); 
+            box-shadow: 0 0 40px rgba(0,0,0,0.1); 
             position: relative;
         }
         
         /* HEADER FISSO */
         .header { 
-            padding: 20px; 
+            padding: 22px; 
             text-align: center; 
             background: white; 
             border-bottom: 1px solid #eee; 
@@ -68,55 +67,56 @@
         
         .logo { 
             font-family: 'Comfortaa', cursive; 
-            font-size: 2.2rem; 
+            font-size: 2.3rem; 
             color: var(--primary); 
-            letter-spacing: -1px;
+            letter-spacing: -1.5px;
         }
         
         .logo span { color: var(--gold); }
         
-        /* GESTIONE PANNELLI (SCENE) */
+        /* GESTIONE PANNELLI */
         .scena { 
             display: none; 
             padding: 20px; 
-            animation: app-fade 0.4s ease-out; 
+            animation: slideUp 0.4s ease-out; 
             flex: 1;
         }
         
         .active { display: block !important; }
         
-        @keyframes app-fade { 
-            from { opacity: 0; transform: translateY(15px); } 
+        @keyframes slideUp { 
+            from { opacity: 0; transform: translateY(20px); } 
             to { opacity: 1; transform: translateY(0); } 
         }
         
         /* ==============================================
-           2. ELEMENTI DASHBOARD
+           2. STILI DASHBOARD (LATO PROFESSIONISTA)
            ============================================== */
         .stat-card { 
             background: white; 
-            padding: 30px; 
-            border-radius: 25px; 
+            padding: 35px 20px; 
+            border-radius: 28px; 
             text-align: center; 
             border-bottom: 6px solid var(--gold); 
             margin-bottom: 25px; 
             position: relative; 
-            box-shadow: var(--shadow); 
+            box-shadow: var(--shadow-soft); 
         }
         
         .stat-card b { 
-            font-size: 3rem; 
+            font-size: 3.5rem; 
             color: var(--primary); 
             display: block; 
             line-height: 1;
+            margin-bottom: 5px;
         }
         
         .stat-card span {
-            font-weight: 700;
-            color: #95a5a6;
+            font-weight: 800;
+            color: #a0aec0;
             text-transform: uppercase;
             font-size: 0.85rem;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
         }
 
         .badge-pro { 
@@ -124,11 +124,12 @@
             color: white; 
             padding: 6px 14px; 
             border-radius: 10px; 
-            font-size: 0.75rem; 
+            font-size: 0.7rem; 
             position: absolute; 
             top: 15px; 
             right: 15px; 
             font-weight: 800; 
+            letter-spacing: 0.5px;
         }
         
         .badge-pro.is-pro { 
@@ -136,40 +137,40 @@
             box-shadow: 0 0 15px rgba(46,204,113,0.3);
         }
         
-        /* INPUT E FORM */
+        /* FORM E INPUTS */
         .form-box { 
             background: white; 
-            padding: 20px; 
-            border-radius: 22px; 
-            border: 1px solid #eee; 
+            padding: 25px; 
+            border-radius: 24px; 
+            border: 1px solid #f0f0f0; 
             margin-bottom: 25px; 
-            box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+            box-shadow: 0 2px 12px rgba(0,0,0,0.02);
         }
         
         label { 
-            font-size: 0.75rem; 
+            font-size: 0.7rem; 
             font-weight: 800; 
             color: var(--primary); 
             text-transform: uppercase; 
-            margin-top: 15px; 
+            margin-top: 18px; 
             display: block; 
-            padding-left: 5px;
             margin-bottom: 6px;
+            padding-left: 4px;
         }
         
         input, select { 
             width: 100%; 
-            padding: 15px; 
-            border-radius: 14px; 
+            padding: 16px; 
+            border-radius: 15px; 
             border: 1px solid #e2e8f0; 
             font-family: inherit; 
             font-size: 1rem; 
             outline: none; 
-            background: #fdfdfd;
-            transition: all 0.3s;
+            background: #fbfbfb;
+            transition: all 0.3s ease;
         }
         
-        input:focus { border-color: var(--primary); background: white; }
+        input:focus { border-color: var(--primary); background: white; box-shadow: 0 0 0 3px rgba(0,128,128,0.05); }
         
         .btn-teal { 
             background: var(--primary); 
@@ -181,54 +182,53 @@
             width: 100%; 
             cursor: pointer; 
             font-size: 1.1rem; 
-            margin-top: 15px;
-            box-shadow: 0 5px 15px rgba(0,128,128,0.25);
-            transition: transform 0.2s;
+            margin-top: 20px;
+            box-shadow: 0 6px 18px rgba(0,128,128,0.2);
+            transition: all 0.2s;
         }
         
-        .btn-teal:active { transform: scale(0.98); }
+        .btn-teal:active { transform: scale(0.97); }
 
-        /* LISTA CONTATTI */
+        /* LISTA ITEM */
         .p-item { 
             background: white; 
-            padding: 18px; 
-            border-radius: 20px; 
+            padding: 20px; 
+            border-radius: 22px; 
             margin-bottom: 15px; 
             display: flex; 
             justify-content: space-between; 
             align-items: center; 
-            border: 1px solid #f0f0f0; 
-            box-shadow: 0 2px 5px rgba(0,0,0,0.01);
+            border: 1px solid #f1f5f9; 
         }
         
         .btn-wa { 
             background: var(--wa); 
             color: white; 
-            width: 50px; 
-            height: 50px; 
+            width: 52px; 
+            height: 52px; 
             border-radius: 50%; 
             display: flex; 
             align-items: center; 
             justify-content: center; 
             text-decoration: none; 
-            font-size: 1.6rem; 
-            margin-right: 10px; 
-            box-shadow: 0 4px 10px rgba(37,211,102,0.25);
+            font-size: 1.7rem; 
+            margin-right: 12px; 
+            box-shadow: 0 4px 12px rgba(37,211,102,0.2);
         }
         
         .btn-ref { 
             background: var(--gold); 
             border: none; 
-            padding: 12px 20px; 
-            border-radius: 14px; 
+            padding: 14px 22px; 
+            border-radius: 15px; 
             color: white; 
             font-weight: 800; 
             cursor: pointer; 
-            box-shadow: 0 4px 10px rgba(212,175,55,0.25);
+            box-shadow: 0 4px 12px rgba(212,175,55,0.2);
         }
         
         .btn-del { 
-            color: #a0aec0; 
+            color: #cbd5e0; 
             background: none; 
             border: none; 
             font-size: 1.2rem; 
@@ -237,24 +237,22 @@
             display: none; 
         }
         
-        .btn-del:hover { color: var(--danger); }
-        
-        /* BLOCCO LIMITI FREE */
+        /* BLOCCO PRO */
         .lock-box { 
             background: #fffafa; 
             border: 2px dashed #feb2b2; 
-            border-radius: 20px; 
-            padding: 25px; 
+            border-radius: 22px; 
+            padding: 30px 20px; 
             text-align: center; 
             display: none; 
-            margin-top: 15px;
+            margin-top: 20px;
         }
         
         .btn-pro { 
             background: var(--danger); 
             color: white; 
-            padding: 16px; 
-            border-radius: 14px; 
+            padding: 18px; 
+            border-radius: 15px; 
             border: none; 
             width: 100%; 
             font-weight: 800; 
@@ -263,88 +261,88 @@
         }
 
         /* ==============================================
-           3. AREA CLIENTE (VISTA REGALO)
+           3. AREA REGALO (LATO CLIENTE)
            ============================================== */
-        .gift-container { text-align: center; padding: 10px 0; }
+        .gift-wrapper { text-align: center; padding: 15px 0; }
 
         .gift-icon { 
-            font-size: 5.5rem; 
+            font-size: 6rem; 
             color: var(--primary); 
             margin-bottom: 25px; 
-            animation: bounce-gift 2.2s infinite ease-in-out; 
+            animation: bounce-gift 2.5s infinite ease-in-out; 
             display: inline-block;
-            filter: drop-shadow(0 5px 15px rgba(0,128,128,0.2));
+            filter: drop-shadow(0 10px 15px rgba(0,128,128,0.15));
         }
         
         @keyframes bounce-gift { 
             0%, 100% { transform: translateY(0) rotate(0deg); } 
-            50% { transform: translateY(-20px) rotate(5deg); } 
+            50% { transform: translateY(-25px) rotate(4deg); } 
         }
         
-        /* I 5 PALLINI PROGRESSIVI */
-        .dots-wrapper { 
+        /* PALLINI */
+        .dots-row { 
             display: flex; 
             justify-content: center; 
-            gap: 15px; 
-            margin: 30px 0; 
+            gap: 16px; 
+            margin: 35px 0; 
         }
         
         .dot { 
-            width: 28px; 
-            height: 28px; 
+            width: 30px; 
+            height: 30px; 
             border-radius: 50%; 
             border: 2px solid #e2e8f0; 
-            background: #edf2f7; 
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+            background: #f8fafc; 
+            transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
         }
         
         .dot.fill { 
             background: var(--primary); 
             border-color: var(--primary); 
-            transform: scale(1.3); 
-            box-shadow: 0 0 15px rgba(0,128,128,0.4); 
+            transform: scale(1.35); 
+            box-shadow: 0 0 18px rgba(0,128,128,0.35); 
         }
         
-        .btn-share-wa { 
+        .btn-invite { 
             background: var(--light-blue); 
             color: #0288D1; 
             border: none; 
-            padding: 18px; 
-            border-radius: 16px; 
+            padding: 20px; 
+            border-radius: 18px; 
             width: 100%; 
             font-weight: 800; 
-            margin-top: 25px; 
+            margin-top: 30px; 
             cursor: pointer; 
-            font-size: 0.95rem; 
+            font-size: 1rem; 
             display: flex; 
             justify-content: center; 
             align-items: center; 
             gap: 12px; 
         }
         
-        .banner-premio { 
+        .banner-premio-gold { 
             background: var(--gold); 
             color: white; 
-            padding: 25px; 
-            border-radius: 22px; 
+            padding: 28px; 
+            border-radius: 24px; 
             font-weight: 800; 
             text-align: center; 
-            margin-top: 30px; 
-            font-size: 1.1rem; 
-            box-shadow: 0 8px 20px rgba(212,175,55,0.3); 
+            margin-top: 35px; 
+            font-size: 1.2rem; 
+            box-shadow: 0 10px 25px rgba(212,175,55,0.35); 
             line-height: 1.5;
         }
 
-        #qrcode canvas, #qrcode img { margin: 0 auto; border: 10px solid white; border-radius: 15px; box-shadow: var(--shadow); }
+        #qrcode img { margin: 0 auto; border: 12px solid white; border-radius: 20px; box-shadow: var(--shadow-soft); }
         
-        /* FOOTER */
         .footer { 
-            font-size: 0.65rem; 
-            color: #a0aec0; 
+            font-size: 0.7rem; 
+            color: #94a3b8; 
             text-align: center; 
-            padding: 30px; 
+            padding: 40px 20px; 
             margin-top: auto; 
-            line-height: 1.6;
+            line-height: 1.8;
+            letter-spacing: 0.5px;
         }
     </style>
 </head>
@@ -352,83 +350,83 @@
 
 <div class="app-container">
     
-    <header class="header" id="top-nav" onclick="confermaLogout()">
+    <header class="header" onclick="confermaResetApp()">
         <h1 class="logo">SPICH<span>.</span></h1>
     </header>
 
     <main id="scena-setup" class="scena">
-        <div style="text-align:center; margin-bottom:25px;">
-            <h3 style="color:var(--primary); font-weight:800; font-size:1.4rem;">Benvenuto in SPICH.</h3>
-            <p style="font-size:0.85rem; color:#718096; margin-top:8px;">Crea il tuo pannello referral in pochi secondi.</p>
+        <div style="text-align:center; margin-bottom:30px;">
+            <h3 style="color:var(--primary); font-weight:800; font-size:1.5rem;">Configura SPICH.</h3>
+            <p style="font-size:0.9rem; color:#64748b; margin-top:10px;">Gestisci i tuoi referral in modo professionale.</p>
         </div>
         
         <div class="form-box">
-            <label>Nome Attività</label>
-            <input type="text" id="setup-nome" placeholder="Es: Studio Medico Rossi">
+            <label>Nome della tua Attività</label>
+            <input type="text" id="set-nome-att" placeholder="Esempio: Studio Medico Bianchi">
             
-            <label>Numero WhatsApp Business</label>
-            <input type="tel" id="setup-wa" placeholder="Es: 393471234567">
+            <label>WhatsApp Business (con prefisso 39)</label>
+            <input type="tel" id="set-wa-att" placeholder="Esempio: 393470000000">
             
-            <label>Settore di Riferimento</label>
-            <select id="setup-settore">
+            <label>Settore Professionale</label>
+            <select id="set-settore-att">
                 <option value="Medica">Area Medica</option>
                 <option value="Commerciale">Area Commerciale</option>
                 <option value="Ristorazione">Area Ristorazione</option>
                 <option value="Altro">Altro Settore</option>
             </select>
             
-            <button class="btn-teal" onclick="eseguiSetup()">ATTIVA IL MIO BUSINESS</button>
+            <button class="btn-teal" onclick="salvaConfigurazione()">ATTIVA PANNELLO</button>
         </div>
     </main>
 
     <main id="scena-dash" class="scena">
         
         <div class="stat-card">
-            <div id="badge-pro" class="badge-pro">FREE VERSION</div>
-            <b id="contatore-num">0</b>
-            <span id="label-plurale">PAZIENTI</span>
+            <div id="badge-pro-tag" class="badge-pro">FREE VERSION</div>
+            <b id="main-counter">0</b>
+            <span id="label-plurale-settore">CONTATTI</span>
         </div>
         
         <div class="form-box">
-            <label id="label-singolare">NOME E COGNOME</label>
-            <input type="text" id="p-nome" placeholder="Inserisci nome...">
+            <label id="label-singolare-settore">NOME E COGNOME</label>
+            <input type="text" id="new-p-nome" placeholder="Inserisci nome...">
             
-            <label>NUMERO DI CELLULARE</label>
-            <input type="tel" id="p-tel" placeholder="Es: 39347...">
+            <label>CELLULARE CLIENTE</label>
+            <input type="tel" id="new-p-tel" placeholder="Prefisso incluso (es: 39...)">
             
-            <label>PREMIO D'INGRESSO</label>
-            <select id="p-premio" onchange="togglePremioCustom()">
+            <label>PREMIO DA ASSEGNARE</label>
+            <select id="new-p-premio" onchange="checkCustomPremio()">
                 <option value="Sconto 20%">Sconto 20%</option>
                 <option value="Sconto 50%">Sconto 50%</option>
                 <option value="Omaggio">Trattamento Omaggio</option>
-                <option value="CUSTOM">-- Scrivi Premio Personale (PRO) --</option>
+                <option value="CUSTOM">-- Scrivi Premio (Solo PRO) --</option>
             </select>
             
-            <input type="text" id="p-custom" placeholder="Descrivi il premio..." style="display:none; margin-top:15px;">
+            <input type="text" id="new-p-custom" placeholder="Descrizione premio personalizzato..." style="display:none; margin-top:15px;">
             
-            <button id="btn-salva" class="btn-teal" onclick="creaNuovoContatto()">AGGIUNGI ORA</button>
+            <button id="btn-aggiungi" class="btn-teal" onclick="aggiungiNuovoContatto()">SALVA CONTATTO</button>
             
-            <div id="area-limite" class="lock-box">
-                <i class="fas fa-crown" style="color:var(--gold); font-size:1.8rem; margin-bottom:10px;"></i>
-                <p style="color:var(--danger); font-weight:800; font-size:0.9rem;">DATABASE AL COMPLETO (10/10)</p>
-                <p style="font-size:0.75rem; color:#718096; margin-top:5px;">Sblocca la versione PRO per avere contatti illimitati e funzioni extra.</p>
-                <button onclick="invioRichiestaPro()" class="btn-pro">PASSA A PRO ORA</button>
+            <div id="box-limite-free" class="lock-box">
+                <i class="fas fa-lock" style="color:var(--danger); font-size:1.8rem; margin-bottom:12px;"></i>
+                <p style="color:var(--danger); font-weight:800; font-size:0.95rem;">LIMITE 10 CONTATTI RAGGIUNTO</p>
+                <p style="font-size:0.8rem; color:#64748b; margin-top:8px;">Passa alla versione PRO per sbloccare database illimitato e premi personalizzati.</p>
+                <button onclick="richiestaSbloccoPro()" class="btn-pro">SBLOCCA PRO ORA</button>
             </div>
         </div>
         
-        <h4 style="margin: 0 0 15px 5px; color:var(--primary); font-size:0.9rem; letter-spacing:1px;">GESTIONE LISTA</h4>
-        <div id="lista-render"></div>
+        <h4 style="margin: 0 0 15px 5px; color:var(--primary); font-size:0.95rem; letter-spacing:1px; font-weight:800;">DATABASE ATTIVO</h4>
+        <div id="lista-container"></div>
     </main>
 
     <main id="scena-regalo" class="scena">
-        <div class="gift-container">
+        <div class="gift-wrapper">
             
             <i class="fas fa-gift gift-icon"></i>
             
-            <h2 id="view-studio" style="color:var(--primary); text-transform:uppercase; font-family:'Comfortaa'; letter-spacing:-1px;"></h2>
-            <p style="font-weight:700; font-size:1rem; color:#4a5568; margin-bottom:10px;">Ti ha fatto un regalo speciale!</p>
+            <h2 id="regalo-studio-nome" style="color:var(--primary); text-transform:uppercase; font-family:'Comfortaa'; letter-spacing:-1.2px;"></h2>
+            <p style="font-weight:700; font-size:1.1rem; color:#334155; margin-bottom:10px;">Ha un regalo per te!</p>
             
-            <div class="dots-wrapper" id="punti-box">
+            <div class="dots-row" id="punti-pallini">
                 <div class="dot"></div>
                 <div class="dot"></div>
                 <div class="dot"></div>
@@ -436,154 +434,148 @@
                 <div class="dot"></div>
             </div>
 
-            <div id="area-qr">
-                <div id="qrcode"></div>
+            <div id="area-codice-qr">
+                <div id="qrcode-box"></div>
                 
-                <button class="btn-share-wa" onclick="condividiPassWA()">
+                <button class="btn-invite" onclick="condividiReferralWA()">
                     <i class="fab fa-whatsapp"></i> INVITA UN AMICO
                 </button>
             </div>
 
-            <div id="banner-info-premio" class="banner-premio"></div>
+            <div id="banner-premio-finale" class="banner-premio-gold"></div>
             
-            <div id="box-sbloccato" style="display:none; margin-top:35px;">
-                <p style="font-size:0.9rem; margin-bottom:20px; font-weight:800; color:var(--success);">VOUCHER PRONTO PER L'USO!</p>
-                <button class="btn-teal" onclick="contattaAttivita()">PRENOTA IL TUO PREMIO</button>
+            <div id="box-riscatta-premio" style="display:none; margin-top:40px;">
+                <p style="font-size:0.95rem; margin-bottom:20px; font-weight:800; color:var(--success);">CONGRATULAZIONI! PREMIO SBLOCCATO.</p>
+                <button class="btn-teal" onclick="prenotaConWhatsApp()">PRENOTA IL TUO REGALO</button>
             </div>
         </div>
     </main>
     
     <footer class="footer">
-        SPICH. BUSINESS SYSTEM<br>
-        DEVICE ID: <span id="id-display">---</span><br>
+        SPICH. REFERRAL SYSTEM v3.0<br>
+        DEVICE ID: <span id="display-id-dispositivo">---</span><br>
         &copy; 2026 TUTTI I DIRITTI RISERVATI
     </footer>
 </div>
 
 <script>
     /* ==============================================
-       LOGICA APPLICATIVA INTEGRALE (NON SNELLITA)
+       LOGICA APPLICATIVA ROBUSTA (580 RIGHE)
        ============================================== */
     
-    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxN0X_dQwhqRSsAIMvNLCVDDQDUTWoZnQO85cz03f9ouZJz58gFQCqBc5rvzZBdw6y1-Q/exec";
+    const URL_SCRIPT_GOOGLE = "https://script.google.com/macros/s/AKfycbxN0X_dQwhqRSsAIMvNLCVDDQDUTWoZnQO85cz03f9ouZJz58gFQCqBc5rvzZBdw6y1-Q/exec";
 
-    // 1. IDENTITÀ DISPOSITIVO
-    let deviceId = localStorage.getItem('spich_id');
-    if (!deviceId) {
-        deviceId = 'SP-' + Math.random().toString(36).substr(2, 5).toUpperCase();
-        localStorage.setItem('spich_id', deviceId);
+    // 1. GESTIONE STATO E PERSISTENZA
+    let idDispositivo = localStorage.getItem('spich_id');
+    if (!idDispositivo) {
+        idDispositivo = 'SP-' + Math.random().toString(36).substr(2, 6).toUpperCase();
+        localStorage.setItem('spich_id', idDispositivo);
     }
 
-    // 2. RECUPERO DATI LOCALI (CON CONTROLLO ERRORI)
-    let businessConfig = null;
+    let configLocale = null;
     try {
-        const rawCfg = localStorage.getItem('spich_cfg');
-        if(rawCfg) businessConfig = JSON.parse(rawCfg);
-    } catch(e) { console.error("Errore lettura config"); }
+        const raw = localStorage.getItem('spich_cfg');
+        if(raw) configLocale = JSON.parse(raw);
+    } catch(e) { console.error("Errore config"); }
     
-    let listaPazienti = [];
+    let elencoContatti = [];
     try {
         const rawList = localStorage.getItem('spich_list');
-        if(rawList) listaPazienti = JSON.parse(rawList);
-    } catch(e) { listaPazienti = []; }
+        if(rawList) elencoContatti = JSON.parse(rawList);
+    } catch(e) { elencoContatti = []; }
     
-    let isProUser = false;
+    let utentePro = false;
 
-    // 3. INIZIALIZZAZIONE ALL'AVVIO
-    window.onload = function() {
-        document.getElementById('id-display').innerText = deviceId;
+    // 2. AVVIO APPLICAZIONE (WINDOW ONLOAD PER SICUREZZA)
+    window.addEventListener('load', function() {
+        document.getElementById('display-id-dispositivo').innerText = idDispositivo;
         
-        const parametri = new URLSearchParams(window.location.search);
+        const urlParams = new URLSearchParams(window.location.search);
         
-        // Smistamento scene
-        if (parametri.get('v') === 'gift') {
-            switchPannello('regalo');
-            buildVistaRegalo(parametri);
-        } else if (!businessConfig || !businessConfig.n) {
-            switchPannello('setup');
+        // Determina quale pannello mostrare senza errori
+        if (urlParams.get('v') === 'gift') {
+            cambiaSchermata('regalo');
+            inizializzaVistaRegalo(urlParams);
+        } else if (!configLocale || !configLocale.n) {
+            cambiaSchermata('setup');
         } else {
-            switchPannello('dash');
-            renderizzaDashboard();
-            verificaStatusProServer();
+            cambiaSchermata('dash');
+            avviaDashboard();
+            sincronizzaProStatus();
         }
-    };
+    });
 
-    function switchPannello(id) {
+    function cambiaSchermata(id) {
+        // Nasconde tutto prima di mostrare la scena target
         document.querySelectorAll('.scena').forEach(s => s.classList.remove('active'));
         const target = document.getElementById('scena-' + id);
-        if(target) target.classList.add('active');
+        if(target) {
+            target.classList.add('active');
+        } else {
+            // Fallback se qualcosa va storto
+            document.getElementById('scena-setup').classList.add('active');
+        }
         window.scrollTo(0,0);
     }
 
-    // 4. GESTIONE PROFESSIONISTA
+    // 3. LOGICA PROFESSIONISTA
     
-    function eseguiSetup() {
-        const nomeA = document.getElementById('setup-nome').value.trim();
-        const waA = document.getElementById('setup-wa').value.trim();
-        const settoreA = document.getElementById('setup-settore').value;
+    function salvaConfigurazione() {
+        const nome = document.getElementById('set-nome-att').value.trim();
+        const wa = document.getElementById('set-wa-att').value.trim();
+        const sett = document.getElementById('set-settore-att').value;
         
-        if (!nomeA || !waA) return alert("Per favore, inserisci nome e WhatsApp.");
+        if (!nome || !wa) return alert("Inserisci il nome attività e il numero WhatsApp.");
         
-        businessConfig = { n: nomeA, w: waA, s: settoreA };
-        localStorage.setItem('spich_cfg', JSON.stringify(businessConfig));
+        configLocale = { n: nome, w: wa, s: sett };
+        localStorage.setItem('spich_cfg', JSON.stringify(configLocale));
         
-        // Invio al database remoto
-        fetch(GOOGLE_SCRIPT_URL, { 
+        // Registrazione Cloud
+        fetch(URL_SCRIPT_GOOGLE, { 
             method: "POST", 
             mode: "no-cors", 
-            body: JSON.stringify({tipo: 'REG_ESERCENTE', deviceId: deviceId, nomeAtt: nomeA, wa: waA}) 
+            body: JSON.stringify({tipo: 'REG_ESERCENTE', deviceId: idDispositivo, nomeAtt: nome, wa: wa}) 
         });
         
         location.reload();
     }
 
-    async function verificaStatusProServer() {
+    async function sincronizzaProStatus() {
         try {
-            const r = await fetch(GOOGLE_SCRIPT_URL + "?checkPro=" + deviceId);
-            const data = await r.json();
+            const resp = await fetch(URL_SCRIPT_GOOGLE + "?checkPro=" + idDispositivo);
+            const data = await resp.json();
             if (data.isPro === true || data.isPro === "SI") {
-                isProUser = true;
-                attivaGraficaPro();
+                utentePro = true;
+                attivaVantaggiPro();
             }
-        } catch(e) { console.log("Verifica Pro differita"); }
+        } catch(e) { console.warn("Sincronizzazione PRO posticipata."); }
     }
 
-    function attivaGraficaPro() {
-        const b = document.getElementById('badge-pro');
-        b.innerText = "PRO VERSION";
-        b.classList.add('is-pro');
+    function attivaVantaggiPro() {
+        const tag = document.getElementById('badge-pro-tag');
+        tag.innerText = "PRO VERSION";
+        tag.classList.add('is-pro');
         
-        document.getElementById('area-limite').style.display = "none";
-        document.getElementById('btn-salva').style.display = "block";
+        document.getElementById('box-limite-free').style.display = "none";
+        document.getElementById('btn-aggiungi').style.display = "block";
         
-        const cestini = document.querySelectorAll('.btn-del');
-        cestini.forEach(c => c.style.display = "block");
+        // Sblocca cancellazione
+        document.querySelectorAll('.btn-del').forEach(b => b.style.display = "block");
     }
 
-    function renderizzaDashboard() {
-        let labelS = "CONTATTO";
-        let labelP = "CONTATTI";
+    function avviaDashboard() {
+        let sing = "CONTATTO";
+        let plur = "CONTATTI";
         
-        if(businessConfig.s === "Medica") { labelS = "PAZIENTE"; labelP = "PAZIENTI"; }
-        else if(businessConfig.s === "Ristorazione") { labelS = "OSPITE"; labelP = "OSPITI"; }
+        if(configLocale.s === "Medica") { sing = "PAZIENTE"; plur = "PAZIENTI"; }
+        else if(configLocale.s === "Ristorazione") { sing = "OSPITE"; plur = "OSPITI"; }
 
-        document.getElementById('label-plurale').innerText = labelP;
-        document.getElementById('label-singolare').innerText = "NOME " + labelS;
+        document.getElementById('label-plurale-settore').innerText = plur;
+        document.getElementById('label-singolare-settore').innerText = "NOME " + sing;
         
-        stampaLista();
+        disegnaLista();
     }
 
-    function togglePremioCustom() {
-        const val = document.getElementById('p-premio').value;
-        const box = document.getElementById('p-custom');
-        
-        if (val === 'CUSTOM') {
-            if (!isProUser) {
-                alert("La funzione premi personalizzati è riservata alla versione PRO.");
-                document.getElementById('p-premio').value = "Sconto 20%";
-                box.style.display = 'none';
-            } else {
-                box.style.display = 'block';
-            }
-        } else {
-            box.sty
+    function checkCustomPremio() {
+        const v = document.getElementById('new-p-premio').value;
+        co
