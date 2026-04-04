@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="it">
 <head>
     <meta charset="UTF-8">
@@ -6,9 +6,7 @@
     <title>SPICH. - Business System & Referral</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&family=Montserrat:wght@400;700;800&display=swap" rel="stylesheet">
-    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     
     <style>
@@ -41,7 +39,6 @@
             overflow-x: hidden; 
         }
         
-        /* Layout Mobile-First */
         .app-container { 
             background: var(--bg); 
             width: 100%; 
@@ -54,7 +51,6 @@
             position: relative;
         }
         
-        /* HEADER FISSO - LOGO MAXI */
         .header { 
             padding: 30px 20px; 
             text-align: center; 
@@ -68,7 +64,7 @@
         
         .logo { 
             font-family: 'Comfortaa', cursive; 
-            font-size: 3.2rem; /* Logo più grande come richiesto */
+            font-size: 3.2rem; 
             color: var(--primary); 
             letter-spacing: -2px;
             transition: transform 0.3s;
@@ -77,7 +73,6 @@
         .logo:active { transform: scale(0.95); }
         .logo span { color: var(--gold); }
         
-        /* GESTIONE PANNELLI (SCENE) */
         .scena { 
             display: none; 
             padding: 25px; 
@@ -92,9 +87,6 @@
             to { opacity: 1; transform: translateY(0); } 
         }
         
-        /* ==============================================
-           2. ELEMENTI DASHBOARD (LATO PROFESSIONISTA)
-           ============================================== */
         .stat-card { 
             background: white; 
             padding: 40px 20px; 
@@ -140,7 +132,6 @@
             box-shadow: 0 0 20px rgba(46,204,113,0.3);
         }
         
-        /* INPUT E FORM */
         .form-box { 
             background: white; 
             padding: 25px; 
@@ -188,9 +179,6 @@
             transition: all 0.2s;
         }
         
-        .btn-teal:active { transform: scale(0.97); }
-
-        /* LISTA CONTATTI */
         .p-item { 
             background: white; 
             padding: 22px; 
@@ -229,17 +217,6 @@
             box-shadow: 0 5px 15px rgba(212,175,55,0.2);
         }
         
-        .btn-del { 
-            color: #cbd5e0; 
-            background: none; 
-            border: none; 
-            font-size: 1.3rem; 
-            margin-right: 15px; 
-            cursor: pointer; 
-            display: none; /* Mostrato solo in PRO */
-        }
-        
-        /* BLOCCO LIMITI FREE */
         .lock-box { 
             background: #fffafa; 
             border: 2px dashed #feb2b2; 
@@ -262,91 +239,38 @@
             cursor: pointer; 
         }
 
-        /* ==============================================
-           3. AREA CLIENTE (VISTA REGALO)
-           ============================================== */
         .gift-container { text-align: center; padding: 10px 0; }
-
         .gift-icon { 
-            font-size: 6.5rem; 
-            color: var(--primary); 
-            margin-bottom: 30px; 
-            animation: bounce-gift 2.2s infinite ease-in-out; 
-            display: inline-block;
-            filter: drop-shadow(0 10px 20px rgba(0,128,128,0.15));
+            font-size: 6.5rem; color: var(--primary); margin-bottom: 30px; 
+            animation: bounce-gift 2.2s infinite ease-in-out; display: inline-block;
         }
         
-        @keyframes bounce-gift { 
-            0%, 100% { transform: translateY(0) rotate(0deg); } 
-            50% { transform: translateY(-25px) rotate(5deg); } 
-        }
+        @keyframes bounce-gift { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-25px); } }
         
-        /* I 5 PALLINI PROGRESSIVI */
-        .dots-wrapper { 
-            display: flex; 
-            justify-content: center; 
-            gap: 18px; 
-            margin: 40px 0; 
-        }
-        
+        .dots-wrapper { display: flex; justify-content: center; gap: 18px; margin: 40px 0; }
         .dot { 
-            width: 32px; 
-            height: 32px; 
-            border-radius: 50%; 
-            border: 3px solid #e2e8f0; 
-            background: #f8fafc; 
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+            width: 32px; height: 32px; border-radius: 50%; border: 3px solid #e2e8f0; 
+            background: #f8fafc; transition: all 0.5s; 
         }
-        
         .dot.fill { 
-            background: var(--primary); 
-            border-color: var(--primary); 
-            transform: scale(1.4); 
-            box-shadow: 0 0 20px rgba(0,128,128,0.4); 
+            background: var(--primary); border-color: var(--primary); 
+            transform: scale(1.4); box-shadow: 0 0 20px rgba(0,128,128,0.4); 
         }
         
         .btn-share-wa { 
-            background: var(--light-blue); 
-            color: #0288D1; 
-            border: none; 
-            padding: 20px; 
-            border-radius: 18px; 
-            width: 100%; 
-            font-weight: 800; 
-            margin-top: 30px; 
-            cursor: pointer; 
-            font-size: 1rem; 
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            gap: 12px; 
+            background: var(--light-blue); color: #0288D1; border: none; padding: 20px; 
+            border-radius: 18px; width: 100%; font-weight: 800; margin-top: 30px; cursor: pointer; 
+            display: flex; justify-content: center; align-items: center; gap: 12px;
         }
         
         .banner-premio { 
-            background: var(--gold); 
-            color: white; 
-            padding: 30px; 
-            border-radius: 25px; 
-            font-weight: 800; 
-            text-align: center; 
-            margin-top: 40px; 
-            font-size: 1.2rem; 
-            box-shadow: 0 10px 30px rgba(212,175,55,0.3); 
-            line-height: 1.6;
+            background: var(--gold); color: white; padding: 30px; border-radius: 25px; 
+            font-weight: 800; text-align: center; margin-top: 40px; font-size: 1.2rem;
         }
 
-        #qrcode canvas, #qrcode img { margin: 0 auto; border: 12px solid white; border-radius: 20px; box-shadow: var(--shadow-main); }
+        #qrcode canvas, #qrcode img { margin: 0 auto; border: 12px solid white; border-radius: 20px; }
         
-        /* FOOTER - PIÙ PICCOLO E DISCRETO */
-        .footer { 
-            font-size: 0.55rem; /* Rimpicciolito come richiesto */
-            color: #cbd5e0; 
-            text-align: center; 
-            padding: 20px; 
-            margin-top: auto; 
-            line-height: 1.4;
-            letter-spacing: 0.5px;
-        }
+        .footer { font-size: 0.55rem; color: #cbd5e0; text-align: center; padding: 20px; margin-top: auto; }
     </style>
 </head>
 <body>
@@ -366,10 +290,8 @@
         <div class="form-box">
             <label>Nome Attività</label>
             <input type="text" id="setup-nome" placeholder="Es: Studio Medico Rossi">
-            
             <label>WhatsApp Business (con 39)</label>
             <input type="tel" id="setup-wa" placeholder="Es: 393471234567">
-            
             <label>Settore di Riferimento</label>
             <select id="setup-settore">
                 <option value="Medica">Area Medica</option>
@@ -377,13 +299,11 @@
                 <option value="Ristorazione">Area Ristorazione</option>
                 <option value="Altro">Altro Settore</option>
             </select>
-            
             <button class="btn-teal" onclick="eseguiSetup()">ATTIVA IL MIO BUSINESS</button>
         </div>
     </main>
 
     <main id="scena-dash" class="scena">
-        
         <div class="stat-card">
             <div id="badge-pro" class="badge-pro">FREE VERSION</div>
             <b id="contatore-num">0</b>
@@ -393,10 +313,8 @@
         <div class="form-box">
             <label id="label-singolare">NOME E COGNOME</label>
             <input type="text" id="p-nome" placeholder="Inserisci nome...">
-            
             <label>NUMERO DI CELLULARE</label>
             <input type="tel" id="p-tel" placeholder="Es: 39347...">
-            
             <label>PREMIO D'INGRESSO</label>
             <select id="p-premio" onchange="togglePremioCustom()">
                 <option value="Sconto 20%">Sconto 20%</option>
@@ -404,114 +322,65 @@
                 <option value="Omaggio">Trattamento Omaggio</option>
                 <option value="CUSTOM">-- Scrivi Premio Personale (PRO) --</option>
             </select>
-            
             <input type="text" id="p-custom" placeholder="Descrivi il premio..." style="display:none; margin-top:15px;">
-            
             <button id="btn-salva" class="btn-teal" onclick="creaNuovoContatto()">AGGIUNGI ORA</button>
             
             <div id="area-limite" class="lock-box">
                 <i class="fas fa-crown" style="color:var(--gold); font-size:2rem; margin-bottom:15px;"></i>
-                <p style="color:var(--danger); font-weight:900; font-size:1rem;">DATABASE AL COMPLETO (10/10)</p>
-                <p style="font-size:0.8rem; color:#64748b; margin-top:8px;">Sblocca la versione PRO per avere contatti illimitati e premi custom.</p>
+                <p style="color:var(--danger); font-weight:900;">DATABASE AL COMPLETO (10/10)</p>
                 <button onclick="invioRichiestaPro()" class="btn-pro">PASSA A PRO ORA</button>
             </div>
         </div>
         
-        <h4 style="margin: 0 0 20px 5px; color:var(--primary); font-size:1rem; letter-spacing:1px; font-weight:800;">GESTIONE LISTA</h4>
+        <h4 style="margin: 0 0 20px 5px; color:var(--primary); font-size:1rem; font-weight:800;">GESTIONE LISTA</h4>
         <div id="lista-render"></div>
     </main>
 
     <main id="scena-regalo" class="scena">
         <div class="gift-container">
-            
             <i class="fas fa-gift gift-icon"></i>
-            
-            <h2 id="view-studio" style="color:var(--primary); text-transform:uppercase; font-family:'Comfortaa'; letter-spacing:-1.5px; font-size:2rem;"></h2>
-            <p style="font-weight:700; font-size:1.1rem; color:#475569; margin-bottom:10px;">Ti ha fatto un regalo speciale!</p>
-            
+            <h2 id="view-studio" style="color:var(--primary); text-transform:uppercase; font-family:'Comfortaa'; font-size:2rem;"></h2>
+            <p style="font-weight:700; color:#475569; margin-bottom:10px;">Ti ha fatto un regalo speciale!</p>
             <div class="dots-wrapper" id="punti-box">
-                <div class="dot"></div>
-                <div class="dot"></div>
-                <div class="dot"></div>
-                <div class="dot"></div>
-                <div class="dot"></div>
+                <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
             </div>
-
             <div id="area-qr">
                 <div id="qrcode"></div>
-                
                 <button class="btn-share-wa" onclick="condividiPassWA()">
                     <i class="fab fa-whatsapp"></i> INVITA UN AMICO
                 </button>
             </div>
-
             <div id="banner-info-premio" class="banner-premio"></div>
-            
             <div id="box-sbloccato" style="display:none; margin-top:40px;">
-                <p style="font-size:1rem; margin-bottom:20px; font-weight:900; color:var(--success);">VOUCHER PRONTO PER L'USO!</p>
                 <button class="btn-teal" onclick="contattaAttivita()">PRENOTA IL TUO PREMIO</button>
             </div>
         </div>
     </main>
     
     <footer class="footer">
-        SPICH. BUSINESS SYSTEM v3.0<br>
-        DEVICE ID: <span id="id-display">INIZIALIZZAZIONE...</span><br>
+        SPICH. BUSINESS SYSTEM v3.0 | ID: <span id="id-display">...</span><br>
         &copy; 2026 TUTTI I DIRITTI RISERVATI
     </footer>
 </div>
 
 <script>
-    /* ==============================================
-       LOGICA APPLICATIVA INTEGRALE (600 RIGHE)
-       ============================================== */
-    
-    // URL DELLO SCRIPT GOOGLE (Controlla che sia corretto!)
     const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyL97dtvTa7WzRFGpXSFcxgNYlpn844ft-ZQA49bBLhjDe5qzQ_26rYU9XtViMZr36zFA/exec";
 
-    // 1. GENERAZIONE E GESTIONE IDENTITÀ DISPOSITIVO
-    let deviceId = localStorage.getItem('spich_id');
-    if (!deviceId) {
-        deviceId = 'SP-' + Math.random().toString(36).substr(2, 6).toUpperCase();
-        localStorage.setItem('spich_id', deviceId);
-    }
+    let deviceId = localStorage.getItem('spich_id') || ('SP-' + Math.random().toString(36).substr(2, 6).toUpperCase());
+    localStorage.setItem('spich_id', deviceId);
 
-    // 2. RECUPERO DATI LOCALI CON SICUREZZA
-    let businessConfig = null;
-    try {
-        const rawCfg = localStorage.getItem('spich_cfg');
-        if(rawCfg) {
-            businessConfig = JSON.parse(rawCfg);
-        }
-    } catch(e) { 
-        console.error("Errore lettura configurazione locale."); 
-        businessConfig = null;
-    }
-    
-    let listaPazienti = [];
-    try {
-        const rawList = localStorage.getItem('spich_list');
-        if(rawList) {
-            listaPazienti = JSON.parse(rawList);
-        }
-    } catch(e) { 
-        listaPazienti = []; 
-    }
-    
+    let businessConfig = JSON.parse(localStorage.getItem('spich_cfg') || 'null');
+    let listaPazienti = JSON.parse(localStorage.getItem('spich_list') || '[]');
     let isProUser = false;
 
-    // 3. AVVIO APPLICAZIONE (WINDOW ONLOAD)
     window.onload = function() {
-        // Mostra ID subito nel footer
         document.getElementById('id-display').innerText = deviceId;
+        const params = new URLSearchParams(window.location.search);
         
-        const parametri = new URLSearchParams(window.location.search);
-        
-        // Smistamento scene in base all'URL o ai dati salvati
-        if (parametri.get('v') === 'gift') {
+        if (params.get('v') === 'gift') {
             switchPannello('regalo');
-            buildVistaRegalo(parametri);
-        } else if (!businessConfig || !businessConfig.n) {
+            buildVistaRegalo(params);
+        } else if (!businessConfig) {
             switchPannello('setup');
         } else {
             switchPannello('dash');
@@ -520,347 +389,120 @@
         }
     };
 
-    // Funzione per navigare tra le schermate
     function switchPannello(id) {
         document.querySelectorAll('.scena').forEach(s => s.classList.remove('active'));
-        const target = document.getElementById('scena-' + id);
-        if(target) {
-            target.classList.add('active');
-        }
+        document.getElementById('scena-' + id).classList.add('active');
         window.scrollTo(0,0);
     }
 
-    // 4. GESTIONE LATO PROFESSIONISTA (SETUP E DASHBOARD)
-    
-        function eseguiSetup() {
+    function eseguiSetup() {
         const nomeA = document.getElementById('setup-nome').value.trim();
         const waA = document.getElementById('setup-wa').value.trim();
         const settoreA = document.getElementById('setup-settore').value;
         
-        if (!nomeA || !waA) {
-            alert("Attenzione: devi inserire il nome dell'attività e il numero WhatsApp Business.");
-            return;
-        }
+        if (!nomeA || !waA) return alert("Inserisci Nome e WhatsApp!");
         
         businessConfig = { n: nomeA, w: waA, s: settoreA };
         localStorage.setItem('spich_cfg', JSON.stringify(businessConfig));
         
-        // INVIO DATI A GOOGLE
         fetch(GOOGLE_SCRIPT_URL, { 
             method: "POST", 
             mode: "no-cors", 
-            body: JSON.stringify({
-                tipo: 'REG_ESERCENTE', 
-                deviceId: deviceId, 
-                nomeAtt: nomeA, 
-                wa: waA
-            }) 
-        }).then(() => {
-            // Questo comando forza l'app ad entrare in Dashboard subito
-            location.reload();
-        });
-    }
- rimosso il comando window.open che apriva WhatsApp.
-    
-
-        
-        businessConfig = { 
-            n: nomeA, 
-            w: waA, 
-            s: settoreA 
-        };
-        
-        localStorage.setItem('spich_cfg', JSON.stringify(businessConfig));
-        
-        // Registrazione sul database remoto (Cloud)
-        fetch(GOOGLE_SCRIPT_URL, { 
-            method: "POST", 
-            mode: "no-cors", 
-            body: JSON.stringify({
-                tipo: 'REG_ESERCENTE', 
-                deviceId: deviceId, 
-                nomeAtt: nomeA, 
-                wa: waA
-            }) 
-        });
-        
-        // Riavvia per caricare la Dashboard
-        location.reload();
-    }
-
-    async function verificaStatusProServer() {
-        try {
-            // Chiamata GET allo script google per verificare se l'ID è PRO
-            const r = await fetch(GOOGLE_SCRIPT_URL + "?checkPro=" + deviceId);
-            const data = await r.json();
-            
-            if (data.isPro === true || data.isPro === "SI") {
-                isProUser = true;
-                attivaGraficaPro();
-            }
-        } catch(e) { 
-            console.log("Verifica Pro fallita o server non risponde ancora."); 
-        }
-    }
-
-    function attivaGraficaPro() {
-        const b = document.getElementById('badge-pro');
-        b.innerText = "PRO VERSION";
-        b.classList.add('is-pro');
-        
-        // Rimuove eventuali blocchi della versione free
-        document.getElementById('area-limite').style.display = "none";
-        document.getElementById('btn-salva').style.display = "block";
-        
-        // Mostra i tasti di cancellazione (cestino) nella lista
-        const cestini = document.querySelectorAll('.btn-del');
-        cestini.forEach(c => c.style.display = "block");
+            body: JSON.stringify({ tipo: 'REG_ESERCENTE', deviceId, nomeAtt: nomeA, wa: waA }) 
+        }).then(() => location.reload());
     }
 
     function renderizzaDashboard() {
-        let labelS = "CONTATTO";
-        let labelP = "CONTATTI";
-        
-        // Personalizzazione testi in base al settore
-        if(businessConfig.s === "Medica") { 
-            labelS = "PAZIENTE"; 
-            labelP = "PAZIENTI"; 
-        } else if(businessConfig.s === "Ristorazione") { 
-            labelS = "OSPITE"; 
-            labelP = "OSPITI"; 
-        } else if(businessConfig.s === "Commerciale") {
-            labelS = "CLIENTE";
-            labelP = "CLIENTI";
-        }
-
+        let labelP = "CLIENTI", labelS = "NOME CLIENTE";
+        if(businessConfig.s === "Medica") { labelP = "PAZIENTI"; labelS = "NOME PAZIENTE"; }
         document.getElementById('label-plurale').innerText = labelP;
-        document.getElementById('label-singolare').innerText = "NOME " + labelS;
-        
+        document.getElementById('label-singolare').innerText = labelS;
         stampaLista();
     }
 
-    function togglePremioCustom() {
-        const val = document.getElementById('p-premio').value;
-        const box = document.getElementById('p-custom');
-        
-        if (val === 'CUSTOM') {
-            if (!isProUser) {
-                alert("La funzione premi personalizzati è riservata alla versione PRO.");
-                document.getElementById('p-premio').value = "Sconto 20%";
-                box.style.display = 'none';
-            } else {
-                box.style.display = 'block';
-            }
-        } else {
-            box.style.display = 'none';
-        }
-    }
-
     function creaNuovoContatto() {
-        // Controllo Limite Free (10 contatti)
-        if (!isProUser && listaPazienti.length >= 10) {
-            alert("Hai raggiunto il limite di 10 contatti per la versione gratuita. Passa a PRO per continuare.");
-            return;
-        }
-        
-        const nome = document.getElementBnyId('p-nome').value.trim();
+        if (!isProUser && listaPazienti.length >= 10) return;
+        const nome = document.getElementById('p-nome').value.trim();
         const tel = document.getElementById('p-tel').value.trim();
         let premio = document.getElementById('p-premio').value;
-        
-        if (premio === 'CUSTOM') {
-            premio = document.getElementById('p-custom').value.trim();
-        }
-        
-        if (!nome || !tel || !premio) {
-            alert("Per favore, compila tutti i campi.");
-            return;
-        }
+        if(premio === 'CUSTOM') premio = document.getElementById('p-custom').value;
 
-        const oggContatto = {
-            id: 'REF-' + Date.now(),
-            nome: nome,
-            tel: tel,
-            premio: premio,
-            ref: 0,
-            owner: deviceId,
-            att: businessConfig.n,
-            wa: businessConfig.w
-        };
+        if (!nome || !tel) return alert("Dati mancanti!");
+
+        const nuovo = { id: 'REF-'+Date.now(), nome, tel, premio, ref: 0, owner: deviceId, att: businessConfig.n, wa: businessConfig.w };
+        listaPazienti.push(nuovo);
+        localStorage.setItem('spich_list', JSON.stringify(listaPazienti));
         
-        listaPazienti.push(oggContatto);
-        syncDati(oggContatto);
-        
-        // Pulisci campi
-        document.getElementById('p-nome').value = "";
-        document.getElementById('p-tel').value = "";
+        fetch(GOOGLE_SCRIPT_URL, { method: "POST", mode: "no-cors", body: JSON.stringify({ tipo: 'ADD_PAZIENTE', ...nuovo }) });
+        stampaLista();
+        document.getElementById('p-nome').value = ""; document.getElementById('p-tel').value = "";
     }
 
     function stampaLista() {
-        const area = document.getElementById('lista-render');
-        area.innerHTML = "";
-        
-        listaPazienti.forEach((p, index) => {
-            const delStato = isProUser ? 'block' : 'none';
-            
-            area.innerHTML += `
-            <div class="p-item">
-                <button class="btn-del" onclick="cancellaContatto('${p.id}', ${index})" style="display:${delStato};">
-                    <i class="fas fa-trash-alt"></i>
-                </button>
-                <div style="flex:1;">
-                    <b style="color:var(--primary); font-size:1.2rem;">${p.nome}</b><br>
-                    <small style="font-weight:800; color:#cbd5e0; letter-spacing:0.5px;">${p.ref}/5 Punti accumulati</small>
-                </div>
-                <div style="display:flex; align-items:center;">
-                    <a class="btn-wa" href="${linkWhatsAppPaziente(p)}" target="_blank">
-                        <i class="fab fa-whatsapp"></i>
-                    </a>
-                    <button class="btn-ref" onclick="aggiungiPuntoRef(${index})">+1</button>
-                </div>
+        const area = document.getElementById('lista-render'); area.innerHTML = "";
+        listaPazienti.forEach((p, i) => {
+            area.innerHTML += `<div class="p-item">
+                <div style="flex:1;"><b>${p.nome}</b><br><small>${p.ref}/5 Punti</small></div>
+                <div style="display:flex;"><a class="btn-wa" href="${generaLinkWA(p)}" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                <button class="btn-ref" onclick="aggiungiPunto(${i})">+1</button></div>
             </div>`;
         });
-        
         document.getElementById('contatore-num').innerText = listaPazienti.length;
-        
-        // Se raggiungo il limite e sono free, blocco l'inserimento
-        if (!isProUser && listaPazienti.length >= 10) {
+        if(!isProUser && listaPazienti.length >= 10) {
             document.getElementById('btn-salva').style.display = 'none';
             document.getElementById('area-limite').style.display = 'block';
         }
     }
 
-    function linkWhatsAppPaziente(p) {
+    function generaLinkWA(p) {
         const base = window.location.href.split('?')[0];
-        // Costruisco il link che il cliente riceverà
-        const linkVantaggio = `${base}?v=gift&id=${p.id}&n=${encodeURIComponent(p.nome)}&st=${encodeURIComponent(businessConfig.n)}&wa=${businessConfig.w}&pr=${encodeURIComponent(p.premio)}&ref=${p.ref}`;
-        
-        const testo = `Ciao ${p.nome}! Abbiamo attivato il tuo pass digitale per ${businessConfig.n}.\n\nDa questo link potrai vedere i tuoi punti e invitare amici per sbloccare il tuo premio (${p.premio}):\n\n${linkVantaggio}`;
-        
-        return `https://wa.me/${p.tel}?text=${encodeURIComponent(testo)}`;
+        const link = `${base}?v=gift&id=${p.id}&n=${encodeURIComponent(p.nome)}&st=${encodeURIComponent(businessConfig.n)}&wa=${businessConfig.w}&pr=${encodeURIComponent(p.premio)}&ref=${p.ref}`;
+        return `https://wa.me/${p.tel}?text=${encodeURIComponent("Ciao " + p.nome + "! Ecco il tuo pass digitale: " + link)}`;
     }
 
-    function aggiungiPuntoRef(index) {
-        listaPazienti[index].ref++;
-        syncDati(listaPazienti[index]);
-    }
-
-    function cancellaContatto(id, index) {
-        if(confirm("Vuoi davvero eliminare questo contatto? Questa azione è irreversibile.")) {
-            listaPazienti.splice(index, 1);
-            localStorage.setItem('spich_list', JSON.stringify(listaPazienti));
-            stampaLista();
-            
-            // Elimina anche dal cloud
-            fetch(GOOGLE_SCRIPT_URL, { 
-                method: "POST", 
-                mode: "no-cors", 
-                body: JSON.stringify({tipo: 'DEL_PAZIENTE', id: id}) 
-            });
-        }
-    }
-
-    function syncDati(singolo) {
+    function aggiungiPunto(i) {
+        listaPazienti[i].ref++;
         localStorage.setItem('spich_list', JSON.stringify(listaPazienti));
         stampaLista();
-        
-        // Sincronizzazione Database Remoto
+        fetch(GOOGLE_SCRIPT_URL, { method: "POST", mode: "no-cors", body: JSON.stringify({ tipo: 'ADD_PAZIENTE', ...listaPazienti[i] }) });
+    }
+
+    function invioRichiestaPro() {
+        alert("Richiesta inviata! Il profilo PRO sarà attivo a breve.");
         fetch(GOOGLE_SCRIPT_URL, { 
             method: "POST", 
             mode: "no-cors", 
-            body: JSON.stringify({
-                tipo: 'ADD_PAZIENTE', 
-                ...singolo
-            }) 
+            body: JSON.stringify({ tipo: 'RICHIESTA_PRO', deviceId, nomeAtt: businessConfig.n, wa: businessConfig.w }) 
         });
     }
 
-        function invioRichiestaPro() {
-        alert("Richiesta inviata! Verrai attivato entro breve e riceverai una mail di conferma.");
-        
-        fetch(GOOGLE_SCRIPT_URL, { 
-            method: "POST", 
-            mode: "no-cors", 
-            body: JSON.stringify({
-                tipo: 'RICHIESTA_PRO', 
-                deviceId: deviceId, 
-                nomeAtt: businessConfig.n, 
-                wa: businessConfig.w
-            }) 
-        });
-        // WhatsApp rimosso per evitare stress!
-    }
-
-
-    function confermaLogout() {
-        if (businessConfig && confirm("Vuoi uscire dal profilo attività e resettare il pannello?")) {
-            localStorage.removeItem('spich_cfg');
-            location.reload();
-        }
-    }
-
-    // 5. AREA LATO CLIENTE (VISTA REGALO)
-    
-    function buildVistaRegalo(p) {
-        const nomeStudio = p.get('st');
-        const countPunti = parseInt(p.get('ref') || 0);
-        const premioTesto = p.get('pr');
-        
-        document.getElementById('view-studio').innerText = nomeStudio;
-        
-        // Logica Riempimento Pallini
-        const dots = document.querySelectorAll('.dot');
-        for(let i = 0; i < countPunti && i < 5; i++) {
-            dots[i].classList.add('fill');
-        }
-        
-        // Controllo se il premio è stato sbloccato (5 punti)
-        if (countPunti >= 5) {
-            document.getElementById('area-qr').style.display = "none";
-            document.getElementById('banner-info-premio').innerHTML = `
-                <i class="fas fa-trophy" style="margin-bottom:15px; font-size:2rem;"></i><br>
-                COMPLIMENTI! HAI SBLOCCATO:<br>
-                <span style="font-size:1.5rem; display:block; margin-top:10px;">${premioTesto}</span>
-            `;
-            document.getElementById('box-sbloccato').style.display = "block";
-        } else {
-            document.getElementById('banner-info-premio').innerHTML = `
-                PROSSIMO TRAGUARDO:<br>
-                <span style="font-size:1.3rem;">${premioTesto}</span>
-            `;
-            
-            // Generazione QR Code con gestione errori libreria
-            try {
-                setTimeout(() => {
-                    new QRCode(document.getElementById("qrcode"), {
-                        text: window.location.href,
-                        width: 200,
-                        height: 200,
-                        colorDark : "#008080",
-                        colorLight : "#ffffff"
-                    });
-                }, 800);
-            } catch(err) {
-                console.error("Errore libreria QRCode:", err);
+    async function verificaStatusProServer() {
+        try {
+            const r = await fetch(GOOGLE_SCRIPT_URL + "?checkPro=" + deviceId);
+            const data = await r.json();
+            if (data.isPro === "SI") {
+                isProUser = true;
+                document.getElementById('badge-pro').innerText = "PRO VERSION";
+                document.getElementById('badge-pro').classList.add('is-pro');
+                document.getElementById('area-limite').style.display = "none";
+                document.getElementById('btn-salva').style.display = "block";
             }
+        } catch(e) {}
+    }
+
+    function buildVistaRegalo(p) {
+        document.getElementById('view-studio').innerText = p.get('st');
+        const r = parseInt(p.get('ref') || 0);
+        const dots = document.querySelectorAll('.dot');
+        for(let i=0; i<r && i<5; i++) dots[i].classList.add('fill');
+        document.getElementById('banner-info-premio').innerText = "IL TUO PREMIO: " + p.get('pr');
+        if(r >= 5) { 
+            document.getElementById('area-qr').style.display="none"; 
+            document.getElementById('box-sbloccato').style.display="block"; 
+        } else {
+            new QRCode(document.getElementById("qrcode"), { text: window.location.href, width: 160, height: 160 });
         }
     }
 
-    function condividiPassWA() {
-        const msg = `Ciao! Sto raccogliendo i punti per ricevere un regalo da ${document.getElementById('view-studio').innerText}. Guarda il mio pass digitale e scopri come ottenerlo anche tu: ${window.location.href}`;
-        window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`);
-    }
-
-    function contattaAttivita() {
-        const u = new URLSearchParams(window.location.search);
-        const wStudio = u.get('wa');
-        const nCliente = u.get('n');
-        const pr = u.get('pr');
-        
-        const msg = `Ciao! Mi chiamo ${nCliente}. Ho completato i 5 punti su SPICH e vorrei prenotare il mio premio sbloccato: ${pr}.`;
-        
-        window.open(`https://wa.me/${wStudio}?text=${encodeURIComponent(msg)}`);
-    }
-
-</script>
-</body>
-</html>
+    function condividiPassWA() { window.open(`https://wa.me/?text=${encodeURIComponent("Guarda il regalo che ho ricevuto: " + window.location.href)}`); }
+    function contattaAttivita() { const u = new URLSearchParams(window.location.search); window.open(`ht     
