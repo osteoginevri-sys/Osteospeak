@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>SPICH. - Business Panel & Referral System</title>
+    <title>SPICH. - Business System & Referral</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&family=Montserrat:wght@400;700;800&display=swap" rel="stylesheet">
     
@@ -13,16 +13,17 @@
     
     <style>
         /* ==============================================
-           VARIABILI E RESET STILI
+           1. VARIABILI E DESIGN SYSTEM
            ============================================== */
         :root { 
-            --primary: #008080; /* Teal/Ottanio SPICH */
+            --primary: #008080; /* Teal SPICH */
             --gold: #d4af37; 
             --bg: #fdfdfd; 
             --danger: #e74c3c; 
             --success: #2ecc71; 
             --wa: #25D366; 
             --light-blue: #E1F5FE;
+            --shadow: 0 4px 15px rgba(0,0,0,0.08);
         }
         
         * { 
@@ -40,7 +41,7 @@
             overflow-x: hidden; 
         }
         
-        /* Contenitore Principale (Simulazione App Mobile) */
+        /* Layout Mobile-First */
         .app-container { 
             background: var(--bg); 
             width: 100%; 
@@ -69,42 +70,42 @@
             font-family: 'Comfortaa', cursive; 
             font-size: 2.2rem; 
             color: var(--primary); 
-            user-select: none;
+            letter-spacing: -1px;
         }
         
         .logo span { color: var(--gold); }
         
-        /* GESTIONE SCENE (Pannelli che si accendono/spengono) */
+        /* GESTIONE PANNELLI (SCENE) */
         .scena { 
             display: none; 
             padding: 20px; 
-            animation: fadeIn 0.4s ease; 
+            animation: app-fade 0.4s ease-out; 
             flex: 1;
         }
         
         .active { display: block !important; }
         
-        @keyframes fadeIn { 
-            from { opacity: 0; transform: translateY(10px); } 
+        @keyframes app-fade { 
+            from { opacity: 0; transform: translateY(15px); } 
             to { opacity: 1; transform: translateY(0); } 
         }
         
         /* ==============================================
-           ELEMENTI DASHBOARD PROFESSIONISTA
+           2. ELEMENTI DASHBOARD
            ============================================== */
         .stat-card { 
             background: white; 
-            padding: 25px; 
-            border-radius: 20px; 
+            padding: 30px; 
+            border-radius: 25px; 
             text-align: center; 
-            border-bottom: 5px solid var(--gold); 
+            border-bottom: 6px solid var(--gold); 
             margin-bottom: 25px; 
             position: relative; 
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05); 
+            box-shadow: var(--shadow); 
         }
         
         .stat-card b { 
-            font-size: 2.8rem; 
+            font-size: 3rem; 
             color: var(--primary); 
             display: block; 
             line-height: 1;
@@ -112,38 +113,37 @@
         
         .stat-card span {
             font-weight: 700;
-            color: #7f8c8d;
+            color: #95a5a6;
             text-transform: uppercase;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             letter-spacing: 1px;
         }
 
         .badge-pro { 
-            background: #bbb; 
+            background: #cbd5e0; 
             color: white; 
-            padding: 5px 12px; 
-            border-radius: 8px; 
-            font-size: 0.7rem; 
+            padding: 6px 14px; 
+            border-radius: 10px; 
+            font-size: 0.75rem; 
             position: absolute; 
-            top: 12px; 
-            right: 12px; 
+            top: 15px; 
+            right: 15px; 
             font-weight: 800; 
-            letter-spacing: 0.5px;
         }
         
         .badge-pro.is-pro { 
             background: var(--success); 
-            box-shadow: 0 0 10px rgba(46,204,113,0.3);
+            box-shadow: 0 0 15px rgba(46,204,113,0.3);
         }
         
-        /* FORM E INPUT */
+        /* INPUT E FORM */
         .form-box { 
             background: white; 
             padding: 20px; 
-            border-radius: 20px; 
+            border-radius: 22px; 
             border: 1px solid #eee; 
-            margin-bottom: 20px; 
-            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+            margin-bottom: 25px; 
+            box-shadow: 0 2px 10px rgba(0,0,0,0.02);
         }
         
         label { 
@@ -153,196 +153,198 @@
             text-transform: uppercase; 
             margin-top: 15px; 
             display: block; 
-            padding-left: 5px; 
-            margin-bottom: 5px;
+            padding-left: 5px;
+            margin-bottom: 6px;
         }
         
         input, select { 
             width: 100%; 
-            padding: 14px; 
-            border-radius: 12px; 
-            border: 1px solid #ddd; 
+            padding: 15px; 
+            border-radius: 14px; 
+            border: 1px solid #e2e8f0; 
             font-family: inherit; 
             font-size: 1rem; 
             outline: none; 
-            background: #fff;
-            transition: border 0.3s;
+            background: #fdfdfd;
+            transition: all 0.3s;
         }
         
-        input:focus { border-color: var(--primary); }
+        input:focus { border-color: var(--primary); background: white; }
         
         .btn-teal { 
             background: var(--primary); 
             color: white; 
             border: none; 
-            padding: 18px; 
-            border-radius: 15px; 
+            padding: 20px; 
+            border-radius: 18px; 
             font-weight: 800; 
             width: 100%; 
             cursor: pointer; 
-            font-size: 1rem; 
-            margin-top: 10px;
-            box-shadow: 0 4px 10px rgba(0,128,128,0.2);
+            font-size: 1.1rem; 
+            margin-top: 15px;
+            box-shadow: 0 5px 15px rgba(0,128,128,0.25);
+            transition: transform 0.2s;
         }
+        
+        .btn-teal:active { transform: scale(0.98); }
 
-        /* LISTA UTENTI */
+        /* LISTA CONTATTI */
         .p-item { 
             background: white; 
-            padding: 15px; 
-            border-radius: 18px; 
-            margin-bottom: 12px; 
+            padding: 18px; 
+            border-radius: 20px; 
+            margin-bottom: 15px; 
             display: flex; 
             justify-content: space-between; 
             align-items: center; 
-            border: 1px solid #eee; 
-            transition: transform 0.2s;
+            border: 1px solid #f0f0f0; 
+            box-shadow: 0 2px 5px rgba(0,0,0,0.01);
         }
         
         .btn-wa { 
             background: var(--wa); 
             color: white; 
-            width: 45px; 
-            height: 45px; 
+            width: 50px; 
+            height: 50px; 
             border-radius: 50%; 
             display: flex; 
             align-items: center; 
             justify-content: center; 
             text-decoration: none; 
-            font-size: 1.4rem; 
-            margin-right: 8px; 
-            box-shadow: 0 3px 8px rgba(37,211,102,0.3);
+            font-size: 1.6rem; 
+            margin-right: 10px; 
+            box-shadow: 0 4px 10px rgba(37,211,102,0.25);
         }
         
         .btn-ref { 
             background: var(--gold); 
             border: none; 
-            padding: 12px 18px; 
-            border-radius: 12px; 
+            padding: 12px 20px; 
+            border-radius: 14px; 
             color: white; 
             font-weight: 800; 
             cursor: pointer; 
-            box-shadow: 0 3px 8px rgba(212,175,55,0.3);
+            box-shadow: 0 4px 10px rgba(212,175,55,0.25);
         }
         
         .btn-del { 
-            color: var(--danger); 
+            color: #a0aec0; 
             background: none; 
             border: none; 
             font-size: 1.2rem; 
             margin-right: 15px; 
             cursor: pointer; 
-            display: none; /* Appare solo se PRO */
+            display: none; 
         }
         
-        /* BOX BLOCCO FREE */
+        .btn-del:hover { color: var(--danger); }
+        
+        /* BLOCCO LIMITI FREE */
         .lock-box { 
-            background: #fff5f5; 
-            border: 2px dashed var(--danger); 
-            border-radius: 18px; 
-            padding: 20px; 
+            background: #fffafa; 
+            border: 2px dashed #feb2b2; 
+            border-radius: 20px; 
+            padding: 25px; 
             text-align: center; 
             display: none; 
-            margin-top: 10px;
+            margin-top: 15px;
         }
         
         .btn-pro { 
             background: var(--danger); 
             color: white; 
-            padding: 14px; 
-            border-radius: 12px; 
+            padding: 16px; 
+            border-radius: 14px; 
             border: none; 
             width: 100%; 
             font-weight: 800; 
-            margin-top: 10px; 
+            margin-top: 15px; 
             cursor: pointer; 
         }
 
         /* ==============================================
-           ESTETICA LATO CLIENTE (AREA REGALO)
+           3. AREA CLIENTE (VISTA REGALO)
            ============================================== */
-        .gift-section { text-align: center; padding-top: 10px; }
+        .gift-container { text-align: center; padding: 10px 0; }
 
-        /* Pacco Regalo Animato */
         .gift-icon { 
-            font-size: 5rem; 
+            font-size: 5.5rem; 
             color: var(--primary); 
-            margin-bottom: 20px; 
-            animation: bounce 2s infinite ease-in-out; 
+            margin-bottom: 25px; 
+            animation: bounce-gift 2.2s infinite ease-in-out; 
             display: inline-block;
+            filter: drop-shadow(0 5px 15px rgba(0,128,128,0.2));
         }
         
-        @keyframes bounce { 
-            0%, 100% { transform: translateY(0) scale(1); } 
-            50% { transform: translateY(-15px) scale(1.05); } 
+        @keyframes bounce-gift { 
+            0%, 100% { transform: translateY(0) rotate(0deg); } 
+            50% { transform: translateY(-20px) rotate(5deg); } 
         }
         
-        /* I 5 Pallini Progressivi */
-        .dots-container { 
+        /* I 5 PALLINI PROGRESSIVI */
+        .dots-wrapper { 
             display: flex; 
             justify-content: center; 
-            gap: 12px; 
-            margin: 25px 0; 
+            gap: 15px; 
+            margin: 30px 0; 
         }
         
         .dot { 
-            width: 26px; 
-            height: 26px; 
+            width: 28px; 
+            height: 28px; 
             border-radius: 50%; 
-            border: 2px solid #ddd; 
-            background: #f0f0f0; 
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+            border: 2px solid #e2e8f0; 
+            background: #edf2f7; 
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
         }
         
         .dot.fill { 
             background: var(--primary); 
             border-color: var(--primary); 
-            transform: scale(1.25); 
-            box-shadow: 0 0 12px rgba(0,128,128,0.4); 
+            transform: scale(1.3); 
+            box-shadow: 0 0 15px rgba(0,128,128,0.4); 
         }
         
-        /* Bottone Condivisione */
-        .btn-share { 
+        .btn-share-wa { 
             background: var(--light-blue); 
             color: #0288D1; 
             border: none; 
-            padding: 16px; 
-            border-radius: 15px; 
+            padding: 18px; 
+            border-radius: 16px; 
             width: 100%; 
             font-weight: 800; 
-            margin-top: 20px; 
+            margin-top: 25px; 
             cursor: pointer; 
-            font-size: 0.9rem; 
+            font-size: 0.95rem; 
             display: flex; 
             justify-content: center; 
             align-items: center; 
-            gap: 10px; 
+            gap: 12px; 
         }
         
-        /* Banner Premio Oro */
-        .banner-oro { 
+        .banner-premio { 
             background: var(--gold); 
             color: white; 
             padding: 25px; 
-            border-radius: 20px; 
+            border-radius: 22px; 
             font-weight: 800; 
             text-align: center; 
-            margin-top: 25px; 
+            margin-top: 30px; 
             font-size: 1.1rem; 
-            box-shadow: 0 6px 20px rgba(212,175,55,0.3); 
-            line-height: 1.4;
+            box-shadow: 0 8px 20px rgba(212,175,55,0.3); 
+            line-height: 1.5;
         }
 
-        /* QR Code Styling */
-        #qrcode img { margin: 0 auto; border: 8px solid white; border-radius: 10px; }
+        #qrcode canvas, #qrcode img { margin: 0 auto; border: 10px solid white; border-radius: 15px; box-shadow: var(--shadow); }
         
         /* FOOTER */
         .footer { 
             font-size: 0.65rem; 
-            color: #bbb; 
+            color: #a0aec0; 
             text-align: center; 
-            padding: 25px; 
+            padding: 30px; 
             margin-top: auto; 
-            letter-spacing: 1px;
+            line-height: 1.6;
         }
     </style>
 </head>
@@ -350,81 +352,83 @@
 
 <div class="app-container">
     
-    <div class="header" id="main-header" onclick="confermaReset()">
+    <header class="header" id="top-nav" onclick="confermaLogout()">
         <h1 class="logo">SPICH<span>.</span></h1>
-    </div>
+    </header>
 
-    <div id="scena-setup" class="scena">
-        <h3 style="text-align:center; margin-bottom:20px; color:var(--primary); font-weight:800;">Benvenuto su SPICH.</h3>
-        <p style="text-align:center; font-size:0.85rem; margin-bottom:20px; color:#7f8c8d;">Configura la tua attività per iniziare a gestire i tuoi referral.</p>
+    <main id="scena-setup" class="scena">
+        <div style="text-align:center; margin-bottom:25px;">
+            <h3 style="color:var(--primary); font-weight:800; font-size:1.4rem;">Benvenuto in SPICH.</h3>
+            <p style="font-size:0.85rem; color:#718096; margin-top:8px;">Crea il tuo pannello referral in pochi secondi.</p>
+        </div>
         
         <div class="form-box">
-            <label>Nome dell'Attività</label>
-            <input type="text" id="set-att" placeholder="Esempio: Studio Medico Rossi">
+            <label>Nome Attività</label>
+            <input type="text" id="setup-nome" placeholder="Es: Studio Medico Rossi">
             
-            <label>Tuo WhatsApp Business</label>
-            <input type="tel" id="set-wa" placeholder="Esempio: 393471234567">
+            <label>Numero WhatsApp Business</label>
+            <input type="tel" id="setup-wa" placeholder="Es: 393471234567">
             
-            <label>Tipo di Professione</label>
-            <select id="set-cat">
-                <option value="Medica">Settore Medico</option>
-                <option value="Commerciale">Settore Commerciale</option>
-                <option value="Ristorazione">Settore Ristorazione</option>
-                <option value="Altro">Altro</option>
+            <label>Settore di Riferimento</label>
+            <select id="setup-settore">
+                <option value="Medica">Area Medica</option>
+                <option value="Commerciale">Area Commerciale</option>
+                <option value="Ristorazione">Area Ristorazione</option>
+                <option value="Altro">Altro Settore</option>
             </select>
             
-            <button class="btn-teal" onclick="salvaSetup()">ATTIVA IL MIO PANNELLO</button>
+            <button class="btn-teal" onclick="eseguiSetup()">ATTIVA IL MIO BUSINESS</button>
         </div>
-    </div>
+    </main>
 
-    <div id="scena-dash" class="scena">
+    <main id="scena-dash" class="scena">
         
         <div class="stat-card">
             <div id="badge-pro" class="badge-pro">FREE VERSION</div>
-            <b id="contatore">0</b>
-            <span id="label-cat">CARICATI</span>
+            <b id="contatore-num">0</b>
+            <span id="label-plurale">PAZIENTI</span>
         </div>
         
-        <div class="form-box" id="form-aggiunta">
-            <label id="label-nome">NOME E COGNOME</label>
-            <input type="text" id="new-nome" placeholder="Inserisci nome...">
+        <div class="form-box">
+            <label id="label-singolare">NOME E COGNOME</label>
+            <input type="text" id="p-nome" placeholder="Inserisci nome...">
             
             <label>NUMERO DI CELLULARE</label>
-            <input type="tel" id="new-tel" placeholder="Es: 39347...">
+            <input type="tel" id="p-tel" placeholder="Es: 39347...">
             
-            <label>PREMIO DA SBLOCCARE</label>
-            <select id="new-premio" onchange="gestisciPremioCustom()">
+            <label>PREMIO D'INGRESSO</label>
+            <select id="p-premio" onchange="togglePremioCustom()">
                 <option value="Sconto 20%">Sconto 20%</option>
                 <option value="Sconto 50%">Sconto 50%</option>
                 <option value="Omaggio">Trattamento Omaggio</option>
-                <option value="CUSTOM">-- Scrivi premio personalizzato (PRO) --</option>
+                <option value="CUSTOM">-- Scrivi Premio Personale (PRO) --</option>
             </select>
             
-            <input type="text" id="new-custom" placeholder="Descrizione premio personalizzato..." style="display:none; margin-top:12px;">
+            <input type="text" id="p-custom" placeholder="Descrivi il premio..." style="display:none; margin-top:15px;">
             
-            <button id="btn-add" class="btn-teal" onclick="aggiungiContatto()">AGGIUNGI AL DATABASE</button>
+            <button id="btn-salva" class="btn-teal" onclick="creaNuovoContatto()">AGGIUNGI ORA</button>
             
-            <div id="box-lock" class="lock-box">
-                <i class="fas fa-lock" style="color:var(--danger); font-size:1.5rem; margin-bottom:10px;"></i>
-                <p style="color:var(--danger); font-weight:800; font-size:0.9rem;">LIMITE 10 CONTATTI RAGGIUNTO</p>
-                <p style="font-size:0.75rem; color:#666; margin-top:5px;">Passa a PRO per gestire contatti illimitati e premi personalizzati.</p>
-                <button onclick="richiediSbloccoPro()" class="btn-pro">SBLOCCA VERSIONE PRO</button>
+            <div id="area-limite" class="lock-box">
+                <i class="fas fa-crown" style="color:var(--gold); font-size:1.8rem; margin-bottom:10px;"></i>
+                <p style="color:var(--danger); font-weight:800; font-size:0.9rem;">DATABASE AL COMPLETO (10/10)</p>
+                <p style="font-size:0.75rem; color:#718096; margin-top:5px;">Sblocca la versione PRO per avere contatti illimitati e funzioni extra.</p>
+                <button onclick="invioRichiestaPro()" class="btn-pro">PASSA A PRO ORA</button>
             </div>
         </div>
         
-        <h4 style="margin-bottom:15px; color:var(--primary); font-size:0.9rem; letter-spacing:1px; border-left:4px solid var(--gold); padding-left:10px;">LISTA ATTIVA</h4>
-        <div id="lista-contatti"></div>
-    </div>
+        <h4 style="margin: 0 0 15px 5px; color:var(--primary); font-size:0.9rem; letter-spacing:1px;">GESTIONE LISTA</h4>
+        <div id="lista-render"></div>
+    </main>
 
-    <div id="scena-regalo" class="scena">
-        <div class="gift-section">
+    <main id="scena-regalo" class="scena">
+        <div class="gift-container">
             
             <i class="fas fa-gift gift-icon"></i>
             
-            <h2 id="reg-studio" style="color:var(--primary); text-transform:uppercase; font-family:'Comfortaa'; margin-bottom:5px;"></h2>
-            <p style="font-weight:700; font-size:0.95rem; color:#2c3e50; margin-bottom:15px;">Ti ha inviato un Regalo!</p>
+            <h2 id="view-studio" style="color:var(--primary); text-transform:uppercase; font-family:'Comfortaa'; letter-spacing:-1px;"></h2>
+            <p style="font-weight:700; font-size:1rem; color:#4a5568; margin-bottom:10px;">Ti ha fatto un regalo speciale!</p>
             
-            <div class="dots-container" id="dots-box">
+            <div class="dots-wrapper" id="punti-box">
                 <div class="dot"></div>
                 <div class="dot"></div>
                 <div class="dot"></div>
@@ -432,154 +436,154 @@
                 <div class="dot"></div>
             </div>
 
-            <div id="qrcode-wrap">
-                <div id="qrcode" style="display:inline-block;"></div>
+            <div id="area-qr">
+                <div id="qrcode"></div>
                 
-                <button class="btn-share" onclick="condividiLinkWA()">
-                    <i class="fab fa-whatsapp"></i> CONDIVIDI CON UN AMICO
+                <button class="btn-share-wa" onclick="condividiPassWA()">
+                    <i class="fab fa-whatsapp"></i> INVITA UN AMICO
                 </button>
             </div>
 
-            <div id="reg-premio-banner" class="banner-oro"></div>
+            <div id="banner-info-premio" class="banner-premio"></div>
             
-            <div id="box-riscatta" style="display:none; margin-top:30px;">
-                <p style="font-size:0.85rem; margin-bottom:15px; font-weight:700; color:var(--success);">COMPLIMENTI! HAI SBLOCCATO IL PREMIO.</p>
-                <button class="btn-teal" onclick="prenotaPremio()">PRENOTA ORA SU WHATSAPP</button>
+            <div id="box-sbloccato" style="display:none; margin-top:35px;">
+                <p style="font-size:0.9rem; margin-bottom:20px; font-weight:800; color:var(--success);">VOUCHER PRONTO PER L'USO!</p>
+                <button class="btn-teal" onclick="contattaAttivita()">PRENOTA IL TUO PREMIO</button>
             </div>
         </div>
-    </div>
+    </main>
     
-    <div class="footer">
-        SPICH. SYSTEM | DEVICE ID: <span id="dev-display">---</span><br>
+    <footer class="footer">
+        SPICH. BUSINESS SYSTEM<br>
+        DEVICE ID: <span id="id-display">---</span><br>
         &copy; 2026 TUTTI I DIRITTI RISERVATI
-    </div>
+    </footer>
 </div>
 
 <script>
     /* ==============================================
-       LOGICA DI SISTEMA E CONFIGURAZIONE
+       LOGICA APPLICATIVA INTEGRALE (NON SNELLITA)
        ============================================== */
     
-    // URL DEL TUO GOOGLE APPS SCRIPT (AGGIORNATO)
-    const API_URL = "https://script.google.com/macros/s/AKfycbxN0X_dQwhqRSsAIMvNLCVDDQDUTWoZnQO85cz03f9ouZJz58gFQCqBc5rvzZBdw6y1-Q/exec";
+    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxN0X_dQwhqRSsAIMvNLCVDDQDUTWoZnQO85cz03f9ouZJz58gFQCqBc5rvzZBdw6y1-Q/exec";
 
-    // 1. GESTIONE IDENTITÀ E PERSISTENZA DATI
+    // 1. IDENTITÀ DISPOSITIVO
     let deviceId = localStorage.getItem('spich_id');
     if (!deviceId) {
         deviceId = 'SP-' + Math.random().toString(36).substr(2, 5).toUpperCase();
         localStorage.setItem('spich_id', deviceId);
     }
 
-    let config = null;
+    // 2. RECUPERO DATI LOCALI (CON CONTROLLO ERRORI)
+    let businessConfig = null;
     try {
-        const savedCfg = localStorage.getItem('spich_cfg');
-        if(savedCfg) config = JSON.parse(savedCfg);
-    } catch(e) { config = null; }
+        const rawCfg = localStorage.getItem('spich_cfg');
+        if(rawCfg) businessConfig = JSON.parse(rawCfg);
+    } catch(e) { console.error("Errore lettura config"); }
     
-    let contatti = [];
+    let listaPazienti = [];
     try {
-        const savedList = localStorage.getItem('spich_list');
-        if(savedList) contatti = JSON.parse(savedList);
-    } catch(e) { contatti = []; }
+        const rawList = localStorage.getItem('spich_list');
+        if(rawList) listaPazienti = JSON.parse(rawList);
+    } catch(e) { listaPazienti = []; }
     
-    let isPro = false;
+    let isProUser = false;
 
-    // 2. AVVIO DELL'APP
+    // 3. INIZIALIZZAZIONE ALL'AVVIO
     window.onload = function() {
-        document.getElementById('dev-display').innerText = deviceId;
+        document.getElementById('id-display').innerText = deviceId;
         
-        const urlParams = new URLSearchParams(window.location.search);
+        const parametri = new URLSearchParams(window.location.search);
         
-        // Determina quale schermata mostrare
-        if (urlParams.get('v') === 'gift') {
-            switchScena('regalo');
-            inizializzaVistaRegalo(urlParams);
-        } else if (!config || !config.n) {
-            switchScena('setup');
+        // Smistamento scene
+        if (parametri.get('v') === 'gift') {
+            switchPannello('regalo');
+            buildVistaRegalo(parametri);
+        } else if (!businessConfig || !businessConfig.n) {
+            switchPannello('setup');
         } else {
-            switchScena('dash');
-            caricaDashboard();
-            verificaAbilitazionePro();
+            switchPannello('dash');
+            renderizzaDashboard();
+            verificaStatusProServer();
         }
     };
 
-    // Funzione robusta per il cambio scena
-    function switchScena(id) {
-        const tutte = document.querySelectorAll('.scena');
-        tutte.forEach(s => s.classList.remove('active'));
+    function switchPannello(id) {
+        document.querySelectorAll('.scena').forEach(s => s.classList.remove('active'));
         const target = document.getElementById('scena-' + id);
         if(target) target.classList.add('active');
         window.scrollTo(0,0);
     }
 
-    // 3. LOGICA PROFESSIONISTA (DASHBOARD)
+    // 4. GESTIONE PROFESSIONISTA
     
-    function salvaSetup() {
-        const nome = document.getElementById('set-att').value.trim();
-        const wa = document.getElementById('set-wa').value.trim();
-        const cat = document.getElementById('set-cat').value;
+    function eseguiSetup() {
+        const nomeA = document.getElementById('setup-nome').value.trim();
+        const waA = document.getElementById('setup-wa').value.trim();
+        const settoreA = document.getElementById('setup-settore').value;
         
-        if (!nome || !wa) return alert("Inserisci il nome dell'attività e il numero WhatsApp.");
+        if (!nomeA || !waA) return alert("Per favore, inserisci nome e WhatsApp.");
         
-        config = { n: nome, w: wa, cat: cat };
-        localStorage.setItem('spich_cfg', JSON.stringify(config));
+        businessConfig = { n: nomeA, w: waA, s: settoreA };
+        localStorage.setItem('spich_cfg', JSON.stringify(businessConfig));
         
-        // Registra su Google Database
-        fetch(API_URL, { 
+        // Invio al database remoto
+        fetch(GOOGLE_SCRIPT_URL, { 
             method: "POST", 
             mode: "no-cors", 
-            body: JSON.stringify({tipo: 'REG_ESERCENTE', deviceId: deviceId, nomeAtt: nome, wa: wa}) 
+            body: JSON.stringify({tipo: 'REG_ESERCENTE', deviceId: deviceId, nomeAtt: nomeA, wa: waA}) 
         });
         
         location.reload();
     }
 
-    async function verificaAbilitazionePro() {
+    async function verificaStatusProServer() {
         try {
-            const resp = await fetch(API_URL + "?checkPro=" + deviceId);
-            const data = await resp.json();
-            if (data.isPro === true || data.isPro === "SI" || data.isPro === "si") {
-                isPro = true;
-                attivaFunzioniPro();
+            const r = await fetch(GOOGLE_SCRIPT_URL + "?checkPro=" + deviceId);
+            const data = await r.json();
+            if (data.isPro === true || data.isPro === "SI") {
+                isProUser = true;
+                attivaGraficaPro();
             }
-        } catch(e) { console.warn("Sync PRO fallito (Offline)"); }
+        } catch(e) { console.log("Verifica Pro differita"); }
     }
 
-    function attivaFunzioniPro() {
-        const badge = document.getElementById('badge-pro');
-        badge.innerText = "PRO VERSION";
-        badge.classList.add('is-pro');
+    function attivaGraficaPro() {
+        const b = document.getElementById('badge-pro');
+        b.innerText = "PRO VERSION";
+        b.classList.add('is-pro');
         
-        document.getElementById('box-lock').style.display = "none";
-        document.getElementById('btn-add').style.display = "block";
+        document.getElementById('area-limite').style.display = "none";
+        document.getElementById('btn-salva').style.display = "block";
         
-        // Mostra i cestini per eliminare contatti
         const cestini = document.querySelectorAll('.btn-del');
         cestini.forEach(c => c.style.display = "block");
     }
 
-    function caricaDashboard() {
-        let singolare = "Contatto";
-        let plurale = "Contatti";
+    function renderizzaDashboard() {
+        let labelS = "CONTATTO";
+        let labelP = "CONTATTI";
         
-        if(config.cat === "Medica") { singolare = "Paziente"; plurale = "Pazienti"; }
-        else if(config.cat === "Ristorazione") { singolare = "Ospite"; plurale = "Ospiti"; }
+        if(businessConfig.s === "Medica") { labelS = "PAZIENTE"; labelP = "PAZIENTI"; }
+        else if(businessConfig.s === "Ristorazione") { labelS = "OSPITE"; labelP = "OSPITI"; }
 
-        document.getElementById('label-cat').innerText = plurale;
-        document.getElementById('label-nome').innerText = "NOME " + singolare;
+        document.getElementById('label-plurale').innerText = labelP;
+        document.getElementById('label-singolare').innerText = "NOME " + labelS;
         
-        renderLista();
+        stampaLista();
     }
 
-    function gestisciPremioCustom() {
-        const p = document.getElementById('new-premio').value;
-        const inputCustom = document.getElementById('new-custom');
+    function togglePremioCustom() {
+        const val = document.getElementById('p-premio').value;
+        const box = document.getElementById('p-custom');
         
-        if (p === 'CUSTOM') {
-            if (!isPro) {
-                alert("Il premio personalizzato è una funzione PRO.");
-                document.getElementById('new-premio').value = "Sconto 20%";
-                inputCustom.style.display = 'none';
+        if (val === 'CUSTOM') {
+            if (!isProUser) {
+                alert("La funzione premi personalizzati è riservata alla versione PRO.");
+                document.getElementById('p-premio').value = "Sconto 20%";
+                box.style.display = 'none';
             } else {
-                inputCustom.style.display = 'block';
+                box.style.display = 'block';
             }
+        } else {
+            box.sty
