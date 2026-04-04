@@ -53,9 +53,9 @@
             position: relative;
         }
         
-        /* HEADER FISSO */
+        /* HEADER FISSO - LOGO PIÙ GRANDE */
         .header { 
-            padding: 22px; 
+            padding: 25px 20px; 
             text-align: center; 
             background: white; 
             border-bottom: 1px solid #eee; 
@@ -67,9 +67,9 @@
         
         .logo { 
             font-family: 'Comfortaa', cursive; 
-            font-size: 2.3rem; 
+            font-size: 2.8rem; /* Ingrandito */
             color: var(--primary); 
-            letter-spacing: -1.5px;
+            letter-spacing: -2px;
         }
         
         .logo span { color: var(--gold); }
@@ -90,7 +90,7 @@
         }
         
         /* ==============================================
-           2. STILI DASHBOARD (LATO PROFESSIONISTA)
+           2. STILI DASHBOARD
            ============================================== */
         .stat-card { 
             background: white; 
@@ -129,12 +129,10 @@
             top: 15px; 
             right: 15px; 
             font-weight: 800; 
-            letter-spacing: 0.5px;
         }
         
         .badge-pro.is-pro { 
             background: var(--success); 
-            box-shadow: 0 0 15px rgba(46,204,113,0.3);
         }
         
         /* FORM E INPUTS */
@@ -144,7 +142,6 @@
             border-radius: 24px; 
             border: 1px solid #f0f0f0; 
             margin-bottom: 25px; 
-            box-shadow: 0 2px 12px rgba(0,0,0,0.02);
         }
         
         label { 
@@ -152,10 +149,8 @@
             font-weight: 800; 
             color: var(--primary); 
             text-transform: uppercase; 
-            margin-top: 18px; 
+            margin: 18px 0 6px 4px; 
             display: block; 
-            margin-bottom: 6px;
-            padding-left: 4px;
         }
         
         input, select { 
@@ -167,10 +162,7 @@
             font-size: 1rem; 
             outline: none; 
             background: #fbfbfb;
-            transition: all 0.3s ease;
         }
-        
-        input:focus { border-color: var(--primary); background: white; box-shadow: 0 0 0 3px rgba(0,128,128,0.05); }
         
         .btn-teal { 
             background: var(--primary); 
@@ -184,10 +176,7 @@
             font-size: 1.1rem; 
             margin-top: 20px;
             box-shadow: 0 6px 18px rgba(0,128,128,0.2);
-            transition: all 0.2s;
         }
-        
-        .btn-teal:active { transform: scale(0.97); }
 
         /* LISTA ITEM */
         .p-item { 
@@ -213,7 +202,6 @@
             text-decoration: none; 
             font-size: 1.7rem; 
             margin-right: 12px; 
-            box-shadow: 0 4px 12px rgba(37,211,102,0.2);
         }
         
         .btn-ref { 
@@ -224,7 +212,6 @@
             color: white; 
             font-weight: 800; 
             cursor: pointer; 
-            box-shadow: 0 4px 12px rgba(212,175,55,0.2);
         }
         
         .btn-del { 
@@ -237,32 +224,7 @@
             display: none; 
         }
         
-        /* BLOCCO PRO */
-        .lock-box { 
-            background: #fffafa; 
-            border: 2px dashed #feb2b2; 
-            border-radius: 22px; 
-            padding: 30px 20px; 
-            text-align: center; 
-            display: none; 
-            margin-top: 20px;
-        }
-        
-        .btn-pro { 
-            background: var(--danger); 
-            color: white; 
-            padding: 18px; 
-            border-radius: 15px; 
-            border: none; 
-            width: 100%; 
-            font-weight: 800; 
-            margin-top: 15px; 
-            cursor: pointer; 
-        }
-
-        /* ==============================================
-           3. AREA REGALO (LATO CLIENTE)
-           ============================================== */
+        /* AREA REGALO */
         .gift-wrapper { text-align: center; padding: 15px 0; }
 
         .gift-icon { 
@@ -271,15 +233,13 @@
             margin-bottom: 25px; 
             animation: bounce-gift 2.5s infinite ease-in-out; 
             display: inline-block;
-            filter: drop-shadow(0 10px 15px rgba(0,128,128,0.15));
         }
         
         @keyframes bounce-gift { 
-            0%, 100% { transform: translateY(0) rotate(0deg); } 
-            50% { transform: translateY(-25px) rotate(4deg); } 
+            0%, 100% { transform: translateY(0); } 
+            50% { transform: translateY(-20px); } 
         }
         
-        /* PALLINI */
         .dots-row { 
             display: flex; 
             justify-content: center; 
@@ -293,57 +253,26 @@
             border-radius: 50%; 
             border: 2px solid #e2e8f0; 
             background: #f8fafc; 
-            transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
         }
         
         .dot.fill { 
             background: var(--primary); 
             border-color: var(--primary); 
-            transform: scale(1.35); 
-            box-shadow: 0 0 18px rgba(0,128,128,0.35); 
+            transform: scale(1.3); 
         }
         
-        .btn-invite { 
-            background: var(--light-blue); 
-            color: #0288D1; 
-            border: none; 
-            padding: 20px; 
-            border-radius: 18px; 
-            width: 100%; 
-            font-weight: 800; 
-            margin-top: 30px; 
-            cursor: pointer; 
-            font-size: 1rem; 
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            gap: 12px; 
-        }
-        
-        .banner-premio-gold { 
-            background: var(--gold); 
-            color: white; 
-            padding: 28px; 
-            border-radius: 24px; 
-            font-weight: 800; 
-            text-align: center; 
-            margin-top: 35px; 
-            font-size: 1.2rem; 
-            box-shadow: 0 10px 25px rgba(212,175,55,0.35); 
-            line-height: 1.5;
-        }
-
-        #qrcode img { margin: 0 auto; border: 12px solid white; border-radius: 20px; box-shadow: var(--shadow-soft); }
-        
+        /* FOOTER PIÙ PICCOLO */
         .footer { 
-            font-size: 0.7rem; 
+            font-size: 0.6rem; /* Ridotto */
             color: #94a3b8; 
             text-align: center; 
-            padding: 40px 20px; 
+            padding: 30px 20px; 
             margin-top: auto; 
-            line-height: 1.8;
-            letter-spacing: 0.5px;
+            line-height: 1.5;
+            letter-spacing: 0.3px;
         }
+
+        #qrcode img { margin: 0 auto; border: 12px solid white; border-radius: 20px; }
     </style>
 </head>
 <body>
@@ -356,226 +285,207 @@
 
     <main id="scena-setup" class="scena">
         <div style="text-align:center; margin-bottom:30px;">
-            <h3 style="color:var(--primary); font-weight:800; font-size:1.5rem;">Configura SPICH.</h3>
-            <p style="font-size:0.9rem; color:#64748b; margin-top:10px;">Gestisci i tuoi referral in modo professionale.</p>
+            <h3 style="color:var(--primary); font-weight:800;">Configura SPICH.</h3>
         </div>
-        
         <div class="form-box">
-            <label>Nome della tua Attività</label>
+            <label>Nome Attività</label>
             <input type="text" id="set-nome-att" placeholder="Esempio: Studio Medico Bianchi">
-            
-            <label>WhatsApp Business (con prefisso 39)</label>
-            <input type="tel" id="set-wa-att" placeholder="Esempio: 393470000000">
-            
-            <label>Settore Professionale</label>
+            <label>WhatsApp (es: 39347...)</label>
+            <input type="tel" id="set-wa-att" placeholder="39...">
+            <label>Settore</label>
             <select id="set-settore-att">
                 <option value="Medica">Area Medica</option>
                 <option value="Commerciale">Area Commerciale</option>
                 <option value="Ristorazione">Area Ristorazione</option>
-                <option value="Altro">Altro Settore</option>
+                <option value="Altro">Altro</option>
             </select>
-            
             <button class="btn-teal" onclick="salvaConfigurazione()">ATTIVA PANNELLO</button>
         </div>
     </main>
 
     <main id="scena-dash" class="scena">
-        
         <div class="stat-card">
             <div id="badge-pro-tag" class="badge-pro">FREE VERSION</div>
             <b id="main-counter">0</b>
             <span id="label-plurale-settore">CONTATTI</span>
         </div>
-        
         <div class="form-box">
             <label id="label-singolare-settore">NOME E COGNOME</label>
             <input type="text" id="new-p-nome" placeholder="Inserisci nome...">
-            
-            <label>CELLULARE CLIENTE</label>
-            <input type="tel" id="new-p-tel" placeholder="Prefisso incluso (es: 39...)">
-            
-            <label>PREMIO DA ASSEGNARE</label>
+            <label>CELLULARE</label>
+            <input type="tel" id="new-p-tel" placeholder="39...">
+            <label>PREMIO</label>
             <select id="new-p-premio" onchange="checkCustomPremio()">
                 <option value="Sconto 20%">Sconto 20%</option>
                 <option value="Sconto 50%">Sconto 50%</option>
-                <option value="Omaggio">Trattamento Omaggio</option>
-                <option value="CUSTOM">-- Scrivi Premio (Solo PRO) --</option>
+                <option value="Omaggio">Omaggio</option>
+                <option value="CUSTOM">-- Custom (PRO) --</option>
             </select>
-            
-            <input type="text" id="new-p-custom" placeholder="Descrizione premio personalizzato..." style="display:none; margin-top:15px;">
-            
-            <button id="btn-aggiungi" class="btn-teal" onclick="aggiungiNuovoContatto()">SALVA CONTATTO</button>
-            
-            <div id="box-limite-free" class="lock-box">
-                <i class="fas fa-lock" style="color:var(--danger); font-size:1.8rem; margin-bottom:12px;"></i>
-                <p style="color:var(--danger); font-weight:800; font-size:0.95rem;">LIMITE 10 CONTATTI RAGGIUNTO</p>
-                <p style="font-size:0.8rem; color:#64748b; margin-top:8px;">Passa alla versione PRO per sbloccare database illimitato e premi personalizzati.</p>
-                <button onclick="richiestaSbloccoPro()" class="btn-pro">SBLOCCA PRO ORA</button>
+            <input type="text" id="new-p-custom" placeholder="Specifica premio..." style="display:none; margin-top:15px;">
+            <button id="btn-aggiungi" class="btn-teal" onclick="aggiungiNuovoContatto()">SALVA</button>
+            <div id="box-limite-free" style="display:none; text-align:center; margin-top:20px; color:var(--danger);">
+                <p><b>LIMITE 10 RAGGIUNTO</b></p>
+                <button onclick="richiestaSbloccoPro()" style="background:var(--danger); color:white; border:none; padding:10px; border-radius:10px; margin-top:10px; width:100%;">SBLOCCA PRO</button>
             </div>
         </div>
-        
-        <h4 style="margin: 0 0 15px 5px; color:var(--primary); font-size:0.95rem; letter-spacing:1px; font-weight:800;">DATABASE ATTIVO</h4>
         <div id="lista-container"></div>
     </main>
 
     <main id="scena-regalo" class="scena">
         <div class="gift-wrapper">
-            
             <i class="fas fa-gift gift-icon"></i>
-            
-            <h2 id="regalo-studio-nome" style="color:var(--primary); text-transform:uppercase; font-family:'Comfortaa'; letter-spacing:-1.2px;"></h2>
-            <p style="font-weight:700; font-size:1.1rem; color:#334155; margin-bottom:10px;">Ha un regalo per te!</p>
-            
+            <h2 id="regalo-studio-nome" style="color:var(--primary); text-transform:uppercase;"></h2>
             <div class="dots-row" id="punti-pallini">
-                <div class="dot"></div>
-                <div class="dot"></div>
-                <div class="dot"></div>
-                <div class="dot"></div>
-                <div class="dot"></div>
+                <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
             </div>
-
-            <div id="area-codice-qr">
-                <div id="qrcode-box"></div>
-                
-                <button class="btn-invite" onclick="condividiReferralWA()">
-                    <i class="fab fa-whatsapp"></i> INVITA UN AMICO
-                </button>
-            </div>
-
-            <div id="banner-premio-finale" class="banner-premio-gold"></div>
-            
-            <div id="box-riscatta-premio" style="display:none; margin-top:40px;">
-                <p style="font-size:0.95rem; margin-bottom:20px; font-weight:800; color:var(--success);">CONGRATULAZIONI! PREMIO SBLOCCATO.</p>
-                <button class="btn-teal" onclick="prenotaConWhatsApp()">PRENOTA IL TUO REGALO</button>
+            <div id="area-qr"><div id="qrcode-box"></div></div>
+            <div id="banner-premio-finale" style="background:var(--gold); color:white; padding:20px; border-radius:15px; margin-top:20px; font-weight:800;"></div>
+            <div id="box-riscatta-premio" style="display:none; margin-top:20px;">
+                <button class="btn-teal" onclick="prenotaConWhatsApp()">RISCATTA REGALO</button>
             </div>
         </div>
     </main>
-    
+
     <footer class="footer">
         SPICH. REFERRAL SYSTEM v3.0<br>
-        DEVICE ID: <span id="display-id-dispositivo">---</span><br>
+        DEVICE ID: <span id="display-id-dispositivo">GENERAZIONE...</span><br>
         &copy; 2026 TUTTI I DIRITTI RISERVATI
     </footer>
 </div>
 
 <script>
-    /* ==============================================
-       LOGICA APPLICATIVA ROBUSTA (580 RIGHE)
-       ============================================== */
-    
     const URL_SCRIPT_GOOGLE = "https://script.google.com/macros/s/AKfycbxN0X_dQwhqRSsAIMvNLCVDDQDUTWoZnQO85cz03f9ouZJz58gFQCqBc5rvzZBdw6y1-Q/exec";
 
-    // 1. GESTIONE STATO E PERSISTENZA
-    let idDispositivo = localStorage.getItem('spich_id');
-    if (!idDispositivo) {
-        idDispositivo = 'SP-' + Math.random().toString(36).substr(2, 6).toUpperCase();
-        localStorage.setItem('spich_id', idDispositivo);
-    }
+    // 1. INIZIALIZZAZIONE ID IMMEDIATA
+    let idDispositivo = localStorage.getItem('spich_id') || ('SP-' + Math.random().toString(36).substr(2, 6).toUpperCase());
+    localStorage.setItem('spich_id', idDispositivo);
 
-    let configLocale = null;
-    try {
-        const raw = localStorage.getItem('spich_cfg');
-        if(raw) configLocale = JSON.parse(raw);
-    } catch(e) { console.error("Errore config"); }
-    
-    let elencoContatti = [];
-    try {
-        const rawList = localStorage.getItem('spich_list');
-        if(rawList) elencoContatti = JSON.parse(rawList);
-    } catch(e) { elencoContatti = []; }
-    
-    let utentePro = false;
+    // 2. FUNZIONE DI SICUREZZA GLOBALE
+    window.onerror = function() { return true; }; // Impedisce blocchi totali
 
-    // 2. AVVIO APPLICAZIONE (WINDOW ONLOAD PER SICUREZZA)
-    window.addEventListener('load', function() {
-        document.getElementById('display-id-dispositivo').innerText = idDispositivo;
-        
-        const urlParams = new URLSearchParams(window.location.search);
-        
-        // Determina quale pannello mostrare senza errori
-        if (urlParams.get('v') === 'gift') {
-            cambiaSchermata('regalo');
-            inizializzaVistaRegalo(urlParams);
-        } else if (!configLocale || !configLocale.n) {
-            cambiaSchermata('setup');
-        } else {
-            cambiaSchermata('dash');
-            avviaDashboard();
-            sincronizzaProStatus();
+    document.addEventListener("DOMContentLoaded", function() {
+        try {
+            document.getElementById('display-id-dispositivo').innerText = idDispositivo;
+            startApp();
+        } catch (err) {
+            console.error("Errore Avvio:", err);
+            // Se tutto fallisce, mostra almeno il setup
+            document.getElementById('scena-setup').classList.add('active');
         }
     });
 
-    function cambiaSchermata(id) {
-        // Nasconde tutto prima di mostrare la scena target
-        document.querySelectorAll('.scena').forEach(s => s.classList.remove('active'));
-        const target = document.getElementById('scena-' + id);
-        if(target) {
-            target.classList.add('active');
+    function startApp() {
+        const urlParams = new URLSearchParams(window.location.search);
+        let configLocale = JSON.parse(localStorage.getItem('spich_cfg') || "null");
+
+        if (urlParams.get('v') === 'gift') {
+            switchSchermata('regalo');
+            inizializzaVistaRegalo(urlParams);
+        } else if (!configLocale) {
+            switchSchermata('setup');
         } else {
-            // Fallback se qualcosa va storto
-            document.getElementById('scena-setup').classList.add('active');
+            switchSchermata('dash');
+            avviaDashboard(configLocale);
         }
-        window.scrollTo(0,0);
     }
 
-    // 3. LOGICA PROFESSIONISTA
-    
+    function switchSchermata(id) {
+        document.querySelectorAll('.scena').forEach(s => s.classList.remove('active'));
+        document.getElementById('scena-' + id).classList.add('active');
+    }
+
     function salvaConfigurazione() {
-        const nome = document.getElementById('set-nome-att').value.trim();
-        const wa = document.getElementById('set-wa-att').value.trim();
-        const sett = document.getElementById('set-settore-att').value;
-        
-        if (!nome || !wa) return alert("Inserisci il nome attività e il numero WhatsApp.");
-        
-        configLocale = { n: nome, w: wa, s: sett };
-        localStorage.setItem('spich_cfg', JSON.stringify(configLocale));
-        
-        // Registrazione Cloud
-        fetch(URL_SCRIPT_GOOGLE, { 
-            method: "POST", 
-            mode: "no-cors", 
-            body: JSON.stringify({tipo: 'REG_ESERCENTE', deviceId: idDispositivo, nomeAtt: nome, wa: wa}) 
-        });
-        
+        const n = document.getElementById('set-nome-att').value.trim();
+        const w = document.getElementById('set-wa-att').value.trim();
+        const s = document.getElementById('set-settore-att').value;
+        if(!n || !w) return alert("Mancano dati");
+        localStorage.setItem('spich_cfg', JSON.stringify({n, w, s}));
+        fetch(URL_SCRIPT_GOOGLE, { method:"POST", mode:"no-cors", body: JSON.stringify({tipo:'REG_ESERCENTE', deviceId:idDispositivo, nomeAtt:n, wa:w}) });
         location.reload();
     }
 
-    async function sincronizzaProStatus() {
-        try {
-            const resp = await fetch(URL_SCRIPT_GOOGLE + "?checkPro=" + idDispositivo);
-            const data = await resp.json();
-            if (data.isPro === true || data.isPro === "SI") {
-                utentePro = true;
-                attivaVantaggiPro();
-            }
-        } catch(e) { console.warn("Sincronizzazione PRO posticipata."); }
-    }
-
-    function attivaVantaggiPro() {
-        const tag = document.getElementById('badge-pro-tag');
-        tag.innerText = "PRO VERSION";
-        tag.classList.add('is-pro');
-        
-        document.getElementById('box-limite-free').style.display = "none";
-        document.getElementById('btn-aggiungi').style.display = "block";
-        
-        // Sblocca cancellazione
-        document.querySelectorAll('.btn-del').forEach(b => b.style.display = "block");
-    }
-
-    function avviaDashboard() {
-        let sing = "CONTATTO";
+    function avviaDashboard(cfg) {
         let plur = "CONTATTI";
-        
-        if(configLocale.s === "Medica") { sing = "PAZIENTE"; plur = "PAZIENTI"; }
-        else if(configLocale.s === "Ristorazione") { sing = "OSPITE"; plur = "OSPITI"; }
-
+        if(cfg.s === "Medica") plur = "PAZIENTI";
+        if(cfg.s === "Ristorazione") plur = "OSPITI";
         document.getElementById('label-plurale-settore').innerText = plur;
-        document.getElementById('label-singolare-settore').innerText = "NOME " + sing;
-        
+        disegnaLista();
+        // Verifica PRO silenziosa
+        fetch(URL_SCRIPT_GOOGLE + "?checkPro=" + idDispositivo).then(r => r.json()).then(d => {
+            if(d.isPro === "SI" || d.isPro === true) {
+                document.getElementById('badge-pro-tag').innerText = "PRO VERSION";
+                document.getElementById('badge-pro-tag').classList.add('is-pro');
+            }
+        }).catch(e => {});
+    }
+
+    function aggiungiNuovoContatto() {
+        let list = JSON.parse(localStorage.getItem('spich_list') || "[]");
+        const n = document.getElementById('new-p-nome').value.trim();
+        const t = document.getElementById('new-p-tel').value.trim();
+        const p = document.getElementById('new-p-premio').value;
+        if(!n || !t) return alert("Compila i campi");
+
+        const nuovo = { id:'R'+Date.now(), nome:n, tel:t, premio:p, ref:0 };
+        list.push(nuovo);
+        localStorage.setItem('spich_list', JSON.stringify(list));
+        disegnaLista();
+        document.getElementById('new-p-nome').value = ""; document.getElementById('new-p-tel').value = "";
+    }
+
+    function disegnaLista() {
+        let list = JSON.parse(localStorage.getItem('spich_list') || "[]");
+        const cont = document.getElementById('lista-container');
+        cont.innerHTML = "";
+        list.forEach((item, i) => {
+            cont.innerHTML += `
+            <div class="p-item">
+                <div style="flex:1"><b>${item.nome}</b><br><small>${item.ref}/5 Punti</small></div>
+                <div style="display:flex">
+                    <a class="btn-wa" href="${generaLinkWA(item)}" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                    <button class="btn-ref" onclick="aggiungiPunto(${i})">+1</button>
+                </div>
+            </div>`;
+        });
+        document.getElementById('main-counter').innerText = list.length;
+    }
+
+    function generaLinkWA(item) {
+        const cfg = JSON.parse(localStorage.getItem('spich_cfg'));
+        const base = window.location.href.split('?')[0];
+        const link = `${base}?v=gift&st=${encodeURIComponent(cfg.n)}&wa=${cfg.w}&n=${encodeURIComponent(item.nome)}&ref=${item.ref}&pr=${encodeURIComponent(item.premio)}`;
+        return `https://wa.me/${item.tel}?text=${encodeURIComponent("Ciao " + item.nome + ", ecco il tuo pass: " + link)}`;
+    }
+
+    function aggiungiPunto(i) {
+        let list = JSON.parse(localStorage.getItem('spich_list'));
+        list[i].ref++;
+        localStorage.setItem('spich_list', JSON.stringify(list));
         disegnaLista();
     }
 
-    function checkCustomPremio() {
-        const v = document.getElementById('new-p-premio').value;
-        co
+    function inizializzaVistaRegalo(p) {
+        document.getElementById('regalo-studio-nome').innerText = p.get('st');
+        const ref = parseInt(p.get('ref') || 0);
+        const dots = document.querySelectorAll('.dot');
+        for(let i=0; i<ref && i<5; i++) dots[i].classList.add('fill');
+        
+        if(ref >= 5) {
+            document.getElementById('area-qr').style.display = "none";
+            document.getElementById('banner-premio-finale').innerText = "REGALO SBLOCCATO: " + p.get('pr');
+            document.getElementById('box-riscatta-premio').style.display = "block";
+        } else {
+            document.getElementById('banner-premio-finale').innerText = "OBIETTIVO: " + p.get('pr');
+            try {
+                setTimeout(() => { new QRCode(document.getElementById("qrcode-box"), { text: window.location.href, width: 180, height: 180 }); }, 500);
+            } catch(e) {}
+        }
+    }
+
+    function confermaResetApp() {
+        if(confirm("Disconnettere profilo?")) { localStorage.removeItem('spich_cfg'); location.reload(); }
+    }
+</script>
+</body>
+    </html>
+    
