@@ -7,14 +7,16 @@
     
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     
     <style>
-        /* ---------------------------------------------------------------------
-           [SECTION 1] - DESIGN SYSTEM (VARIABILI)
-           ---------------------------------------------------------------------
+        /* =====================================================================
+           [CSS SECTION 1] - DESIGN SYSTEM & COLOR PALETTE
+           =====================================================================
         */
         :root { 
+            /* Colori Identitari */
             --primary-teal: #008080; 
             --dark-teal: #006666;
             --premium-gold: #d4af37;
@@ -28,27 +30,31 @@
             --danger-red: #ef4444;
             --success-green: #10b981;
             
-            /* Elevation & Shadows */
+            /* Ombre e Profondità Premium */
             --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
             --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
             --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
             --card-shadow: 0 10px 40px rgba(0,0,0,0.06);
             
-            /* Border Radius */
+            /* Bordi Arrotondati */
             --radius-lg: 24px;
             --radius-md: 16px;
             --radius-sm: 12px;
         }
 
-        /* ---------------------------------------------------------------------
-           [SECTION 2] - RESET E SETUP BASE
-           ---------------------------------------------------------------------
+        /* =====================================================================
+           [CSS SECTION 2] - RESET E BOILERPLATE
+           =====================================================================
         */
         * { 
             box-sizing: border-box; 
             margin: 0; 
             padding: 0; 
             -webkit-tap-highlight-color: transparent; 
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
@@ -62,7 +68,7 @@
             justify-content: center;
         }
 
-        /* Container principale con cornicette premium */
+        /* Container dell'app con bordi laterali dorati */
         .app-container {
             width: 100%;
             max-width: 500px;
@@ -76,9 +82,9 @@
             border-right: 6px solid var(--premium-gold);
         }
 
-        /* ---------------------------------------------------------------------
-           [SECTION 3] - HEADER E BRANDING
-           ---------------------------------------------------------------------
+        /* =====================================================================
+           [CSS SECTION 3] - HEADER E BRANDING
+           =====================================================================
         */
         .header-main {
             padding: 60px 20px 20px;
@@ -105,21 +111,23 @@
             letter-spacing: 5px;
             text-transform: uppercase;
             margin-top: -5px;
-            margin-bottom: 10px;
+            margin-bottom: 20px;
         }
 
+        /* Nome Attività visualizzato in dashboard */
         .biz-display-header {
             font-weight: 800;
             color: var(--premium-gold);
             text-transform: uppercase;
             font-size: 0.9rem;
             letter-spacing: 2px;
-            margin-top: 10px;
+            margin-top: -10px;
+            margin-bottom: 20px;
         }
 
-        /* ---------------------------------------------------------------------
-           [SECTION 4] - SCENES & ANIMATIONS
-           ---------------------------------------------------------------------
+        /* =====================================================================
+           [CSS SECTION 4] - LOGICA DELLE VISTE (SCENES)
+           =====================================================================
         */
         .view-scene {
             display: none;
@@ -137,9 +145,9 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* ---------------------------------------------------------------------
-           [SECTION 5] - UI COMPONENTS (CARDS, INPUTS, BUTTONS)
-           ---------------------------------------------------------------------
+        /* =====================================================================
+           [CSS SECTION 5] - COMPONENTI UI (CARDS, INPUTS, BUTTONS)
+           =====================================================================
         */
         .card-ui {
             background: var(--pure-white);
@@ -148,6 +156,7 @@
             border: 2px solid var(--soft-gold);
             margin-bottom: 25px;
             box-shadow: var(--card-shadow);
+            position: relative;
         }
 
         .field-group {
@@ -161,6 +170,7 @@
             text-transform: uppercase;
             color: var(--primary-teal);
             margin-bottom: 10px;
+            margin-left: 4px;
             letter-spacing: 1px;
         }
 
@@ -200,19 +210,31 @@
             align-items: center;
             justify-content: center;
             gap: 12px;
+            box-shadow: var(--shadow-md);
         }
 
-        .btn-primary { background: var(--primary-teal); color: var(--pure-white); }
-        .btn-gold { background: var(--premium-gold); color: var(--pure-white); }
-        .btn-action:active { transform: scale(0.96); }
+        .btn-primary {
+            background: var(--primary-teal);
+            color: var(--pure-white);
+        }
 
-        /* ---------------------------------------------------------------------
-           [SECTION 6] - DASHBOARD SPECIFIC UI
-           ---------------------------------------------------------------------
+        .btn-gold {
+            background: var(--premium-gold);
+            color: var(--pure-white);
+        }
+
+        .btn-action:active {
+            transform: scale(0.96);
+        }
+
+        /* =====================================================================
+           [CSS SECTION 6] - DASHBOARD & LISTE
+           =====================================================================
         */
         .counter-display {
             text-align: center;
-            padding: 30px 0;
+            padding: 40px 0;
+            margin-bottom: 20px;
         }
 
         .counter-number {
@@ -230,20 +252,33 @@
             font-size: 0.85rem;
         }
 
+        .list-container {
+            margin-top: 10px;
+        }
+
         .row-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px;
+            padding: 18px 22px;
             background: var(--pure-white);
             border: 1px solid #f1f5f9;
             border-radius: var(--radius-md);
             margin-bottom: 15px;
-            box-shadow: var(--shadow-sm);
+            transition: 0.3s ease;
         }
 
-        .row-info b { color: var(--primary-teal); font-size: 1.1rem; display: block; }
-        .row-info span { color: var(--slate-gray); font-size: 0.85rem; font-weight: 600; }
+        .row-info b {
+            color: var(--primary-teal);
+            font-size: 1.1rem;
+            display: block;
+        }
+
+        .row-info span {
+            color: var(--slate-gray);
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
 
         .tool-btn {
             width: 45px;
@@ -262,15 +297,15 @@
         .btn-wa-action { background: #25D366; }
         .btn-pts-action { background: var(--premium-gold); font-weight: 900; }
 
-        /* ---------------------------------------------------------------------
-           [SECTION 7] - IL PACCO REGALO PREMIUM (STILIZZATO & ANIMATO)
-           ---------------------------------------------------------------------
+        /* =====================================================================
+           [CSS SECTION 7] - PACCO REGALO PREMIUM (STILIZZATO & ANIMATO)
+           =====================================================================
         */
-        .gift-wrapper {
+        .gift-container {
             position: relative;
             width: 140px;
             height: 140px;
-            margin: 0 auto 40px;
+            margin: 0 auto 30px;
             animation: floatingGift 3.5s ease-in-out infinite;
         }
 
@@ -279,8 +314,8 @@
             50% { transform: translateY(-12px) rotate(2deg); }
         }
 
-        /* Scatola Blu Notte */
-        .box-body {
+        /* Scatola Stilizzata Blu */
+        .gift-box-premium {
             position: absolute;
             bottom: 10px;
             left: 20px;
@@ -288,13 +323,14 @@
             height: 85px;
             background: var(--deep-blue);
             border-radius: 12px;
-            border: 2.5px solid var(--premium-gold);
+            border: 3px solid var(--premium-gold);
             box-shadow: 0 15px 35px rgba(0, 51, 102, 0.4);
+            overflow: hidden;
             z-index: 2;
         }
 
-        /* Nastro Verticale Oro */
-        .box-body::before {
+        /* Nastro Dorato Verticale */
+        .gift-box-premium::before {
             content: '';
             position: absolute;
             left: 50%;
@@ -304,68 +340,153 @@
             background: var(--gold-gradient);
         }
 
-        /* Nastro Orizzontale Oro */
-        .box-body::after {
+        /* Nastro Dorato Orizzontale */
+        .gift-box-premium::after {
             content: '';
             position: absolute;
-            top: 30%;
+            top: 32%;
             width: 100%;
             height: 14px;
             background: var(--gold-gradient);
         }
 
-        /* Fiocco Oro Premium */
-        .box-ribbon {
+        /* Fiocco Superiore Stilizzato Oro */
+        .gift-bow-premium {
             position: absolute;
-            top: 12px;
+            top: 15px;
             left: 50%;
             transform: translateX(-50%);
             width: 70px;
-            height: 35px;
-            z-index: 10;
+            height: 40px;
+            z-index: 5;
         }
 
-        .box-ribbon::before, .box-ribbon::after {
+        .gift-bow-premium::before, .gift-bow-premium::after {
             content: '';
             position: absolute;
             width: 38px;
-            height: 28px;
+            height: 30px;
             background: var(--gold-gradient);
             border-radius: 50% 50% 10% 50%;
             border: 1.5px solid rgba(0,0,0,0.1);
         }
 
-        .box-ribbon::before {
+        .gift-bow-premium::before {
             left: -8px;
             transform: rotate(-15deg);
         }
 
-        .box-ribbon::after {
+        .gift-bow-premium::after {
             right: -8px;
             transform: rotate(105deg);
             border-radius: 50% 50% 50% 10%;
         }
 
-        /* ---------------------------------------------------------------------
-           [SECTION 8] - VOUCHER E QR CODE
-           ---------------------------------------------------------------------
+        /* =====================================================================
+           [CSS SECTION 8] - VOUCHER E QR CODE
+           =====================================================================
         */
-        .voucher-wrap { text-align: center; }
-        .v-biz-name { font-family: 'Comfortaa', cursive; font-size: 2.6rem; color: var(--primary-teal); font-weight: 700; margin-bottom: 5px; }
-        .v-user-welcome { font-weight: 700; color: var(--slate-gray); font-size: 1.2rem; margin-bottom: 30px; }
+        .voucher-wrap {
+            text-align: center;
+        }
 
-        .dots-grid { display: flex; justify-content: center; gap: 15px; margin: 25px 0; }
-        .fidelity-point { width: 30px; height: 30px; border-radius: 50%; border: 2.5px solid var(--premium-gold); position: relative; }
-        .fidelity-point.filled { background: var(--premium-gold); transform: scale(1.2); box-shadow: 0 0 15px rgba(212, 175, 55, 0.3); }
-        .fidelity-point.filled::after { content: '✓'; color: white; font-size: 14px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-weight: 900; }
+        .v-biz-name {
+            font-family: 'Comfortaa', cursive;
+            font-size: 2.6rem;
+            color: var(--primary-teal);
+            margin-bottom: 5px;
+            font-weight: 700;
+        }
 
-        .qr-output-box { margin: 35px auto; padding: 20px; background: white; display: inline-block; border-radius: var(--radius-md); border: 1px solid #f1f5f9; box-shadow: var(--shadow-md); }
+        .v-user-welcome {
+            font-weight: 700;
+            color: var(--slate-gray);
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
 
-        /* Toast e Notifiche */
-        .toast-system { position: fixed; bottom: 40px; left: 50%; transform: translateX(-50%); background: var(--dark-text); color: white; padding: 15px 30px; border-radius: 50px; font-weight: 700; display: none; z-index: 9999; }
+        .dots-grid {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 25px 0;
+        }
 
-        .footer-branding { padding: 50px 20px; text-align: center; margin-top: auto; }
-        .footer-branding p { font-size: 0.7rem; color: var(--slate-gray); font-weight: 800; text-transform: uppercase; letter-spacing: 3px; }
+        .fidelity-point {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            border: 2.5px solid var(--premium-gold);
+            position: relative;
+        }
+
+        .fidelity-point.filled {
+            background: var(--premium-gold);
+            transform: scale(1.2);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+        }
+
+        .fidelity-point.filled::after {
+            content: '✓';
+            color: white;
+            font-size: 14px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-weight: 900;
+        }
+
+        .qr-output-box {
+            margin: 35px auto;
+            padding: 20px;
+            background: white;
+            display: inline-block;
+            border-radius: var(--radius-md);
+            border: 1px solid #f1f5f9;
+            box-shadow: var(--shadow-md);
+        }
+
+        /* =====================================================================
+           [CSS SECTION 9] - SISTEMA DI NOTIFICHE E FEEDBACK
+           =====================================================================
+        */
+        .toast-system {
+            position: fixed;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--dark-text);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            display: none;
+            z-index: 9999;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .footer-branding {
+            padding: 50px 20px;
+            text-align: center;
+            margin-top: auto;
+        }
+
+        .footer-branding p {
+            font-size: 0.7rem;
+            color: var(--slate-gray);
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        #debug-info {
+            font-size: 0.5rem;
+            color: #cbd5e1;
+            margin-top: 10px;
+            letter-spacing: 1px;
+        }
 
     </style>
 </head>
@@ -383,31 +504,37 @@
 
         <main id="view-setup" class="view-scene">
             <div class="card-ui">
-                <h3 style="margin-bottom:25px; color:var(--primary-teal); font-weight:800;">Attivazione Account</h3>
+                <h3 style="margin-bottom:25px; color:var(--primary-teal); font-weight:800;">Benvenuto nel Network</h3>
+                
                 <div class="field-group">
-                    <label class="field-label">Nome Attività</label>
+                    <label class="field-label">Nome della tua Attività</label>
                     <input type="text" id="setup-name" placeholder="Esempio: Studio Spich">
                 </div>
+
                 <div class="field-group">
                     <label class="field-label">WhatsApp Business</label>
                     <input type="tel" id="setup-phone" placeholder="3331234567">
                 </div>
+
                 <div class="field-group">
-                    <label class="field-label">Settore</label>
+                    <label class="field-label">Settore Operativo</label>
                     <select id="setup-type">
                         <option value="Salute">Settore Sanitario</option>
                         <option value="Ristorazione">Food & Beverage</option>
                         <option value="Wellness">Benessere & Estetica</option>
                     </select>
                 </div>
-                <button class="btn-action btn-primary" onclick="initBusinessProfile()">ATTIVA ORA <i class="fas fa-check-circle"></i></button>
+
+                <button class="btn-action btn-primary" onclick="initBusinessProfile()">
+                    ATTIVA NETWORK <i class="fas fa-check-circle"></i>
+                </button>
             </div>
         </main>
 
         <main id="view-dash" class="view-scene">
             <div class="counter-display">
                 <div class="counter-number" id="stats-total">0</div>
-                <div class="counter-label" id="stats-label">Database Cloud</div>
+                <div class="counter-label" id="stats-label">Pazienti nel Cloud</div>
             </div>
 
             <div class="card-ui">
@@ -415,11 +542,15 @@
                     <label class="field-label" id="label-client-name">Nome Completo</label>
                     <input type="text" id="new-client-name" placeholder="Cognome e Nome">
                 </div>
+                
                 <div class="field-group">
-                    <label class="field-label">WhatsApp Cliente</label>
+                    <label class="field-label">Cellulare WhatsApp</label>
                     <input type="tel" id="new-client-tel" placeholder="3XXXXXXXXX">
                 </div>
-                <button id="btn-submit-main" class="btn-action btn-primary" onclick="registerNewPatient()">CREA PASS REGALO <i class="fas fa-plus-circle"></i></button>
+
+                <button id="btn-submit-main" class="btn-action btn-primary" onclick="registerNewPatient()">
+                    CREA PASS REGALO <i class="fas fa-plus-circle"></i>
+                </button>
             </div>
 
             <div id="main-list-render" class="list-container"></div>
@@ -428,9 +559,9 @@
         <main id="view-voucher" class="view-scene">
             <div class="voucher-wrap">
                 
-                <div class="gift-wrapper">
-                    <div class="box-ribbon"></div>
-                    <div class="box-body"></div>
+                <div class="gift-container">
+                    <div class="gift-bow-premium"></div>
+                    <div class="gift-box-premium"></div>
                 </div>
 
                 <h2 id="display-biz-name" class="v-biz-name">STUDIO</h2>
@@ -448,22 +579,22 @@
                     <div id="qrcode-canvas"></div>
                 </div>
 
-                <button class="btn-action btn-gold" onclick="shareVoucherLink()">REGALA SCONTO A UN AMICO <i class="fab fa-whatsapp"></i></button>
+                <button class="btn-action btn-gold" onclick="shareVoucherLink()">
+                    REGALA SCONTO A UN AMICO <i class="fab fa-whatsapp"></i>
+                </button>
             </div>
         </main>
 
         <footer class="footer-branding">
             <p>&copy; 2026 SPICH. DIGITAL NETWORK</p>
-            <div id="debug-info" style="font-size:0.5rem; color:#cbd5e1; margin-top:10px;"></div>
+            <div id="debug-info">SESSION ID: --</div>
         </footer>
 
     </div>
 
     <script>
         /**
-         * =====================================================================
-         * CONFIGURAZIONE SISTEMA E LOGICA CLOUD
-         * =====================================================================
+         * CONFIGURAZIONE ENDPOINT GOOGLE APPS SCRIPT
          */
         const GOOGLE_ENDPOINT = "https://script.google.com/macros/s/AKfycbyh4CGnWQWyvztKvTkbQ9_TOUMb3EQaB6bZySuamZeRkYSe_1VBvWJYXc2LcESKWS1sdg/exec";
         
@@ -473,61 +604,81 @@
             patientDb: JSON.parse(localStorage.getItem('spich_v18_db') || '[]')
         };
 
+        /**
+         * INIZIALIZZAZIONE APP AL CARICAMENTO
+         */
         window.addEventListener('DOMContentLoaded', async () => {
-            localStorage.setItem('spich_v18_device_id', state.deviceID);
+            if(!localStorage.getItem('spich_v18_device_id')) {
+                localStorage.setItem('spich_v18_device_id', state.deviceID);
+            }
             document.getElementById('debug-info').innerText = "SESSION ID: " + state.deviceID;
             
             const urlParams = new URLSearchParams(window.location.search);
             
+            // Caso 1: L'utente sta visualizzando un voucher regalo
             if (urlParams.get('v') === 'gift') {
                 initVoucherMode(urlParams);
-            } else if (!state.bizProfile) {
+            } 
+            // Caso 2: Primo accesso esercente (Setup)
+            else if (!state.bizProfile) {
                 navigateTo('setup');
-            } else {
+            } 
+            // Caso 3: Dashboard Esercente
+            else {
                 navigateTo('dash');
                 const bizTitle = document.getElementById('display-dash-biz-name');
                 bizTitle.innerText = state.bizProfile.name;
                 bizTitle.style.display = 'block';
                 
                 applyTerminology();
-                await checkCloudStatus(); // <--- LOGICA DI CONTROLLO REMOTO
+                await checkCloudStatus(); // Verifica se l'account è ancora attivo sul cloud
                 refreshPatientUI();
             }
         });
 
         /**
          * LOGICA DI CONTROLLO REMOTO (KILL-SWITCH)
-         * Se cancelli l'esercente dallo script, l'app si resetta.
+         * Se il nome o l'ID vengono rimossi dallo Script, l'app si resetta.
          */
         async function checkCloudStatus() {
             try {
                 const response = await fetch(`${GOOGLE_ENDPOINT}?checkPro=${state.deviceID}`);
                 const cloudData = await response.json();
 
-                // Se lo script ritorna che l'ID non esiste più o è rimosso
+                // Logica di autorizzazione remota
                 if (cloudData.status === "UNAUTHORIZED" || cloudData.status === "DELETED" || !cloudData.exists) {
-                    console.log("Account rimosso remotamente.");
-                    triggerToast("Account disattivato.");
+                    console.log("Account disattivato dal pannello centrale.");
+                    triggerToast("Account non autorizzato.");
                     setTimeout(() => {
                         localStorage.clear();
                         location.reload();
-                    }, 2000);
+                    }, 2500);
                 }
             } catch (err) {
-                console.warn("Cloud connection error, procedo offline.");
+                console.warn("Lavorando in modalità offline.");
             }
         }
 
+        /**
+         * GENERATORE ID UNIVOCO DISPOSITIVO
+         */
         function generateUID() {
             return 'SP-' + Math.random().toString(36).substr(2, 9).toUpperCase();
         }
 
+        /**
+         * CONTROLLER DELLE VISTE
+         */
         function navigateTo(sceneId) {
             document.querySelectorAll('.view-scene').forEach(s => s.classList.remove('active'));
-            document.getElementById('view-' + sceneId).classList.add('active');
+            const target = document.getElementById('view-' + sceneId);
+            if(target) target.classList.add('active');
             window.scrollTo(0, 0);
         }
 
+        /**
+         * SISTEMA DI NOTIFICA TOAST
+         */
         function triggerToast(message) {
             const toast = document.getElementById('sys-toast');
             toast.innerText = message;
@@ -536,7 +687,7 @@
         }
 
         /**
-         * LOGICA DI SETUP INIZIALE
+         * CREAZIONE PROFILO ESERCENTE
          */
         function initBusinessProfile() {
             const nameValue = document.getElementById('setup-name').value.trim();
@@ -556,6 +707,7 @@
 
             localStorage.setItem('spich_v18_biz_data', JSON.stringify(state.bizProfile));
 
+            // Sincronizzazione Cloud Profilo
             fetch(GOOGLE_ENDPOINT, {
                 method: "POST",
                 mode: "no-cors",
@@ -568,12 +720,15 @@
             setTimeout(() => { location.reload(); }, 1200);
         }
 
+        /**
+         * PERSONALIZZAZIONE TERMINOLOGIA IN BASE AL SETTORE
+         */
         function applyTerminology() {
             if (!state.bizProfile) return;
             const maps = {
-                "Ristorazione": { plural: "Ospiti nel Cloud", singular: "Nome Ospite" },
-                "Wellness": { plural: "Clienti nel Cloud", singular: "Nome Cliente" },
-                "Salute": { plural: "Pazienti nel Cloud", singular: "Nome Paziente" }
+                "Ristorazione": { plural: "Ospiti nel Database", singular: "Nome Ospite" },
+                "Wellness": { plural: "Clienti nel Database", singular: "Nome Cliente" },
+                "Salute": { plural: "Pazienti nel Database", singular: "Nome Paziente" }
             };
             const selected = maps[state.bizProfile.sector] || maps["Salute"];
             document.getElementById('stats-label').innerText = selected.plural;
@@ -581,7 +736,7 @@
         }
 
         /**
-         * REGISTRAZIONE E GESTIONE PAZIENTI
+         * REGISTRAZIONE NUOVO CLIENTE E GENERAZIONE PASS
          */
         function registerNewPatient() {
             const cName = document.getElementById('new-client-name').value.trim();
@@ -600,9 +755,11 @@
                 pts: 0
             };
 
+            // Salvataggio Locale
             state.patientDb.unshift(patientRecord);
             localStorage.setItem('spich_v18_db', JSON.stringify(state.patientDb));
 
+            // Sincronizzazione Cloud Cliente
             fetch(GOOGLE_ENDPOINT, {
                 method: "POST",
                 mode: "no-cors",
@@ -619,12 +776,19 @@
 
             triggerToast("Pass Creato!");
             refreshPatientUI();
+            
+            // Pulizia Form
             document.getElementById('new-client-name').value = "";
             document.getElementById('new-client-tel').value = "";
         }
 
+        /**
+         * RENDERING LISTA UTENTI IN DASHBOARD
+         */
         function refreshPatientUI() {
             const listArea = document.getElementById('main-list-render');
+            if(!listArea) return;
+            
             listArea.innerHTML = "";
             document.getElementById('stats-total').innerText = state.patientDb.length;
 
@@ -648,9 +812,14 @@
             });
         }
 
+        /**
+         * INCREMENTO PUNTI FIDELITY
+         */
         function updatePoints(index) {
             state.patientDb[index].pts++;
             localStorage.setItem('spich_v18_db', JSON.stringify(state.patientDb));
+            
+            // Sincronizzazione Punti nel Cloud
             fetch(GOOGLE_ENDPOINT, {
                 method: "POST",
                 mode: "no-cors",
@@ -661,10 +830,14 @@
                     pts: state.patientDb[index].pts
                 })
             });
+            
             triggerToast("Punto Registrato!");
             refreshPatientUI();
         }
 
+        /**
+         * COSTRUZIONE MESSAGGIO WHATSAPP CON LINK VOUCHER
+         */
         function buildWhatsAppMessage(patient) {
             const root = window.location.href.split('?')[0];
             const voucherParams = `?v=gift&st=${encodeURIComponent(state.bizProfile.name)}&n=${encodeURIComponent(patient.nome)}&cid=${patient.cid}`;
@@ -673,13 +846,17 @@
         }
 
         /**
-         * VISTA VOUCHER (LATO CLIENTE)
+         * INIZIALIZZAZIONE VISTA VOUCHER (LATO CLIENTE)
          */
         async function initVoucherMode(params) {
             navigateTo('voucher');
-            document.getElementById('display-biz-name').innerText = params.get('st');
-            document.getElementById('display-user-name').innerText = "Ciao, " + params.get('n');
+            const bizName = params.get('st') || "SPICH.";
+            const userName = params.get('n') || "Cliente";
+            
+            document.getElementById('display-biz-name').innerText = bizName;
+            document.getElementById('display-user-name').innerText = "Ciao, " + userName;
 
+            // Generazione QR Code
             new QRCode(document.getElementById("qrcode-canvas"), {
                 text: window.location.href,
                 width: 170, height: 170,
@@ -687,6 +864,7 @@
                 correctLevel: QRCode.CorrectLevel.H
             });
 
+            // Recupero Punti dal Cloud per il voucher
             try {
                 const cloudRes = await fetch(`${GOOGLE_ENDPOINT}?getCid=${params.get('cid')}`);
                 const data = await cloudRes.json();
@@ -695,12 +873,18 @@
                 for (let j = 0; j < currentPoints && j < 5; j++) {
                     dotElements[j].classList.add('filled');
                 }
-            } catch (error) {}
+            } catch (error) {
+                console.error("Errore recupero punti cloud.");
+            }
         }
 
+        /**
+         * CONDIVISIONE VOUCHER AD AMICI (REFERRAL)
+         */
         function shareVoucherLink() {
             const currentParams = new URLSearchParams(window.location.search);
-            const msgToShare = `Ehi! Guarda questo regalo che ho ricevuto da ${currentParams.get('st')}! Pass: ${window.location.href}`;
+            const biz = currentParams.get('st');
+            const msgToShare = `Ehi! Guarda questo regalo che ho ricevuto da ${biz}! Puoi riceverlo anche tu qui: ${window.location.href}`;
             window.open(`https://wa.me/?text=${encodeURIComponent(msgToShare)}`);
         }
 
