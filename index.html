@@ -3,127 +3,117 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>SPICH. - Professional Gateway V.8</title>
+    <title>SPICH. - Business Growth Hub V.9</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     
     <style>
         /* =========================================================
-           SISTEMA DI STILE - SPICH. PREMIUM DESIGN
-           =========================================================
-        */
+           DESIGN SYSTEM SPICH. - PREMIUM PETROL & GOLD
+           ========================================================= */
         :root { 
             --teal-primary: #008080; 
             --gold-premium: #d4af37;
-            --gold-soft: #f4e3b1;
+            --gold-light: #f4e3b1;
             --white: #ffffff;
-            --bg-light: #f8fafc;
-            --slate-800: #1e293b;
-            --slate-500: #64748b;
-            --danger: #ef4444;
-            --success: #10b981;
-            --shadow-soft: 0 10px 30px rgba(0,0,0,0.05);
-            --radius-main: 30px;
+            --bg-canvas: #f8fafc;
+            --text-dark: #1e293b;
+            --text-gray: #64748b;
+            --danger-red: #ef4444;
+            --success-green: #10b981;
+            --shadow-lux: 0 20px 40px rgba(0,0,0,0.06);
+            --radius-lg: 30px;
         }
 
-        /* Reset Universale */
-        * { 
-            box-sizing: border-box; 
-            -webkit-tap-highlight-color: transparent; 
-            margin: 0; 
-            padding: 0; 
-        }
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; margin: 0; padding: 0; }
 
         body { 
-            background: var(--bg-light); 
+            background: var(--bg-canvas); 
             font-family: 'Montserrat', sans-serif; 
-            color: var(--slate-800); 
+            color: var(--text-dark); 
             min-height: 100vh; 
             display: flex; 
             justify-content: center; 
         }
 
-        /* Contenitore Principale */
-        .app-container { 
+        /* Container Principale */
+        .main-wrapper { 
             width: 100%; 
-            max-width: 480px; 
+            max-width: 500px; 
             background: var(--white); 
             min-height: 100vh; 
             display: flex; 
             flex-direction: column; 
-            box-shadow: 0 0 60px rgba(0,0,0,0.03); 
+            box-shadow: 0 0 100px rgba(0,0,0,0.03);
             position: relative;
         }
 
-        /* Header Branding */
+        /* Header e Navigazione */
         .app-header { 
             padding: 40px 20px; 
             text-align: center; 
             background: var(--white); 
             border-bottom: 1px solid #f1f5f9; 
             cursor: pointer;
-            transition: transform 0.2s ease;
+            position: relative;
         }
-        .app-header:active { transform: scale(0.97); }
         
-        .logo-text { 
+        .logo-main { 
             font-family: 'Comfortaa', cursive; 
             font-size: 3.5rem; 
             color: var(--teal-primary); 
             letter-spacing: -3px;
             font-weight: 700;
         }
-        .logo-text span { color: var(--gold-premium); }
-        .logo-sub { 
-            font-size: 0.7rem; 
-            font-weight: 800; 
-            color: var(--slate-500); 
-            letter-spacing: 5px; 
-            text-transform: uppercase; 
-            margin-top: -10px; 
+        .logo-main span { color: var(--gold-premium); }
+        
+        /* Icona Info Mail */
+        .info-trigger {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: var(--text-gray);
+            font-size: 1.2rem;
+            cursor: pointer;
         }
 
-        /* Gestione Scene / Viste */
-        .view-scene { 
+        /* Layout Scene */
+        .scene-view { 
             display: none; 
             padding: 25px; 
-            animation: viewFadeIn 0.5s ease forwards; 
+            animation: fadeIn 0.4s ease-out forwards; 
             flex: 1; 
         }
-        .view-scene.active { display: flex; flex-direction: column; }
-        @keyframes viewFadeIn { 
-            from { opacity: 0; transform: translateY(15px); } 
-            to { opacity: 1; transform: translateY(0); } 
-        }
+        .scene-view.active { display: flex; flex-direction: column; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Card Statistiche */
-        .hero-stats { 
+        /* Dashboard Stats */
+        .stats-hero { 
             background: var(--white); 
-            padding: 45px 20px; 
-            border-radius: var(--radius-main); 
+            padding: 40px 20px; 
+            border-radius: var(--radius-lg); 
             text-align: center; 
             border-bottom: 8px solid var(--gold-premium); 
             margin-bottom: 30px; 
-            box-shadow: var(--shadow-soft); 
+            box-shadow: var(--shadow-lux); 
             position: relative;
         }
-        .hero-stats b { font-size: 5.5rem; color: var(--teal-primary); display: block; line-height: 1; font-weight: 800; }
-        .hero-stats span { font-weight: 700; color: var(--slate-500); text-transform: uppercase; font-size: 0.8rem; letter-spacing: 2px; }
+        .stats-hero b { font-size: 5rem; color: var(--teal-primary); display: block; line-height: 1; font-weight: 800; }
+        .stats-hero span { font-weight: 700; color: var(--text-gray); text-transform: uppercase; font-size: 0.8rem; letter-spacing: 2px; }
 
-        .badge-status { 
+        .status-pill { 
             position: absolute; top: 15px; right: 20px; font-size: 0.6rem; 
             font-weight: 900; padding: 8px 15px; border-radius: 12px; 
-            background: #f1f5f9; color: var(--slate-500);
+            background: #f1f5f9; color: var(--text-gray);
         }
-        .badge-status.pro-mode { 
-            background: var(--gold-premium); color: white; box-shadow: 0 4px 10px rgba(212,175,55,0.3); 
+        .status-pill.is-pro { 
+            background: var(--gold-premium); color: white; box-shadow: 0 4px 12px rgba(212,175,55,0.3); 
         }
 
-        /* Componenti Form */
-        .card-ui { 
+        /* Form e Input */
+        .ui-card { 
             background: var(--white); 
             padding: 25px; 
             border-radius: 25px; 
@@ -131,14 +121,18 @@
             margin-bottom: 25px; 
         }
         
-        .label-ui { 
+        .ui-label { 
             font-size: 0.7rem; 
             font-weight: 800; 
             color: var(--teal-primary); 
             text-transform: uppercase; 
             margin: 15px 0 5px 5px; 
             display: block; 
-            letter-spacing: 1px;
+        }
+
+        .input-group { position: relative; display: flex; align-items: center; }
+        .prefix-addon {
+            position: absolute; left: 20px; font-weight: 700; color: var(--teal-primary);
         }
 
         input, select { 
@@ -148,14 +142,14 @@
             border: 2px solid #f1f5f9; 
             font-family: inherit; 
             font-size: 1rem; 
-            margin-bottom: 5px; 
             outline: none; 
             transition: 0.3s;
             background: #fafafa;
         }
+        .tel-input { padding-left: 55px; }
         input:focus { border-color: var(--gold-premium); background: white; }
 
-        .btn-premium { 
+        .btn-main { 
             background: var(--teal-primary); 
             color: white; 
             border: none; 
@@ -164,19 +158,15 @@
             font-weight: 800; 
             width: 100%; 
             cursor: pointer; 
-            font-size: 1.2rem;
-            box-shadow: 0 10px 20px rgba(0,128,128,0.1); 
-            margin-top: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
+            font-size: 1.1rem;
+            margin-top: 15px;
+            display: flex; align-items: center; justify-content: center; gap: 10px;
+            box-shadow: 0 10px 20px rgba(0,128,128,0.1);
         }
-        .btn-premium:active { transform: scale(0.98); }
-        .btn-premium:disabled { background: #e2e8f0; cursor: not-allowed; }
+        .btn-main:active { transform: scale(0.98); }
 
-        /* Lista Pazienti */
-        .patient-row { 
+        /* Lista Clienti */
+        .client-item { 
             background: white; 
             padding: 20px; 
             border-radius: 25px; 
@@ -187,469 +177,415 @@
             border: 1px solid #f1f5f9; 
             box-shadow: 0 5px 15px rgba(0,0,0,0.02);
         }
-        .p-info b { font-size: 1.1rem; color: var(--teal-primary); display: block; }
-        .p-info small { font-weight: 700; color: var(--slate-500); text-transform: uppercase; font-size: 0.65rem; }
+        .c-info b { font-size: 1.1rem; color: var(--teal-primary); display: block; }
+        .c-info small { font-weight: 700; color: var(--text-gray); text-transform: uppercase; font-size: 0.65rem; }
         
-        .action-wa { 
-            background: #25D366; color: white; width: 50px; height: 50px; 
-            border-radius: 50%; display: flex; align-items: center; 
-            justify-content: center; text-decoration: none; font-size: 1.5rem; 
+        .btn-circle { 
+            width: 45px; height: 45px; border-radius: 50%; display: flex; 
+            align-items: center; justify-content: center; text-decoration: none; font-size: 1.2rem; border: none; cursor: pointer;
         }
-        .action-point { 
-            background: var(--gold-premium); border: none; padding: 10px 15px; 
-            border-radius: 12px; color: white; font-weight: 900; cursor: pointer; 
-        }
+        .btn-wa { background: #25D366; color: white; }
+        .btn-add-pt { background: var(--gold-premium); color: white; font-weight: 900; }
+        .btn-del { background: #fee2e2; color: var(--danger-red); font-size: 1rem; margin-left: 5px; }
 
-        /* Sistema 5 Pallini (Paziente) */
-        .pallini-wrap { 
-            display: flex; 
-            justify-content: center; 
-            gap: 12px; 
-            margin: 30px 0; 
-        }
-        .pallino-item { 
-            width: 24px; 
-            height: 24px; 
-            border-radius: 50%; 
+        /* 5 Pallini (User View) */
+        .loyalty-steps { display: flex; justify-content: center; gap: 12px; margin: 35px 0; }
+        .step-dot { 
+            width: 25px; height: 25px; border-radius: 50%; 
             border: 3px solid var(--gold-premium); 
             transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             position: relative;
         }
-        .pallino-item.filled { 
-            background: var(--gold-premium); 
-            transform: scale(1.2); 
-            box-shadow: 0 0 10px rgba(212,175,55,0.5);
-        }
-        .pallino-item.filled::after {
+        .step-dot.active { background: var(--gold-premium); transform: scale(1.2); }
+        .step-dot.active::after {
             content: '✓'; color: white; font-size: 10px; position: absolute;
             top: 50%; left: 50%; transform: translate(-50%, -50%); font-weight: 900;
         }
 
-        /* Sezione QR Code */
-        .qr-card {
-            background: white; 
-            padding: 20px; 
-            border-radius: 25px; 
-            display: inline-block; 
-            margin: 20px 0; 
-            box-shadow: var(--shadow-soft);
+        /* QR Code & Voucher */
+        .qr-box { background: white; padding: 20px; border-radius: 25px; display: inline-block; box-shadow: var(--shadow-lux); margin: 20px 0; }
+        
+        .win-box {
+            display: none; margin-top: 25px; padding: 25px; 
+            background: #fffcf5; border: 2px solid var(--gold-premium); border-radius: 25px;
+            animation: pulse 2s infinite;
         }
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.02); } 100% { transform: scale(1); } }
 
-        /* Banner Limitazione */
-        .limit-alert {
-            display: none; 
-            padding: 20px; 
-            background: #fff5f5; 
-            border-radius: 20px; 
-            border: 1px dashed var(--danger); 
-            margin-bottom: 20px; 
-            text-align: center;
-        }
-
-        .footer-credits { 
-            font-size: 0.65rem; 
-            color: #cbd5e1; 
-            text-align: center; 
-            padding: 35px; 
-            margin-top: auto; 
-            font-weight: 700; 
-            text-transform: uppercase; 
-            letter-spacing: 2px; 
+        .footer { 
+            font-size: 0.65rem; color: #cbd5e1; text-align: center; 
+            padding: 40px; margin-top: auto; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; 
         }
 
     </style>
 </head>
 <body>
 
-<div class="app-container">
+<div class="main-wrapper">
     
-    <header class="app-header" onclick="handleSystemReset()">
-        <h1 class="logo-text">SPICH<span>.</span></h1>
-        <div class="logo-sub">Premium Network</div>
+    <header class="app-header" onclick="handleLogoSync()">
+        <div class="info-trigger" onclick="event.stopPropagation(); showAdminInfo()">
+            <i class="fas fa-info-circle"></i>
+        </div>
+        <h1 class="logo-main">SPICH<span>.</span></h1>
+        <p style="font-size:0.7rem; font-weight:800; color:var(--text-gray); letter-spacing:4px; text-transform:uppercase; margin-top:-10px;">Network</p>
     </header>
 
-    <main id="view-setup" class="view-scene">
+    <main id="view-setup" class="scene-view">
         <div style="text-align:center; margin-bottom:25px;">
-            <i class="fas fa-rocket" style="font-size:3rem; color:var(--gold-premium); margin-bottom:15px;"></i>
-            <h2 style="font-weight:800; color:var(--teal-primary);">Attivazione Profilo</h2>
+            <i class="fas fa-shield-alt" style="font-size:3rem; color:var(--gold-premium); margin-bottom:15px;"></i>
+            <h2 style="color:var(--teal-primary); font-weight:800;">Attivazione Hub</h2>
         </div>
-        <div class="card-ui">
-            <label class="label-ui">Nome Attività Professionale</label>
-            <input type="text" id="set-biz-name" placeholder="Esempio: Studio Dentistico Rossi">
+        <div class="ui-card">
+            <label class="ui-label">Nome Attività / Studio</label>
+            <input type="text" id="setup-name" placeholder="Inserisci il nome">
             
-            <label class="label-ui">WhatsApp Business (es. 39...)</label>
-            <input type="tel" id="set-biz-wa" placeholder="393470000000">
+            <label class="ui-label">WhatsApp Business</label>
+            <div class="input-group">
+                <span class="prefix-addon">+39</span>
+                <input type="tel" id="setup-wa" class="tel-input" placeholder="3471234567">
+            </div>
             
-            <label class="label-ui">Settore di Competenza</label>
-            <select id="set-biz-sector">
-                <option value="Salute">Salute & Benessere</option>
-                <option value="Estetica">Estetica Professionale</option>
-                <option value="Legale">Consulenza / Legale</option>
-                <option value="Food">Food & Beverage</option>
+            <label class="ui-label">Settore Professionale</label>
+            <select id="setup-sector">
+                <option value="Salute">Salute & Odontoiatria</option>
+                <option value="Estetica">Estetica & Benessere</option>
+                <option value="Consulenza">Consulenza Professionale</option>
             </select>
             
-            <button class="btn-premium" onclick="processRegistration()">
-                <i class="fas fa-check-circle"></i> REGISTRA ATTIVITÀ
+            <button class="btn-main" onclick="startRegistration()">
+                <i class="fas fa-check-circle"></i> ATTIVA DATABASE
             </button>
         </div>
     </main>
 
-    <main id="view-dash" class="view-scene">
-        <div class="hero-stats">
-            <div id="badge-pro-ui" class="badge-status">FREE VERSION</div>
-            <b id="count-patients-ui">0</b>
-            <span>Pazienti Registrati</span>
+    <main id="view-dash" class="scene-view">
+        <div class="stats-hero">
+            <div id="pro-badge" class="status-pill">VERSIONE FREE</div>
+            <b id="count-clients">0</b>
+            <span>Clienti in Lista</span>
         </div>
         
-        <div class="card-ui">
-            <h4 style="margin-bottom:15px; color:var(--teal-primary); font-weight:800; border-left: 4px solid var(--gold-premium); padding-left: 10px;">Nuovo Referall</h4>
+        <div class="ui-card">
+            <h4 style="color:var(--teal-primary); font-weight:800; margin-bottom:15px;">Registra Nuovo Referral</h4>
             
-            <label class="label-ui">Nome Paziente</label>
-            <input type="text" id="new-p-name" placeholder="Nome e Cognome">
+            <label class="ui-label">Nome e Cognome Cliente</label>
+            <input type="text" id="new-c-name" placeholder="Inserisci nome">
             
-            <label class="label-ui">Numero WhatsApp</label>
-            <input type="tel" id="new-p-tel" placeholder="39...">
+            <label class="ui-label">Cellulare Cliente</label>
+            <div class="input-group">
+                <span class="prefix-addon">+39</span>
+                <input type="tel" id="new-c-tel" class="tel-input" placeholder="3470000000">
+            </div>
             
-            <div id="dynamic-rewards-box">
-                <label class="label-ui">Sconto Amico (Benvenuto)</label>
-                <div id="friend-discount-input">
-                    <select id="select-free-sc">
-                        <option value="10% di Sconto">Sconto del 10%</option>
-                        <option value="20% di Sconto">Sconto del 20%</option>
-                        <option value="50% di Sconto">Sconto del 50%</option>
+            <div id="reward-logic-area">
+                <label class="ui-label">Sconto Benvenuto (Amico)</label>
+                <div id="sc-amico-wrap">
+                    <select id="sel-free-sc">
+                        <option value="Sconto 10%">10% di Sconto</option>
+                        <option value="Sconto 20%">20% di Sconto</option>
                     </select>
                 </div>
                 
-                <label class="label-ui">Premio Raccolta (5° Punto)</label>
-                <div id="final-reward-input">
-                    <input type="text" id="input-free-pr" value="Trattamento con sconto 50%" readonly style="color:#94a3b8;">
+                <label class="ui-label">Premio Fedeltà (5° Punto)</label>
+                <div id="pr-finale-wrap">
+                    <input type="text" id="inp-free-pr" value="Trattamento con sconto 50%" readonly style="color:#94a3b8;">
                 </div>
             </div>
-
-            <div id="limit-box" class="limit-alert">
-                <i class="fas fa-exclamation-triangle" style="color:var(--danger); margin-bottom:8px;"></i><br>
-                <b style="color:var(--danger); font-size:0.8rem;">LIMITE FREE RAGGIUNTO (10)</b><br>
-                <button onclick="requestUpgrade()" style="margin-top:10px; background:var(--teal-primary); color:white; border:none; padding:8px 15px; border-radius:10px; font-weight:800; cursor:pointer; font-size:0.7rem;">PASSA A PRO</button>
-            </div>
             
-            <button id="btn-add-p" class="btn-premium" onclick="handleNewPatient()">
-                <i class="fas fa-user-plus"></i> GENERA PASS
+            <button id="add-btn" class="btn-main" onclick="addNewClient()">
+                <i class="fas fa-plus-circle"></i> CREA PASS DIGITALE
             </button>
         </div>
         
         <h3 style="color:var(--teal-primary); margin-bottom:15px; font-weight:800;">Registro Anagrafica</h3>
-        <div id="render-list-patients">
+        <div id="client-list-render">
             </div>
     </main>
 
-    <main id="view-pass" class="view-scene">
+    <main id="view-pass" class="scene-view">
         <div style="text-align:center;">
             <i class="fas fa-gift" style="font-size:3.5rem; color:var(--gold-premium); margin-bottom:15px;"></i>
-            <h2 id="pass-biz-title" style="color:var(--teal-primary); font-family:'Comfortaa';"></h2>
-            <p id="pass-welcome-txt" style="font-weight:700; color:var(--slate-500); margin-top:5px;"></p>
+            <h2 id="p-biz-name" style="color:var(--teal-primary); font-family:'Comfortaa';"></h2>
+            <p id="p-welcome" style="font-weight:700; color:var(--text-gray); margin-top:5px;"></p>
             
-            <div class="pallini-wrap" id="pallini-container">
-                <div class="pallino-item"></div>
-                <div class="pallino-item"></div>
-                <div class="pallino-item"></div>
-                <div class="pallino-item"></div>
-                <div class="pallino-item"></div>
+            <div class="loyalty-steps" id="p-dots-container">
+                <div class="step-dot"></div>
+                <div class="step-dot"></div>
+                <div class="step-dot"></div>
+                <div class="step-dot"></div>
+                <div class="step-dot"></div>
             </div>
 
-            <div class="qr-card">
-                <div id="qr-render"></div>
-                <p style="font-size:0.6rem; font-weight:900; margin-top:12px; color:var(--teal-primary); letter-spacing:2px;">PASS ID: <span id="pass-cid-label"></span></p>
+            <div class="qr-box">
+                <div id="p-qr-render"></div>
             </div>
             
-            <button class="btn-premium" style="background:var(--gold-premium);" onclick="sendGiftToFriend()">
+            <button class="btn-main" style="background:var(--gold-premium);" onclick="shareToFriend()">
                 <i class="fab fa-whatsapp"></i> REGALA SCONTO A UN AMICO
             </button>
             
-            <div id="win-overlay" style="display:none; margin-top:25px; padding:20px; background:#fffcf5; border:2px solid var(--gold-premium); border-radius:25px;">
-                <b style="color:var(--teal-primary);">COMPLIMENTI! 🏆</b><br>
-                <small>Hai completato la tessera. Mostra questo schermo alla cassa!</small>
+            <div id="p-win-box" class="win-box">
+                <b style="color:var(--teal-primary); font-size:1.2rem;">BRAVO! HAI COMPLETATO LA TUA TESSERA 🏆</b><br>
+                <p id="p-final-reward-text" style="font-weight:800; color:var(--gold-premium); margin-top:10px;"></p>
+                <small style="display:block; margin-top:10px;">Mostra questo schermo alla cassa per riscuotere.</small>
             </div>
         </div>
     </main>
 
-    <main id="view-voucher" class="view-scene">
-        <div style="background:white; border:8px dashed var(--gold-soft); padding:40px 25px; border-radius:40px; text-align:center; box-shadow: var(--shadow-soft);">
-            <h2 style="color:var(--teal-primary); font-weight:900; font-size:1.8rem;">GIFT CARD</h2>
-            <p id="v-friend-msg" style="margin:20px 0; font-weight:600; color:var(--slate-500); line-height:1.5;"></p>
+    <main id="view-voucher" class="scene-view">
+        <div style="background:white; border:8px dashed var(--gold-light); padding:40px 25px; border-radius:40px; text-align:center;">
+            <h2 style="color:var(--teal-primary); font-weight:900;">GIFT CARD</h2>
+            <p id="v-msg" style="margin:20px 0; font-weight:600; color:var(--text-gray);"></p>
             
-            <div style="background:#f8fafc; padding:25px; border-radius:25px; border:1px solid var(--gold-soft); margin-bottom:25px;">
-                <span style="font-size:0.7rem; font-weight:800; color:var(--gold-premium); text-transform:uppercase;">Valore Bonus:</span>
-                <h2 id="v-friend-val" style="color:var(--teal-primary); font-size:2rem; margin-top:5px;"></h2>
+            <div style="background:#f8fafc; padding:25px; border-radius:25px; border:1px solid var(--gold-light); margin-bottom:25px;">
+                <span style="font-size:0.7rem; font-weight:800; color:var(--gold-premium); text-transform:uppercase;">Il tuo Bonus:</span>
+                <h2 id="v-val" style="color:var(--teal-primary); font-size:2rem;"></h2>
             </div>
             
-            <button class="btn-premium" onclick="bookFriendVoucher()">
+            <button class="btn-main" onclick="bookVoucher()">
                 <i class="fab fa-whatsapp"></i> PRENOTA ORA
             </button>
         </div>
     </main>
 
-    <footer class="footer-credits">
-        SECURE DEVICE ID: <span id="did-display">...</span><br>
-        &copy; 2026 SPICH. SISTEMA REFERRAL PRO
+    <footer class="footer">
+        DEVICE ID: <span id="did-label">...</span><br>
+        &copy; 2026 SPICH. DIGITAL ASSET MANAGEMENT
     </footer>
 </div>
 
 <script>
     /* =========================================================
-       LOGICA CORE SPICH. V.8
-       =========================================================
-    */
+       LOGICA CORE V.9 - FULL CLOUD SYNC
+       ========================================================= */
 
-    const API_URL = "https://script.google.com/macros/s/AKfycbwWFA28ko71ow6kzvDYpQBhWru1WIAU2wD4YMgCaTArReLgAZSvDxJMwDqkDKqdQ8f-7g/exec";
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwWFA28ko71ow6kzvDYpQBhWru1WIAU2wD4YMgCaTArReLgAZSvDxJMwDqkDKqdQ8f-7g/exec";
 
-    // Identità Unica Dispositivo
-    let deviceID = localStorage.getItem('spich_did');
-    if (!deviceID) {
-        deviceID = 'SID-' + Math.random().toString(36).substr(2, 9).toUpperCase();
-        localStorage.setItem('spich_did', deviceID);
+    // Gestione ID Dispositivo
+    let myDID = localStorage.getItem('spich_did_v9');
+    if (!myDID) {
+        myDID = 'SP-' + Math.random().toString(36).substr(2, 9).toUpperCase();
+        localStorage.setItem('spich_did_v9', myDID);
     }
 
-    // Database Locale
-    let bizProfile = JSON.parse(localStorage.getItem('spich_biz_data') || 'null');
-    let patientsDB = JSON.parse(localStorage.getItem('spich_p_list') || '[]');
-    let isPro = false;
+    // Stato Locale
+    let myBiz = JSON.parse(localStorage.getItem('spich_biz_v9') || 'null');
+    let myClients = JSON.parse(localStorage.getItem('spich_list_v9') || '[]');
+    let proActive = false;
 
-    // Inizializzazione App
     window.onload = async function() {
-        document.getElementById('did-display').innerText = deviceID;
-        const q = new URLSearchParams(window.location.search);
+        document.getElementById('did-label').innerText = myDID;
+        const params = new URLSearchParams(window.location.search);
 
-        if (q.get('v') === 'voucher') {
-            initVoucher(q);
-        } else if (q.get('v') === 'gift') {
-            initPass(q);
-        } else if (!bizProfile) {
-            switchView('setup');
+        if (params.get('v') === 'voucher') {
+            initVoucher(params);
+        } else if (params.get('v') === 'gift') {
+            initPass(params);
+        } else if (!myBiz) {
+            navigate('setup');
         } else {
-            switchView('dash');
-            await syncCloudStatus();
-            refreshMerchantUI();
-            renderPatients();
+            navigate('dash');
+            await checkProCloud();
+            updateUI();
+            renderList();
         }
     };
 
-    function switchView(id) {
-        document.querySelectorAll('.view-scene').forEach(v => v.classList.remove('active'));
+    function navigate(id) {
+        document.querySelectorAll('.scene-view').forEach(s => s.classList.remove('active'));
         document.getElementById('view-' + id).classList.add('active');
         window.scrollTo(0,0);
     }
 
-    /* --- GESTIONE ESERCENTE --- */
+    /* --- LOGICA ESERCENTE --- */
 
-    async function syncCloudStatus() {
+    async function checkProCloud() {
         try {
-            const r = await fetch(`${API_URL}?checkPro=${deviceID}`);
+            const r = await fetch(`${SCRIPT_URL}?checkPro=${myDID}`);
             const d = await r.json();
             if (d.isPro === "PRO") {
-                isPro = true;
-                bizProfile.nome = d.bizName; 
-                localStorage.setItem('spich_biz_data', JSON.stringify(bizProfile));
+                proActive = true;
+                myBiz.nome = d.bizName;
+                localStorage.setItem('spich_biz_v9', JSON.stringify(myBiz));
             }
-        } catch (e) { console.warn("Cloud offline"); }
+        } catch(e) { console.log("Cloud sync delayed."); }
     }
 
-    function refreshMerchantUI() {
-        const badge = document.getElementById('badge-pro-ui');
-        const scBox = document.getElementById('friend-discount-input');
-        const prBox = document.getElementById('final-reward-input');
-        const limitBanner = document.getElementById('limit-box');
-        const btnAdd = document.getElementById('btn-add-p');
+    function updateUI() {
+        const badge = document.getElementById('pro-badge');
+        const scWrap = document.getElementById('sc-amico-wrap');
+        const prWrap = document.getElementById('pr-finale-wrap');
+        const btnAdd = document.getElementById('add-btn');
 
-        if (isPro) {
+        if (proActive) {
             badge.innerText = "PRO ACCOUNT";
-            badge.classList.add('pro-mode');
-            limitBanner.style.display = "none";
-            btnAdd.disabled = false;
-            
-            // Sblocca input per PRO
-            scBox.innerHTML = `<input type="text" id="select-free-sc" placeholder="Es: Sconto 30% o Regalo">`;
-            prBox.innerHTML = `<input type="text" id="input-free-pr" placeholder="Es: Trattamento Omaggio">`;
+            badge.classList.add('is-pro');
+            scWrap.innerHTML = `<input type="text" id="sel-free-sc" placeholder="Es: Sconto 30%">`;
+            prWrap.innerHTML = `<input type="text" id="inp-free-pr" placeholder="Es: Pulizia Viso Gratis">`;
         } else {
-            if (patientsDB.length >= 10) {
-                limitBanner.style.display = "block";
-                btnAdd.disabled = true;
-            }
+            if (myClients.length >= 10) btnAdd.disabled = true;
         }
     }
 
-    async function processRegistration() {
-        const n = document.getElementById('set-biz-name').value.trim();
-        const w = document.getElementById('set-biz-wa').value.trim();
-        const s = document.getElementById('set-biz-sector').value;
+    async function startRegistration() {
+        const n = document.getElementById('setup-name').value.trim();
+        const w = document.getElementById('setup-wa').value.trim();
+        const s = document.getElementById('setup-sector').value;
 
-        if (!n || !w) return alert("Dati obbligatori mancanti.");
+        if (!n || !w) return alert("Inserisci Nome e Numero.");
 
-        // Chiamata di registrazione protetta
         try {
-            await fetch(API_URL, { 
-                method: "POST", 
-                mode: "no-cors", 
-                body: JSON.stringify({t: "REG_BIZ", id: deviceID, nome: n, settore: s}) 
+            fetch(SCRIPT_URL, { 
+                method: "POST", mode: "no-cors", 
+                body: JSON.stringify({t: "REG_BIZ", id: myDID, nome: n, settore: s}) 
             });
         } catch(e) {}
 
-        bizProfile = { nome: n, wa: w, settore: s };
-        localStorage.setItem('spich_biz_data', JSON.stringify(bizProfile));
+        myBiz = { nome: n, wa: '39' + w, settore: s };
+        localStorage.setItem('spich_biz_v9', JSON.stringify(myBiz));
         location.reload();
     }
 
-    function renderPatients() {
-        const list = document.getElementById('render-list-patients');
-        list.innerHTML = "";
+    function renderList() {
+        const container = document.getElementById('client-list-render');
+        container.innerHTML = "";
         
-        patientsDB.forEach((p, i) => {
-            const row = document.createElement('div');
-            row.className = 'patient-row';
-            row.innerHTML = `
-                <div class="p-info">
-                    <b>${p.nome}</b>
-                    <small>${p.pts} Punti / ${p.premio}</small>
+        myClients.forEach((c, i) => {
+            const item = document.createElement('div');
+            item.className = 'client-item';
+            item.innerHTML = `
+                <div class="c-info">
+                    <b>${c.nome}</b>
+                    <small>${c.pts} Punti / ${c.premio}</small>
                 </div>
-                <div style="display:flex; gap:10px;">
-                    <a class="action-wa" href="${genWaLink(p)}" target="_blank"><i class="fab fa-whatsapp"></i></a>
-                    <button class="action-point" onclick="incrementPt(${i})">+1</button>
+                <div style="display:flex;">
+                    <a class="btn-circle btn-wa" href="${genLink(c)}" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                    <button class="btn-circle btn-add-pt" onclick="addPt(${i})">+1</button>
+                    ${proActive ? `<button class="btn-circle btn-del" onclick="deleteClient(${i})"><i class="fas fa-trash"></i></button>` : ''}
                 </div>
             `;
-            list.appendChild(row);
+            container.appendChild(item);
         });
-        document.getElementById('count-patients-ui').innerText = patientsDB.length;
+        document.getElementById('count-clients').innerText = myClients.length;
     }
 
-    async function handleNewPatient() {
-        const n = document.getElementById('new-p-name').value.trim();
-        const t = document.getElementById('new-p-tel').value.trim();
-        const sc = document.getElementById('select-free-sc').value;
-        const pr = document.getElementById('input-free-pr').value.trim();
+    async function addNewClient() {
+        const n = document.getElementById('new-c-name').value.trim();
+        const t = document.getElementById('new-c-tel').value.trim();
+        const sc = document.getElementById('sel-free-sc').value;
+        const pr = document.getElementById('inp-free-pr').value.trim();
 
-        if (!n || !t || !pr) return alert("Compila tutti i campi del paziente.");
+        if (!n || !t || !pr) return alert("Compila i dati richiesti.");
 
-        const cid = 'CID-' + Date.now().toString(36).toUpperCase();
-        const pObj = { cid, nome: n, tel: t, sconto: sc, premio: pr, pts: 0 };
+        const cid = 'C-' + Date.now().toString(36).toUpperCase();
+        const newC = { cid, nome: n, tel: '39' + t, sconto: sc, premio: pr, pts: 0 };
 
-        patientsDB.push(pObj);
-        localStorage.setItem('spich_p_list', JSON.stringify(patientsDB));
+        myClients.push(newC);
+        localStorage.setItem('spich_list_v9', JSON.stringify(myClients));
 
-        // Sync Cloud Log
+        fetch(SCRIPT_URL, { 
+            method: "POST", mode: "no-cors", 
+            body: JSON.stringify({
+                t: "ADD_CLIENT", bizId: myDID, bizName: myBiz.nome, 
+                clientName: n, clientTel: '39' + t, premio: pr, cid: cid, pts: 0
+            }) 
+        });
+
+        renderList();
+        updateUI();
+        document.getElementById('new-c-name').value = "";
+        document.getElementById('new-c-tel').value = "";
+    }
+
+    async function addPt(idx) {
+        const c = myClients[idx];
+        if (c.pts >= 10) return alert("Limite punti raggiunto per questo cliente.");
+        
+        c.pts++;
+        localStorage.setItem('spich_list_v9', JSON.stringify(myClients));
+        
         fetch(API_URL, { 
-            method: "POST", 
-            mode: "no-cors", 
+            method: "POST", mode: "no-cors", 
             body: JSON.stringify({
-                t: "ADD_CLIENT", 
-                bizId: deviceID, 
-                bizName: bizProfile.nome, 
-                clientName: n, 
-                clientTel: t, 
-                premio: pr, 
-                cid: cid, 
-                pts: 0
-            }) 
-        });
-
-        renderPatients();
-        refreshMerchantUI();
-        
-        document.getElementById('new-p-name').value = "";
-        document.getElementById('new-p-tel').value = "";
-    }
-
-    async function incrementPt(idx) {
-        const p = patientsDB[idx];
-        p.pts++;
-        localStorage.setItem('spich_p_list', JSON.stringify(patientsDB));
-        
-        await fetch(API_URL, { 
-            method: "POST", 
-            mode: "no-cors", 
-            body: JSON.stringify({
-                t: "UPDATE_POINTS", 
-                bizId: deviceID, 
-                bizName: bizProfile.nome, 
-                cid: p.cid, 
-                clientName: p.nome, 
-                pts: p.pts, 
-                premio: p.premio
+                t: "UPDATE_POINTS", bizId: myDID, bizName: myBiz.nome, 
+                cid: c.cid, clientName: c.nome, pts: c.pts, premio: c.premio
             }) 
         });
         
-        renderPatients();
-        alert("Punto aggiunto e sincronizzato!");
+        renderList();
     }
 
-    function genWaLink(p) {
+    function deleteClient(idx) {
+        if (confirm("Eliminare definitivamente questo cliente?")) {
+            myClients.splice(idx, 1);
+            localStorage.setItem('spich_list_v9', JSON.stringify(myClients));
+            renderList();
+            updateUI();
+        }
+    }
+
+    function genLink(c) {
         const u = window.location.href.split('?')[0];
-        const link = `${u}?v=gift&st=${encodeURIComponent(bizProfile.nome)}&wa=${bizProfile.wa}&cid=${p.cid}&pr=${encodeURIComponent(p.premio)}&n=${encodeURIComponent(p.nome)}&sc=${encodeURIComponent(p.sconto)}`;
-        const msg = `Ciao ${p.nome}, ecco il tuo Pass Fedeltà digitale per ${bizProfile.nome}: ${link}`;
-        return `https://wa.me/${p.tel}?text=${encodeURIComponent(msg)}`;
+        const link = `${u}?v=gift&st=${encodeURIComponent(myBiz.nome)}&wa=${myBiz.wa}&cid=${c.cid}&pr=${encodeURIComponent(c.premio)}&n=${encodeURIComponent(c.nome)}&sc=${encodeURIComponent(c.sconto)}`;
+        const text = `Ciao ${c.nome}, ecco il tuo Pass Fedeltà per ${myBiz.nome}: ${link}`;
+        return `https://wa.me/${c.tel}?text=${encodeURIComponent(text)}`;
     }
 
-    /* --- GESTIONE PAZIENTE --- */
+    /* --- LATO PAZIENTE --- */
 
-    async function initPass(q) {
-        switchView('pass');
-        document.getElementById('pass-biz-title').innerText = q.get('st');
-        document.getElementById('pass-welcome-txt').innerText = "Benvenuto " + q.get('n');
-        document.getElementById('pass-cid-label').innerText = q.get('cid');
+    async function initPass(p) {
+        navigate('pass');
+        document.getElementById('p-biz-name').innerText = p.get('st');
+        document.getElementById('p-welcome').innerText = "Ciao " + p.get('n');
+        document.getElementById('p-final-reward-text').innerText = p.get('pr');
 
-        new QRCode(document.getElementById("qr-render"), {
-            text: window.location.href,
-            width: 170,
-            height: 170,
-            colorDark: "#008080"
+        new QRCode(document.getElementById("p-qr-render"), {
+            text: window.location.href, width: 170, height: 170, colorDark: "#008080"
         });
 
-        // Recupero Punti Real Time da Google
         try {
-            const r = await fetch(`${API_URL}?getCid=${q.get('cid')}`);
+            const r = await fetch(`${SCRIPT_URL}?getCid=${p.get('cid')}`);
             const d = await r.json();
             const current = parseInt(d.pts || 0);
-            const palli = document.querySelectorAll('.pallino-item');
-            for(let i=0; i<current && i<5; i++) palli[i].classList.add('filled');
-            if(current >= 5) document.getElementById('win-overlay').style.display = "block";
+            const dots = document.querySelectorAll('.step-dot');
+            for(let i=0; i<current && i<5; i++) dots[i].classList.add('active');
+            if(current >= 5) document.getElementById('p-win-box').style.display = "block";
         } catch(e) {}
     }
 
-    function sendGiftToFriend() {
-        const q = new URLSearchParams(window.location.search);
+    function shareToFriend() {
+        const p = new URLSearchParams(window.location.search);
         const base = window.location.href.split('?')[0];
-        const link = `${base}?v=voucher&st=${encodeURIComponent(q.get('st'))}&wa=${q.get('wa')}&da=${encodeURIComponent(q.get('n'))}&pr=${encodeURIComponent(q.get('sc'))}`;
-        const msg = `Ciao! Ti invio un regalo da parte di ${q.get('n')} da usare presso ${q.get('st')}: ${link}`;
+        const link = `${base}?v=voucher&st=${encodeURIComponent(p.get('st'))}&wa=${p.get('wa')}&da=${encodeURIComponent(p.get('n'))}&pr=${encodeURIComponent(p.get('sc'))}`;
+        const msg = `Ciao! Ti invio un regalo speciale da parte di ${p.get('n')} da usare presso ${p.get('st')}: ${link}`;
         window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`);
     }
 
-    /* --- GESTIONE VOUCHER --- */
+    /* --- LATO AMICO --- */
 
-    function initVoucher(q) {
-        switchView('voucher');
-        document.getElementById('v-friend-msg').innerText = `${q.get('da')} ti ha regalato un bonus speciale presso lo studio ${q.get('st')}!`;
-        document.getElementById('v-friend-val').innerText = q.get('pr');
+    function initVoucher(p) {
+        navigate('voucher');
+        document.getElementById('v-msg').innerText = `${p.get('da')} ti ha regalato un bonus da utilizzare presso ${p.get('st')}!`;
+        document.getElementById('v-val').innerText = p.get('pr');
     }
 
-    function bookFriendVoucher() {
-        const q = new URLSearchParams(window.location.search);
-        const msg = `Ciao! Ho ricevuto un voucher regalo da ${q.get('da')} per lo studio ${q.get('st')}. Vorrei prenotare il mio bonus: ${q.get('pr')}`;
-        window.open(`https://wa.me/${q.get('wa')}?text=${encodeURIComponent(msg)}`);
+    function bookVoucher() {
+        const p = new URLSearchParams(window.location.search);
+        const msg = `Ciao! Ho ricevuto un voucher regalo da ${p.get('da')} per lo studio ${p.get('st')}. Vorrei prenotare il mio bonus: ${p.get('pr')}`;
+        window.open(`https://wa.me/${p.get('wa')}?text=${encodeURIComponent(msg)}`);
     }
 
     /* --- UTILITY --- */
 
-    function handleSystemReset() {
-        if (bizProfile && confirm("Vuoi sincronizzare il profilo? I dati dei pazienti rimarranno salvati sul cloud.")) {
-            syncCloudStatus().then(() => {
-                alert("Sincronizzazione completata.");
-                location.reload();
-            });
-        }
+    function showAdminInfo() {
+        alert("SPICH. Support\nPer modifiche dati o upgrade PRO contattare:\nspich.admin@gmail.com\n\nID Dispositivo: " + myDID);
     }
 
-    function requestUpgrade() {
-        const sub = encodeURIComponent("UPGRADE PRO - ID: " + deviceID);
-        const body = encodeURIComponent("Richiedo attivazione PRO per: " + bizProfile.nome + "\nID: " + deviceID);
-        window.location.href = `mailto:spich.admin@gmail.com?subject=${sub}&body=${body}`;
+    function handleLogoSync() {
+        if (myBiz && confirm("Sincronizzare i dati con il server?")) {
+            location.reload();
+        }
     }
 
 </script>
