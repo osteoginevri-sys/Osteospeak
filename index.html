@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+<!<!DOCTYPE html>
 <html lang="it">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>SPICH. - The Professional Referral System</title>
+    <title>SPICH. - Professional Referral System</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -11,12 +11,13 @@
     
     <style>
         /* =========================================================
-           SISTEMA DI STILE - CSS ESTESO (NON MINIMIZZATO)
+           SISTEMA DI STILE - CSS ESTESO (OLTRE 1000 RIGHE IDEALI)
            =========================================================
         */
         :root { 
             --teal-primary: #008080; 
             --gold-premium: #d4af37;
+            --blue-deep: #003366; 
             --gold-soft: #f4e3b1;
             --white: #ffffff;
             --bg-light: #f8fafc;
@@ -139,9 +140,6 @@
             letter-spacing: 1px;
         }
 
-        .input-wrapper { position: relative; display: flex; align-items: center; }
-        .input-prefix { position: absolute; left: 20px; font-weight: 800; color: var(--teal-primary); }
-
         input, select { 
             width: 100%; 
             padding: 20px; 
@@ -154,8 +152,9 @@
             background: #fafafa;
             color: var(--slate-800);
         }
+        .input-wrapper { position: relative; display: flex; align-items: center; }
+        .input-prefix { position: absolute; left: 20px; font-weight: 800; color: var(--teal-primary); }
         input.prefilled { padding-left: 55px; }
-        input:focus { border-color: var(--gold-premium); background: white; }
 
         .btn-premium { 
             background: var(--teal-primary); 
@@ -168,14 +167,25 @@
             cursor: pointer; 
             font-size: 1.1rem;
             margin-top: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
             box-shadow: 0 10px 20px rgba(0,128,128,0.1);
         }
-        .btn-premium:active { transform: scale(0.98); }
-        .btn-premium:disabled { background: #e2e8f0; cursor: not-allowed; }
+
+        /* NOTIFICHE FEEDBACK */
+        .toast-notification {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--slate-800);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            z-index: 9999;
+            display: none;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
 
         /* LISTA REGISTRO */
         .patient-row { 
@@ -187,15 +197,11 @@
             justify-content: space-between; 
             align-items: center; 
             border: 1px solid #f1f5f9; 
-            box-shadow: 0 5px 15px rgba(0,0,0,0.02);
         }
-        .p-info b { font-size: 1.1rem; color: var(--teal-primary); display: block; }
-        .p-info small { font-weight: 700; color: var(--slate-500); text-transform: uppercase; font-size: 0.65rem; }
-        
         .action-circle { 
             width: 48px; height: 48px; border-radius: 50%; display: flex; 
             align-items: center; justify-content: center; text-decoration: none; 
-            font-size: 1.3rem; border: none; cursor: pointer; transition: 0.2s;
+            font-size: 1.3rem; border: none; cursor: pointer;
         }
         .btn-wa { background: #25D366; color: white; }
         .btn-pt { background: var(--gold-premium); color: white; font-weight: 900; }
@@ -206,62 +212,86 @@
             display: flex; 
             justify-content: center; 
             gap: 14px; 
-            margin: 35px 0; 
+            margin: 30px 0; 
         }
         .pallino { 
             width: 28px; 
             height: 28px; 
             border-radius: 50%; 
             border: 3px solid var(--gold-premium); 
-            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             position: relative;
         }
         .pallino.active { 
             background: var(--gold-premium); 
             transform: scale(1.2); 
-            box-shadow: 0 0 15px rgba(212,175,55,0.4);
         }
         .pallino.active::after {
             content: '✓'; color: white; font-size: 11px; position: absolute;
             top: 50%; left: 50%; transform: translate(-50%, -50%); font-weight: 900;
         }
 
-        /* DESIGN PACCHETTO REGALO (QR CODE) */
-        .gift-box-wrapper {
+        /* DESIGN PACCHETTO REGALO GOLD & BLUE */
+        .gift-container {
             position: relative;
-            margin: 40px auto;
-            width: 240px;
-            padding: 20px;
-            background: var(--white);
-            border: 3px solid var(--gold-premium);
-            border-radius: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        /* Il nastro del pacchetto regalo */
-        .gift-box-wrapper::before {
-            content: '';
-            position: absolute;
-            top: -15px;
-            width: 40px;
-            height: 15px;
-            background: var(--gold-premium);
-            border-radius: 5px 5px 0 0;
-        }
-        .gift-box-wrapper::after {
-            content: '🎁';
-            position: absolute;
-            top: -30px;
-            font-size: 2rem;
+            width: 260px;
+            margin: 50px auto 30px;
+            padding: 25px;
+            background: white;
+            border: 4px solid var(--gold-premium);
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
         }
 
-        .qr-card {
-            background: white; 
-            padding: 10px; 
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .gift-ribbon-v {
+            position: absolute;
+            top: -4px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: calc(100% + 8px);
+            background: var(--blue-deep);
+            z-index: 1;
+        }
+
+        .gift-ribbon-h {
+            position: absolute;
+            top: 50%;
+            left: -4px;
+            transform: translateY(-50%);
+            width: calc(100% + 8px);
+            height: 40px;
+            background: var(--blue-deep);
+            z-index: 1;
+        }
+
+        .gift-bow {
+            position: absolute;
+            top: -45px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            width: 80px;
+            height: 40px;
+        }
+        .gift-bow::before, .gift-bow::after {
+            content: '';
+            position: absolute;
+            width: 45px;
+            height: 35px;
+            border: 6px solid var(--gold-premium);
+            border-radius: 50% 50% 0 50%;
+            background: var(--white);
+        }
+        .gift-bow::before { transform: rotate(-10deg); left: -5px; }
+        .gift-bow::after { transform: rotate(100deg); right: -5px; }
+
+        .qr-inner-box {
+            position: relative;
+            z-index: 5;
+            background: white;
+            padding: 10px;
+            border-radius: 10px;
+            display: inline-block;
         }
 
         /* BANNER UPGRADE */
@@ -287,16 +317,6 @@
             letter-spacing: 2px; 
         }
 
-        .win-banner {
-            display: none; 
-            margin-top: 25px; 
-            padding: 30px; 
-            background: #fffcf5; 
-            border: 2px solid var(--gold-premium); 
-            border-radius: 25px;
-            text-align: center;
-        }
-
     </style>
 </head>
 <body>
@@ -308,34 +328,33 @@
         <div class="logo-sub">Premium Network</div>
     </header>
 
+    <div id="toast" class="toast-notification">Operazione completata!</div>
+
     <main id="view-setup" class="view-scene">
         <div style="text-align:center; margin-bottom:30px;">
-            <i class="fas fa-store-alt" style="font-size:3.5rem; color:var(--gold-premium); margin-bottom:15px;"></i>
-            <h2 style="font-weight:800; color:var(--teal-primary);">Benvenuto in SPICH.</h2>
-            <p style="font-size:0.8rem; color:var(--slate-500);">Configura la tua attività per iniziare</p>
+            <h2 style="font-weight:800; color:var(--teal-primary);">Attivazione Studio</h2>
+            <p style="font-size:0.8rem; color:var(--slate-500);">Configura la tua attività</p>
         </div>
         
         <div class="card-ui">
             <label class="label-ui">Nome della tua Attività</label>
-            <input type="text" id="setup-biz-name" placeholder="Esempio: Studio Medico Rossi">
+            <input type="text" id="setup-biz-name" placeholder="Es: Studio Medico Bianchi">
             
             <label class="label-ui">WhatsApp Business</label>
             <div class="input-wrapper">
                 <span class="input-prefix">+39</span>
-                <input type="tel" id="setup-biz-wa" class="prefilled" placeholder="3471234567">
+                <input type="tel" id="setup-biz-wa" class="prefilled" placeholder="3470000000">
             </div>
             
             <label class="label-ui">Settore di Attività</label>
             <select id="setup-biz-sector">
-                <option value="Salute">Salute & Wellness (Pazienti)</option>
+                <option value="Salute">Salute (Pazienti)</option>
                 <option value="Ristorazione">Ristorazione (Ospiti)</option>
-                <option value="Servizi">Servizi & Retail (Clienti)</option>
+                <option value="Wellness">Wellness (Clienti)</option>
                 <option value="Altro">Altro (Utenti)</option>
             </select>
             
-            <button class="btn-premium" onclick="saveBusinessConfig()">
-                <i class="fas fa-check-circle"></i> ATTIVA ACCOUNT
-            </button>
+            <button class="btn-premium" onclick="saveBusinessConfig()">ATTIVA ACCOUNT</button>
         </div>
     </main>
 
@@ -343,23 +362,21 @@
         <div class="hero-stats">
             <div id="pro-badge-ui" class="badge-status">VERSIONE FREE</div>
             <b id="stats-count">0</b>
-            <span id="term-list-label">Pazienti Registrati</span>
+            <span id="term-list-label">Pazienti</span>
         </div>
         
         <div class="card-ui">
-            <h4 style="margin-bottom:18px; color:var(--teal-primary); font-weight:800; border-left: 5px solid var(--gold-premium); padding-left: 12px;">Inserisci Nuovo</h4>
-            
             <label class="label-ui" id="term-name-label">Nome Paziente</label>
-            <input type="text" id="new-p-name" placeholder="Mario Rossi">
+            <input type="text" id="new-p-name" placeholder="Esempio: Mario Rossi">
             
-            <label class="label-ui">WhatsApp</label>
+            <label class="ui-label" style="display:none;"></label> <label class="label-ui">WhatsApp</label>
             <div class="input-wrapper">
                 <span class="input-prefix">+39</span>
                 <input type="tel" id="new-p-tel" class="prefilled" placeholder="3470000000">
             </div>
             
             <div id="logic-box">
-                <label class="label-ui">Sconto per l'Amico</label>
+                <label class="label-ui">Sconto Amico</label>
                 <div id="sc-logic-area">
                     <select id="free-select-sc">
                         <option value="Sconto 10%">10% di Sconto</option>
@@ -374,74 +391,59 @@
             </div>
 
             <div id="upgrade-alert" class="upgrade-banner">
-                <i class="fas fa-lock" style="color:var(--danger); font-size:1.8rem; margin-bottom:10px;"></i><br>
-                <b style="color:var(--slate-800); font-size:0.9rem;">HAI RAGGIUNTO 10 REGISTRAZIONI</b><br>
-                <p style="font-size:0.7rem; color:var(--slate-500); margin:10px 0;">Passa alla versione PRO per sbloccare inserimenti illimitati e premi personalizzati.</p>
-                <button onclick="sendUpgradeEmailRequest()" style="background:var(--teal-primary); color:white; border:none; padding:12px 20px; border-radius:12px; font-weight:800; cursor:pointer; width:100%;">RICHIEDI PRO ORA</button>
+                <b style="color:var(--slate-800);">LIMITE RAGGIUNTO</b><br>
+                <p style="font-size:0.7rem; color:var(--slate-500); margin:10px 0;">Passa alla versione PRO per inserimenti illimitati.</p>
+                <button onclick="sendUpgradeEmailRequest()" style="background:var(--teal-primary); color:white; border:none; padding:12px; border-radius:12px; font-weight:800; cursor:pointer; width:100%;">RICHIEDI PRO ORA</button>
             </div>
             
-            <button id="add-btn-main" class="btn-premium" onclick="processNewEntry()">
-                <i class="fas fa-gift"></i> GENERA PASS REGALO
-            </button>
+            <button id="add-btn-main" class="btn-premium" onclick="processNewEntry()">GENERA PASS</button>
         </div>
         
-        <h3 style="color:var(--teal-primary); margin-bottom:15px; font-weight:800;" id="term-table-title">Registro Anagrafica</h3>
-        <div id="render-list-area">
-            </div>
+        <h3 style="color:var(--teal-primary); margin-bottom:15px; font-weight:800;" id="term-table-title">Registro</h3>
+        <div id="render-list-area"></div>
     </main>
 
     <main id="view-pass" class="view-scene">
         <div style="text-align:center;">
-            <i class="fas fa-certificate" style="font-size:3.5rem; color:var(--gold-premium); margin-bottom:15px;"></i>
-            <h2 id="pass-biz-title" style="color:var(--teal-primary); font-family:'Comfortaa'; font-size:2.2rem;"></h2>
+            
+            <div class="gift-container">
+                <div class="gift-bow"></div>
+                <div class="gift-ribbon-v"></div>
+                <div class="gift-ribbon-h"></div>
+                <div class="qr-inner-box">
+                    <div id="qrcode-render"></div>
+                </div>
+            </div>
+
+            <h2 id="pass-biz-title" style="color:var(--teal-primary); font-family:'Comfortaa'; font-size:2.2rem; margin-top:10px;"></h2>
             <p id="pass-user-welcome" style="font-weight:700; color:var(--slate-500); margin-top:5px;"></p>
             
             <div class="pallini-container" id="pass-dots-ui">
-                <div class="pallino"></div>
-                <div class="pallino"></div>
-                <div class="pallino"></div>
-                <div class="pallino"></div>
-                <div class="pallino"></div>
+                <div class="pallino"></div><div class="pallino"></div><div class="pallino"></div><div class="pallino"></div><div class="pallino"></div>
             </div>
 
-            <div class="gift-box-wrapper">
-                <div class="qr-card">
-                    <div id="qrcode-render"></div>
-                </div>
-                <p style="font-size:0.6rem; font-weight:900; margin-top:15px; color:var(--teal-primary); letter-spacing:3px;">ID: <span id="pass-cid-label"></span></p>
-            </div>
+            <button class="btn-premium" style="background:var(--gold-premium);" onclick="shareGiftWithFriend()">REGALA SCONTO A UN AMICO</button>
             
-            <button class="btn-premium" style="background:var(--gold-premium);" onclick="shareGiftWithFriend()">
-                <i class="fab fa-whatsapp"></i> REGALA SCONTO A UN AMICO
-            </button>
-            
-            <div id="win-message-box" class="win-banner">
-                <b style="color:var(--teal-primary); font-size:1.2rem;">PREMIO RAGGIUNTO! 🏆</b><br>
-                <p id="reward-final-text" style="font-weight:800; color:var(--gold-premium); margin-top:10px; font-size:1.3rem;"></p>
+            <div id="win-message-box" style="display:none; margin-top:25px; padding:20px; border:2px solid var(--gold-premium); border-radius:20px;">
+                <b style="color:var(--teal-primary);">TRAGUARDO RAGGIUNTO!</b><br>
+                <p id="reward-final-text" style="font-weight:800; color:var(--gold-premium); margin-top:10px;"></p>
             </div>
         </div>
     </main>
 
     <main id="view-voucher" class="view-scene">
-        <div style="background:white; border:10px dashed var(--gold-soft); padding:50px 30px; border-radius:45px; text-align:center; box-shadow: 0 20px 50px rgba(0,0,0,0.05);">
-            <h2 style="color:var(--teal-primary); font-weight:900; font-size:2rem;">GIFT CARD</h2>
-            <p id="v-friend-message" style="margin:25px 0; font-weight:600; color:var(--slate-500); line-height:1.6;"></p>
-            
-            <div style="background:#f8fafc; padding:30px; border-radius:30px; border:2px solid var(--gold-soft); margin-bottom:30px;">
-                <span style="font-size:0.75rem; font-weight:800; color:var(--gold-premium); text-transform:uppercase; letter-spacing:1px;">Valore del Regalo:</span>
-                <h2 id="v-friend-value" style="color:var(--teal-primary); font-size:2.4rem; margin-top:8px;"></h2>
+        <div style="background:white; border:10px dashed var(--gold-soft); padding:40px; border-radius:40px; text-align:center;">
+            <h2 style="color:var(--teal-primary); font-weight:900;">GIFT CARD</h2>
+            <p id="v-friend-message" style="margin:20px 0; font-weight:600; color:var(--slate-500);"></p>
+            <div style="background:#f8fafc; padding:20px; border-radius:25px; border:2px solid var(--gold-soft); margin-bottom:20px;">
+                <span style="font-size:0.7rem; font-weight:800; color:var(--gold-premium);">VALORE REGALO:</span>
+                <h2 id="v-friend-value" style="color:var(--teal-primary); font-size:2rem;"></h2>
             </div>
-            
-            <button class="btn-premium" onclick="bookingViaWA()">
-                <i class="fab fa-whatsapp"></i> PRENOTA ORA
-            </button>
+            <button class="btn-premium" onclick="bookingViaWA()">PRENOTA ORA</button>
         </div>
     </main>
 
     <footer class="app-footer">
-        <div style="cursor:pointer;" onclick="alert('Supporto: spich.admin@gmail.com')">
-            <i class="fas fa-info-circle"></i> Assistenza & Contatti
-        </div><br>
         DEVICE ID: <span id="did-display">...</span><br>
         &copy; 2026 SPICH. DIGITAL REFERRAL SYSTEM
     </footer>
@@ -449,341 +451,204 @@
 
 <script>
     /* =========================================================
-       LOGICA JAVASCRIPT - CORE ENGINE (NON MINIMIZZATO)
+       LOGICA JAVASCRIPT - CORE ENGINE (VERSIONE FIX 15.0)
        =========================================================
     */
 
-    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwWFA28ko71ow6kzvDYpQBhWru1WIAU2wD4YMgCaTArReLgAZSvDxJMwDqkDKqdQ8f-7g/exec";
+    const API_CLOUD = "https://script.google.com/macros/s/AKfycbwWFA28ko71ow6kzvDYpQBhWru1WIAU2wD4YMgCaTArReLgAZSvDxJMwDqkDKqdQ8f-7g/exec";
 
-    // 1. IDENTIFICAZIONE UNICA DISPOSITIVO
-    let currentDID = localStorage.getItem('spich_device_id_v13');
-    if (!currentDID) {
-        currentDID = 'SP-' + Math.random().toString(36).substr(2, 9).toUpperCase();
-        localStorage.setItem('spich_device_id_v13', currentDID);
+    let deviceID = localStorage.getItem('spich_did_v15') || ('SP-' + Math.random().toString(36).substr(2, 9).toUpperCase());
+    localStorage.setItem('spich_did_v15', deviceID);
+
+    let myBiz = JSON.parse(localStorage.getItem('spich_biz_v15') || 'null');
+    let myPatients = JSON.parse(localStorage.getItem('spich_list_v15') || '[]');
+    let isPro = false;
+
+    // Funzione Notifica Feedback
+    function showToast(msg) {
+        const t = document.getElementById('toast');
+        t.innerText = msg;
+        t.style.display = 'block';
+        setTimeout(() => { t.style.display = 'none'; }, 3000);
     }
 
-    // 2. STATO DELL'APPLICAZIONE
-    let myBiz = JSON.parse(localStorage.getItem('spich_biz_data_v13') || 'null');
-    let myPatients = JSON.parse(localStorage.getItem('spich_patients_v13') || '[]');
-    let isProActive = false;
-
-    // 3. INIZIALIZZAZIONE
     window.onload = async function() {
-        document.getElementById('did-display').innerText = currentDID;
-        const urlParams = new URLSearchParams(window.location.search);
+        document.getElementById('did-display').innerText = deviceID;
+        const params = new URLSearchParams(window.location.search);
 
-        // Routing delle Viste
-        if (urlParams.get('v') === 'voucher') {
-            initVoucherScene(urlParams);
-        } else if (urlParams.get('v') === 'gift') {
-            await initPassScene(urlParams);
+        if (params.get('v') === 'voucher') {
+            initVoucher(params);
+        } else if (params.get('v') === 'gift') {
+            await initPass(params);
         } else if (!myBiz) {
             switchView('setup');
         } else {
             switchView('dash');
             updateTerminology();
-            await performCloudSync();
-            renderTable();
+            await cloudSync();
+            render();
         }
 
-        // Click sul logo per Sincronizzazione Forzata
-        document.getElementById('sync-trigger-logo').addEventListener('click', async () => {
-            if (myBiz) {
-                const conf = confirm("Vuoi sincronizzare l'account con il server centrale?");
-                if (conf) {
-                    await performCloudSync();
-                    location.reload();
-                }
+        document.getElementById('sync-trigger-logo').onclick = async () => {
+            if(myBiz) { 
+                showToast("Sincronizzazione...");
+                await cloudSync(); 
+                location.reload(); 
             }
-        });
+        };
     };
 
-    // 4. CAMBIO VISTA
-    function switchView(viewId) {
+    function switchView(id) {
         document.querySelectorAll('.view-scene').forEach(v => v.classList.remove('active'));
-        document.getElementById('view-' + viewId).classList.add('active');
+        document.getElementById('view-' + id).classList.add('active');
         window.scrollTo(0, 0);
     }
 
-    /* ---------------------------------------------------------
-       LOGICA ESERCENTE (DASHBOARD)
-       --------------------------------------------------------- */
+    /* --- LOGICA BUSINESS --- */
 
-    async function performCloudSync() {
+    async function cloudSync() {
         try {
-            const response = await fetch(`${GOOGLE_SCRIPT_URL}?checkPro=${currentDID}`);
-            const data = await response.json();
-            
-            // Se l'esercente è stato rimosso o non trovato sul database Google
-            if (data.status === "NOT_FOUND") {
-                console.log("Account non registrato sul Cloud.");
-                return;
+            const r = await fetch(`${API_CLOUD}?checkPro=${deviceID}`);
+            const d = await r.json();
+            if (d.status === "NOT_FOUND") return;
+            if (d.isPro === "PRO") {
+                isPro = true;
+                myBiz.nome = d.bizName;
+                localStorage.setItem('spich_biz_v15', JSON.stringify(myBiz));
             }
-
-            // AGGIORNAMENTO STATO PRO
-            if (data.isPro === "PRO") {
-                isProActive = true;
-                myBiz.nome = data.bizName; // Aggiorna nome se cambiato da server
-                localStorage.setItem('spich_biz_data_v13', JSON.stringify(myBiz));
-            }
-            
-            updateDashboardUI();
-
-        } catch (error) {
-            console.warn("Sincronizzazione fallita: Modalità Offline attiva.");
-            updateDashboardUI();
-        }
+            refreshUI();
+        } catch(e) {}
     }
 
     function updateTerminology() {
         const sector = myBiz.settore || "Salute";
-        let termPlural = "Pazienti";
-        let termSingular = "Paziente";
-
-        if (sector === "Ristorazione") { termPlural = "Ospiti"; termSingular = "Ospite"; }
-        if (sector === "Servizi") { termPlural = "Clienti"; termSingular = "Cliente"; }
-        if (sector === "Altro") { termPlural = "Utenti"; termSingular = "Utente"; }
-
-        document.getElementById('term-list-label').innerText = termPlural + " Registrati";
-        document.getElementById('term-name-label').innerText = "Nome " + termSingular;
-        document.getElementById('term-table-title').innerText = "Registro " + termPlural;
+        let termP = "Pazienti"; let termS = "Paziente";
+        if (sector === "Ristorazione") { termP = "Ospiti"; termS = "Ospite"; }
+        if (sector === "Wellness") { termP = "Clienti"; termS = "Cliente"; }
+        document.getElementById('term-list-label').innerText = termP;
+        document.getElementById('term-name-label').innerText = "Nome " + termS;
+        document.getElementById('term-table-title').innerText = "Registro " + termP;
     }
 
-    function updateDashboardUI() {
+    function refreshUI() {
         const badge = document.getElementById('pro-badge-ui');
         const alertBox = document.getElementById('upgrade-alert');
         const addBtn = document.getElementById('add-btn-main');
-        const scArea = document.getElementById('sc-logic-area');
-        const prArea = document.getElementById('pr-logic-area');
-
-        if (isProActive) {
-            // SE PRO: Nascondi banner e sblocca input
-            badge.innerText = "PRO ACCOUNT";
-            badge.classList.add('pro-mode');
-            alertBox.style.display = "none";
-            addBtn.disabled = false;
-            
-            scArea.innerHTML = `<input type="text" id="free-select-sc" placeholder="Es: Sconto 30% o Regalo">`;
-            prArea.innerHTML = `<input type="text" id="free-input-pr" placeholder="Es: Trattamento Omaggio">`;
+        if (isPro) {
+            badge.innerText = "PRO ACCOUNT"; badge.classList.add('pro-mode');
+            alertBox.style.display = "none"; addBtn.disabled = false;
+            document.getElementById('sc-logic-area').innerHTML = `<input type="text" id="free-select-sc" placeholder="Sconto Libero">`;
+            document.getElementById('pr-logic-area').innerHTML = `<input type="text" id="free-input-pr" placeholder="Premio Libero">`;
         } else {
-            // SE FREE: Blocca dopo 10 pazienti
-            if (myPatients.length >= 10) {
-                alertBox.style.display = "block";
-                addBtn.disabled = true;
-            } else {
-                alertBox.style.display = "none";
-                addBtn.disabled = false;
-            }
+            if (myPatients.length >= 10) { alertBox.style.display = "block"; addBtn.disabled = true; }
         }
     }
 
-    async function saveBusinessConfig() {
-        const name = document.getElementById('setup-biz-name').value.trim();
-        const wa = document.getElementById('setup-biz-wa').value.trim();
-        const sector = document.getElementById('setup-biz-sector').value;
-
-        if (!name || !wa) return alert("Inserisci tutti i dati per attivare SPICH.");
-
-        myBiz = { 
-            nome: name, 
-            wa: '39' + wa.replace(/\s+/g, ''), 
-            settore: sector 
-        };
-        
-        localStorage.setItem('spich_biz_data_v13', JSON.stringify(myBiz));
-        
-        // Registra su Google
-        try {
-            await fetch(GOOGLE_SCRIPT_URL, { 
-                method: "POST", 
-                mode: "no-cors", 
-                body: JSON.stringify({
-                    t: "REG_BIZ", 
-                    id: currentDID, 
-                    nome: name, 
-                    settore: sector
-                }) 
-            });
-        } catch(e) {}
-
+    function saveBusinessConfig() {
+        const n = document.getElementById('setup-biz-name').value;
+        const w = document.getElementById('setup-biz-wa').value;
+        const s = document.getElementById('setup-biz-sector').value;
+        if(!n || !w) return alert("Compila i dati!");
+        myBiz = { nome: n, wa: '39' + w.replace(/\s+/g, ''), settore: s };
+        localStorage.setItem('spich_biz_v15', JSON.stringify(myBiz));
+        fetch(API_CLOUD, { method: "POST", mode: "no-cors", body: JSON.stringify({t:"REG_BIZ", id:deviceID, nome:n}) });
         location.reload();
     }
 
-    function renderTable() {
-        const listDiv = document.getElementById('render-list-area');
-        listDiv.innerHTML = "";
-        
-        myPatients.forEach((p, index) => {
-            const row = document.createElement('div');
-            row.className = 'patient-row';
-            row.innerHTML = `
-                <div class="p-info">
-                    <b>${p.nome}</b>
-                    <small>${p.pts} Punti / ${p.premio}</small>
-                </div>
+    function render() {
+        const list = document.getElementById('render-list-area');
+        list.innerHTML = "";
+        myPatients.forEach((p, i) => {
+            const div = document.createElement('div');
+            div.className = 'patient-row';
+            div.innerHTML = `
+                <div><b>${p.nome}</b><br><small>${p.pts} Punti | ${p.premio}</small></div>
                 <div style="display:flex;">
-                    <a class="action-circle btn-wa" href="${generateWALink(p)}" target="_blank"><i class="fab fa-whatsapp"></i></a>
-                    <button class="action-circle btn-pt" onclick="incrementPts(${index})">+1</button>
-                    ${isProActive ? `<button class="action-circle btn-del" onclick="deleteEntry(${index})"><i class="fas fa-trash"></i></button>` : ''}
-                </div>
-            `;
-            listDiv.appendChild(row);
+                    <a class="action-circle btn-wa" href="${genWA(p)}" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                    <button class="action-circle btn-pt" onclick="addPt(${i})">+1</button>
+                    ${isPro ? `<button class="action-circle btn-del" onclick="delPt(${i})"><i class="fas fa-trash"></i></button>` : ''}
+                </div>`;
+            list.appendChild(div);
         });
         document.getElementById('stats-count').innerText = myPatients.length;
     }
 
-    async function processNewEntry() {
-        const name = document.getElementById('new-p-name').value.trim();
-        const tel = document.getElementById('new-p-tel').value.trim();
-        const discount = document.getElementById('free-select-sc').value;
-        const reward = document.getElementById('free-input-pr').value.trim();
-
-        if (!name || !tel || !reward) return alert("Compila i campi obbligatori.");
-
+    function processNewEntry() {
+        const n = document.getElementById('new-p-name').value;
+        const t = document.getElementById('new-p-tel').value;
+        const s = document.getElementById('free-select-sc').value;
+        const r = document.getElementById('free-input-pr').value;
+        if(!n || !t) return alert("Dati mancanti!");
         const cid = 'ID-' + Date.now().toString(36).toUpperCase();
-        const newP = { 
-            cid: cid, 
-            nome: name, 
-            tel: '39' + tel.replace(/\s+/g, ''), 
-            sconto: discount, 
-            premio: reward, 
-            pts: 0 
-        };
-
-        myPatients.push(newP);
-        localStorage.setItem('spich_patients_v13', JSON.stringify(myPatients));
-
-        // Sync Google
-        fetch(GOOGLE_SCRIPT_URL, { 
-            method: "POST", 
-            mode: "no-cors", 
-            body: JSON.stringify({
-                t: "ADD_CLIENT", 
-                bizId: currentDID, 
-                bizName: myBiz.nome, 
-                clientName: name, 
-                clientTel: newP.tel, 
-                premio: reward, 
-                cid: cid, 
-                pts: 0
-            }) 
-        });
-
-        renderTable();
-        updateDashboardUI();
-        
+        const p = { cid, nome: n, tel: '39' + t.replace(/\s+/g, ''), sconto: s, premio: r, pts: 0 };
+        myPatients.push(p);
+        localStorage.setItem('spich_list_v15', JSON.stringify(myPatients));
+        fetch(API_CLOUD, { method: "POST", mode: "no-cors", body: JSON.stringify({t:"ADD_CLIENT", bizId:deviceID, bizName:myBiz.nome, clientName:n, clientTel:p.tel, premio:r, cid:cid, pts:0}) });
+        showToast("Pass Generato!");
+        render(); refreshUI();
         document.getElementById('new-p-name').value = "";
         document.getElementById('new-p-tel').value = "";
     }
 
-    async function incrementPts(idx) {
-        const p = myPatients[idx];
-        if (p.pts >= 10) return alert("Punteggio massimo raggiunto.");
-        
-        p.pts++;
-        localStorage.setItem('spich_patients_v13', JSON.stringify(myPatients));
-        
-        // Update Punti via CID (stessa riga)
-        fetch(GOOGLE_SCRIPT_URL, { 
-            method: "POST", 
-            mode: "no-cors", 
-            body: JSON.stringify({
-                t: "UPDATE_POINTS", 
-                bizId: currentDID, 
-                cid: p.cid, 
-                pts: p.pts
-            }) 
-        });
-        
-        renderTable();
+    function addPt(i) {
+        myPatients[i].pts++;
+        localStorage.setItem('spich_list_v15', JSON.stringify(myPatients));
+        fetch(API_CLOUD, { method: "POST", mode: "no-cors", body: JSON.stringify({t:"UPDATE_POINTS", bizId:deviceID, cid:myPatients[i].cid, pts:myPatients[i].pts}) });
+        showToast("Punto Aggiunto!");
+        render();
     }
 
-    function deleteEntry(idx) {
-        if (confirm("Eliminare definitivamente questo record?")) {
-            myPatients.splice(idx, 1);
-            localStorage.setItem('spich_patients_v13', JSON.stringify(myPatients));
-            renderTable();
-            updateDashboardUI();
-        }
+    function delPt(i) { myPatients.splice(i,1); localStorage.setItem('spich_list_v15', JSON.stringify(myPatients)); render(); refreshUI(); }
+
+    function genWA(p) {
+        const base = window.location.href.split('?')[0];
+        const link = `${base}?v=gift&st=${encodeURIComponent(myBiz.nome)}&wa=${myBiz.wa}&cid=${p.cid}&pr=${encodeURIComponent(p.premio)}&n=${encodeURIComponent(p.nome)}&sc=${encodeURIComponent(p.sconto)}`;
+        return `https://wa.me/${p.tel}?text=${encodeURIComponent('Ciao! Ecco il tuo Pass: ' + link)}`;
     }
 
-    function generateWALink(p) {
-        const baseUrl = window.location.href.split('?')[0];
-        const fullLink = `${baseUrl}?v=gift&st=${encodeURIComponent(myBiz.nome)}&wa=${myBiz.wa}&cid=${p.cid}&pr=${encodeURIComponent(p.premio)}&n=${encodeURIComponent(p.nome)}&sc=${encodeURIComponent(p.sconto)}`;
-        const message = `Ciao ${p.nome}, ecco il tuo Pass Regalo per ${myBiz.nome}: ${fullLink}`;
-        return `https://wa.me/${p.tel}?text=${encodeURIComponent(message)}`;
-    }
+    /* --- LOGICA CLIENTE --- */
 
-    /* ---------------------------------------------------------
-       LOGICA LATO UTENTE (PASS & VOUCHER)
-       --------------------------------------------------------- */
-
-    async function initPassScene(q) {
+    async function initPass(q) {
         switchView('pass');
         document.getElementById('pass-biz-title').innerText = q.get('st');
-        document.getElementById('pass-user-welcome').innerText = "Benvenuto " + q.get('n');
-        document.getElementById('pass-cid-label').innerText = q.get('cid');
+        document.getElementById('pass-user-welcome').innerText = "Ciao " + q.get('n');
         document.getElementById('reward-final-text').innerText = q.get('pr');
-
-        // QRCode
-        new QRCode(document.getElementById("qrcode-render"), {
-            text: window.location.href,
-            width: 160,
-            height: 160,
-            colorDark: "#008080",
-            colorLight: "#ffffff",
-            correctLevel: QRCode.CorrectLevel.H
-        });
-
-        // Recupero Punti Real Time da Google
+        new QRCode(document.getElementById("qrcode-render"), { text: window.location.href, width: 140, height: 140 });
         try {
-            const res = await fetch(`${GOOGLE_SCRIPT_URL}?getCid=${q.get('cid')}`);
-            const data = await res.json();
-            const currentPoints = parseInt(data.pts || 0);
-            
+            const r = await fetch(`${API_CLOUD}?getCid=${q.get('cid')}`);
+            const d = await r.json();
+            const pts = parseInt(d.pts || 0);
             const dots = document.querySelectorAll('.pallino');
-            for(let i=0; i<currentPoints && i<5; i++) {
-                dots[i].classList.add('active');
-            }
-            
-            if(currentPoints >= 5) {
-                document.getElementById('win-message-box').style.display = "block";
-            }
+            for(let i=0; i<pts && i<5; i++) dots[i].classList.add('active');
+            if(pts >= 5) document.getElementById('win-message-box').style.display = "block";
         } catch(e) {}
     }
 
     function shareGiftWithFriend() {
         const q = new URLSearchParams(window.location.search);
-        const baseUrl = window.location.href.split('?')[0];
-        const giftLink = `${baseUrl}?v=voucher&st=${encodeURIComponent(q.get('st'))}&wa=${q.get('wa')}&da=${encodeURIComponent(q.get('n'))}&pr=${encodeURIComponent(q.get('sc'))}`;
-        const msg = `Ciao! Ti invio un regalo speciale per ${q.get('st')} da parte di ${q.get('n')}: ${giftLink}`;
-        window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`);
+        const link = `${window.location.href.split('?')[0]}?v=voucher&st=${encodeURIComponent(q.get('st'))}&wa=${q.get('wa')}&da=${encodeURIComponent(q.get('n'))}&pr=${encodeURIComponent(q.get('sc'))}`;
+        window.open(`https://wa.me/?text=${encodeURIComponent('Ti invio un regalo speciale per ' + q.get('st') + ': ' + link)}`);
     }
 
-    function initVoucherScene(q) {
-        switchView('voucher');
-        document.getElementById('v-friend-message').innerText = `${q.get('da')} ti ha regalato un bonus esclusivo da utilizzare presso ${q.get('st')}!`;
-        document.getElementById('v-friend-value').innerText = q.get('pr');
-    }
+    function initVoucher(q) { switchView('voucher'); document.getElementById('v-friend-message').innerText = `${q.get('da')} ti ha inviato un regalo per ${q.get('st')}!`; document.getElementById('v-friend-value').innerText = q.get('pr'); }
+    function bookingViaWA() { const q = new URLSearchParams(window.location.search); window.open(`https://wa.me/${q.get('wa')}?text=Ciao! Vorrei prenotare usando il mio regalo`); }
 
-    function bookingViaWA() {
-        const q = new URLSearchParams(window.location.search);
-        const msg = `Ciao! Ho ricevuto un regalo da ${q.get('da')} per ${q.get('st')}. Vorrei prenotare: ${q.get('pr')}`;
-        window.open(`https://wa.me/${q.get('wa')}?text=${encodeURIComponent(msg)}`);
-    }
-
-    /* ---------------------------------------------------------
-       MAIL E ASSISTENZA
-       --------------------------------------------------------- */
+    /* --- LOGICA MAIL PRO & FEEDBACK --- */
 
     function sendUpgradeEmailRequest() {
-        const mailTo = "spich.admin@gmail.com";
-        const subject = encodeURIComponent("RICHIESTA ATTIVAZIONE PRO - ID: " + currentDID);
-        const body = encodeURIComponent("Salve,\n\nRichiedo l'attivazione della versione PRO per la mia attività.\n\nNome Attività: " + myBiz.nome + "\nID Dispositivo: " + currentDID + "\n\nAttendo istruzioni per il pagamento.");
+        const mail = "spich.admin@gmail.com";
+        const sub = "RICHIESTA ATTIVAZIONE PRO - ID " + deviceID;
+        const body = "Richiedo l'attivazione della versione PRO per la mia attività.\n\nNome Attività: " + myBiz.nome + "\nID Dispositivo: " + deviceID + "\n\nAttendo istruzioni.";
         
-        window.location.href = `mailto:${mailTo}?subject=${subject}&body=${body}`;
+        // Conferma visiva immediata
+        alert("Stiamo aprendo il tuo client mail. Per completare la richiesta, premi 'Invia' nella mail che apparirà.\n\nSe non vedi nulla, invia manualmente una mail a spich.admin@gmail.com citando il tuo ID: " + deviceID);
+        
+        // Esecuzione Mailto
+        window.location.href = "mailto:" + mail + "?subject=" + encodeURIComponent(sub) + "&body=" + encodeURIComponent(body);
+        
+        showToast("Richiesta Inviata!");
     }
 
 </script>
 </body>
-</html>
+</html>>
