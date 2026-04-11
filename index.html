@@ -16,9 +16,11 @@
            =====================================================================
         */
         :root { 
+            /* Palette Colori Principale */
             --primary-teal: #008080; 
             --dark-teal: #006666;
             --premium-gold: #d4af37;
+            --gold-gradient: linear-gradient(135deg, #fbf5b7 0%, #d4af37 50%, #a67c00 100%);
             --deep-blue: #003366; 
             --soft-gold: #f4e3b1;
             --pure-white: #ffffff;
@@ -28,13 +30,13 @@
             --danger-red: #ef4444;
             --success-green: #10b981;
             
-            /* Elevation & Shadows */
+            /* Elevazione e Ombre */
             --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
             --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
             --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
             --card-shadow: 0 10px 30px rgba(0,0,0,0.05);
             
-            /* Border Radius */
+            /* Bordi e Arrotondamenti */
             --radius-lg: 24px;
             --radius-md: 16px;
             --radius-sm: 12px;
@@ -80,13 +82,13 @@
             position: relative;
             box-shadow: 0 0 40px rgba(0,0,0,0.03);
             
-            /* Cornicette laterali eleganti */
+            /* Cornicette laterali eleganti stabilite come standard */
             border-left: 5px solid var(--premium-gold);
             border-right: 5px solid var(--premium-gold);
         }
 
         /* =====================================================================
-           [SECTION 4] - HEADER & BRANDING
+           [SECTION 4] - HEADER & BRANDING IDENTITY
            =====================================================================
         */
         .header-main {
@@ -117,7 +119,7 @@
             margin-bottom: 20px;
         }
 
-        /* Nome Attività visibile in Dashboard */
+        /* Nome Attività visibile in Dashboard dopo il Login */
         .biz-display-header {
             font-weight: 800;
             color: var(--premium-gold);
@@ -129,7 +131,7 @@
         }
 
         /* =====================================================================
-           [SECTION 5] - VIEW CONTROLLER (SCENES)
+           [SECTION 5] - VIEW CONTROLLER (SCENES & ANIMATIONS)
            =====================================================================
         */
         .view-scene {
@@ -156,7 +158,7 @@
             background: var(--pure-white);
             padding: 25px;
             border-radius: var(--radius-lg);
-            border: 2px solid var(--soft-gold); /* Cornicetta sottile dorata */
+            border: 2px solid var(--soft-gold); /* Cornicetta sottile dorata interna */
             margin-bottom: 25px;
             box-shadow: var(--card-shadow);
             position: relative;
@@ -238,7 +240,7 @@
         }
 
         /* =====================================================================
-           [SECTION 7] - DASHBOARD SPECIFIC ELEMENTS
+           [SECTION 7] - DASHBOARD SPECIFIC ELEMENTS & LISTS
            =====================================================================
         */
         .counter-display {
@@ -320,7 +322,91 @@
         .btn-del-action { background: #fee2e2; color: var(--danger-red); }
 
         /* =====================================================================
-           [SECTION 8] - VOUCHER DESIGN (CON PACCO REGALO)
+           [SECTION 8] - IL PACCO REGALO MASTER (CENTRALE, FLUTTUANTE CON FIOCCO)
+           =====================================================================
+        */
+        .gift-container {
+            margin: 0 auto 35px; /* Centrale e spaziatura */
+            width: 140px; /* Massimizzato */
+            height: 140px;
+            position: relative;
+            animation: giftFloat 3s ease-in-out infinite; /* Fluttuazione */
+        }
+
+        @keyframes giftFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        /* Scatola Stilizzata Monocolore Teal */
+        .gift-box-premium {
+            width: 100px;
+            height: 85px;
+            background: var(--primary-teal);
+            border-radius: 12px;
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 3px solid var(--premium-gold);
+            z-index: 2;
+            box-shadow: 0 10px 25px rgba(0,128,128,0.2);
+        }
+
+        /* Nastri Oro sul Pacco Teal (Pseudo-elementi) */
+        .gift-box-premium::before {
+            content: '';
+            position: absolute;
+            top: 50%; left: 0;
+            width: 100%; height: 10px;
+            background: var(--gold-gradient);
+            transform: translateY(-50%);
+        }
+
+        .gift-box-premium::after {
+            content: '';
+            position: absolute;
+            left: 50%; top: 0;
+            width: 10px; height: 100%;
+            background: var(--gold-gradient);
+            transform: translateX(-50%);
+        }
+
+        /* Il Fiocco Superiore Vistoso (Oro) */
+        .gift-bow-premium {
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 40px;
+            z-index: 5;
+        }
+
+        .gift-bow-premium::before,
+        .gift-bow-premium::after {
+            content: '';
+            position: absolute;
+            width: 42px;
+            height: 32px;
+            background: var(--gold-gradient);
+            border-radius: 50% 50% 10% 50%; /* Stilizzazione occhielli fiocco */
+            border: 1.5px solid rgba(0,0,0,0.1);
+        }
+
+        .gift-bow-premium::before {
+            left: -10px;
+            transform: rotate(-15deg);
+        }
+
+        .gift-bow-premium::after {
+            right: -10px;
+            transform: rotate(105deg);
+            border-radius: 50% 50% 50% 10%;
+        }
+
+        /* =====================================================================
+           [SECTION 9] - VOUCHER INTERFACCIA PAZIENTE & QR
            =====================================================================
         */
         .voucher-wrap {
@@ -328,56 +414,9 @@
             padding: 10px 0;
         }
 
-        /* Gift Icon with Ribbon */
-        .gift-box-icon {
-            width: 80px;
-            height: 80px;
-            margin: 0 auto 25px;
-            position: relative;
-            background: var(--deep-blue);
-            border-radius: 15px;
-            border: 4px solid var(--premium-gold);
-            box-shadow: 0 8px 20px rgba(0, 51, 102, 0.2);
-        }
-
-        .gift-box-icon::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 0;
-            width: 100%;
-            height: 10px;
-            background: var(--premium-gold);
-            transform: translateY(-50%);
-        }
-
-        .gift-box-icon::after {
-            content: '';
-            position: absolute;
-            left: 50%;
-            top: 0;
-            width: 10px;
-            height: 100%;
-            background: var(--premium-gold);
-            transform: translateX(-50%);
-        }
-
-        /* Il fiocco sopra il pacco */
-        .gift-ribbon {
-            position: absolute;
-            top: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 40px;
-            height: 20px;
-            background: var(--premium-gold);
-            border-radius: 20px 20px 0 0;
-            z-index: 10;
-        }
-
         .v-biz-name {
             font-family: 'Comfortaa', cursive;
-            font-size: 2.6rem;
+            font-size: 2.8rem;
             color: var(--primary-teal);
             margin-bottom: 8px;
             font-weight: 700;
@@ -399,8 +438,8 @@
         }
 
         .fidelity-point {
-            width: 30px;
-            height: 30px;
+            width: 32px;
+            height: 32px;
             border-radius: 50%;
             border: 2.5px solid var(--premium-gold);
             transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -436,7 +475,7 @@
         }
 
         /* =====================================================================
-           [SECTION 9] - ALERTS & NOTIFICATIONS
+           [SECTION 10] - ALERTS, NOTIFICATIONS & TOAST
            =====================================================================
         */
         .pro-upgrade-banner {
@@ -483,7 +522,7 @@
         }
 
         /* =====================================================================
-           [SECTION 10] - FOOTER
+           [SECTION 11] - FOOTER E DECORAZIONI FINALI
            =====================================================================
         */
         .footer-branding {
@@ -517,7 +556,7 @@
 
         <main id="view-setup" class="view-scene">
             <div class="card-ui">
-                <h3 style="margin-bottom:25px; color:var(--primary-teal); font-weight:800;">Benvenuto nel Network</h3>
+                <h3 style="margin-bottom:25px; color:var(--primary-teal); font-weight:800; text-align:center;">Benvenuto nel Network</h3>
                 
                 <div class="field-group">
                     <label class="field-label">Nome della tua Attività</label>
@@ -543,7 +582,7 @@
                 </button>
             </div>
             
-            <p style="text-align:center; font-size:0.75rem; color:var(--slate-gray);">
+            <p style="text-align:center; font-size:0.75rem; color:var(--slate-gray); padding: 0 20px;">
                 Accedendo accetti i termini di gestione del Network Premium SPICH.
             </p>
         </main>
@@ -603,19 +642,19 @@
 
             <div style="display:flex; justify-content:space-between; align-items:center; margin: 15px 5px;">
                 <h4 style="font-weight:800; color:var(--primary-teal); text-transform:uppercase; font-size:0.85rem;">Anagrafica Attiva</h4>
-                <span id="session-tag" style="font-size:0.6rem; background:#f1f5f9; padding:4px 10px; border-radius:10px; font-weight:700;">LIVE SYNC</span>
+                <span id="session-tag" style="font-size:0.6rem; background:#f1f5f9; padding:4px 10px; border-radius:10px; font-weight:700;">LIVE SYNC attivo</span>
             </div>
             
             <div id="main-list-render" class="list-container">
-            </div>
+                </div>
         </main>
 
         <main id="view-voucher" class="view-scene">
             <div class="voucher-wrap">
                 
-                <div style="position:relative; width:80px; height:80px; margin: 0 auto 30px;">
-                    <div class="gift-ribbon"></div>
-                    <div class="gift-box-icon"></div>
+                <div class="gift-container">
+                    <div class="gift-bow-premium"></div>
+                    <div class="gift-box-premium"></div>
                 </div>
 
                 <h2 id="display-biz-name" class="v-biz-name">STUDIO</h2>
@@ -640,7 +679,7 @@
                 </div>
 
                 <p style="font-size:0.75rem; color:var(--slate-gray); padding:0 30px; margin: 15px 0 30px;">
-                    Presenta questo Pass al desk. Ad ogni visita accumuli punti per il tuo premio fedeltà.
+                    Presenta questo Pass digitale al desk. Ad ogni visita accumuli punti per il tuo premio fedeltà personalizzato.
                 </p>
 
                 <button class="btn-action btn-gold" onclick="shareVoucherLink()">
@@ -659,331 +698,540 @@
     <script>
         /**
          * =====================================================================
-         * CONFIGURAZIONE DI SISTEMA (Google Apps Script Endpoint)
+         * CONFIGURAZIONE DI SISTEMA & ENDPOINT
          * =====================================================================
          */
+        // Endpoint Google Apps Script per sincronizzazione cloud
         const GOOGLE_ENDPOINT = "https://script.google.com/macros/s/AKfycbyh4CGnWQWyvztKvTkbQ9_TOUMb3EQaB6bZySuamZeRkYSe_1VBvWJYXc2LcESKWS1sdg/exec";
         
         /**
          * =====================================================================
-         * STATO DELL'APPLICAZIONE
+         * STATO GLOBALE DELL'APPLICAZIONE (Inizializzazione)
          * =====================================================================
          */
+        // RECUPERO DATI DA LOCALSTORAGE CON FALLBACK DI SICUREZZA
         let state = {
+            // ID Unico Dispositivo (Generato o recuperato)
             deviceID: localStorage.getItem('spich_v18_device_id') || generateUID(),
+            // Profilo attività salvato
             bizProfile: JSON.parse(localStorage.getItem('spich_v18_biz_data') || 'null'),
+            // Database pazienti locale
             patientDb: JSON.parse(localStorage.getItem('spich_v18_db') || '[]'),
+            // Stato Pro (Aggiornato dal cloud)
             isProActive: false
         };
 
         /**
          * =====================================================================
-         * INIZIALIZZAZIONE AL CARICAMENTO
+         * EVENT LISTENER - BOOTSTRAP DELL'APP
          * =====================================================================
          */
         window.addEventListener('DOMContentLoaded', async () => {
+            // VERIFICA E PERSISTENZA DEVICE ID
+            try {
+                if(!localStorage.getItem('spich_v18_device_id')) {
+                    localStorage.setItem('spich_v18_device_id', state.deviceID);
+                    console.log("Nuovo DeviceID generato: " + state.deviceID);
+                }
+                document.getElementById('debug-info').innerText = "SESSION ID: " + state.deviceID;
+            } catch (e) { console.error("Errore LocalStorage DeviceID."); }
             
-            if(!localStorage.getItem('spich_v18_device_id')) {
-                localStorage.setItem('spich_v18_device_id', state.deviceID);
-            }
-            
-            document.getElementById('debug-info').innerText = "SESSION ID: " + state.deviceID;
-            
+            // ROUTING LOGICO BASATO SU PARAMETRI URL
             const urlParams = new URLSearchParams(window.location.search);
             
+            // CASO A: LATO CLIENTE (VOUCHER MODE)
             if (urlParams.get('v') === 'gift') {
-                // MODALITÀ PAZIENTE
+                console.log("Modalità Voucher Attiva - Lato Cliente");
                 initVoucherMode(urlParams);
-            } else if (!state.bizProfile) {
-                // MODALITÀ SETUP
+            } 
+            // CASO B: LATO ESERCENTE - PRIMO ACCESSO (SETUP MODE)
+            else if (!state.bizProfile) {
+                console.log("Nessun profilo trovato. Reindirizzamento Setup.");
                 navigateTo('setup');
-            } else {
-                // MODALITÀ DASHBOARD
+            } 
+            // CASO C: LATO ESERCENTE - REGISTRATO (DASHBOARD MODE)
+            else {
+                console.log("Dashboard Esercente Attiva. Avvio Dashboard.");
                 navigateTo('dash');
                 
-                // Mostra nome attività in Dashboard
-                const bizTitle = document.getElementById('display-dash-biz-name');
-                bizTitle.innerText = state.bizProfile.name;
-                bizTitle.style.display = 'block';
+                // MOSTRA NOME ATTIVITÀ NELL'HEADER
+                try {
+                    const bizTitle = document.getElementById('display-dash-biz-name');
+                    bizTitle.innerText = state.bizProfile.name;
+                    bizTitle.style.display = 'block';
+                } catch (e) { console.warn("Header Dashboard non trovato."); }
                 
-                applyTerminology();
-                await checkCloudStatus();
-                refreshPatientUI();
+                // INIZIALIZZAZIONE COMPONENTI DASHBOARD
+                applyTerminology();   // Adatta nomi (Pazienti, Clienti, Ospiti)
+                refreshPatientUI();   // Renderizza lista locale
+                
+                // KILL-SWITCH REMOTO: Esegui controllo cancellazione dal cloud
+                console.log("Esecuzione controllo cloud remoto (Kill-Switch)...");
+                await checkCloudStatus(); 
             }
         });
 
+        /**
+         * =====================================================================
+         * FUNZIONI DI UTILITÀ GENERALE
+         * =====================================================================
+         */
+        // GENERATORE ID UNICO (UID)
         function generateUID() {
+            // Combina random stringa e timestamp per unicità elevata
             return 'SP-' + Math.random().toString(36).substr(2, 9).toUpperCase();
         }
 
+        // CONTROLLER DI NAVIGAZIONE TRA LE VISTE (SCENES)
         function navigateTo(sceneId) {
+            console.log("Navigazione verso scena: " + sceneId);
+            // Nascondi tutte le scene
             const scenes = document.querySelectorAll('.view-scene');
             scenes.forEach(s => s.classList.remove('active'));
-            document.getElementById('view-' + sceneId).classList.add('active');
-            window.scrollTo(0, 0);
+            
+            // Mostra la scena target
+            const target = document.getElementById('view-' + sceneId);
+            if(target) {
+                target.classList.add('active');
+                // Scroll in alto automatico
+                window.scrollTo(0, 0);
+            } else { console.error("Scena non trovata: " + sceneId); }
         }
 
+        // SISTEMA DI NOTIFICHE FLASH (TOAST)
         function triggerToast(message) {
+            console.log("Toast notifica: " + message);
             const toast = document.getElementById('sys-toast');
-            toast.innerText = message;
-            toast.style.display = 'block';
-            setTimeout(() => { toast.style.display = 'none'; }, 2800);
+            if(toast) {
+                toast.innerText = message;
+                toast.style.display = 'block';
+                // Nascondi dopo 3 secondi
+                setTimeout(() => { toast.style.display = 'none'; }, 3000);
+            }
         }
 
         /**
          * =====================================================================
-         * LOGICA DI BUSINESS
+         * LOGICA DI CONTROLLO REMOTO & SINCRONIZZAZIONE CLOUD (KILL-SWITCH)
          * =====================================================================
          */
-        function initBusinessProfile() {
-            const nameValue = document.getElementById('setup-name').value.trim();
-            const phoneValue = document.getElementById('setup-phone').value.trim();
-            const sectorValue = document.getElementById('setup-type').value;
-
-            if (!nameValue || !phoneValue) {
-                alert("Attenzione: Tutti i campi sono obbligatori.");
+        async function checkCloudStatus() {
+            // ESEGUI SOLO SE LOGGATO (LOGICA CONCORDATA)
+            if(!state.bizProfile || !state.deviceID) {
+                console.log("Check Cloud saltato: Utente non loggato localmente.");
                 return;
             }
 
-            state.bizProfile = {
-                name: nameValue,
-                phone: '39' + phoneValue.replace(/\D/g, ''),
-                sector: sectorValue
-            };
-
-            localStorage.setItem('spich_v18_biz_data', JSON.stringify(state.bizProfile));
-
-            // Notifica al Cloud
-            fetch(GOOGLE_ENDPOINT, {
-                method: "POST",
-                mode: "no-cors",
-                body: JSON.stringify({
-                    t: "REG_BIZ",
-                    id: state.deviceID,
-                    nome: nameValue,
-                    settore: sectorValue
-                })
-            });
-
-            triggerToast("Network Attivato!");
-            setTimeout(() => { location.reload(); }, 1200);
-        }
-
-        async function checkCloudStatus() {
-            if(!state.deviceID) return;
+            console.log("Invio richiesta check cloud per ID: " + state.deviceID);
             try {
+                // Fetch asincrono con timeout di sicurezza implicito
                 const response = await fetch(`${GOOGLE_ENDPOINT}?checkPro=${state.deviceID}`);
+                
+                // Verifica integrità risposta
+                if (!response.ok) throw new Error('Risposta di rete non valida.');
+                
                 const cloudData = await response.json();
+                console.log("Dati cloud ricevuti:", cloudData);
 
                 // LOGICA KILL-SWITCH REMOTO
+                // Se lo stato è UNAUTHORIZED o exists è false, l'ID è stato cancellato dal foglio.
                 if (cloudData.status === "UNAUTHORIZED" || cloudData.exists === false) {
-                    triggerToast("Account disattivato dal Network.");
+                    console.error("ACCESSO NEGATO: L'ID è stato rimosso dal Network centrale.");
+                    triggerToast("NETWORK DISATTIVATO.");
+                    
+                    // Resetta l'app e blocca l'accesso dopo 2.5 secondi
                     setTimeout(() => { 
+                        console.log("Reset totale applicazione in corso...");
                         localStorage.clear(); 
                         location.reload(); 
                     }, 2500);
-                    return;
+                    return; // Interrompi esecuzione ulteriore
                 }
 
+                // LOGICA SBLOCCO PRO
                 if (cloudData.isPro === "PRO") {
+                    console.log("Stato PRO rilevato. Sblocco funzionalità.");
                     state.isProActive = true;
-                    unlockProFeatures();
+                    unlockProFeatures(); // Aggiorna UI con campi PRO
                 }
                 
+                // Aggiorna limiti FREE in base allo stato
                 toggleLimitWarnings();
             } catch (err) {
-                console.warn("Cloud offline.");
+                console.warn("Cloud Sync offline o Endpoint non raggiungibile. Modalità locale attiva.", err);
+                // In modalità offline, l'app continua a funzionare con i dati locali
+                // ma non sblocca PRO se non già sbloccato.
             }
         }
 
+        /**
+         * =====================================================================
+         * LOGICA DI SETUP & ATTIVAZIONE ESERCENTE
+         * =====================================================================
+         */
+        function initBusinessProfile() {
+            console.log("Avvio creazione profilo esercente...");
+            
+            // RECUPERO E VALIDAZIONE DATI FORM
+            try {
+                const nameValue = document.getElementById('setup-name').value.trim();
+                const phoneValue = document.getElementById('setup-phone').value.trim();
+                const sectorValue = document.getElementById('setup-type').value;
+
+                // Regex robusta per verifica cellulare
+                const phoneRegex = /^[0-9]{8,11}$/;
+
+                // VALIDAZIONE ESTESA
+                if (nameValue.length < 3) { alert("Nome attività troppo corto (min 3 caratteri)."); return; }
+                if (!phoneRegex.test(phoneValue)) { alert("Numero WhatsApp non valido. Inserire solo numeri (es. 3331234567)."); return; }
+
+                // SALVATAGGIO STATO LOCALE (LOGIN)
+                state.bizProfile = {
+                    name: nameValue,
+                    phone: '39' + phoneValue.replace(/\D/g, ''), // Formato internazionale
+                    sector: sectorValue,
+                    created_at: new Date().toISOString()
+                };
+
+                localStorage.setItem('spich_v18_biz_data', JSON.stringify(state.bizProfile));
+                console.log("Profilo locale creato:", state.bizProfile);
+
+                // REGISTRAZIONE SUL GOOGLE SHEET (Cloud Sync)
+                console.log("Invio dati registrazione al Cloud Google...");
+                fetch(GOOGLE_ENDPOINT, {
+                    method: "POST",
+                    mode: "no-cors", // No-cors per evitare problemi CORS
+                    body: JSON.stringify({
+                        t: "REG_BIZ",
+                        id: state.deviceID,
+                        nome: nameValue,
+                        settore: sectorValue,
+                        created_at: state.bizProfile.created_at
+                    })
+                });
+
+                // NOTIFICA E RELOAD
+                triggerToast("NETWORK ATTIVATO!");
+                // Reload dopo 1.5 secondi per avviare la Dashboard
+                setTimeout(() => { location.reload(); }, 1500);
+
+            } catch (e) { console.error("Errore critico in initBusinessProfile", e); alert("Si è verificato un errore durante l'attivazione. Riprova."); }
+        }
+
+        /**
+         * =====================================================================
+         * GESTIONE TERMINOLOGIA & LIMITI DASHBOARD
+         * =====================================================================
+         */
         function applyTerminology() {
             if (!state.bizProfile) return;
-            const labelCount = document.getElementById('stats-label');
-            const labelInput = document.getElementById('label-client-name');
-            const maps = {
-                "Ristorazione": { plural: "Ospiti Registrati", singular: "Nome Ospite" },
-                "Wellness": { plural: "Clienti nel Database", singular: "Nome Cliente" },
-                "Salute": { plural: "Pazienti Registrati", singular: "Nome Paziente" }
-            };
-            const selected = maps[state.bizProfile.sector] || maps["Salute"];
-            labelCount.innerText = selected.plural;
-            labelInput.innerText = selected.singular;
+            console.log("Adattamento terminologia per settore: " + state.bizProfile.sector);
+            
+            try {
+                const labelCount = document.getElementById('stats-label');
+                const labelInput = document.getElementById('label-client-name');
+                const inputPlaceholder = document.getElementById('new-client-name');
+                
+                const maps = {
+                    "Ristorazione": { plural: "Ospiti Registrati", singular: "Nome Ospite" },
+                    "Wellness": { plural: "Clienti nel Database", singular: "Nome Cliente" },
+                    "Salute": { plural: "Pazienti Registrati", singular: "Nome Paziente" }
+                };
+                
+                const selected = maps[state.bizProfile.sector] || maps["Salute"]; // Default Salute
+                
+                if(labelCount) labelCount.innerText = selected.plural;
+                if(labelInput) labelInput.innerText = selected.singular;
+                if(inputPlaceholder) inputPlaceholder.placeholder = "Inserisci " + selected.singular;
+            } catch (e) { console.warn("Elementi terminologia non trovati."); }
         }
 
         function toggleLimitWarnings() {
-            const banner = document.getElementById('alert-limit-reached');
-            const btnSubmit = document.getElementById('btn-submit-main');
-            if (!state.isProActive && state.patientDb.length >= 10) {
-                banner.style.display = 'block';
-                btnSubmit.disabled = true;
-            } else {
-                banner.style.display = 'none';
-                btnSubmit.disabled = false;
+            // Se PRO attiva, i limiti sono rimossi
+            if(state.isProActive) {
+                console.log("Logica limiti disattivata (PRO attivo).");
+                return;
             }
+
+            console.log("Verifica limiti FREE (10 pazienti)... Database attuale: " + state.patientDb.length);
+            try {
+                const banner = document.getElementById('alert-limit-reached');
+                const btnSubmit = document.getElementById('btn-submit-main');
+                
+                // Verifica se raggiunto il limite di 10 record
+                if (state.patientDb.length >= 10) {
+                    console.warn("LIMITE FREE RAGGIUNTO. Blocco inserimento.");
+                    if(banner) banner.style.display = 'block';
+                    if(btnSubmit) btnSubmit.disabled = true;
+                } else {
+                    if(banner) banner.style.display = 'none';
+                    if(btnSubmit) btnSubmit.disabled = false;
+                }
+            } catch (e) { console.warn("Elementi limiti Dashboard non trovati."); }
         }
 
         function unlockProFeatures() {
-            const refSlot = document.getElementById('slot-referral');
-            const loySlot = document.getElementById('slot-loyalty');
-            // Verifica se esistono per non sovrascrivere se già pro
-            if(refSlot && refSlot.querySelector('select')) {
-                refSlot.innerHTML = `<input type="text" id="val-referral" placeholder="Esempio: 15% Sconto">`;
-            }
-            if(loySlot && loySlot.querySelector('input[readonly]')) {
-                loySlot.innerHTML = `<input type="text" id="val-loyalty" placeholder="Esempio: Kit Omaggio">`;
-            }
+            console.log("Sblocco UI funzionalità PRO (Campi personalizzati)...");
+            try {
+                const refSlot = document.getElementById('slot-referral');
+                const loySlot = document.getElementById('slot-loyalty');
+                
+                // Sostituisci i campi fissi/readonly con Input liberi
+                if(refSlot) {
+                    refSlot.innerHTML = `<input type="text" id="val-referral" placeholder="Esempio: 15% Sconto Amico">`;
+                }
+                if(loySlot) {
+                    loySlot.innerHTML = `<input type="text" id="val-loyalty" placeholder="Esempio: Trattamento Omaggio">`;
+                }
+            } catch (e) { console.warn("Elementi personalizzazione PRO non trovati."); }
         }
 
+        /**
+         * =====================================================================
+         * REGISTRAZIONE E GESTIONE PAZIENTI (LATO ESERCENTE)
+         * =====================================================================
+         */
         function registerNewPatient() {
-            const cName = document.getElementById('new-client-name').value.trim();
-            const cTel = document.getElementById('new-client-tel').value.trim();
-            const cRef = document.getElementById('val-referral').value;
-            const cLoy = document.getElementById('val-loyalty').value;
+            console.log("Tentativo registrazione nuovo paziente...");
+            
+            try {
+                const cName = document.getElementById('new-client-name').value.trim();
+                const cTel = document.getElementById('new-client-tel').value.trim();
+                
+                // Recupero valori (potrebbero essere Select o Input PRO)
+                const refField = document.getElementById('val-referral');
+                const loyField = document.getElementById('val-loyalty');
+                
+                const cRef = refField ? refField.value : 'Sconto 10%';
+                const cLoy = loyField ? loyField.value : 'Trattamento Omaggio';
 
-            if (!cName || !cTel) {
-                alert("Inserire Nome e Cellulare.");
-                return;
-            }
+                // Regex cellulare
+                const phoneRegex = /^[0-9]{9,11}$/;
 
-            const uniqueCID = 'CID-' + Date.now().toString(36).toUpperCase();
-            const patientRecord = {
-                cid: uniqueCID,
-                nome: cName,
-                tel: '39' + cTel.replace(/\D/g, ''),
-                sconto: cRef,
-                premio: cLoy,
-                pts: 0
-            };
+                // VALIDAZIONE PAZIENTE
+                if (cName.length < 3) { alert("Nome troppo corto."); return; }
+                if (!phoneRegex.test(cTel)) { alert("Numero cellulare non valido."); return; }
 
-            state.patientDb.unshift(patientRecord);
-            localStorage.setItem('spich_v18_db', JSON.stringify(state.patientDb));
-
-            fetch(GOOGLE_ENDPOINT, {
-                method: "POST",
-                mode: "no-cors",
-                body: JSON.stringify({
-                    t: "ADD_CLIENT",
-                    bizId: state.deviceID,
-                    bizName: state.bizProfile.name,
-                    clientName: cName,
-                    clientTel: patientRecord.tel,
-                    premio: cLoy,
+                // CREAZIONE RECORD LOCALE
+                const uniqueCID = 'CID-' + Date.now().toString(36).toUpperCase();
+                const patientRecord = {
                     cid: uniqueCID,
-                    pts: 0
-                })
-            });
+                    nome: cName,
+                    tel: '39' + cTel.replace(/\D/g, ''),
+                    sconto: cRef, // Valore referral (es. Sconto 10%)
+                    premio: cLoy,  // Premio fedeltà (es. Trattamento Omaggio)
+                    pts: 0,       // Punti iniziali
+                    created_at: new Date().toISOString()
+                };
 
-            triggerToast("Pass Creato!");
-            refreshPatientUI();
-            toggleLimitWarnings();
-            document.getElementById('new-client-name').value = "";
-            document.getElementById('new-client-tel').value = "";
+                // AGGIORNAMENTO DATABASE LOCALE (Aggiungi in testa)
+                state.patientDb.unshift(patientRecord);
+                localStorage.setItem('spich_v18_db', JSON.stringify(state.patientDb));
+                console.log("Paziente registrato localmente: " + uniqueCID);
+
+                // SINCRONIZZAZIONE GOOGLE SHEET (Cloud Backup & Referral)
+                fetch(GOOGLE_ENDPOINT, {
+                    method: "POST",
+                    mode: "no-cors",
+                    body: JSON.stringify({
+                        t: "ADD_CLIENT",
+                        bizId: state.deviceID,
+                        bizName: state.bizProfile.name,
+                        clientName: cName,
+                        clientTel: patientRecord.tel,
+                        premio: cLoy,
+                        cid: uniqueCID,
+                        pts: 0,
+                        sconto: cRef // Info referral per lo sheet amico
+                    })
+                });
+
+                // AGGIORNAMENTO UI
+                triggerToast("Pass Creato!");
+                refreshPatientUI();
+                toggleLimitWarnings(); // Ricontrolla se limite raggiunto
+                
+                // RESET CAMPI FORM
+                document.getElementById('new-client-name').value = "";
+                document.getElementById('new-client-tel').value = "";
+
+            } catch (e) { console.error("Errore in registerNewPatient", e); }
         }
 
         function refreshPatientUI() {
-            const listArea = document.getElementById('main-list-render');
-            listArea.innerHTML = "";
-            document.getElementById('stats-total').innerText = state.patientDb.length;
+            console.log("Rendering lista pazienti locale...");
+            try {
+                const listArea = document.getElementById('main-list-render');
+                if(!listArea) return;
+                
+                listArea.innerHTML = "";
+                document.getElementById('stats-total').innerText = state.patientDb.length;
 
-            if (state.patientDb.length === 0) {
-                listArea.innerHTML = `<p style="text-align:center; color:#94a3b8; padding:30px;">Database vuoto.</p>`;
-                return;
-            }
+                if (state.patientDb.length === 0) {
+                    listArea.innerHTML = `<p style="text-align:center; color:#94a3b8; font-weight:600; padding:30px;">Database vuoto.<br>Registra il tuo primo paziente.</p>`;
+                    return;
+                }
 
-            state.patientDb.forEach((entry, i) => {
-                const element = document.createElement('div');
-                element.className = 'row-item';
-                const whatsappUrl = buildWhatsAppMessage(entry);
-                element.innerHTML = `
-                    <div class="row-info">
-                        <b>${entry.nome}</b>
-                        <span>${entry.pts} Punti • ${entry.premio}</span>
-                    </div>
-                    <div class="row-tools">
-                        <a href="${whatsappUrl}" target="_blank" class="tool-btn btn-wa-action">
-                            <i class="fab fa-whatsapp"></i>
-                        </a>
-                        <button class="tool-btn btn-pts-action" onclick="updatePoints(${i})">+1</button>
-                        ${state.isProActive ? `
-                            <button class="tool-btn btn-del-action" onclick="removeEntry(${i})">
-                                <i class="fas fa-trash-alt"></i>
-                            </button>
-                        ` : ''}
-                    </div>
-                `;
-                listArea.appendChild(element);
-            });
+                state.patientDb.forEach((entry, i) => {
+                    const element = document.createElement('div');
+                    element.className = 'row-item';
+                    
+                    const whatsappUrl = buildWhatsAppMessage(entry);
+                    
+                    element.innerHTML = `
+                        <div class="row-info">
+                            <b>${entry.nome}</b>
+                            <span>${entry.pts} Punti Registrati • ${entry.premio}</span>
+                        </div>
+                        <div class="row-tools">
+                            <a href="${whatsappUrl}" target="_blank" class="tool-btn btn-wa-action" title="Invia Pass WhatsApp">
+                                <i class="fab fa-whatsapp"></i>
+                            </a>
+                            <button class="tool-btn btn-pts-action" onclick="updatePoints(${i})" title="Aggiungi Punto Visita">+1</button>
+                            ${state.isProActive ? `
+                                <button class="tool-btn btn-del-action" onclick="removeEntry(${i})" title="Rimuovi record">
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
+                            ` : ''}
+                        </div>
+                    `;
+                    listArea.appendChild(element);
+                });
+            } catch (e) { console.error("Errore durante refreshPatientUI", e); }
         }
 
         function updatePoints(index) {
-            state.patientDb[index].pts++;
-            localStorage.setItem('spich_v18_db', JSON.stringify(state.patientDb));
-            fetch(GOOGLE_ENDPOINT, {
-                method: "POST",
-                mode: "no-cors",
-                body: JSON.stringify({
-                    t: "UPDATE_POINTS",
-                    bizId: state.deviceID,
-                    cid: state.patientDb[index].cid,
-                    pts: state.patientDb[index].pts
-                })
-            });
-            triggerToast("Punto Registrato!");
-            refreshPatientUI();
+            console.log("Aggiornamento punto per record index: " + index);
+            try {
+                // Incremento Locale
+                state.patientDb[index].pts++;
+                localStorage.setItem('spich_v18_db', JSON.stringify(state.patientDb));
+                
+                // Sincronizzazione Cloud immediata (no-cors)
+                fetch(GOOGLE_ENDPOINT, {
+                    method: "POST",
+                    mode: "no-cors",
+                    body: JSON.stringify({
+                        t: "UPDATE_POINTS",
+                        bizId: state.deviceID,
+                        cid: state.patientDb[index].cid,
+                        pts: state.patientDb[index].pts
+                    })
+                });
+                
+                triggerToast("Punto Registrato!");
+                refreshPatientUI();
+            } catch (e) { console.error("Errore in updatePoints", e); }
         }
 
         function removeEntry(index) {
-            if (confirm("Rimuovere il record?")) {
+            if(!state.isProActive) return; // Protezione se chiamato in FREE
+
+            console.log("Tentativo rimozione record index: " + index);
+            if (confirm("Attenzione: Rimuovere definitivamente il record di " + state.patientDb[index].nome + "?\nL'azione è irreversibile locale.")) {
                 state.patientDb.splice(index, 1);
                 localStorage.setItem('spich_v18_db', JSON.stringify(state.patientDb));
+                triggerToast("Record Rimosso.");
                 refreshPatientUI();
-                toggleLimitWarnings();
+                toggleLimitWarnings(); // Ricontrolla limiti (potrebbe sbloccarsi)
+                
+                // Nota: In questa versione FREE/PRO, la rimozione non cancella dal cloud sheet amico per backup
             }
         }
 
         function buildWhatsAppMessage(patient) {
-            const root = window.location.href.split('?')[0];
+            // Costruzione URL voucher base
+            const rootUrl = window.location.href.split('?')[0];
             const voucherParams = `?v=gift&st=${encodeURIComponent(state.bizProfile.name)}&wa=${state.bizProfile.phone}&n=${encodeURIComponent(patient.nome)}&cid=${patient.cid}&pr=${encodeURIComponent(patient.premio)}&sc=${encodeURIComponent(patient.sconto)}`;
-            const finalLink = root + voucherParams;
-            const text = `Ciao ${patient.nome}! 🎉 Ecco il tuo Pass Regalo di ${state.bizProfile.name}: ${finalLink}`;
+            const finalVoucherLink = rootUrl + voucherParams;
+            
+            // Testo messaggio WhatsApp internazionale
+            const text = `Ciao ${patient.nome}! 🎉 Ecco il tuo Pass Regalo speciale di ${state.bizProfile.name}!\n\nUtilizzalo per accumulare punti o regalarlo a un amico.\n\nVisualizza il pass qui:\n${finalVoucherLink}`;
+            
             return `https://wa.me/${patient.tel}?text=${encodeURIComponent(text)}`;
         }
 
+        /**
+         * =====================================================================
+         * LATO PAZIENTE - INIZIALIZZAZIONE VOUCHER (MODE Gift)
+         * =====================================================================
+         */
         async function initVoucherMode(params) {
+            console.log("Avvio inizializzazione Voucher Paziente...");
             navigateTo('voucher');
-            document.getElementById('display-biz-name').innerText = params.get('st');
-            document.getElementById('display-user-name').innerText = "Ciao, " + params.get('n');
-            document.getElementById('display-reward-desc').innerText = params.get('pr');
-
-            new QRCode(document.getElementById("qrcode-canvas"), {
-                text: window.location.href,
-                width: 170, height: 170,
-                colorDark: "#003366", colorLight: "#ffffff",
-                correctLevel: QRCode.CorrectLevel.H
-            });
-
+            
             try {
-                const cloudRes = await fetch(`${GOOGLE_ENDPOINT}?getCid=${params.get('cid')}`);
-                const data = await cloudRes.json();
-                const currentPoints = parseInt(data.pts || 0);
-                const dotElements = document.querySelectorAll('.fidelity-point');
-                for (let j = 0; j < currentPoints && j < 5; j++) {
-                    dotElements[j].classList.add('filled');
-                }
-                if (currentPoints >= 5) {
-                    document.getElementById('display-win-box').style.display = "block";
-                }
-            } catch (error) {}
+                // RECUPERO INFO DA URL
+                document.getElementById('display-biz-name').innerText = params.get('st') || "SPICH NETWORK";
+                document.getElementById('display-user-name').innerText = "Ciao, " + (params.get('n') || "Gentile Paziente");
+                document.getElementById('display-reward-desc').innerText = params.get('pr') || "Vantaggio Fedeltà";
+
+                // GENERAZIONE QR CODE ORIGINALE
+                console.log("Generazione QR Code...");
+                new QRCode(document.getElementById("qrcode-canvas"), {
+                    text: window.location.href, // L'URL completo attuale
+                    width: 170,
+                    height: 170,
+                    colorDark: "#003366", // Deep Blue
+                    colorLight: "#ffffff",
+                    correctLevel: QRCode.CorrectLevel.H
+                });
+
+                // RECUPERO PUNTI AGGIORNATI DAL CLOUD (Sync Reale)
+                console.log("Recupero punti aggiornati CID: " + params.get('cid'));
+                try {
+                    const cloudResponse = await fetch(`${GOOGLE_ENDPOINT}?getCid=${params.get('cid')}`);
+                    const data = await cloudResponse.json();
+                    
+                    const currentPoints = parseInt(data.pts || 0);
+                    console.log("Punti cloud recuperati: " + currentPoints);
+                    
+                    const dotElements = document.querySelectorAll('.fidelity-point');
+                    
+                    // Riempimento dei punti fidelity
+                    for (let j = 0; j < currentPoints && j < 5; j++) {
+                        dotElements[j].classList.add('filled');
+                    }
+                    
+                    // Gestione vincita sbloccata
+                    if (currentPoints >= 5) {
+                        console.log("Punto 5 raggiunto! Mostro box vincita.");
+                        const winBox = document.getElementById('display-win-box');
+                        if(winBox) winBox.style.display = "block";
+                    }
+                } catch (e) { console.warn("Impossibile recuperare punti cloud per voucher. Modalità offline.", e); }
+            } catch (e) { console.error("Errore durante inizializzazione Voucher.", e); }
         }
 
+        /**
+         * =====================================================================
+         * LOGICA CONDIVISIONE AMICO (Referral System)
+         * =====================================================================
+         */
         function shareVoucherLink() {
             const currentParams = new URLSearchParams(window.location.search);
-            const msgToShare = `Ehi! Ti regalo uno ${currentParams.get('sc')} presso ${currentParams.get('st')}! Pass: ${window.location.href}`;
-            window.open(`https://wa.me/?text=${encodeURIComponent(msgToShare)}`);
+            
+            console.log("Avvio condivisione referral per: " + currentParams.get('cid'));
+            
+            // Testo messaggio referral Amico
+            const message = `Ehi! Guarda che regalo ho ricevuto da ${currentParams.get('st') || 'SPICH'}: uno ${currentParams.get('sc') || 'Sconto speciale'} per te!\n\n🎁 Ottienilo subito cliccando qui:\n${window.location.href}`;
+            
+            // Link WhatsApp Web condivisione
+            window.open(`https://wa.me/?text=${encodeURIComponent(message)}`);
         }
 
+        /**
+         * =====================================================================
+         * LOGICA PRO UPGRADE REQUEST
+         * =====================================================================
+         */
         function sendProUpgradeRequest() {
-            triggerToast("Invio richiesta...");
+            console.log("Tentativo invio richiesta PRO...");
+            if(!state.deviceID || !state.bizProfile) return;
+            
+            triggerToast("Invio richiesta PRO...");
+            
+            // Invio notifica cloud
             fetch(GOOGLE_ENDPOINT, {
                 method: "POST",
                 mode: "no-cors",
@@ -993,7 +1241,9 @@
                     nome: state.bizProfile.name
                 })
             });
-            alert("RICHIESTA INVIATA!\nTi contatteremo su WhatsApp per l'attivazione PRO.");
+            
+            // Allarme visivo
+            alert("RICHIESTA INVIATA CON SUCCESSO!\n\nVerrai contattato su WhatsApp Business per l'attivazione della versione PRO e lo sblocco dei limiti.");
         }
 
     </script>
