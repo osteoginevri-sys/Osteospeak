@@ -3,406 +3,905 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>SPICH. - Premium Referral Network V.12</title>
+    <title>SPICH. - Professional Referral System</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     
     <style>
-        /* =========================================================
-           SISTEMA DI STILE - SPICH. PREMIUM DESIGN
-           ========================================================= */
+        /* SISTEMA DI DESIGN - VARIABILI CORE 
+        */
         :root { 
             --teal-primary: #008080; 
             --gold-premium: #d4af37;
             --gold-soft: #f4e3b1;
             --white: #ffffff;
-            --bg-light: #f8fafc;
-            --slate-800: #1e293b;
-            --slate-500: #64748b;
-            --danger: #ef4444;
-            --radius-main: 30px;
+            --bg-canvas: #f8fafc;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --danger-red: #ef4444;
+            --success-green: #10b981;
+            --radius-xl: 30px;
+            --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
         }
 
-        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; margin: 0; padding: 0; }
+        /* RESET & BASE */
+        * { 
+            box-sizing: border-box; 
+            -webkit-tap-highlight-color: transparent; 
+            margin: 0; 
+            padding: 0; 
+        }
 
         body { 
-            background: var(--bg-light); 
+            background: var(--bg-canvas); 
             font-family: 'Montserrat', sans-serif; 
-            color: var(--slate-800); 
+            color: var(--text-main); 
             min-height: 100vh; 
             display: flex; 
             justify-content: center; 
+            line-height: 1.5;
         }
 
-        .app-container { 
+        /* CONTENITORE PRINCIPALE (MOBILE FIRST) */
+        .app-shell { 
             width: 100%; 
             max-width: 500px; 
             background: var(--white); 
             min-height: 100vh; 
             display: flex; 
             flex-direction: column; 
-            box-shadow: 0 0 60px rgba(0,0,0,0.03); 
+            box-shadow: 0 0 80px rgba(0,0,0,0.05); 
             position: relative;
+            overflow-x: hidden;
         }
 
-        /* HEADER */
-        .app-header { 
-            padding: 45px 20px; 
+        /* HEADER & LOGO */
+        .header-branding { 
+            padding: 50px 20px; 
             text-align: center; 
             background: var(--white); 
             border-bottom: 1px solid #f1f5f9; 
             cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .header-branding:active {
+            transform: scale(0.98);
         }
         
-        .logo-text { 
+        .logo-main { 
             font-family: 'Comfortaa', cursive; 
-            font-size: 3.5rem; 
+            font-size: 3.8rem; 
             color: var(--teal-primary); 
             letter-spacing: -3px;
             font-weight: 700;
         }
-        .logo-text span { color: var(--gold-premium); }
-        .logo-sub { 
-            font-size: 0.7rem; font-weight: 800; color: var(--slate-500); 
-            letter-spacing: 5px; text-transform: uppercase; margin-top: -10px; 
+
+        .logo-main span { 
+            color: var(--gold-premium); 
         }
 
-        /* VISTE */
-        .view-scene { display: none; padding: 30px; animation: slideUp 0.4s ease; flex: 1; flex-direction: column; }
-        .view-scene.active { display: flex; }
-        @keyframes slideUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .logo-subtitle { 
+            font-size: 0.75rem; 
+            font-weight: 800; 
+            color: var(--text-muted); 
+            letter-spacing: 6px; 
+            text-transform: uppercase; 
+            margin-top: -12px; 
+        }
 
-        /* DASHBOARD HERO */
-        .hero-stats { 
+        /* VISTE E TRANSIZIONI */
+        .view-container { 
+            display: none; 
+            padding: 30px; 
+            flex: 1; 
+            flex-direction: column;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .view-container.active { 
+            display: flex; 
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* DASHBOARD HERO STATS */
+        .dashboard-hero { 
             background: var(--white); 
-            padding: 45px 20px; 
-            border-radius: var(--radius-main); 
+            padding: 50px 20px; 
+            border-radius: var(--radius-xl); 
             text-align: center; 
-            border-bottom: 8px solid var(--gold-premium); 
-            margin-bottom: 30px; 
-            box-shadow: 0 15px 35px rgba(0,0,0,0.04); 
+            border-bottom: 10px solid var(--gold-premium); 
+            margin-bottom: 35px; 
+            box-shadow: var(--shadow-lg); 
             position: relative;
         }
-        .hero-stats b { font-size: 5.5rem; color: var(--teal-primary); display: block; line-height: 1; font-weight: 800; }
-        .hero-stats span { font-weight: 700; color: var(--slate-500); text-transform: uppercase; font-size: 0.8rem; letter-spacing: 2px; }
 
-        .badge-status { 
-            position: absolute; top: 15px; right: 20px; font-size: 0.6rem; 
-            font-weight: 900; padding: 8px 15px; border-radius: 12px; 
-            background: #f1f5f9; color: var(--slate-500);
+        .dashboard-hero b { 
+            font-size: 6rem; 
+            color: var(--teal-primary); 
+            display: block; 
+            line-height: 1; 
+            font-weight: 900; 
         }
-        .badge-status.pro-mode { background: var(--gold-premium); color: white; }
 
-        /* INPUTS */
-        .card-ui { 
-            background: var(--white); padding: 25px; border-radius: 25px; 
-            border: 1px solid #f1f5f9; margin-bottom: 25px; 
+        .dashboard-hero span { 
+            font-weight: 700; 
+            color: var(--text-muted); 
+            text-transform: uppercase; 
+            font-size: 0.85rem; 
+            letter-spacing: 3px; 
         }
-        .label-ui { font-size: 0.7rem; font-weight: 800; color: var(--teal-primary); text-transform: uppercase; margin: 15px 0 5px 5px; display: block; }
-        
-        .input-wrapper { position: relative; display: flex; align-items: center; }
-        .input-prefix { position: absolute; left: 20px; font-weight: 800; color: var(--teal-primary); }
+
+        .status-badge { 
+            position: absolute; 
+            top: 15px; 
+            right: 25px; 
+            font-size: 0.65rem; 
+            font-weight: 900; 
+            padding: 10px 18px; 
+            border-radius: 15px; 
+            background: #f1f5f9; 
+            color: var(--text-muted);
+            letter-spacing: 1px;
+        }
+
+        .status-badge.pro { 
+            background: var(--gold-premium); 
+            color: var(--white); 
+        }
+
+        /* BANNER UPGRADE PRO (CRITICO) */
+        .upgrade-card {
+            display: none; /* Gestito da JS */
+            background: #fff8f8;
+            border: 2px dashed var(--danger-red);
+            padding: 30px;
+            border-radius: 25px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .upgrade-card i {
+            font-size: 2.5rem;
+            color: var(--gold-premium);
+            margin-bottom: 15px;
+        }
+
+        .upgrade-card h3 {
+            font-size: 1rem;
+            color: var(--text-main);
+            margin-bottom: 10px;
+        }
+
+        .upgrade-btn {
+            background: var(--teal-primary);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 15px;
+            font-weight: 800;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 15px;
+            box-shadow: 0 4px 12px rgba(0, 128, 128, 0.2);
+        }
+
+        /* FORM E INPUT UI */
+        .ui-card { 
+            background: var(--white); 
+            padding: 30px; 
+            border-radius: 25px; 
+            border: 1px solid #f1f5f9; 
+            margin-bottom: 30px; 
+        }
+
+        .ui-label { 
+            font-size: 0.75rem; 
+            font-weight: 800; 
+            color: var(--teal-primary); 
+            text-transform: uppercase; 
+            margin: 20px 0 8px 5px; 
+            display: block; 
+        }
+
+        .input-group { 
+            position: relative; 
+            display: flex; 
+            align-items: center; 
+        }
+
+        .input-addon { 
+            position: absolute; 
+            left: 20px; 
+            font-weight: 800; 
+            color: var(--teal-primary); 
+        }
 
         input, select { 
-            width: 100%; padding: 20px; border-radius: 20px; 
-            border: 2px solid #f1f5f9; font-family: inherit; font-size: 1rem; 
-            outline: none; background: #fafafa;
-        }
-        input.prefilled { padding-left: 55px; }
-
-        .btn-premium { 
-            background: var(--teal-primary); color: white; border: none; 
-            padding: 22px; border-radius: 20px; font-weight: 800; 
-            width: 100%; cursor: pointer; font-size: 1.1rem; margin-top: 15px;
-        }
-
-        /* BANNER PRO (BLOCCANTE) */
-        #upgrade-alert {
-            display: none; background: #fff5f5; border: 2px dashed var(--danger);
-            padding: 25px; border-radius: 25px; margin-bottom: 20px; text-align: center;
+            width: 100%; 
+            padding: 22px; 
+            border-radius: 20px; 
+            border: 2px solid #f1f5f9; 
+            font-family: inherit; 
+            font-size: 1.05rem; 
+            outline: none; 
+            background: #fafafa;
+            transition: all 0.3s ease;
         }
 
-        /* PALLINI & QR */
-        .pallini-container { display: flex; justify-content: center; gap: 14px; margin: 35px 0; }
-        .pallino { width: 28px; height: 28px; border-radius: 50%; border: 3px solid var(--gold-premium); transition: 0.4s; position: relative; }
-        .pallino.active { background: var(--gold-premium); transform: scale(1.2); }
-        .pallino.active::after { content: '✓'; color: white; font-size: 11px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-weight: 900; }
+        input.has-addon { 
+            padding-left: 60px; 
+        }
 
-        .qr-section { display: flex; flex-direction: column; align-items: center; width: 100%; margin: 25px 0; }
-        .qr-card { background: white; padding: 20px; border-radius: 30px; box-shadow: 0 20px 40px rgba(0,0,0,0.06); }
+        input:focus {
+            border-color: var(--gold-premium);
+            background: white;
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.1);
+        }
+
+        .action-button { 
+            background: var(--teal-primary); 
+            color: white; 
+            border: none; 
+            padding: 24px; 
+            border-radius: 20px; 
+            font-weight: 800; 
+            width: 100%; 
+            cursor: pointer; 
+            font-size: 1.2rem; 
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .action-button:disabled {
+            background: #cbd5e1;
+            cursor: not-allowed;
+        }
 
         /* LISTA REGISTRO */
-        .patient-row { 
-            background: white; padding: 20px; border-radius: 25px; margin-bottom: 12px;
-            display: flex; justify-content: space-between; align-items: center; border: 1px solid #f1f5f9; 
+        .record-item { 
+            background: white; 
+            padding: 22px; 
+            border-radius: 25px; 
+            margin-bottom: 15px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            border: 1px solid #f1f5f9; 
+            transition: transform 0.2s;
         }
-        .action-circle { width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: none; cursor: pointer; margin-left: 8px;}
-        .btn-wa { background: #25D366; color: white; text-decoration: none; font-size: 1.3rem;}
-        .btn-pt { background: var(--gold-premium); color: white; font-weight: 900; }
-        .btn-del { background: #fee2e2; color: var(--danger); }
 
-        .app-footer { font-size: 0.65rem; color: #cbd5e1; text-align: center; padding: 40px; margin-top: auto; font-weight: 700; text-transform: uppercase; }
+        .record-item:hover {
+            transform: translateX(5px);
+        }
+
+        .record-info b { 
+            font-size: 1.15rem; 
+            color: var(--teal-primary); 
+            display: block; 
+        }
+
+        .record-info small { 
+            font-weight: 700; 
+            color: var(--text-muted); 
+            text-transform: uppercase; 
+            font-size: 0.7rem; 
+        }
+
+        .record-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .circle-btn { 
+            width: 50px; 
+            height: 50px; 
+            border-radius: 50%; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            border: none; 
+            cursor: pointer; 
+            font-size: 1.2rem;
+            transition: all 0.2s;
+        }
+
+        .btn-whatsapp { background: #25D366; color: white; text-decoration: none; }
+        .btn-point { background: var(--gold-premium); color: white; font-weight: 900; }
+        .btn-delete { background: #fee2e2; color: var(--danger-red); }
+
+        /* PALLINI FEDELTÀ */
+        .points-grid { 
+            display: flex; 
+            justify-content: center; 
+            gap: 16px; 
+            margin: 40px 0; 
+        }
+
+        .point-dot { 
+            width: 32px; 
+            height: 32px; 
+            border-radius: 50%; 
+            border: 4px solid var(--gold-premium); 
+            transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+            position: relative; 
+        }
+
+        .point-dot.active { 
+            background: var(--gold-premium); 
+            transform: scale(1.25); 
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+        }
+
+        .point-dot.active::after { 
+            content: '✓'; 
+            color: white; 
+            font-size: 12px; 
+            position: absolute; 
+            top: 50%; 
+            left: 50%; 
+            transform: translate(-50%, -50%); 
+            font-weight: 900; 
+        }
+
+        /* QR CODE SECTION */
+        .qr-wrapper { 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            width: 100%; 
+            margin: 30px 0; 
+        }
+
+        .qr-frame { 
+            background: white; 
+            padding: 25px; 
+            border-radius: 35px; 
+            box-shadow: var(--shadow-lg); 
+            border: 1px solid #f1f5f9;
+        }
+
+        /* FOOTER */
+        .footer-info { 
+            font-size: 0.7rem; 
+            color: #cbd5e1; 
+            text-align: center; 
+            padding: 50px 20px; 
+            margin-top: auto; 
+            font-weight: 700; 
+            text-transform: uppercase; 
+            letter-spacing: 2px;
+        }
+
+        .footer-info span {
+            color: var(--text-muted);
+        }
 
     </style>
 </head>
 <body>
 
-<div class="app-container">
-    <header class="app-header" id="sync-trigger">
-        <h1 class="logo-text">SPICH<span>.</span></h1>
-        <div class="logo-sub">Premium Network</div>
+<div class="app-shell">
+    
+    <header class="header-branding" id="main-sync-btn">
+        <h1 class="logo-main">SPICH<span>.</span></h1>
+        <div class="logo-subtitle">Premium Network</div>
     </header>
 
-    <main id="view-setup" class="view-scene">
-        <div style="text-align:center; margin-bottom:30px;">
-            <i class="fas fa-gift" style="font-size:3.5rem; color:var(--gold-premium); margin-bottom:15px;"></i>
-            <h2 style="font-weight:800; color:var(--teal-primary);">Configurazione Hub</h2>
+    <main id="view-setup" class="view-container">
+        <div style="text-align:center; margin-bottom:40px;">
+            <i class="fas fa-rocket" style="font-size:4rem; color:var(--gold-premium); margin-bottom:20px;"></i>
+            <h2 style="font-weight:900; color:var(--teal-primary); font-size:1.8rem;">Attivazione Studio</h2>
+            <p style="color:var(--text-muted); margin-top:10px;">Inizia a far crescere la tua rete oggi.</p>
         </div>
-        <div class="card-ui">
-            <label class="label-ui">Nome Attività</label>
-            <input type="text" id="setup-biz-name" placeholder="Es: Studio Medico Rossi">
-            <label class="label-ui">WhatsApp Business</label>
-            <div class="input-wrapper">
-                <span class="input-prefix">+39</span>
-                <input type="tel" id="setup-biz-wa" class="prefilled" placeholder="3471234567">
+
+        <div class="ui-card">
+            <label class="ui-label">Nome dell'Attività / Studio</label>
+            <input type="text" id="biz-name-input" placeholder="Es: Studio Medico Bianchi">
+
+            <label class="ui-label">Cellulare WhatsApp Business</label>
+            <div class="input-group">
+                <span class="input-addon">+39</span>
+                <input type="tel" id="biz-wa-input" class="has-addon" placeholder="3471234567">
             </div>
-            <button class="btn-premium" onclick="handleBusinessRegistration()">ATTIVA ORA</button>
+
+            <button class="action-button" onclick="initBusinessAccount()">
+                <i class="fas fa-check-circle"></i> SALVA PROFILO
+            </button>
         </div>
     </main>
 
-    <main id="view-dash" class="view-scene">
-        <div class="hero-stats">
-            <div id="pro-badge-ui" class="badge-status">VERSIONE FREE</div>
-            <b id="stats-count">0</b>
-            <span>Clienti in Lista</span>
+    <main id="view-dashboard" class="view-container">
+        <div class="dashboard-hero">
+            <div id="badge-pro-visual" class="status-badge">FREE VERSION</div>
+            <b id="ui-total-count">0</b>
+            <span>Clienti in Anagrafica</span>
         </div>
         
-        <div class="card-ui">
-            <div id="upgrade-alert">
-                <i class="fas fa-crown" style="color:var(--gold-premium); font-size:2rem; margin-bottom:10px;"></i><br>
-                <b style="color:var(--slate-800);">LIMITE 10 CLIENTI RAGGIUNTO</b><br>
-                <p style="font-size:0.7rem; margin:10px 0;">Passa alla versione PRO per inserimenti illimitati e personalizzazione totale.</p>
-                <button onclick="sendUpgradeEmail()" style="background:var(--teal-primary); color:white; border:none; padding:12px 25px; border-radius:15px; font-weight:800; cursor:pointer; width:100%;">RICHIEDI UPGRADE PRO</button>
+        <div id="pro-upgrade-banner" class="upgrade-card">
+            <i class="fas fa-crown"></i>
+            <h3>LIMITE DI 10 CLIENTI RAGGIUNTO</h3>
+            <p style="color:var(--text-muted); font-size:0.8rem;">Per continuare ad aggiungere pazienti e sbloccare la personalizzazione dei premi, passa alla versione PRO.</p>
+            <button class="upgrade-btn" onclick="requestProActivation()">
+                <i class="fas fa-envelope"></i> RICHIEDI ATTIVAZIONE PRO
+            </button>
+        </div>
+
+        <div class="ui-card" id="form-registration-area">
+            <h4 style="margin-bottom:20px; color:var(--teal-primary); font-weight:800; border-left: 5px solid var(--gold-premium); padding-left:15px;">Nuovo Inserimento</h4>
+            
+            <label class="ui-label">Nome e Cognome Cliente</label>
+            <input type="text" id="reg-p-name" placeholder="Esempio: Mario Rossi">
+
+            <label class="ui-label">Numero WhatsApp</label>
+            <div class="input-group">
+                <span class="input-addon">+39</span>
+                <input type="tel" id="reg-p-tel" class="has-addon" placeholder="3471234567">
+            </div>
+            
+            <div id="reward-logic-container">
+                <label class="ui-label">Voucher per l'Amico (Sconto)</label>
+                <div id="sc-wrapper">
+                    <select id="select-discount-free">
+                        <option value="Sconto 10%">10% di Sconto</option>
+                        <option value="Sconto 20%">20% di Sconto</option>
+                    </select>
+                </div>
+
+                <label class="ui-label">Premio Fedeltà al 5° Punto</label>
+                <div id="pr-wrapper">
+                    <input type="text" id="input-reward-free" value="Trattamento con sconto 50%" readonly style="color:#94a3b8;">
+                </div>
             </div>
 
-            <div id="form-content">
-                <label class="label-ui">Nome Cliente</label>
-                <input type="text" id="new-p-name" placeholder="Mario Rossi">
-                <label class="label-ui">WhatsApp</label>
-                <div class="input-wrapper">
-                    <span class="input-prefix">+39</span>
-                    <input type="tel" id="new-p-tel" class="prefilled" placeholder="3470000000">
-                </div>
-                
-                <div id="logic-box">
-                    <label class="label-ui">Sconto Amico</label>
-                    <div id="sc-logic">
-                        <select id="free-select-sc">
-                            <option value="Sconto 10%">10% di Sconto</option>
-                            <option value="Sconto 20%">20% di Sconto</option>
-                        </select>
-                    </div>
-                    <label class="label-ui">Premio Fedeltà (5° Punto)</label>
-                    <div id="pr-logic">
-                        <input type="text" id="free-input-pr" value="Trattamento con sconto 50%" readonly style="color:#94a3b8;">
-                    </div>
-                </div>
-                <button id="add-btn-main" class="btn-premium" onclick="processNewPatient()">GENERA PASS</button>
-            </div>
+            <button id="submit-btn-main" class="action-button" onclick="createNewReferral()">
+                <i class="fas fa-plus-circle"></i> GENERA PASS DIGITALE
+            </button>
         </div>
         
-        <h3 style="color:var(--teal-primary); margin-bottom:15px; font-weight:800;">Registro Clienti</h3>
-        <div id="render-patients-list"></div>
+        <h3 style="color:var(--teal-primary); margin:20px 0; font-weight:800; display:flex; align-items:center; gap:10px;">
+            <i class="fas fa-users"></i> Registro Pazienti
+        </h3>
+        <div id="list-container-render">
+            </div>
     </main>
 
-    <main id="view-pass" class="view-scene">
+    <main id="view-pass-client" class="view-container">
         <div style="text-align:center;">
-            <i class="fas fa-gift" style="font-size:4rem; color:var(--gold-premium); margin-bottom:15px;"></i>
-            <h2 id="pass-biz-title" style="color:var(--teal-primary); font-family:'Comfortaa'; font-size:2.2rem;"></h2>
-            <p id="pass-user-welcome" style="font-weight:700; color:var(--slate-500);"></p>
-            <div class="pallini-container" id="pass-dots-ui">
-                <div class="pallino"></div><div class="pallino"></div><div class="pallino"></div><div class="pallino"></div><div class="pallino"></div>
+            <i class="fas fa-certificate" style="font-size:4.5rem; color:var(--gold-premium); margin-bottom:20px;"></i>
+            <h2 id="pass-studio-name" style="color:var(--teal-primary); font-family:'Comfortaa'; font-size:2.4rem;"></h2>
+            <p id="pass-welcome-msg" style="font-weight:700; color:var(--text-muted); margin-top:10px;"></p>
+            
+            <div class="points-grid" id="pass-points-render">
+                <div class="point-dot"></div>
+                <div class="point-dot"></div>
+                <div class="point-dot"></div>
+                <div class="point-dot"></div>
+                <div class="point-dot"></div>
             </div>
-            <div class="qr-section">
-                <div class="qr-card"><div id="qrcode-render"></div></div>
+
+            <div class="qr-wrapper">
+                <div class="qr-frame">
+                    <div id="qrcode-target"></div>
+                </div>
+                <p style="margin-top:20px; font-size:0.6rem; letter-spacing:4px; font-weight:900; color:var(--teal-primary);">PASS ID: <span id="pass-id-tag"></span></p>
             </div>
-            <button class="btn-premium" style="background:var(--gold-premium);" onclick="openShareOptions()">REGALA SCONTO A UN AMICO</button>
-            <div id="win-message-box" style="display:none; margin-top:20px; background:#fffcf5; border:2px solid var(--gold-premium); padding:20px; border-radius:20px;">
-                <b style="color:var(--teal-primary);">COMPLIMENTI! HAI OTTENUTO:</b><br>
-                <p id="reward-final-text" style="font-weight:800; color:var(--gold-premium); font-size:1.2rem; margin-top:5px;"></p>
+            
+            <button class="action-button" style="background:var(--gold-premium);" onclick="shareToFriend()">
+                <i class="fab fa-whatsapp"></i> INVITA UN AMICO (GIFT)
+            </button>
+            
+            <div id="win-banner-final" style="display:none; margin-top:30px; background:#fffcf5; border:3px solid var(--gold-premium); padding:25px; border-radius:25px; animation: pulse 2s infinite;">
+                <b style="color:var(--teal-primary); font-size:1.2rem; display:block; margin-bottom:10px;">🏆 PREMIO SBLOCCATO!</b>
+                <p id="win-reward-desc" style="font-weight:800; color:var(--gold-premium); font-size:1.4rem;"></p>
             </div>
         </div>
     </main>
 
-    <main id="view-voucher" class="view-scene">
-        <div style="background:white; border:10px dashed var(--gold-soft); padding:40px; border-radius:40px; text-align:center;">
-            <h2 style="color:var(--teal-primary); font-weight:900;">GIFT CARD</h2>
-            <p id="v-friend-message" style="margin:20px 0; font-weight:600; color:var(--slate-500);"></p>
-            <div style="background:#f8fafc; padding:20px; border-radius:25px; border:2px solid var(--gold-soft); margin-bottom:20px;">
-                <span style="font-size:0.7rem; font-weight:800; color:var(--gold-premium);">VALORE REGALO:</span>
-                <h2 id="v-friend-value" style="color:var(--teal-primary); font-size:2rem;"></h2>
+    <main id="view-friend-voucher" class="view-container">
+        <div style="background:white; border:10px dashed var(--gold-soft); padding:50px 30px; border-radius:45px; text-align:center; box-shadow: var(--shadow-lg);">
+            <i class="fas fa-gift" style="font-size:4rem; color:var(--gold-premium); margin-bottom:25px;"></i>
+            <h2 style="color:var(--teal-primary); font-weight:900; font-size:2.2rem;">GIFT CARD</h2>
+            <p id="voucher-welcome-text" style="margin:25px 0; font-weight:600; color:var(--text-muted); line-height:1.6;"></p>
+            
+            <div style="background:#f8fafc; padding:30px; border-radius:30px; border:2px solid var(--gold-soft); margin-bottom:30px;">
+                <span style="font-size:0.75rem; font-weight:800; color:var(--gold-premium); text-transform:uppercase; letter-spacing:2px;">Bonus Esclusivo:</span>
+                <h2 id="voucher-value-text" style="color:var(--teal-primary); font-size:2.5rem; margin-top:10px;"></h2>
             </div>
-            <button class="btn-premium" onclick="whatsappBooking()">PRENOTA ORA</button>
+            
+            <button class="action-button" onclick="contactStudioForBooking()">
+                <i class="fab fa-whatsapp"></i> PRENOTA APPUNTAMENTO
+            </button>
         </div>
     </main>
 
-    <footer class="app-footer">
-        <div onclick="alert('Support: spich.admin@gmail.com')">Info & Assistenza</div><br>
-        DEVICE ID: <span id="did-display"></span>
+    <footer class="footer-info">
+        <div style="cursor:pointer; margin-bottom:15px;" onclick="alert('Supporto: spich.admin@gmail.com')">
+            <i class="fas fa-headset"></i> Centro Assistenza SPICH.
+        </div>
+        ID DISPOSITIVO: <span id="did-label">CARICAMENTO...</span><br>
+        &copy; 2026 SPICH. DIGITAL REFERRAL SYSTEM V12.5
     </footer>
 </div>
 
 <script>
-    const GOOGLE_API_URL = "https://script.google.com/macros/s/AKfycbwWFA28ko71ow6kzvDYpQBhWru1WIAU2wD4YMgCaTArReLgAZSvDxJMwDqkDKqdQ8f-7g/exec";
-    
-    let deviceID = localStorage.getItem('spich_did_v12') || ('SP-' + Math.random().toString(36).substr(2, 9).toUpperCase());
-    localStorage.setItem('spich_did_v12', deviceID);
-    
-    let bizCfg = JSON.parse(localStorage.getItem('spich_biz_v12') || 'null');
-    let pList = JSON.parse(localStorage.getItem('spich_list_v12') || '[]');
-    let isPro = false;
+    /* =========================================================
+       LOGICA JAVASCRIPT - SPICH. CORE ENGINE
+       =========================================================
+    */
 
+    // Configurazione API Server
+    const API_URL = "https://script.google.com/macros/s/AKfycbwWFA28ko71ow6kzvDYpQBhWru1WIAU2wD4YMgCaTArReLgAZSvDxJMwDqkDKqdQ8f-7g/exec";
+    
+    // Gestione ID Dispositivo Persistente
+    let myDeviceID = localStorage.getItem('spich_did_v12_5');
+    if (!myDeviceID) {
+        myDeviceID = 'SP-' + Math.random().toString(36).substr(2, 9).toUpperCase();
+        localStorage.setItem('spich_did_v12_5', myDeviceID);
+    }
+
+    // Variabili di Stato Globali
+    let myBizData = JSON.parse(localStorage.getItem('spich_biz_v12_5') || 'null');
+    let myPatients = JSON.parse(localStorage.getItem('spich_list_v12_5') || '[]');
+    let userIsPro = false;
+
+    /**
+     * INIZIALIZZAZIONE APP
+     */
     window.onload = async function() {
-        document.getElementById('did-display').innerText = deviceID;
-        const urlP = new URLSearchParams(window.location.search);
+        // Mostra ID nel footer
+        document.getElementById('did-label').innerText = myDeviceID;
+        
+        // Analisi parametri URL (per pazienti e amici)
+        const params = new URLSearchParams(window.location.search);
+        const mode = params.get('v');
 
-        if (urlP.get('v') === 'voucher') { initVoucher(urlP); }
-        else if (urlP.get('v') === 'gift') { await initPass(urlP); }
-        else if (!bizCfg) { switchV('setup'); }
+        if (mode === 'voucher') {
+            setupVoucherScene(params);
+        } 
+        else if (mode === 'gift') {
+            await setupPassScene(params);
+        } 
+        else if (!myBizData) {
+            navigateTo('setup');
+        } 
         else {
-            switchV('dash');
-            await syncCloud();
-            render();
+            navigateTo('dashboard');
+            await synchronizeWithCloud();
+            renderPatientList();
         }
 
-        document.getElementById('sync-trigger').onclick = async () => {
-            if(confirm("Sincronizzare con il server?")) { await syncCloud(); location.reload(); }
+        // Listener Sincronizzazione al click sul Logo
+        document.getElementById('main-sync-btn').onclick = async function() {
+            if(confirm("Vuoi forzare la sincronizzazione con il server per aggiornare lo stato PRO?")) {
+                await synchronizeWithCloud();
+                location.reload();
+            }
         };
     };
 
-    function switchV(id) {
-        document.querySelectorAll('.view-scene').forEach(v => v.classList.remove('active'));
-        document.getElementById('view-' + id).classList.add('active');
-        window.scrollTo(0,0);
+    /**
+     * NAVIGAZIONE TRA LE VISTE
+     */
+    function navigateTo(viewId) {
+        document.querySelectorAll('.view-container').forEach(v => v.classList.remove('active'));
+        document.getElementById('view-' + viewId).classList.add('active');
+        window.scrollTo(0, 0);
     }
 
-    async function syncCloud() {
+    /**
+     * SINCRONIZZAZIONE CLOUD (GOOGLE SCRIPT)
+     */
+    async function synchronizeWithCloud() {
         try {
-            const r = await fetch(`${GOOGLE_API_URL}?checkPro=${deviceID}`);
-            const d = await r.json();
-            if (d.status === "NOT_FOUND") { localStorage.clear(); location.reload(); }
-            if (d.isPro === "PRO") { isPro = true; bizCfg.nome = d.bizName; localStorage.setItem('spich_biz_v12', JSON.stringify(bizCfg)); }
-            updateUI();
-        } catch(e) {}
+            const res = await fetch(`${API_URL}?checkPro=${myDeviceID}`);
+            const data = await res.json();
+            
+            // Caso 1: Esercente rimosso dal database
+            if (data.status === "NOT_FOUND") {
+                localStorage.clear();
+                location.reload();
+                return;
+            }
+
+            // Caso 2: Esercente è diventato PRO
+            if (data.isPro === "PRO") {
+                userIsPro = true;
+                myBizData.nome = data.bizName; 
+                localStorage.setItem('spich_biz_v12_5', JSON.stringify(myBizData));
+            }
+
+            refreshProLogicUI();
+
+        } catch(error) {
+            console.warn("Server non raggiungibile. Modalità offline attiva.");
+            refreshProLogicUI();
+        }
     }
 
-    function updateUI() {
-        const badge = document.getElementById('pro-badge-ui');
-        const alertBox = document.getElementById('upgrade-alert');
-        const formBox = document.getElementById('form-content');
-        const addBtn = document.getElementById('add-btn-main');
+    /**
+     * GESTIONE LOGICA PRO (BANNER E BLOCCHI)
+     */
+    function refreshProLogicUI() {
+        const badge = document.getElementById('badge-pro-visual');
+        const upgradeBanner = document.getElementById('pro-upgrade-banner');
+        const formArea = document.getElementById('form-registration-area');
+        const btnAdd = document.getElementById('submit-btn-main');
 
-        if (isPro) {
-            badge.innerText = "PRO ACCOUNT"; badge.classList.add('pro-mode');
-            alertBox.style.display = "none"; // IL BANNER SPARISCE SE SEI PRO
-            formBox.style.opacity = "1";
-            addBtn.disabled = false;
-            document.getElementById('sc-logic').innerHTML = `<input type="text" id="free-select-sc" placeholder="Sconto personalizzato">`;
-            document.getElementById('pr-logic').innerHTML = `<input type="text" id="free-input-pr" placeholder="Premio personalizzato">`;
-        } else {
-            if (pList.length >= 10) {
-                alertBox.style.display = "block"; // MOSTRA BANNER SE FREE E > 10
-                formBox.style.opacity = "0.3";
-                addBtn.disabled = true;
+        if (userIsPro) {
+            // SE PRO: Nascondi banner e sblocca tutto
+            badge.innerText = "PRO ACCOUNT";
+            badge.classList.add('pro');
+            upgradeBanner.style.display = "none";
+            formArea.style.opacity = "1";
+            btnAdd.disabled = false;
+
+            // Sblocco personalizzazione input
+            document.getElementById('sc-wrapper').innerHTML = `<input type="text" id="select-discount-free" placeholder="Esempio: 25% Sconto">`;
+            document.getElementById('pr-wrapper').innerHTML = `<input type="text" id="input-reward-free" placeholder="Esempio: Pacchetto Igiene Gratis">`;
+        } 
+        else {
+            // SE FREE: Controlla limite 10
+            if (myPatients.length >= 10) {
+                upgradeBanner.style.display = "block";
+                formArea.style.opacity = "0.3";
+                btnAdd.disabled = true;
             } else {
-                alertBox.style.display = "none";
+                upgradeBanner.style.display = "none";
             }
         }
     }
 
-    function handleBusinessRegistration() {
-        const n = document.getElementById('setup-biz-name').value;
-        const w = document.getElementById('setup-biz-wa').value;
-        if(!n || !w) return;
-        bizCfg = { nome: n, wa: '39' + w };
-        localStorage.setItem('spich_biz_v12', JSON.stringify(bizCfg));
-        fetch(GOOGLE_API_URL, { method: "POST", mode: "no-cors", body: JSON.stringify({t: "REG_BIZ", id: deviceID, nome: n}) });
+    /**
+     * REGISTRAZIONE INIZIALE BUSINESS
+     */
+    function initBusinessAccount() {
+        const name = document.getElementById('biz-name-input').value.trim();
+        const wa = document.getElementById('biz-wa-input').value.trim();
+
+        if(!name || !wa) {
+            alert("Per favore, inserisci tutti i dati richiesti.");
+            return;
+        }
+
+        myBizData = { 
+            nome: name, 
+            wa: '39' + wa.replace(/\s+/g, '') 
+        };
+
+        localStorage.setItem('spich_biz_v12_5', JSON.stringify(myBizData));
+
+        // Notifica al server Google
+        fetch(API_URL, { 
+            method: "POST", 
+            mode: "no-cors", 
+            body: JSON.stringify({
+                t: "REG_BIZ", 
+                id: myDeviceID, 
+                nome: name
+            }) 
+        });
+
         location.reload();
     }
 
-    function render() {
-        const container = document.getElementById('render-patients-list');
+    /**
+     * RENDERING LISTA PAZIENTI
+     */
+    function renderPatientList() {
+        const container = document.getElementById('list-container-render');
         container.innerHTML = "";
-        pList.forEach((p, i) => {
-            const div = document.createElement('div');
-            div.className = 'patient-row';
-            div.innerHTML = `
-                <div><b>${p.nome}</b><br><small>${p.pts} PT | ${p.premio}</small></div>
-                <div style="display:flex;">
-                    <a class="action-circle btn-wa" href="${genLink(p)}" target="_blank"><i class="fab fa-whatsapp"></i></a>
-                    <button class="action-circle btn-pt" onclick="addPt(${i})">+1</button>
-                    ${isPro ? `<button class="action-circle btn-del" onclick="delPt(${i})"><i class="fas fa-trash"></i></button>` : ''}
+        
+        myPatients.forEach((p, index) => {
+            const item = document.createElement('div');
+            item.className = 'record-item';
+            item.innerHTML = `
+                <div class="record-info">
+                    <b>${p.nome}</b>
+                    <small>${p.pts} Punti Accumulati | ${p.premio}</small>
+                </div>
+                <div class="record-actions">
+                    <a class="circle-btn btn-whatsapp" href="${generateWhatsAppMsg(p)}" target="_blank">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                    <button class="circle-btn btn-point" onclick="addPointToPatient(${index})">
+                        +1
+                    </button>
+                    ${userIsPro ? `
+                    <button class="circle-btn btn-delete" onclick="deletePatientRecord(${index})">
+                        <i class="fas fa-trash"></i>
+                    </button>` : ''}
                 </div>
             `;
-            container.appendChild(div);
+            container.appendChild(item);
         });
-        document.getElementById('stats-count').innerText = pList.length;
+
+        document.getElementById('ui-total-count').innerText = myPatients.length;
     }
 
-    async function processNewPatient() {
-        const n = document.getElementById('new-p-name').value;
-        const t = document.getElementById('new-p-tel').value;
-        const s = document.getElementById('free-select-sc').value;
-        const r = document.getElementById('free-input-pr').value;
-        if(!n || !t) return;
-        const cid = 'C-' + Date.now().toString(36).toUpperCase();
-        const p = { cid, nome: n, tel: '39' + t, sconto: s, premio: r, pts: 0 };
-        pList.push(p);
-        localStorage.setItem('spich_list_v12', JSON.stringify(pList));
-        fetch(GOOGLE_API_URL, { method: "POST", mode: "no-cors", body: JSON.stringify({t: "ADD_CLIENT", bizId: deviceID, bizName: bizCfg.nome, clientName: n, clientTel: '39'+t, premio: r, cid: cid, pts: 0}) });
-        render(); updateUI();
+    /**
+     * AGGIUNTA NUOVO PAZIENTE
+     */
+    async function createNewReferral() {
+        const name = document.getElementById('reg-p-name').value.trim();
+        const tel = document.getElementById('reg-p-tel').value.trim();
+        const discount = document.getElementById('select-discount-free').value;
+        const reward = document.getElementById('input-reward-free').value.trim();
+
+        if(!name || !tel) {
+            alert("Nome e Telefono sono obbligatori.");
+            return;
+        }
+
+        const cid = 'CLIENT-' + Date.now().toString(36).toUpperCase();
+        const newEntry = { 
+            cid, 
+            nome: name, 
+            tel: '39' + tel.replace(/\s+/g, ''), 
+            sconto: discount, 
+            premio: reward, 
+            pts: 0 
+        };
+
+        myPatients.push(newEntry);
+        localStorage.setItem('spich_list_v12_5', JSON.stringify(myPatients));
+
+        // Sync Google Sheets
+        fetch(API_URL, { 
+            method: "POST", 
+            mode: "no-cors", 
+            body: JSON.stringify({
+                t: "ADD_CLIENT", 
+                bizId: myDeviceID, 
+                bizName: myBizData.nome, 
+                clientName: name, 
+                clientTel: newEntry.tel, 
+                premio: reward, 
+                cid: cid, 
+                pts: 0
+            }) 
+        });
+
+        renderPatientList();
+        refreshProLogicUI();
+
+        // Reset form
+        document.getElementById('reg-p-name').value = "";
+        document.getElementById('reg-p-tel').value = "";
     }
 
-    async function addPt(i) {
-        const p = pList[i]; p.pts++;
-        localStorage.setItem('spich_list_v12', JSON.stringify(pList));
-        fetch(GOOGLE_API_URL, { method: "POST", mode: "no-cors", body: JSON.stringify({t: "UPDATE_POINTS", bizId: deviceID, cid: p.cid, pts: p.pts}) });
-        render();
+    /**
+     * INCREMENTO PUNTI
+     */
+    async function addPointToPatient(idx) {
+        const p = myPatients[idx];
+        p.pts++;
+        
+        localStorage.setItem('spich_list_v12_5', JSON.stringify(myPatients));
+        
+        // Sincronizzazione Cloud (Update sulla stessa riga)
+        fetch(API_URL, { 
+            method: "POST", 
+            mode: "no-cors", 
+            body: JSON.stringify({
+                t: "UPDATE_POINTS", 
+                bizId: myDeviceID, 
+                cid: p.cid, 
+                pts: p.pts
+            }) 
+        });
+        
+        renderPatientList();
     }
 
-    function delPt(i) { pList.splice(i, 1); localStorage.setItem('spich_list_v12', JSON.stringify(pList)); render(); updateUI(); }
-
-    function genLink(p) {
-        const base = window.location.href.split('?')[0];
-        const link = `${base}?v=gift&st=${encodeURIComponent(bizCfg.nome)}&wa=${bizCfg.wa}&cid=${p.cid}&pr=${encodeURIComponent(p.premio)}&n=${encodeURIComponent(p.nome)}&sc=${encodeURIComponent(p.sconto)}`;
-        return `https://wa.me/${p.tel}?text=${encodeURIComponent('Ciao ' + p.nome + ', ecco il tuo Pass: ' + link)}`;
+    /**
+     * ELIMINAZIONE RECORD
+     */
+    function deletePatientRecord(idx) {
+        if(confirm("Vuoi eliminare definitivamente questo paziente dal tuo registro?")) {
+            myPatients.splice(idx, 1);
+            localStorage.setItem('spich_list_v12_5', JSON.stringify(myPatients));
+            renderPatientList();
+            refreshProLogicUI();
+        }
     }
 
-    async function initPass(q) {
-        switchV('pass');
-        document.getElementById('pass-biz-title').innerText = q.get('st');
-        document.getElementById('pass-user-welcome').innerText = "Ciao " + q.get('n');
-        document.getElementById('reward-final-text').innerText = q.get('pr');
-        new QRCode(document.getElementById("qrcode-render"), { text: window.location.href, width: 150, height: 150 });
-        const r = await fetch(`${GOOGLE_API_URL}?getCid=${q.get('cid')}`);
-        const d = await r.json();
-        const pts = parseInt(d.pts || 0);
-        const dots = document.querySelectorAll('.pallino');
-        for(let i=0; i<pts && i<5; i++) dots[i].classList.add('active');
-        if(pts >= 5) document.getElementById('win-message-box').style.display = "block";
+    /**
+     * GENERAZIONE LINK WHATSAPP
+     */
+    function generateWhatsAppMsg(p) {
+        const currentUrl = window.location.href.split('?')[0];
+        const passUrl = `${currentUrl}?v=gift&st=${encodeURIComponent(myBizData.nome)}&wa=${myBizData.wa}&cid=${p.cid}&pr=${encodeURIComponent(p.premio)}&n=${encodeURIComponent(p.nome)}&sc=${encodeURIComponent(p.sconto)}`;
+        const text = `Ciao ${p.nome}, qui ${myBizData.nome}. Ecco il tuo Pass Fedeltà Digitale: ${passUrl}`;
+        return `https://wa.me/${p.tel}?text=${encodeURIComponent(text)}`;
     }
 
-    function openShareOptions() {
+    /**
+     * SETUP VISTA PASS (PAZIENTE)
+     */
+    async function setupPassScene(q) {
+        navigateTo('pass-client');
+        document.getElementById('pass-studio-name').innerText = q.get('st');
+        document.getElementById('pass-welcome-msg').innerText = "Felici di rivederti, " + q.get('n');
+        document.getElementById('pass-id-tag').innerText = q.get('cid');
+        document.getElementById('win-reward-desc').innerText = q.get('pr');
+
+        // Render QRCode centrale
+        new QRCode(document.getElementById("qrcode-target"), {
+            text: window.location.href,
+            width: 180,
+            height: 180,
+            colorDark: "#008080",
+            colorLight: "#ffffff"
+        });
+
+        // Recupero Punti in tempo reale da Google
+        try {
+            const r = await fetch(`${API_URL}?getCid=${q.get('cid')}`);
+            const d = await r.json();
+            const actualPoints = parseInt(d.pts || 0);
+            
+            const dots = document.querySelectorAll('.point-dot');
+            for(let i = 0; i < actualPoints && i < 5; i++) {
+                dots[i].classList.add('active');
+            }
+
+            if(actualPoints >= 5) {
+                document.getElementById('win-banner-final').style.display = "block";
+            }
+        } catch(e) {
+            console.warn("Impossibile caricare i punti dal server.");
+        }
+    }
+
+    /**
+     * CONDIVISIONE GIFT (AMICO)
+     */
+    function shareToFriend() {
         const q = new URLSearchParams(window.location.search);
-        const link = `${window.location.href.split('?')[0]}?v=voucher&st=${encodeURIComponent(q.get('st'))}&wa=${q.get('wa')}&da=${encodeURIComponent(q.get('n'))}&pr=${encodeURIComponent(q.get('sc'))}`;
-        window.open(`https://wa.me/?text=${encodeURIComponent('Ti invio un regalo: ' + link)}`);
+        const currentUrl = window.location.href.split('?')[0];
+        const giftUrl = `${currentUrl}?v=voucher&st=${encodeURIComponent(q.get('st'))}&wa=${q.get('wa')}&da=${encodeURIComponent(q.get('n'))}&pr=${encodeURIComponent(q.get('sc'))}`;
+        const msg = `Ciao! Ti invio un regalo speciale per ${q.get('st')} da parte di ${q.get('n')}: ${giftUrl}`;
+        window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`);
     }
 
-    function initVoucher(q) { switchV('voucher'); document.getElementById('v-friend-message').innerText = `${q.get('da')} ti ha inviato un regalo per ${q.get('st')}!`; document.getElementById('v-friend-value').innerText = q.get('pr'); }
-    function whatsappBooking() { const q = new URLSearchParams(window.location.search); window.open(`https://wa.me/${q.get('wa')}?text=Vorrei usare il regalo di ${q.get('da')}`); }
-    function sendUpgradeEmail() { window.location.href = `mailto:spich.admin@gmail.com?subject=UPGRADE PRO ID:${deviceID}&body=Richiedo attivazione PRO per ${bizCfg.nome}`; }
+    /**
+     * SETUP VISTA VOUCHER (AMICO)
+     */
+    function setupVoucherScene(q) {
+        navigateTo('friend-voucher');
+        document.getElementById('voucher-welcome-text').innerText = `${q.get('da')} ti ha regalato un bonus esclusivo presso lo studio ${q.get('st')}!`;
+        document.getElementById('voucher-value-text').innerText = q.get('pr');
+    }
+
+    /**
+     * PRENOTAZIONE AMICO
+     */
+    function contactStudioForBooking() {
+        const q = new URLSearchParams(window.location.search);
+        const msg = `Ciao! Ho ricevuto un regalo da ${q.get('da')} per lo studio ${q.get('st')}. Vorrei prenotare il mio premio: ${q.get('pr')}`;
+        window.open(`https://wa.me/${q.get('wa')}?text=${encodeURIComponent(msg)}`);
+    }
+
+    /**
+     * INVIO MAIL ATTIVAZIONE PRO
+     */
+    function requestProActivation() {
+        const subject = encodeURIComponent("RICHIESTA ATTIVAZIONE PRO - ID: " + myDeviceID);
+        const body = encodeURIComponent("Salve,\nRichiedo l'attivazione della versione PRO per lo studio: " + myBizData.nome + "\n\nID Dispositivo: " + myDeviceID);
+        window.location.href = `mailto:spich.admin@gmail.com?subject=${subject}&body=${body}`;
+    }
+
 </script>
 </body>
 </html>
