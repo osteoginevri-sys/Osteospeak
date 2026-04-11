@@ -19,7 +19,6 @@
             --primary-teal: #008080; 
             --dark-teal: #006666;
             --premium-gold: #d4af37;
-            --gold-gradient: linear-gradient(135deg, #fbf5b7 0%, #d4af37 50%, #a67c00 100%);
             --deep-blue: #003366; 
             --soft-gold: #f4e3b1;
             --pure-white: #ffffff;
@@ -321,7 +320,7 @@
         .btn-del-action { background: #fee2e2; color: var(--danger-red); }
 
         /* =====================================================================
-           [SECTION 8] - VOUCHER DESIGN (CON PACCO REGALO MASTER)
+           [SECTION 8] - VOUCHER DESIGN (CON PACCO REGALO)
            =====================================================================
         */
         .voucher-wrap {
@@ -329,79 +328,52 @@
             padding: 10px 0;
         }
 
-        /* Gift Icon Master con Fiocco e Gradienti Oro */
-        .gift-box-scene {
+        /* Gift Icon with Ribbon */
+        .gift-box-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 25px;
             position: relative;
-            width: 130px;
-            height: 130px;
-            margin: 0 auto 30px;
-            animation: giftFloat 3.2s ease-in-out infinite;
+            background: var(--deep-blue);
+            border-radius: 15px;
+            border: 4px solid var(--premium-gold);
+            box-shadow: 0 8px 20px rgba(0, 51, 102, 0.2);
         }
 
-        @keyframes giftFloat {
-            0%, 100% { transform: translateY(0) rotate(0); }
-            50% { transform: translateY(-12px) rotate(1deg); }
-        }
-        
-        .box-base {
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 85px;
-            background: var(--primary-teal);
-            border-radius: 12px;
-            border: 3px solid var(--premium-gold);
-            z-index: 2;
-            box-shadow: 0 10px 25px rgba(0, 128, 128, 0.2);
-        }
-
-        /* Nastro Oro Verticale Master */
-        .box-base::before {
+        .gift-box-icon::before {
             content: '';
             position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 22px;
-            height: 100%;
-            background: var(--gold-gradient);
-        }
-
-        /* Nastro Oro Orizzontale Master */
-        .box-base::after {
-            content: '';
-            position: absolute;
-            top: 35%;
+            top: 50%;
+            left: 0;
             width: 100%;
-            height: 14px;
-            background: var(--gold-gradient);
+            height: 10px;
+            background: var(--premium-gold);
+            transform: translateY(-50%);
         }
 
-        /* Fiocco Superiore Esteso */
-        .box-top-ribbon {
-            position: absolute;
-            top: 18px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 75px;
-            height: 35px;
-            z-index: 5;
-        }
-
-        .box-top-ribbon::before,
-        .box-top-ribbon::after {
+        .gift-box-icon::after {
             content: '';
             position: absolute;
-            width: 40px;
-            height: 30px;
-            background: var(--gold-gradient);
-            border-radius: 50% 50% 10% 50%;
-            border: 1.5px solid rgba(0,0,0,0.12);
+            left: 50%;
+            top: 0;
+            width: 10px;
+            height: 100%;
+            background: var(--premium-gold);
+            transform: translateX(-50%);
         }
 
-        .box-top-ribbon::before { left: -10px; transform: rotate(-15deg); }
-        .box-top-ribbon::after { right: -10px; transform: rotate(105deg); border-radius: 50% 50% 50% 10%; }
+        /* Il fiocco sopra il pacco */
+        .gift-ribbon {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 20px;
+            background: var(--premium-gold);
+            border-radius: 20px 20px 0 0;
+            z-index: 10;
+        }
 
         .v-biz-name {
             font-family: 'Comfortaa', cursive;
@@ -427,8 +399,8 @@
         }
 
         .fidelity-point {
-            width: 32px;
-            height: 32px;
+            width: 30px;
+            height: 30px;
             border-radius: 50%;
             border: 2.5px solid var(--premium-gold);
             transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -475,6 +447,23 @@
             margin-top: 25px;
             text-align: center;
             display: none;
+            animation: shake 0.5s ease;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        .win-notif-box {
+            background: #fffcf0;
+            border: 2px solid var(--premium-gold);
+            padding: 25px;
+            border-radius: var(--radius-lg);
+            margin-top: 25px;
+            display: none;
+            text-align: center;
         }
 
         .toast-system {
@@ -520,6 +509,7 @@
         <header class="header-main">
             <h1 class="brand-logo">SPICH<span>.</span></h1>
             <p class="brand-sub">Premium Network</p>
+            
             <div id="display-dash-biz-name" class="biz-display-header" style="display:none;"></div>
         </header>
 
@@ -527,15 +517,18 @@
 
         <main id="view-setup" class="view-scene">
             <div class="card-ui">
-                <h3 style="margin-bottom:25px; color:var(--primary-teal); font-weight:800;">Attivazione Network</h3>
+                <h3 style="margin-bottom:25px; color:var(--primary-teal); font-weight:800;">Benvenuto nel Network</h3>
+                
                 <div class="field-group">
-                    <label class="field-label">Nome Attività</label>
+                    <label class="field-label">Nome della tua Attività</label>
                     <input type="text" id="setup-name" placeholder="Esempio: Studio Medico Spich">
                 </div>
+
                 <div class="field-group">
-                    <label class="field-label">WhatsApp Business</label>
+                    <label class="field-label">Contatto WhatsApp Business</label>
                     <input type="tel" id="setup-phone" placeholder="3331234567">
                 </div>
+
                 <div class="field-group">
                     <label class="field-label">Settore Operativo</label>
                     <select id="setup-type">
@@ -544,52 +537,111 @@
                         <option value="Wellness">Benessere & Estetica</option>
                     </select>
                 </div>
+
                 <button class="btn-action btn-primary" onclick="initBusinessProfile()">
                     ATTIVA ORA <i class="fas fa-check-circle"></i>
                 </button>
             </div>
+            
+            <p style="text-align:center; font-size:0.75rem; color:var(--slate-gray);">
+                Accedendo accetti i termini di gestione del Network Premium SPICH.
+            </p>
         </main>
 
         <main id="view-dash" class="view-scene">
+            
             <div class="counter-display">
                 <div class="counter-number" id="stats-total">0</div>
-                <div class="counter-label" id="stats-label">Pazienti nel Database</div>
+                <div class="counter-label" id="stats-label">Pazienti nel Cloud</div>
             </div>
 
             <div class="card-ui">
                 <div class="field-group">
-                    <label class="field-label" id="label-client-name">Nome Paziente</label>
-                    <input type="text" id="new-client-name" placeholder="Inserisci Nome">
+                    <label class="field-label" id="label-client-name">Nome Completo</label>
+                    <input type="text" id="new-client-name" placeholder="Cognome e Nome">
                 </div>
+                
                 <div class="field-group">
                     <label class="field-label">Cellulare WhatsApp</label>
                     <input type="tel" id="new-client-tel" placeholder="3XXXXXXXXX">
                 </div>
-                <button class="btn-action btn-primary" onclick="registerNewPatient()">
+
+                <div id="reward-logic-panel">
+                    <div class="field-group">
+                        <label class="field-label">Benefit Amico (Sconto Referral)</label>
+                        <div id="slot-referral">
+                            <select id="val-referral">
+                                <option value="Sconto 10%">Sconto 10% (Default)</option>
+                                <option value="Sconto 20%">Sconto 20% (Premium)</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="field-group">
+                        <label class="field-label">Premio Fedeltà (5° Punto)</label>
+                        <div id="slot-loyalty">
+                            <input type="text" id="val-loyalty" value="Trattamento Omaggio" readonly style="opacity:0.6; cursor:not-allowed;">
+                        </div>
+                    </div>
+                </div>
+
+                <div id="alert-limit-reached" class="pro-upgrade-banner">
+                    <i class="fas fa-crown" style="font-size:1.8rem; color:var(--premium-gold); margin-bottom:10px;"></i>
+                    <h4 style="color:var(--danger-red); font-weight:800;">LIMITE FREE RAGGIUNTO</h4>
+                    <p style="font-size:0.8rem; color:var(--slate-gray); margin: 10px 0 20px;">
+                        Hai gestito i tuoi primi 10 pazienti. Passa alla versione PRO per sbloccare database illimitato e premi personalizzati.
+                    </p>
+                    <button class="btn-action btn-gold" onclick="sendProUpgradeRequest()">
+                        SBLOCCA VERSIONE PRO
+                    </button>
+                </div>
+
+                <button id="btn-submit-main" class="btn-action btn-primary" style="margin-top:10px;" onclick="registerNewPatient()">
                     CREA PASS REGALO <i class="fas fa-plus-circle"></i>
                 </button>
             </div>
 
-            <div id="main-list-render" class="list-container"></div>
+            <div style="display:flex; justify-content:space-between; align-items:center; margin: 15px 5px;">
+                <h4 style="font-weight:800; color:var(--primary-teal); text-transform:uppercase; font-size:0.85rem;">Anagrafica Attiva</h4>
+                <span id="session-tag" style="font-size:0.6rem; background:#f1f5f9; padding:4px 10px; border-radius:10px; font-weight:700;">LIVE SYNC</span>
+            </div>
+            
+            <div id="main-list-render" class="list-container">
+            </div>
         </main>
 
         <main id="view-voucher" class="view-scene">
             <div class="voucher-wrap">
-                <div class="gift-box-scene">
-                    <div class="box-top-ribbon"></div>
-                    <div class="box-base"></div>
+                
+                <div style="position:relative; width:80px; height:80px; margin: 0 auto 30px;">
+                    <div class="gift-ribbon"></div>
+                    <div class="gift-box-icon"></div>
                 </div>
 
                 <h2 id="display-biz-name" class="v-biz-name">STUDIO</h2>
+                
                 <p id="display-user-name" class="v-user-welcome">Benvenuto</p>
 
                 <div class="dots-grid" id="display-dots-ui">
-                    <div class="fidelity-point"></div><div class="fidelity-point"></div><div class="fidelity-point"></div><div class="fidelity-point"></div><div class="fidelity-point"></div>
+                    <div class="fidelity-point"></div>
+                    <div class="fidelity-point"></div>
+                    <div class="fidelity-point"></div>
+                    <div class="fidelity-point"></div>
+                    <div class="fidelity-point"></div>
+                </div>
+
+                <div id="display-win-box" class="win-notif-box">
+                    <p style="color:var(--primary-teal); font-weight:800; font-size:1.1rem; text-transform:uppercase;">Vantaggio Sbloccato!</p>
+                    <p id="display-reward-desc" style="color:var(--premium-gold); font-weight:700; font-size:1.2rem;"></p>
                 </div>
 
                 <div class="qr-output-box">
                     <div id="qrcode-canvas"></div>
                 </div>
+
+                <p style="font-size:0.75rem; color:var(--slate-gray); padding:0 30px; margin: 15px 0 30px;">
+                    Presenta questo Pass al desk. Ad ogni visita accumuli punti per il tuo premio fedeltà.
+                </p>
 
                 <button class="btn-action btn-gold" onclick="shareVoucherLink()">
                     REGALA SCONTO A UN AMICO <i class="fab fa-whatsapp"></i>
@@ -599,7 +651,7 @@
 
         <footer class="footer-branding">
             <p>&copy; 2026 SPICH. DIGITAL NETWORK</p>
-            <div id="debug-info" style="font-size:0.5rem; color:#cbd5e1; margin-top:10px;"></div>
+            <div id="debug-info" style="font-size:0.5rem; color:#cbd5e1; margin-top:10px;">ID: --</div>
         </footer>
 
     </div>
@@ -607,218 +659,343 @@
     <script>
         /**
          * =====================================================================
-         * CONFIGURAZIONE E STATO
+         * CONFIGURAZIONE DI SISTEMA (Google Apps Script Endpoint)
          * =====================================================================
          */
         const GOOGLE_ENDPOINT = "https://script.google.com/macros/s/AKfycbyh4CGnWQWyvztKvTkbQ9_TOUMb3EQaB6bZySuamZeRkYSe_1VBvWJYXc2LcESKWS1sdg/exec";
         
+        /**
+         * =====================================================================
+         * STATO DELL'APPLICAZIONE
+         * =====================================================================
+         */
         let state = {
-            deviceID: localStorage.getItem('spich_v18_device_id') || ('SP-' + Math.random().toString(36).substr(2, 9).toUpperCase()),
+            deviceID: localStorage.getItem('spich_v18_device_id') || generateUID(),
             bizProfile: JSON.parse(localStorage.getItem('spich_v18_biz_data') || 'null'),
-            patientDb: JSON.parse(localStorage.getItem('spich_v18_db') || '[]')
+            patientDb: JSON.parse(localStorage.getItem('spich_v18_db') || '[]'),
+            isProActive: false
         };
 
         /**
          * =====================================================================
-         * INIZIALIZZAZIONE CORE
+         * INIZIALIZZAZIONE AL CARICAMENTO
          * =====================================================================
          */
         window.addEventListener('DOMContentLoaded', async () => {
+            
             if(!localStorage.getItem('spich_v18_device_id')) {
                 localStorage.setItem('spich_v18_device_id', state.deviceID);
             }
-            document.getElementById('debug-info').innerText = "ID DISPOSITIVO: " + state.deviceID;
+            
+            document.getElementById('debug-info').innerText = "SESSION ID: " + state.deviceID;
             
             const urlParams = new URLSearchParams(window.location.search);
             
             if (urlParams.get('v') === 'gift') {
+                // MODALITÀ PAZIENTE
                 initVoucherMode(urlParams);
             } else if (!state.bizProfile) {
+                // MODALITÀ SETUP
                 navigateTo('setup');
             } else {
+                // MODALITÀ DASHBOARD
                 navigateTo('dash');
-                document.getElementById('display-dash-biz-name').innerText = state.bizProfile.name;
-                document.getElementById('display-dash-biz-name').style.display = 'block';
+                
+                // Mostra nome attività in Dashboard
+                const bizTitle = document.getElementById('display-dash-biz-name');
+                bizTitle.innerText = state.bizProfile.name;
+                bizTitle.style.display = 'block';
+                
                 applyTerminology();
+                await checkCloudStatus();
                 refreshPatientUI();
-                // KILL SWITCH: Controllo cancellazione remota
-                await checkCloudStatus(); 
             }
         });
 
-        async function checkCloudStatus() {
-            if(!state.bizProfile) return;
-            try {
-                const response = await fetch(`${GOOGLE_ENDPOINT}?checkPro=${state.deviceID}`);
-                const cloudData = await response.json();
-                if (cloudData.status === "UNAUTHORIZED" || cloudData.exists === false) {
-                    triggerToast("Account rimosso dal Network.");
-                    setTimeout(() => { 
-                        localStorage.clear(); 
-                        location.reload(); 
-                    }, 2500);
-                }
-            } catch (err) { console.warn("Cloud Sync Offline."); }
+        function generateUID() {
+            return 'SP-' + Math.random().toString(36).substr(2, 9).toUpperCase();
         }
 
-        function navigateTo(id) {
-            document.querySelectorAll('.view-scene').forEach(s => s.classList.remove('active'));
-            document.getElementById('view-' + id).classList.add('active');
+        function navigateTo(sceneId) {
+            const scenes = document.querySelectorAll('.view-scene');
+            scenes.forEach(s => s.classList.remove('active'));
+            document.getElementById('view-' + sceneId).classList.add('active');
             window.scrollTo(0, 0);
         }
 
-        function triggerToast(m) {
+        function triggerToast(message) {
             const toast = document.getElementById('sys-toast');
-            toast.innerText = m;
+            toast.innerText = message;
             toast.style.display = 'block';
-            setTimeout(() => { toast.style.display = 'none'; }, 3000);
+            setTimeout(() => { toast.style.display = 'none'; }, 2800);
         }
 
         /**
          * =====================================================================
-         * LOGICA ATTIVAZIONE E DASHBOARD
+         * LOGICA DI BUSINESS
          * =====================================================================
          */
         function initBusinessProfile() {
-            const n = document.getElementById('setup-name').value.trim();
-            const p = document.getElementById('setup-phone').value.trim();
-            const s = document.getElementById('setup-type').value;
+            const nameValue = document.getElementById('setup-name').value.trim();
+            const phoneValue = document.getElementById('setup-phone').value.trim();
+            const sectorValue = document.getElementById('setup-type').value;
 
-            if(!n || !p) {
-                alert("Dati obbligatori mancanti.");
+            if (!nameValue || !phoneValue) {
+                alert("Attenzione: Tutti i campi sono obbligatori.");
                 return;
             }
 
-            state.bizProfile = { 
-                name: n, 
-                phone: '39' + p.replace(/\D/g,''), 
-                sector: s 
+            state.bizProfile = {
+                name: nameValue,
+                phone: '39' + phoneValue.replace(/\D/g, ''),
+                sector: sectorValue
             };
+
             localStorage.setItem('spich_v18_biz_data', JSON.stringify(state.bizProfile));
 
-            // Notifica Cloud
+            // Notifica al Cloud
             fetch(GOOGLE_ENDPOINT, {
-                method: "POST", mode: "no-cors",
-                body: JSON.stringify({ t: "REG_BIZ", id: state.deviceID, nome: n, settore: s })
-            });
-
-            triggerToast("Attivazione Inviata!");
-            setTimeout(() => { location.reload(); }, 1200);
-        }
-
-        function registerNewPatient() {
-            const n = document.getElementById('new-client-name').value.trim();
-            const t = document.getElementById('new-client-tel').value.trim();
-
-            if(!n || !t) {
-                alert("Inserire dati paziente.");
-                return;
-            }
-
-            const cid = 'CID-' + Date.now().toString(36).toUpperCase();
-            const record = { cid, nome: n, tel: '39' + t.replace(/\D/g,''), pts: 0 };
-            
-            state.patientDb.unshift(record);
-            localStorage.setItem('spich_v18_db', JSON.stringify(state.patientDb));
-
-            fetch(GOOGLE_ENDPOINT, {
-                method: "POST", mode: "no-cors",
-                body: JSON.stringify({ 
-                    t: "ADD_CLIENT", 
-                    bizId: state.deviceID, 
-                    bizName: state.bizProfile.name, 
-                    clientName: n, 
-                    clientTel: record.tel, 
-                    cid: cid 
+                method: "POST",
+                mode: "no-cors",
+                body: JSON.stringify({
+                    t: "REG_BIZ",
+                    id: state.deviceID,
+                    nome: nameValue,
+                    settore: sectorValue
                 })
             });
 
-            triggerToast("Pass Generato!");
+            triggerToast("Network Attivato!");
+            setTimeout(() => { location.reload(); }, 1200);
+        }
+
+        async function checkCloudStatus() {
+            if(!state.deviceID) return;
+            try {
+                const response = await fetch(`${GOOGLE_ENDPOINT}?checkPro=${state.deviceID}`);
+                const cloudData = await response.json();
+
+                // LOGICA KILL-SWITCH REMOTO
+                if (cloudData.status === "UNAUTHORIZED" || cloudData.exists === false) {
+                    triggerToast("Account disattivato dal Network.");
+                    setTimeout(() => { 
+                        localStorage.clear(); 
+                        location.reload(); 
+                    }, 2500);
+                    return;
+                }
+
+                if (cloudData.isPro === "PRO") {
+                    state.isProActive = true;
+                    unlockProFeatures();
+                }
+                
+                toggleLimitWarnings();
+            } catch (err) {
+                console.warn("Cloud offline.");
+            }
+        }
+
+        function applyTerminology() {
+            if (!state.bizProfile) return;
+            const labelCount = document.getElementById('stats-label');
+            const labelInput = document.getElementById('label-client-name');
+            const maps = {
+                "Ristorazione": { plural: "Ospiti Registrati", singular: "Nome Ospite" },
+                "Wellness": { plural: "Clienti nel Database", singular: "Nome Cliente" },
+                "Salute": { plural: "Pazienti Registrati", singular: "Nome Paziente" }
+            };
+            const selected = maps[state.bizProfile.sector] || maps["Salute"];
+            labelCount.innerText = selected.plural;
+            labelInput.innerText = selected.singular;
+        }
+
+        function toggleLimitWarnings() {
+            const banner = document.getElementById('alert-limit-reached');
+            const btnSubmit = document.getElementById('btn-submit-main');
+            if (!state.isProActive && state.patientDb.length >= 10) {
+                banner.style.display = 'block';
+                btnSubmit.disabled = true;
+            } else {
+                banner.style.display = 'none';
+                btnSubmit.disabled = false;
+            }
+        }
+
+        function unlockProFeatures() {
+            const refSlot = document.getElementById('slot-referral');
+            const loySlot = document.getElementById('slot-loyalty');
+            // Verifica se esistono per non sovrascrivere se già pro
+            if(refSlot && refSlot.querySelector('select')) {
+                refSlot.innerHTML = `<input type="text" id="val-referral" placeholder="Esempio: 15% Sconto">`;
+            }
+            if(loySlot && loySlot.querySelector('input[readonly]')) {
+                loySlot.innerHTML = `<input type="text" id="val-loyalty" placeholder="Esempio: Kit Omaggio">`;
+            }
+        }
+
+        function registerNewPatient() {
+            const cName = document.getElementById('new-client-name').value.trim();
+            const cTel = document.getElementById('new-client-tel').value.trim();
+            const cRef = document.getElementById('val-referral').value;
+            const cLoy = document.getElementById('val-loyalty').value;
+
+            if (!cName || !cTel) {
+                alert("Inserire Nome e Cellulare.");
+                return;
+            }
+
+            const uniqueCID = 'CID-' + Date.now().toString(36).toUpperCase();
+            const patientRecord = {
+                cid: uniqueCID,
+                nome: cName,
+                tel: '39' + cTel.replace(/\D/g, ''),
+                sconto: cRef,
+                premio: cLoy,
+                pts: 0
+            };
+
+            state.patientDb.unshift(patientRecord);
+            localStorage.setItem('spich_v18_db', JSON.stringify(state.patientDb));
+
+            fetch(GOOGLE_ENDPOINT, {
+                method: "POST",
+                mode: "no-cors",
+                body: JSON.stringify({
+                    t: "ADD_CLIENT",
+                    bizId: state.deviceID,
+                    bizName: state.bizProfile.name,
+                    clientName: cName,
+                    clientTel: patientRecord.tel,
+                    premio: cLoy,
+                    cid: uniqueCID,
+                    pts: 0
+                })
+            });
+
+            triggerToast("Pass Creato!");
             refreshPatientUI();
+            toggleLimitWarnings();
             document.getElementById('new-client-name').value = "";
             document.getElementById('new-client-tel').value = "";
         }
 
         function refreshPatientUI() {
-            const container = document.getElementById('main-list-render');
-            container.innerHTML = "";
+            const listArea = document.getElementById('main-list-render');
+            listArea.innerHTML = "";
             document.getElementById('stats-total').innerText = state.patientDb.length;
 
-            state.patientDb.forEach((p, i) => {
-                const item = document.createElement('div');
-                item.className = 'row-item';
-                item.innerHTML = `
+            if (state.patientDb.length === 0) {
+                listArea.innerHTML = `<p style="text-align:center; color:#94a3b8; padding:30px;">Database vuoto.</p>`;
+                return;
+            }
+
+            state.patientDb.forEach((entry, i) => {
+                const element = document.createElement('div');
+                element.className = 'row-item';
+                const whatsappUrl = buildWhatsAppMessage(entry);
+                element.innerHTML = `
                     <div class="row-info">
-                        <b>${p.nome}</b>
-                        <span>${p.pts} Punti Registrati</span>
+                        <b>${entry.nome}</b>
+                        <span>${entry.pts} Punti • ${entry.premio}</span>
                     </div>
                     <div class="row-tools">
-                        <a href="${buildWa(p)}" target="_blank" class="tool-btn btn-wa-action">
+                        <a href="${whatsappUrl}" target="_blank" class="tool-btn btn-wa-action">
                             <i class="fab fa-whatsapp"></i>
                         </a>
-                        <button class="tool-btn btn-pts-action" onclick="addPoint(${i})">+1</button>
-                    </div>`;
-                container.appendChild(item);
+                        <button class="tool-btn btn-pts-action" onclick="updatePoints(${i})">+1</button>
+                        ${state.isProActive ? `
+                            <button class="tool-btn btn-del-action" onclick="removeEntry(${i})">
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
+                        ` : ''}
+                    </div>
+                `;
+                listArea.appendChild(element);
             });
         }
 
-        function addPoint(i) {
-            state.patientDb[i].pts++;
+        function updatePoints(index) {
+            state.patientDb[index].pts++;
             localStorage.setItem('spich_v18_db', JSON.stringify(state.patientDb));
-            
             fetch(GOOGLE_ENDPOINT, {
-                method: "POST", mode: "no-cors",
-                body: JSON.stringify({ 
-                    t: "UPDATE_POINTS", 
-                    bizId: state.deviceID, 
-                    cid: state.patientDb[i].cid, 
-                    pts: state.patientDb[i].pts 
+                method: "POST",
+                mode: "no-cors",
+                body: JSON.stringify({
+                    t: "UPDATE_POINTS",
+                    bizId: state.deviceID,
+                    cid: state.patientDb[index].cid,
+                    pts: state.patientDb[index].pts
                 })
             });
-            
-            triggerToast("Punto Aggiunto!");
+            triggerToast("Punto Registrato!");
             refreshPatientUI();
         }
 
-        function buildWa(p) {
-            const base = window.location.href.split('?')[0];
-            const link = `${base}?v=gift&st=${encodeURIComponent(state.bizProfile.name)}&n=${encodeURIComponent(p.nome)}&cid=${p.cid}`;
-            const msg = `Ciao ${p.nome}! Ecco il tuo Pass Regalo di ${state.bizProfile.name}: ${link}`;
-            return `https://wa.me/${p.tel}?text=${encodeURIComponent(msg)}`;
+        function removeEntry(index) {
+            if (confirm("Rimuovere il record?")) {
+                state.patientDb.splice(index, 1);
+                localStorage.setItem('spich_v18_db', JSON.stringify(state.patientDb));
+                refreshPatientUI();
+                toggleLimitWarnings();
+            }
         }
 
-        async function initVoucherMode(p) {
+        function buildWhatsAppMessage(patient) {
+            const root = window.location.href.split('?')[0];
+            const voucherParams = `?v=gift&st=${encodeURIComponent(state.bizProfile.name)}&wa=${state.bizProfile.phone}&n=${encodeURIComponent(patient.nome)}&cid=${patient.cid}&pr=${encodeURIComponent(patient.premio)}&sc=${encodeURIComponent(patient.sconto)}`;
+            const finalLink = root + voucherParams;
+            const text = `Ciao ${patient.nome}! 🎉 Ecco il tuo Pass Regalo di ${state.bizProfile.name}: ${finalLink}`;
+            return `https://wa.me/${patient.tel}?text=${encodeURIComponent(text)}`;
+        }
+
+        async function initVoucherMode(params) {
             navigateTo('voucher');
-            document.getElementById('display-biz-name').innerText = p.get('st');
-            document.getElementById('display-user-name').innerText = "Ciao, " + p.get('n');
-            
+            document.getElementById('display-biz-name').innerText = params.get('st');
+            document.getElementById('display-user-name').innerText = "Ciao, " + params.get('n');
+            document.getElementById('display-reward-desc').innerText = params.get('pr');
+
             new QRCode(document.getElementById("qrcode-canvas"), {
                 text: window.location.href,
-                width: 170, height: 170
+                width: 170, height: 170,
+                colorDark: "#003366", colorLight: "#ffffff",
+                correctLevel: QRCode.CorrectLevel.H
             });
 
             try {
-                const res = await fetch(`${GOOGLE_ENDPOINT}?getCid=${p.get('cid')}`);
-                const data = await res.json();
-                const pts = parseInt(data.pts || 0);
-                const dots = document.querySelectorAll('.fidelity-point');
-                for(let j=0; j<pts && j<5; j++) dots[j].classList.add('filled');
-            } catch(e) {}
-        }
-
-        function applyTerminology() {
-            const m = { "Ristorazione": "Ospiti nel Database", "Wellness": "Clienti nel Database", "Salute": "Pazienti nel Database" };
-            document.getElementById('stats-label').innerText = m[state.bizProfile.sector] || "Utenti Registrati";
-            
-            const mSing = { "Ristorazione": "Nome Ospite", "Wellness": "Nome Cliente", "Salute": "Nome Paziente" };
-            document.getElementById('label-client-name').innerText = mSing[state.bizProfile.sector] || "Nome Utente";
+                const cloudRes = await fetch(`${GOOGLE_ENDPOINT}?getCid=${params.get('cid')}`);
+                const data = await cloudRes.json();
+                const currentPoints = parseInt(data.pts || 0);
+                const dotElements = document.querySelectorAll('.fidelity-point');
+                for (let j = 0; j < currentPoints && j < 5; j++) {
+                    dotElements[j].classList.add('filled');
+                }
+                if (currentPoints >= 5) {
+                    document.getElementById('display-win-box').style.display = "block";
+                }
+            } catch (error) {}
         }
 
         function shareVoucherLink() {
-            const p = new URLSearchParams(window.location.search);
-            const msg = `Ehi! Ti regalo uno sconto da ${p.get('st')}! Ecco il pass: ${window.location.href}`;
-            window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`);
+            const currentParams = new URLSearchParams(window.location.search);
+            const msgToShare = `Ehi! Ti regalo uno ${currentParams.get('sc')} presso ${currentParams.get('st')}! Pass: ${window.location.href}`;
+            window.open(`https://wa.me/?text=${encodeURIComponent(msgToShare)}`);
         }
+
+        function sendProUpgradeRequest() {
+            triggerToast("Invio richiesta...");
+            fetch(GOOGLE_ENDPOINT, {
+                method: "POST",
+                mode: "no-cors",
+                body: JSON.stringify({
+                    t: "REQ_PRO",
+                    id: state.deviceID,
+                    nome: state.bizProfile.name
+                })
+            });
+            alert("RICHIESTA INVIATA!\nTi contatteremo su WhatsApp per l'attivazione PRO.");
+        }
+
     </script>
 </body>
 </html>
