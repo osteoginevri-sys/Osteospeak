@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>SPICH. - Business System & Referral</title>
+    <title>SPICH. - Business System & Referral Management</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&family=Montserrat:wght@400;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -11,54 +11,54 @@
     
     <style>
         /* ==============================================
-           1. DESIGN SYSTEM SPICH (800 RIGHE - NO CUT)
+           1. DESIGN SYSTEM SPICH. (VERSIONE INTEGRALE)
            ============================================== */
         :root { 
-            --primary: #008080; 
-            --gold: #d4af37; 
+            --primary: #008080; /* Teal Professionale */
+            --gold: #d4af37;    /* Oro Premium */
             --bg: #fdfdfd; 
             --danger: #e74c3c; 
             --success: #2ecc71; 
             --wa: #25D366; 
             --light-blue: #E1F5FE;
-            --shadow-main: 0 15px 35px rgba(0,0,0,0.1);
+            --text-dark: #2c3e50;
+            --shadow-main: 0 20px 40px rgba(0,0,0,0.08);
         }
         
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; margin: 0; padding: 0; }
         
         body { 
-            background: #f0f2f5; 
+            background: #f4f7f6; 
             font-family: 'Montserrat', sans-serif; 
-            color: #2c3e50; 
+            color: var(--text-dark); 
             min-height: 100vh; 
-            overflow-x: hidden; 
+            display: flex;
+            justify-content: center;
         }
         
         .app-container { 
             background: var(--bg); 
             width: 100%; 
             min-height: 100vh; 
-            max-width: 480px; 
-            margin: 0 auto; 
+            max-width: 500px; 
             display: flex; 
             flex-direction: column; 
-            box-shadow: 0 0 60px rgba(0,0,0,0.1); 
+            box-shadow: 0 0 100px rgba(0,0,0,0.1); 
             position: relative;
         }
         
-        /* HEADER FISSO - LOGO SPICH. */
+        /* HEADER FISSO */
         .header { 
-            padding: 35px 20px; 
+            padding: 40px 20px; 
             text-align: center; 
             background: white; 
-            border-bottom: 1px solid #f0f0f0; 
-            cursor: pointer; 
+            border-bottom: 1px solid #eee; 
             position: sticky; top: 0; z-index: 1000;
         }
         
         .logo { 
             font-family: 'Comfortaa', cursive; 
-            font-size: 3.5rem; 
+            font-size: 3.8rem; 
             color: var(--primary); 
             letter-spacing: -3px;
             font-weight: 700;
@@ -66,121 +66,131 @@
         
         .logo span { color: var(--gold); }
         
-        /* SCENE ANIMATION */
+        /* GESTIONE SCENE */
         .scena { 
             display: none; 
-            padding: 25px; 
-            animation: fadeIn 0.5s ease-out; 
+            padding: 30px 20px; 
+            animation: fadeIn 0.4s ease-out; 
             flex: 1;
         }
         
         .active { display: block !important; }
         
         @keyframes fadeIn { 
-            from { opacity: 0; transform: translateY(20px); } 
+            from { opacity: 0; transform: translateY(10px); } 
             to { opacity: 1; transform: translateY(0); } 
         }
         
-        /* CARDS DASHBOARD */
+        /* CARTE DASHBOARD */
         .stat-card { 
             background: white; 
-            padding: 45px 20px; 
-            border-radius: 35px; 
+            padding: 50px 20px; 
+            border-radius: 40px; 
             text-align: center; 
-            border-bottom: 8px solid var(--gold); 
-            margin-bottom: 30px; 
+            border-bottom: 10px solid var(--gold); 
+            margin-bottom: 35px; 
             position: relative; 
             box-shadow: var(--shadow-main); 
         }
         
-        .stat-card b { font-size: 4.2rem; color: var(--primary); display: block; line-height: 1; }
-        .stat-card span { font-weight: 800; color: #94a3b8; text-transform: uppercase; font-size: 0.95rem; letter-spacing: 2px; }
+        .stat-card b { font-size: 4.5rem; color: var(--primary); display: block; line-height: 1; }
+        .stat-card span { font-weight: 800; color: #94a3b8; text-transform: uppercase; font-size: 1rem; letter-spacing: 3px; }
 
         .badge-pro { 
-            background: #cbd5e0; color: white; padding: 8px 18px; border-radius: 14px; 
-            font-size: 0.75rem; position: absolute; top: 20px; right: 20px; font-weight: 900; 
+            background: #cbd5e0; color: white; padding: 10px 20px; border-radius: 15px; 
+            font-size: 0.8rem; position: absolute; top: 25px; right: 25px; font-weight: 900; 
         }
         .badge-pro.is-pro { background: var(--success); }
         
-        /* FORM & INPUTS */
+        /* INPUT E FORM */
         .form-box { 
-            background: white; padding: 25px; border-radius: 30px; 
-            border: 1px solid #f1f5f9; margin-bottom: 30px; 
+            background: white; padding: 30px; border-radius: 35px; 
+            border: 1px solid #f1f5f9; margin-bottom: 35px; 
         }
         
         label { 
-            font-size: 0.8rem; font-weight: 800; color: var(--primary); 
-            text-transform: uppercase; margin: 20px 0 8px 5px; display: block; 
+            font-size: 0.85rem; font-weight: 800; color: var(--primary); 
+            text-transform: uppercase; margin: 25px 0 10px 5px; display: block; 
         }
         
         input, select { 
-            width: 100%; padding: 20px; border-radius: 20px; 
-            border: 1px solid #e2e8f0; font-family: inherit; font-size: 1.1rem; 
+            width: 100%; padding: 22px; border-radius: 22px; 
+            border: 2px solid #edf2f7; font-family: inherit; font-size: 1.15rem; 
             outline: none; background: #fbfcfd; transition: 0.3s;
         }
         
-        input:focus { border-color: var(--primary); background: white; box-shadow: 0 0 0 4px rgba(0,128,128,0.05); }
+        input:focus { border-color: var(--primary); background: white; }
         
         .btn-teal { 
-            background: var(--primary); color: white; border: none; padding: 24px; 
-            border-radius: 22px; font-weight: 800; width: 100%; cursor: pointer; 
-            font-size: 1.3rem; margin-top: 15px; box-shadow: 0 10px 25px rgba(0,128,128,0.2);
+            background: var(--primary); color: white; border: none; padding: 25px; 
+            border-radius: 25px; font-weight: 800; width: 100%; cursor: pointer; 
+            font-size: 1.4rem; margin-top: 20px; box-shadow: 0 12px 24px rgba(0,128,128,0.25);
+            transition: 0.3s;
         }
+        
+        .btn-teal:active { transform: scale(0.98); }
 
-        /* LISTA ITEM */
+        /* LISTA PAZIENTI */
         .p-item { 
             background: white; padding: 25px; border-radius: 30px; 
-            margin-bottom: 20px; display: flex; justify-content: space-between; 
-            align-items: center; border: 1px solid #f1f5f9; box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+            margin-bottom: 25px; display: flex; justify-content: space-between; 
+            align-items: center; border: 1px solid #f1f5f9; box-shadow: 0 5px 15px rgba(0,0,0,0.03);
         }
         
         .btn-wa { 
-            background: var(--wa); color: white; width: 60px; height: 60px; 
+            background: var(--wa); color: white; width: 65px; height: 65px; 
             border-radius: 50%; display: flex; align-items: center; justify-content: center; 
-            text-decoration: none; font-size: 2rem; box-shadow: 0 6px 15px rgba(37,211,102,0.3);
+            text-decoration: none; font-size: 2.2rem; box-shadow: 0 8px 20px rgba(37,211,102,0.3);
         }
         
         .btn-ref { 
-            background: var(--gold); border: none; padding: 18px 25px; 
-            border-radius: 18px; color: white; font-weight: 900; cursor: pointer; 
+            background: var(--gold); border: none; padding: 20px 30px; 
+            border-radius: 20px; color: white; font-weight: 900; cursor: pointer; 
         }
 
-        /* AREA PALLINI (Paziente) */
-        .dots-wrapper { display: flex; justify-content: center; gap: 18px; margin: 40px 0; }
+        /* SISTEMA PALLINI (REFERRAL PROGRESS) */
+        .dots-wrapper { display: flex; justify-content: center; gap: 20px; margin: 45px 0; }
         .dot { 
-            width: 38px; height: 38px; border-radius: 50%; 
-            border: 4px solid #e2e8f0; background: #f8fafc; transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            width: 40px; height: 40px; border-radius: 50%; 
+            border: 4px solid #e2e8f0; background: #f8fafc; transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
         .dot.fill { 
             background: var(--primary); border-color: var(--primary); 
-            transform: scale(1.3); box-shadow: 0 0 20px rgba(0,128,128,0.4); 
+            transform: scale(1.35); box-shadow: 0 0 25px rgba(0,128,128,0.45); 
         }
 
         .btn-share-wa { 
-            background: var(--light-blue); color: #0288D1; border: none; padding: 22px; 
-            border-radius: 20px; width: 100%; font-weight: 800; margin-top: 30px; 
-            cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 12px; font-size: 1.1rem;
+            background: var(--light-blue); color: #0288D1; border: none; padding: 25px; 
+            border-radius: 25px; width: 100%; font-weight: 800; margin-top: 35px; 
+            cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 15px; font-size: 1.2rem;
         }
 
-        /* VOUCHER AMICO (Sobrio ma d'impatto) */
+        /* VOUCHER AMICO DESIGN */
         .voucher-card {
-            background: white; border: 6px dashed var(--gold); padding: 45px 25px;
-            border-radius: 40px; text-align: center; margin-top: 20px;
+            background: white; border: 8px dashed var(--gold); padding: 50px 30px;
+            border-radius: 50px; text-align: center; margin-top: 25px;
+            box-shadow: var(--shadow-main);
         }
         
-        .voucher-title {
-            font-family: 'Comfortaa', cursive; font-size: 3rem; color: var(--primary); margin-bottom: 20px;
+        .voucher-header-logo {
+            font-family: 'Comfortaa', cursive; font-size: 4rem; color: var(--primary); margin-bottom: 10px;
+        }
+
+        .banner-premio { 
+            background: var(--gold); color: white; padding: 35px; border-radius: 35px; 
+            font-weight: 800; text-align: center; margin-top: 45px; font-size: 1.4rem; 
+            box-shadow: 0 15px 35px rgba(212,175,55,0.4);
+        }
+
+        /* RICHIESTA PRO */
+        .lock-pro-box { 
+            background: #fff5f5; border: 2px dashed #fc8181; border-radius: 30px; 
+            padding: 35px; text-align: center; margin-top: 25px;
         }
 
         .footer { 
-            font-size: 0.65rem; color: #cbd5e0; text-align: center; 
-            padding: 35px; margin-top: auto; border-top: 1px solid #f0f0f0; 
-        }
-        
-        /* LOCK BOX PRO */
-        .lock-box { 
-            background: #fffafa; border: 2px dashed #feb2b2; border-radius: 25px; 
-            padding: 30px; text-align: center; margin-top: 20px; display: none;
+            font-size: 0.7rem; color: #cbd5e0; text-align: center; 
+            padding: 40px; margin-top: auto; border-top: 1px solid #eee; 
         }
     </style>
 </head>
@@ -188,312 +198,314 @@
 
 <div class="app-container">
     
-    <header class="header" onclick="confermaReset()">
-        <h1 class="logo">SPICH<span>.</span></h1>
+    <header class="header">
+        <h1 class="logo" onclick="location.reload()">SPICH<span>.</span></h1>
     </header>
 
     <main id="scena-setup" class="scena">
-        <div style="text-align:center; margin-bottom:30px;">
-            <h2 style="color:var(--primary); font-weight:900; font-size:1.8rem;">Benvenuto in SPICH.</h2>
-            <p style="color:#64748b; margin-top:5px;">Configura il tuo business in 10 secondi.</p>
+        <div style="text-align:center; margin-bottom:35px;">
+            <h2 style="color:var(--primary); font-weight:900; font-size:2rem;">Business Center</h2>
+            <p style="color:#64748b; margin-top:8px;">Attiva il tuo sistema referral professionale.</p>
         </div>
         <div class="form-box">
-            <label>Nome Attività</label>
+            <label>Nome Attività / Studio</label>
             <input type="text" id="setup-nome" placeholder="Es: Studio Medico Rossi">
             <label>WhatsApp Business (con 39)</label>
             <input type="tel" id="setup-wa" placeholder="393471234567">
-            <label>Settore</label>
+            <label>Settore di Riferimento</label>
             <select id="setup-settore">
                 <option value="Medica">Area Medica</option>
                 <option value="Estetica">Estetica / Benessere</option>
-                <option value="Ristorazione">Ristorazione</option>
-                <option value="Altro">Altro Settore</option>
+                <option value="Ristorazione">Ristorazione / Food</option>
+                <option value="Altro">Altro Professional</option>
             </select>
-            <button class="btn-teal" onclick="eseguiSetup()">ATTIVA IL MIO BUSINESS</button>
+            <button class="btn-teal" onclick="salvaSetup()">REGISTRA ATTIVITÀ</button>
         </div>
     </main>
 
     <main id="scena-dash" class="scena">
         <div class="stat-card">
-            <div id="badge-pro" class="badge-pro">FREE VERSION</div>
-            <b id="count-total">0</b>
-            <span id="label-plural">PAZIENTI</span>
+            <div id="badge-pro" class="badge-pro">FREE ACCOUNT</div>
+            <b id="tot-utenti">0</b>
+            <span id="label-tipo-utenti">UTENTI</span>
         </div>
         
         <div class="form-box">
-            <label id="label-name-input">NOME E COGNOME</label>
-            <input type="text" id="p-nome" placeholder="Inserisci nome...">
+            <label id="label-input-nome">NOME COMPLETO CLIENTE</label>
+            <input type="text" id="p-nome" placeholder="Mario Rossi">
             <label>CELLULARE (CON 39)</label>
-            <input type="tel" id="p-tel" placeholder="39347...">
-            <label>PREMIO REFERRAL</label>
+            <input type="tel" id="p-tel" placeholder="393331234567">
+            <label>PREMIO DEDICATO</label>
             <select id="p-premio">
                 <option value="Sconto 20%">Sconto 20%</option>
                 <option value="Sconto 50%">Sconto 50%</option>
-                <option value="Trattamento Omaggio">Trattamento Omaggio</option>
+                <option value="Seduta Gratuita">Seduta Gratuita</option>
+                <option value="Prodotto Omaggio">Prodotto Omaggio</option>
             </select>
             
-            <button id="btn-add" class="btn-teal" onclick="creaNuovoContatto()">AGGIUNGI E INVIA</button>
-            
-            <div id="lock-pro" class="lock-box">
-                <i class="fas fa-crown" style="color:var(--gold); font-size:2.5rem; margin-bottom:15px;"></i>
-                <p style="color:var(--danger); font-weight:900;">LIMITE FREE RAGGIUNTO (10/10)</p>
-                <button onclick="richiediProEmail()" style="background:var(--danger); color:white; border:none; padding:15px; border-radius:15px; width:100%; font-weight:800; margin-top:15px; cursor:pointer;">PASSA A PRO (INVIA EMAIL)</button>
+            <div id="area-azione-paziente">
+                <button id="btn-add" class="btn-teal" onclick="aggiungiPaziente()">AGGIUNGI E INVIA PASS</button>
+            </div>
+
+            <div id="box-limite-pro" class="lock-pro-box" style="display:none;">
+                <i class="fas fa-crown" style="color:var(--gold); font-size:3rem; margin-bottom:15px;"></i>
+                <h3 style="color:#c53030; font-weight:900;">LIMITE RAGGIUNTO</h3>
+                <p style="font-size:0.9rem; margin-bottom:20px;">Hai raggiunto il limite di 10 contatti per la versione gratuita.</p>
+                <button onclick="richiediProMail()" style="background:var(--primary); color:white; border:none; padding:18px; border-radius:15px; width:100%; font-weight:800; cursor:pointer; font-size:1.1rem;">PASSA A PRO (INVIA EMAIL)</button>
             </div>
         </div>
         
-        <h3 style="color:var(--primary); margin-bottom:20px; font-weight:800;">CONTATTI ATTIVI</h3>
-        <div id="render-lista"></div>
+        <h3 style="color:var(--primary); margin-bottom:25px; font-weight:800; letter-spacing:1px;">ANAGRAFICA ATTIVA</h3>
+        <div id="lista-render"></div>
     </main>
 
     <main id="scena-gift" class="scena">
         <div style="text-align:center;">
-            <i class="fas fa-gift" style="font-size:5rem; color:var(--primary); margin-bottom:20px;"></i>
-            <h2 id="g-studio-nome" style="color:var(--primary); text-transform:uppercase; font-family:'Comfortaa';"></h2>
-            <p style="font-weight:700; color:#64748b; margin-top:10px;">Ecco i tuoi progressi:</p>
+            <i class="fas fa-gift" style="font-size:5.5rem; color:var(--primary); margin-bottom:20px;"></i>
+            <h2 id="g-studio" style="color:var(--primary); text-transform:uppercase; font-family:'Comfortaa'; letter-spacing:-1px;"></h2>
+            <p style="font-weight:700; color:#4a5568; margin-top:12px;">La tua Raccolta Premi Digitale</p>
             
-            <div class="dots-wrapper" id="box-punti">
+            <div class="dots-wrapper" id="pallini-container">
                 <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
             </div>
 
-            <div id="area-qr">
-                <div id="qrcode" style="display:flex; justify-content:center; margin-bottom:25px;"></div>
-                <button class="btn-share-wa" onclick="condividiVoucher()">
+            <div id="qrcode-area">
+                <div id="qrcode" style="display:flex; justify-content:center; margin-bottom:30px;"></div>
+                <button class="btn-share-wa" onclick="condividiVoucherAmico()">
                     <i class="fab fa-whatsapp"></i> REGALA UN BONUS A UN AMICO
                 </button>
             </div>
 
-            <div id="g-premio-banner" class="banner-premio" style="background:var(--gold); color:white; padding:30px; border-radius:30px; font-weight:800; margin-top:30px;"></div>
+            <div id="g-premio-banner" class="banner-premio"></div>
         </div>
     </main>
 
     <main id="scena-voucher" class="scena">
         <div class="voucher-card">
-            <h1 class="voucher-title">SPICH<span>.</span></h1>
-            <div style="width:50px; height:4px; background:var(--gold); margin: 0 auto 30px;"></div>
-            <h2 id="v-saluto" style="color:var(--primary); font-weight:800;">UN REGALO PER TE!</h2>
-            <p id="v-descr" style="margin:20px 0; font-weight:600; line-height:1.6; color:#475569;"></p>
+            <h1 class="voucher-header-logo">SPICH<span>.</span></h1>
+            <div style="width:60px; height:5px; background:var(--gold); margin: 0 auto 35px;"></div>
             
-            <div style="background:var(--light-blue); padding:25px; border-radius:25px; margin:30px 0; border:1px solid rgba(0,128,128,0.1);">
-                <span style="font-size:0.8rem; font-weight:800; color:var(--primary); text-transform:uppercase; letter-spacing:1px;">Valore del Voucher:</span>
-                <h2 id="v-premio-txt" style="color:var(--gold); font-size:2.2rem; margin-top:10px;"></h2>
+            <h2 id="v-saluto" style="color:var(--primary); font-weight:800; font-size:1.8rem;">REGALO PER TE!</h2>
+            <p id="v-messaggio" style="margin:25px 0; font-weight:600; line-height:1.7; color:#4a5568; font-size:1.1rem;"></p>
+            
+            <div style="background:var(--light-blue); padding:30px; border-radius:30px; margin:35px 0; border:2px solid rgba(0,128,128,0.15);">
+                <span style="font-size:0.9rem; font-weight:800; color:var(--primary); text-transform:uppercase; letter-spacing:2px;">Bonus Esclusivo:</span>
+                <h2 id="v-premio-txt" style="color:var(--gold); font-size:2.5rem; margin-top:12px;"></h2>
             </div>
             
             <button class="btn-teal" onclick="prenotaDaVoucher()">
-                <i class="fab fa-whatsapp"></i> PRENOTA IL TUO REGALO
+                <i class="fab fa-whatsapp"></i> PRENOTA IL TUO REGALO ORA
             </button>
         </div>
-        <p style="text-align:center; margin-top:40px; font-size:0.8rem; color:#94a3b8; font-weight:700;">OFFERTO DA SPICH. BUSINESS SYSTEM</p>
+        <p style="text-align:center; margin-top:50px; font-size:0.9rem; color:#94a3b8; font-weight:700; letter-spacing:1px;">POWERED BY SPICH. BUSINESS SYSTEM</p>
     </main>
 
     <footer class="footer">
-        SPICH. BUSINESS SYSTEM v3.5<br>
-        DEVICE ID: <span id="display-id">...</span><br>
+        SPICH. SYSTEM v4.0 - PROFESSIONAL EDITION<br>
+        ID DISPOSITIVO: <span id="id-device-ui">...</span><br>
         &copy; 2026 TUTTI I DIRITTI RISERVATI
     </footer>
 </div>
 
 <script>
     /* ==============================================
-       2. LOGICA APPLICATIVA INTEGRALE (800 RIGHE)
+       2. LOGICA APPLICATIVA (SINCRO CLOUD & PALLINI)
        ============================================== */
 
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxxLHt8BP8xqVjN211jCDaNDYUcYtbb8QPNNIbfooYXe2Ca7wbkXlKVPirMLaO1vHzsbg/exec";
+    const URL_CLOUD = "https://script.google.com/macros/s/AKfycbyDDqoL9DeyhkzY6kdKoN8QwLrt8gti-_jLXnl_PFY6_n6Fwl4cWCFFIqeDzf43D0nl4w/exec";
 
-    // --- IDENTITÀ DISPOSITIVO ---
-    let deviceId = localStorage.getItem('spich_dev_id');
-    if (!deviceId) {
-        deviceId = 'SP-' + Math.random().toString(36).substr(2, 6).toUpperCase();
-        localStorage.setItem('spich_dev_id', deviceId);
-    }
+    // --- IDENTITÀ ---
+    let myId = localStorage.getItem('spich_id') || ('SP-' + Math.random().toString(36).substr(2, 6).toUpperCase());
+    localStorage.setItem('spich_id', myId);
 
-    // --- CARICAMENTO DATI ---
-    let config = JSON.parse(localStorage.getItem('spich_config') || 'null');
-    let db = JSON.parse(localStorage.getItem('spich_db') || '[]');
-    let proStatus = false;
+    // --- DATI LOCALI ---
+    let configurazione = JSON.parse(localStorage.getItem('spich_cfg') || 'null');
+    let contatti = JSON.parse(localStorage.getItem('spich_db') || '[]');
+    let isPro = false;
 
     window.onload = function() {
-        document.getElementById('display-id').innerText = deviceId;
+        document.getElementById('id-device-ui').innerText = myId;
         const params = new URLSearchParams(window.location.search);
         
         // Router delle Scene
         if (params.get('v') === 'voucher') {
-            mostraScena('voucher');
+            cambiaScena('voucher');
             initVoucher(params);
         } else if (params.get('v') === 'gift') {
-            mostraScena('gift');
+            cambiaScena('gift');
             initGift(params);
-        } else if (!config) {
-            mostraScena('setup');
+        } else if (!configurazione) {
+            cambiaScena('setup');
         } else {
-            mostraScena('dash');
-            renderDashboard();
-            verificaProCloud();
+            cambiaScena('dash');
+            aggiornaDashboard();
+            controllaStatoPro();
         }
     };
 
-    function mostraScena(id) {
+    function cambiaScena(id) {
         document.querySelectorAll('.scena').forEach(s => s.classList.remove('active'));
         document.getElementById('scena-' + id).classList.add('active');
         window.scrollTo(0,0);
     }
 
     // --- LOGICA ESERCENTE ---
-    function eseguiSetup() {
+    function salvaSetup() {
         const n = document.getElementById('setup-nome').value.trim();
         const w = document.getElementById('setup-wa').value.trim();
         const s = document.getElementById('setup-settore').value;
-        if(!n || !w) return alert("Compila tutti i campi!");
+        if(!n || !w) return alert("Inserisci i dati dell'attività!");
 
-        config = { n, w, s };
-        localStorage.setItem('spich_config', JSON.stringify(config));
+        configurazione = { n, w, s };
+        localStorage.setItem('spich_cfg', JSON.stringify(configurazione));
         
-        // Sincronizzazione Cloud
-        fetch(SCRIPT_URL, { 
+        // Sincronizzazione Cloud Esercente
+        fetch(URL_CLOUD, { 
             method: "POST", 
             mode: "no-cors", 
-            body: JSON.stringify({ t: "REG_BIZ", id: deviceId, nome: n, settore: s }) 
+            body: JSON.stringify({ t: "REG_BIZ", id: myId, nome: n, settore: s }) 
         });
         
         location.reload();
     }
 
-    function renderDashboard() {
-        const container = document.getElementById('render-lista');
+    function aggiornaDashboard() {
+        const container = document.getElementById('lista-render');
         container.innerHTML = "";
         
-        db.forEach((p, i) => {
-            const card = document.createElement('div');
-            card.className = 'p-item';
-            card.innerHTML = `
+        contatti.forEach((p, i) => {
+            const riga = document.createElement('div');
+            riga.className = 'p-item';
+            riga.innerHTML = `
                 <div style="flex:1;">
-                    <b style="font-size:1.2rem; color:var(--primary);">${p.nome}</b><br>
-                    <small style="font-weight:800; color:#94a3b8;">${p.punti}/5 REFERRAL</small>
+                    <b style="font-size:1.3rem; color:var(--primary);">${p.nome}</b><br>
+                    <small style="font-weight:800; color:#94a3b8; text-transform:uppercase;">${p.punti}/5 REFERRAL ATTIVI</small>
                 </div>
-                <div style="display:flex; gap:12px;">
-                    <a class="btn-wa" href="${generaLinkWA(p)}" target="_blank"><i class="fab fa-whatsapp"></i></a>
-                    <button class="btn-ref" onclick="addPunto(${i})">+1</button>
+                <div style="display:flex; gap:15px;">
+                    <a class="btn-wa" href="${generaLinkPaziente(p)}" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                    <button class="btn-ref" onclick="incrementaPunto(${i})">+1</button>
                 </div>
             `;
-            container.appendChild(card);
+            container.appendChild(riga);
         });
 
-        document.getElementById('count-total').innerText = db.length;
-        document.getElementById('label-plural').innerText = (config.s === "Medica") ? "PAZIENTI" : "CLIENTI";
+        document.getElementById('tot-utenti').innerText = contatti.length;
+        document.getElementById('label-tipo-utenti').innerText = (configurazione.s === "Medica") ? "PAZIENTI" : "CLIENTI";
         
-        // Gestione Limite Free
-        if(!proStatus && db.length >= 10) {
-            document.getElementById('lock-pro').style.display = "block";
-            document.getElementById('btn-add').style.display = "none";
+        // Gestione Limite Account Free
+        if(!isPro && contatti.length >= 10) {
+            document.getElementById('box-limite-pro').style.display = "block";
+            document.getElementById('area-azione-paziente').style.display = "none";
         }
     }
 
-    function creaNuovoContatto() {
-        const n = document.getElementById('p-nome').value.trim();
-        const t = document.getElementById('p-tel').value.trim();
-        const pr = document.getElementById('p-premio').value;
-        if(!n || !t) return alert("Inserisci dati mancanti!");
+    function aggiungiPaziente() {
+        const nome = document.getElementById('p-nome').value.trim();
+        const tel = document.getElementById('p-tel').value.trim();
+        const premio = document.getElementById('p-premio').value;
+        if(!nome || !tel) return alert("Compila Nome e Cellulare!");
 
-        const nuovo = { id: Date.now(), nome: n, tel: t, punti: 0, premio: pr };
-        db.push(nuovo);
-        localStorage.setItem('spich_db', JSON.stringify(db));
+        const nuovo = { id: Date.now(), nome: nome, tel: tel, punti: 0, premio: premio };
+        contatti.push(nuovo);
+        localStorage.setItem('spich_db', JSON.stringify(contatti));
         
-        // Sincronizza Paziente su Google Sheets
-        fetch(SCRIPT_URL, {
+        // Sincronizza Paziente su Google Sheets (Log_Referral)
+        fetch(URL_CLOUD, {
             method: "POST",
             mode: "no-cors",
             body: JSON.stringify({
                 t: "ADD_CLIENT",
-                bizId: deviceId,
-                bizName: config.n,
-                clientName: n,
-                clientTel: t,
-                premio: pr
+                bizId: myId,
+                bizName: configurazione.n,
+                clientName: nome,
+                clientTel: tel,
+                premio: premio
             })
         });
 
-        renderDashboard();
+        aggiornaDashboard();
         document.getElementById('p-nome').value = "";
         document.getElementById('p-tel').value = "";
     }
 
-    function addPunto(i) {
-        db[i].punti++;
-        localStorage.setItem('spich_db', JSON.stringify(db));
-        renderDashboard();
+    function incrementaPunto(index) {
+        contatti[index].punti++;
+        localStorage.setItem('spich_db', JSON.stringify(contatti));
+        aggiornaDashboard();
+        alert("Punto aggiunto! Invia di nuovo il link al paziente per aggiornare i suoi pallini.");
     }
 
-    function generaLinkWA(p) {
+    function generaLinkPaziente(p) {
         const base = window.location.href.split('?')[0];
-        const link = `${base}?v=gift&st=${encodeURIComponent(config.n)}&wa=${config.w}&n=${encodeURIComponent(p.nome)}&pr=${encodeURIComponent(p.premio)}&pts=${p.punti}`;
-        return `https://wa.me/${p.tel}?text=${encodeURIComponent("Ciao " + p.nome + "! Ecco il tuo pass punti per " + config.n + ": " + link)}`;
+        // IL LINK ORA INCLUDE SEMPRE IL NUMERO DI PUNTI ATTUALE
+        const linkDigitale = `${base}?v=gift&st=${encodeURIComponent(configurazione.n)}&wa=${configurazione.w}&n=${encodeURIComponent(p.nome)}&pr=${encodeURIComponent(p.premio)}&pts=${p.punti}`;
+        return `https://wa.me/${p.tel}?text=${encodeURIComponent("Ciao " + p.nome + "! Ecco il tuo Pass Regalo aggiornato per " + configurazione.n + ": " + linkDigitale)}`;
     }
 
     // --- LOGICA PAZIENTE (PALLINI) ---
     function initGift(params) {
-        document.getElementById('g-studio-nome').innerText = params.get('st');
-        document.getElementById('g-premio-banner').innerText = "IL TUO PREMIO: " + params.get('pr');
+        document.getElementById('g-studio').innerText = params.get('st');
+        document.getElementById('g-premio-banner').innerText = "PREMIO RACCOLTA: " + params.get('pr');
         
         const pts = parseInt(params.get('pts') || 0);
-        const dots = document.querySelectorAll('.dot');
+        const pallini = document.querySelectorAll('.dot');
         for(let i=0; i<pts && i<5; i++) {
-            dots[i].classList.add('fill');
+            pallini[i].classList.add('fill');
         }
         
         new QRCode(document.getElementById("qrcode"), {
             text: window.location.href,
-            width: 170,
-            height: 170,
-            colorDark : "#008080"
+            width: 180,
+            height: 180,
+            colorDark : "#008080",
+            colorLight : "#ffffff"
         });
     }
 
-    function condividiVoucher() {
+    function condividiVoucherAmico() {
         const p = new URLSearchParams(window.location.search);
         const base = window.location.href.split('?')[0];
         
-        const linkAmico = `${base}?v=voucher&st=${encodeURIComponent(p.get('st'))}&wa=${p.get('wa')}&da=${encodeURIComponent(p.get('n'))}&pr=${encodeURIComponent(p.get('pr'))}`;
-        const msg = `Ciao! Ho un regalo per te da parte di ${p.get('st')}. Clicca qui per attivarlo: ${linkAmico}`;
+        // LINK PER L'AMICO (SCENA VOUCHER)
+        const linkVoucher = `${base}?v=voucher&st=${encodeURIComponent(p.get('st'))}&wa=${p.get('wa')}&da=${encodeURIComponent(p.get('n'))}&pr=${encodeURIComponent(p.get('pr'))}`;
+        const msg = `Ciao! Ho un regalo speciale per te da parte di ${p.get('st')}. Clicca qui per attivarlo: ${linkVoucher}`;
         window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`);
     }
 
-    // --- LOGICA AMICO (VOUCHER SOBRIO) ---
+    // --- LOGICA AMICO (VOUCHER) ---
     function initVoucher(params) {
-        document.getElementById('v-descr').innerText = `Il tuo amico ${params.get('da')} ha pensato a te e ti ha inviato un bonus speciale da utilizzare presso ${params.get('st')}!`;
+        document.getElementById('v-messaggio').innerText = `Il tuo amico ${params.get('da')} ti ha inviato un voucher regalo esclusivo da utilizzare presso lo studio ${params.get('st')}!`;
         document.getElementById('v-premio-txt').innerText = params.get('pr');
     }
 
     function prenotaDaVoucher() {
         const p = new URLSearchParams(window.location.search);
-        const msg = `Ciao! Ho ricevuto un voucher da ${p.get('da')} per il regalo: ${p.get('pr')}. Vorrei prenotare un appuntamento!`;
+        const msg = `Ciao! Ho ricevuto un voucher regalo da parte di ${p.get('da')} per ${p.get('pr')}. Vorrei prenotare un appuntamento presso di voi!`;
         window.open(`https://wa.me/${p.get('wa')}?text=${encodeURIComponent(msg)}`);
     }
 
-    // --- UTILS & CLOUD ---
-    async function verificaProCloud() {
+    // --- UTILITIES CLOUD & PRO ---
+    async function controllaStatoPro() {
         try {
-            const res = await fetch(SCRIPT_URL + "?checkPro=" + deviceId);
+            const res = await fetch(URL_CLOUD + "?checkPro=" + myId);
             const data = await res.json();
             if(data.isPro === "SI") {
-                proStatus = true;
-                document.getElementById('badge-pro').innerText = "PRO VERSION";
+                isPro = true;
+                document.getElementById('badge-pro').innerText = "PRO ACCOUNT";
                 document.getElementById('badge-pro').classList.add('is-pro');
-                renderDashboard();
+                document.getElementById('box-limite-pro').style.display = "none";
+                document.getElementById('area-azione-paziente').style.display = "block";
+                aggiornaDashboard();
             }
-        } catch(e) {}
+        } catch(e) { console.log("Cloud offline o ID non trovato."); }
     }
 
-    function richiediProEmail() {
-        const subject = encodeURIComponent("RICHIESTA ATTIVAZIONE PRO - ID: " + deviceId);
-        const body = encodeURIComponent("Salve SPICH Admin,\n\nVorrei attivare la versione PRO per la mia attività: " + config.n + ".\nIl mio Device ID è: " + deviceId);
-        window.location.href = `mailto:spich.admin@gmail.com?subject=${subject}&body=${body}`;
+    function richiediProMail() {
+        const ogg = encodeURIComponent("RICHIESTA ATTIVAZIONE PRO - ID: " + myId);
+        const corpo = encodeURIComponent("Salve SPICH Admin,\n\nRichiedo l'attivazione della versione PRO per la mia attività: " + configurazione.n + ".\nIl mio Device ID è: " + myId + "\n\nAttendo istruzioni per il pagamento.");
+        window.location.href = `mailto:spich.admin@gmail.com?subject=${ogg}&body=${corpo}`;
     }
 
-    function confermaReset() {
-        if(confirm("Vuoi resettare l'app? Perderai tutti i dati locali.")) {
-            localStorage.clear();
-            location.reload();
-        }
-    }
 </script>
 </body>
 </html>
