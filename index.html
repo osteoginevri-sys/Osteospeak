@@ -3,572 +3,250 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>SPICH. - Business System & Referral</title>
+    <title>SPICH. - Business System</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&family=Montserrat:wght@400;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     
     <style>
-        /* ==============================================
-           1. VARIABILI E DESIGN SYSTEM
-           ============================================== */
-        :root { 
-            --primary: #008080; /* Teal SPICH */
-            --gold: #d4af37; 
-            --bg: #fdfdfd; 
-            --danger: #e74c3c; 
-            --success: #2ecc71; 
-            --wa: #25D366; 
-            --light-blue: #E1F5FE;
-            --shadow-main: 0 10px 30px rgba(0,0,0,0.08);
-        }
-        
-        * { 
-            box-sizing: border-box; 
-            -webkit-tap-highlight-color: transparent; 
-            margin: 0; 
-            padding: 0; 
-        }
-        
-        body { 
-            background: #f0f2f5; 
-            font-family: 'Montserrat', sans-serif; 
-            color: #2c3e50; 
-            min-height: 100vh; 
-            overflow-x: hidden; 
-        }
-        
-        /* Layout Mobile-First */
-        .app-container { 
-            background: var(--bg); 
-            width: 100%; 
-            min-height: 100vh; 
-            max-width: 480px; 
-            margin: 0 auto; 
-            display: flex; 
-            flex-direction: column; 
-            box-shadow: 0 0 50px rgba(0,0,0,0.15); 
-            position: relative;
-        }
-        
-        /* HEADER FISSO - LOGO MAXI */
-        .header { 
-            padding: 30px 20px; 
-            text-align: center; 
-            background: white; 
-            border-bottom: 1px solid #f0f0f0; 
-            cursor: pointer; 
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-        
-        .logo { 
-            font-family: 'Comfortaa', cursive; 
-            font-size: 3.2rem; 
-            color: var(--primary); 
-            letter-spacing: -2px;
-            transition: transform 0.3s;
-        }
-        
-        .logo:active { transform: scale(0.95); }
+        :root { --primary: #008080; --gold: #d4af37; --bg: #fdfdfd; --danger: #e74c3c; --success: #2ecc71; --wa: #25D366; --light-blue: #E1F5FE; --shadow-main: 0 10px 30px rgba(0,0,0,0.08); }
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; margin: 0; padding: 0; }
+        body { background: #f0f2f5; font-family: 'Montserrat', sans-serif; color: #2c3e50; min-height: 100vh; }
+        .app-container { background: var(--bg); width: 100%; min-height: 100vh; max-width: 480px; margin: 0 auto; display: flex; flex-direction: column; box-shadow: 0 0 50px rgba(0,0,0,0.15); position: relative; }
+        .header { padding: 30px 20px; text-align: center; background: white; border-bottom: 1px solid #f0f0f0; cursor: pointer; position: sticky; top: 0; z-index: 1000; }
+        .logo { font-family: 'Comfortaa', cursive; font-size: 3.2rem; color: var(--primary); letter-spacing: -2px; }
         .logo span { color: var(--gold); }
-        
-        /* GESTIONE PANNELLI (SCENE) */
-        .scena { 
-            display: none; 
-            padding: 25px; 
-            animation: fadeInScene 0.5s ease-out; 
-            flex: 1;
-        }
-        
+        .scena { display: none; padding: 25px; animation: fadeIn 0.5s; flex: 1; }
         .active { display: block !important; }
-        
-        @keyframes fadeInScene { 
-            from { opacity: 0; transform: translateY(25px); } 
-            to { opacity: 1; transform: translateY(0); } 
-        }
-        
-        /* ==============================================
-           2. ELEMENTI DASHBOARD (LATO PROFESSIONISTA)
-           ============================================== */
-        .stat-card { 
-            background: white; 
-            padding: 40px 20px; 
-            border-radius: 30px; 
-            text-align: center; 
-            border-bottom: 8px solid var(--gold); 
-            margin-bottom: 30px; 
-            position: relative; 
-            box-shadow: var(--shadow-main); 
-        }
-        
-        .stat-card b { 
-            font-size: 3.8rem; 
-            color: var(--primary); 
-            display: block; 
-            line-height: 1;
-            margin-bottom: 8px;
-        }
-        
-        .stat-card span {
-            font-weight: 800;
-            color: #94a3b8;
-            text-transform: uppercase;
-            font-size: 0.9rem;
-            letter-spacing: 2px;
-        }
-
-        .badge-pro { 
-            background: #cbd5e0; 
-            color: white; 
-            padding: 6px 16px; 
-            border-radius: 12px; 
-            font-size: 0.75rem; 
-            position: absolute; 
-            top: 15px; 
-            right: 15px; 
-            font-weight: 900; 
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-        }
-        
-        .badge-pro.is-pro { 
-            background: var(--success); 
-            box-shadow: 0 0 20px rgba(46,204,113,0.3);
-        }
-        
-        /* INPUT E FORM */
-        .form-box { 
-            background: white; 
-            padding: 25px; 
-            border-radius: 25px; 
-            border: 1px solid #f1f5f9; 
-            margin-bottom: 30px; 
-            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
-        }
-        
-        label { 
-            font-size: 0.75rem; 
-            font-weight: 800; 
-            color: var(--primary); 
-            text-transform: uppercase; 
-            margin: 20px 0 8px 5px; 
-            display: block; 
-        }
-        
-        input, select { 
-            width: 100%; 
-            padding: 18px; 
-            border-radius: 16px; 
-            border: 1px solid #e2e8f0; 
-            font-family: inherit; 
-            font-size: 1.05rem; 
-            outline: none; 
-            background: #fbfcfd;
-            transition: all 0.3s;
-        }
-        
-        input:focus { border-color: var(--primary); background: white; box-shadow: 0 0 0 4px rgba(0,128,128,0.05); }
-        
-        .btn-teal { 
-            background: var(--primary); 
-            color: white; 
-            border: none; 
-            padding: 22px; 
-            border-radius: 20px; 
-            font-weight: 800; 
-            width: 100%; 
-            cursor: pointer; 
-            font-size: 1.2rem; 
-            margin-top: 25px;
-            box-shadow: 0 8px 20px rgba(0,128,128,0.25);
-            transition: all 0.2s;
-        }
-        
-        .btn-teal:active { transform: scale(0.97); }
-
-        /* LISTA CONTATTI */
-        .p-item { 
-            background: white; 
-            padding: 22px; 
-            border-radius: 24px; 
-            margin-bottom: 18px; 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            border: 1px solid #f1f5f9; 
-            box-shadow: 0 5px 15px rgba(0,0,0,0.02);
-        }
-        
-        .btn-wa { 
-            background: var(--wa); 
-            color: white; 
-            width: 55px; 
-            height: 55px; 
-            border-radius: 50%; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            text-decoration: none; 
-            font-size: 1.8rem; 
-            margin-right: 12px; 
-            box-shadow: 0 5px 15px rgba(37,211,102,0.2);
-        }
-        
-        .btn-ref { 
-            background: var(--gold); 
-            border: none; 
-            padding: 15px 25px; 
-            border-radius: 16px; 
-            color: white; 
-            font-weight: 900; 
-            cursor: pointer; 
-            box-shadow: 0 5px 15px rgba(212,175,55,0.2);
-        }
-        
-        /* BLOCCO LIMITI FREE */
-        .lock-box { 
-            background: #fffafa; 
-            border: 2px dashed #feb2b2; 
-            border-radius: 25px; 
-            padding: 30px; 
-            text-align: center; 
-            display: none; 
-            margin-top: 20px;
-        }
-        
-        .btn-pro { 
-            background: var(--danger); 
-            color: white; 
-            padding: 18px; 
-            border-radius: 16px; 
-            border: none; 
-            width: 100%; 
-            font-weight: 800; 
-            margin-top: 15px; 
-            cursor: pointer; 
-        }
-
-        /* ==============================================
-           3. AREA CLIENTE (VISTA REGALO)
-           ============================================== */
-        .gift-container { text-align: center; padding: 10px 0; }
-
-        .gift-icon { 
-            font-size: 6.5rem; 
-            color: var(--primary); 
-            margin-bottom: 30px; 
-            animation: bounce-gift 2.2s infinite ease-in-out; 
-            display: inline-block;
-            filter: drop-shadow(0 10px 20px rgba(0,128,128,0.15));
-        }
-        
-        @keyframes bounce-gift { 
-            0%, 100% { transform: translateY(0) rotate(0deg); } 
-            50% { transform: translateY(-25px) rotate(5deg); } 
-        }
-        
-        .dots-wrapper { 
-            display: flex; 
-            justify-content: center; 
-            gap: 18px; 
-            margin: 40px 0; 
-        }
-        
-        .dot { 
-            width: 32px; 
-            height: 32px; 
-            border-radius: 50%; 
-            border: 3px solid #e2e8f0; 
-            background: #f8fafc; 
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
-        }
-        
-        .dot.fill { 
-            background: var(--primary); 
-            border-color: var(--primary); 
-            transform: scale(1.4); 
-            box-shadow: 0 0 20px rgba(0,128,128,0.4); 
-        }
-        
-        .btn-share-wa { 
-            background: var(--light-blue); 
-            color: #0288D1; 
-            border: none; 
-            padding: 20px; 
-            border-radius: 18px; 
-            width: 100%; 
-            font-weight: 800; 
-            margin-top: 30px; 
-            cursor: pointer; 
-            font-size: 1rem; 
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            gap: 12px; 
-        }
-        
-        .banner-premio { 
-            background: var(--gold); 
-            color: white; 
-            padding: 30px; 
-            border-radius: 25px; 
-            font-weight: 800; 
-            text-align: center; 
-            margin-top: 40px; 
-            font-size: 1.2rem; 
-            box-shadow: 0 10px 30px rgba(212,175,55,0.3); 
-            line-height: 1.6;
-        }
-
-        #qrcode canvas, #qrcode img { margin: 0 auto; border: 12px solid white; border-radius: 20px; box-shadow: var(--shadow-main); }
-        
-        .footer { 
-            font-size: 0.55rem; 
-            color: #cbd5e0; 
-            text-align: center; 
-            padding: 20px; 
-            margin-top: auto; 
-            line-height: 1.4;
-            letter-spacing: 0.5px;
-        }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .stat-card { background: white; padding: 40px 20px; border-radius: 30px; text-align: center; border-bottom: 8px solid var(--gold); margin-bottom: 30px; position: relative; box-shadow: var(--shadow-main); }
+        .stat-card b { font-size: 3.8rem; color: var(--primary); display: block; }
+        .badge-pro { background: #cbd5e0; color: white; padding: 6px 16px; border-radius: 12px; font-size: 0.75rem; position: absolute; top: 15px; right: 15px; font-weight: 900; }
+        .badge-pro.is-pro { background: var(--success); }
+        .form-box { background: white; padding: 25px; border-radius: 25px; border: 1px solid #f1f5f9; margin-bottom: 30px; }
+        label { font-size: 0.75rem; font-weight: 800; color: var(--primary); text-transform: uppercase; margin: 20px 0 8px 5px; display: block; }
+        input, select { width: 100%; padding: 18px; border-radius: 16px; border: 1px solid #e2e8f0; font-size: 1.05rem; outline: none; background: #fbfcfd; }
+        .btn-teal { background: var(--primary); color: white; border: none; padding: 22px; border-radius: 20px; font-weight: 800; width: 100%; cursor: pointer; font-size: 1.2rem; margin-top: 25px; box-shadow: 0 8px 20px rgba(0,128,128,0.25); }
+        .p-item { background: white; padding: 22px; border-radius: 24px; margin-bottom: 18px; display: flex; justify-content: space-between; align-items: center; border: 1px solid #f1f5f9; }
+        .btn-wa { background: var(--wa); color: white; width: 55px; height: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 1.8rem; }
+        .btn-ref { background: var(--gold); border: none; padding: 15px 25px; border-radius: 16px; color: white; font-weight: 900; cursor: pointer; }
+        .lock-box { background: #fffafa; border: 2px dashed #feb2b2; border-radius: 25px; padding: 30px; text-align: center; display: none; }
+        .btn-pro { background: var(--danger); color: white; padding: 18px; border-radius: 16px; width: 100%; font-weight: 800; margin-top: 15px; border: none; }
+        .dots-wrapper { display: flex; justify-content: center; gap: 15px; margin: 30px 0; }
+        .dot { width: 25px; height: 25px; border-radius: 50%; border: 3px solid #e2e8f0; background: #f8fafc; }
+        .dot.fill { background: var(--primary); border-color: var(--primary); transform: scale(1.2); }
+        .btn-share-wa { background: var(--light-blue); color: #0288D1; border: none; padding: 18px; border-radius: 15px; width: 100%; font-weight: 800; margin-top: 20px; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 10px; }
+        .banner-premio { background: var(--gold); color: white; padding: 25px; border-radius: 20px; margin-top: 30px; font-weight: 800; }
+        #qrcode { display: flex; justify-content: center; margin-top: 20px; }
+        .footer { font-size: 0.6rem; color: #cbd5e0; text-align: center; padding: 20px; margin-top: auto; }
     </style>
 </head>
 <body>
 
 <div class="app-container">
-    
-    <header class="header" id="main-header" onclick="confermaLogout()">
+    <header class="header" onclick="confermaLogout()">
         <h1 class="logo">SPICH<span>.</span></h1>
     </header>
 
     <main id="scena-setup" class="scena">
-        <div style="text-align:center; margin-bottom:30px;">
-            <h3 style="color:var(--primary); font-weight:900; font-size:1.6rem;">Benvenuto in SPICH.</h3>
-            <p style="font-size:0.9rem; color:#64748b; margin-top:10px;">Crea il tuo pannello referral professionale in 10 secondi.</p>
+        <div style="text-align:center; margin-bottom:20px;">
+            <h3 style="color:var(--primary); font-weight:900;">ATTIVA BUSINESS</h3>
         </div>
-        
         <div class="form-box">
             <label>Nome Attività</label>
-            <input type="text" id="setup-nome" placeholder="Es: Studio Medico Rossi">
-            
-            <label>WhatsApp Business (con 39)</label>
-            <input type="tel" id="setup-wa" placeholder="Es: 393471234567">
-            
-            <label>Settore di Riferimento</label>
+            <input type="text" id="setup-nome" placeholder="Es: Studio Rossi">
+            <label>WhatsApp (con 39)</label>
+            <input type="tel" id="setup-wa" placeholder="39347...">
+            <label>Settore</label>
             <select id="setup-settore">
                 <option value="Medica">Area Medica</option>
-                <option value="Commerciale">Area Commerciale</option>
-                <option value="Ristorazione">Area Ristorazione</option>
-                <option value="Altro">Altro Settore</option>
+                <option value="Ristorazione">Ristorazione</option>
+                <option value="Altro">Altro</option>
             </select>
-            
-            <button class="btn-teal" onclick="eseguiSetup()">ATTIVA IL MIO BUSINESS</button>
+            <button class="btn-teal" onclick="eseguiSetup()">ATTIVA ORA</button>
         </div>
     </main>
 
     <main id="scena-dash" class="scena">
-        
         <div class="stat-card">
-            <div id="badge-pro" class="badge-pro">FREE VERSION</div>
+            <div id="badge-pro" class="badge-pro">FREE</div>
             <b id="contatore-num">0</b>
             <span id="label-plurale">PAZIENTI</span>
         </div>
-        
         <div class="form-box">
             <label id="label-singolare">NOME E COGNOME</label>
-            <input type="text" id="p-nome" placeholder="Inserisci nome...">
-            
-            <label>NUMERO DI CELLULARE</label>
-            <input type="tel" id="p-tel" placeholder="Es: 39347...">
-            
-            <label>PREMIO D'INGRESSO</label>
+            <input type="text" id="p-nome">
+            <label>CELLULARE</label>
+            <input type="tel" id="p-tel">
+            <label>PREMIO</label>
             <select id="p-premio" onchange="togglePremioCustom()">
                 <option value="Sconto 20%">Sconto 20%</option>
-                <option value="Sconto 50%">Sconto 50%</option>
-                <option value="Omaggio">Trattamento Omaggio</option>
-                <option value="CUSTOM">-- Scrivi Premio Personale (PRO) --</option>
+                <option value="Omaggio">Omaggio</option>
+                <option value="CUSTOM">-- Custom (PRO) --</option>
             </select>
-            
-            <input type="text" id="p-custom" placeholder="Descrivi il premio..." style="display:none; margin-top:15px;">
-            
+            <input type="text" id="p-custom" style="display:none; margin-top:10px;" placeholder="Descrivi premio...">
             <button id="btn-salva" class="btn-teal" onclick="creaNuovoContatto()">AGGIUNGI ORA</button>
-            
             <div id="area-limite" class="lock-box">
-                <i class="fas fa-crown" style="color:var(--gold); font-size:2rem; margin-bottom:15px;"></i>
-                <p style="color:var(--danger); font-weight:900; font-size:1rem;">DATABASE AL COMPLETO (10/10)</p>
-                <p style="font-size:0.8rem; color:#64748b; margin-top:8px;">Sblocca la versione PRO per avere contatti illimitati e premi custom.</p>
-                <button onclick="invioRichiestaPro()" class="btn-pro">PASSA A PRO ORA</button>
+                <p style="color:var(--danger); font-weight:900;">LIMITE 10/10 RAGGIUNTO</p>
+                <button onclick="invioRichiestaPro()" class="btn-pro">PASSA A PRO</button>
             </div>
         </div>
-        
-        <h4 style="margin: 0 0 20px 5px; color:var(--primary); font-size:1rem; letter-spacing:1px; font-weight:800;">GESTIONE LISTA</h4>
         <div id="lista-render"></div>
     </main>
 
     <main id="scena-regalo" class="scena">
-        <div class="gift-container">
-            
-            <i class="fas fa-gift gift-icon"></i>
-            
-            <h2 id="view-studio" style="color:var(--primary); text-transform:uppercase; font-family:'Comfortaa'; letter-spacing:-1.5px; font-size:2rem;"></h2>
-            <p style="font-weight:700; font-size:1.1rem; color:#475569; margin-bottom:10px;">Ti ha fatto un regalo speciale!</p>
-            
-            <div class="dots-wrapper" id="punti-box">
-                <div class="dot"></div>
-                <div class="dot"></div>
-                <div class="dot"></div>
-                <div class="dot"></div>
-                <div class="dot"></div>
+        <div style="text-align:center;">
+            <i class="fas fa-gift" style="font-size:4rem; color:var(--primary); margin-bottom:20px;"></i>
+            <h2 id="view-studio" style="color:var(--primary);"></h2>
+            <div class="dots-wrapper" id="dots-container">
+                <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
             </div>
-
-            <div id="area-qr">
+            <div id="area-qr-view">
                 <div id="qrcode"></div>
-                
                 <button class="btn-share-wa" onclick="condividiPassWA()">
                     <i class="fab fa-whatsapp"></i> INVITA UN AMICO
                 </button>
             </div>
-
             <div id="banner-info-premio" class="banner-premio"></div>
-            
-            <div id="box-sbloccato" style="display:none; margin-top:40px;">
-                <p style="font-size:1rem; margin-bottom:20px; font-weight:900; color:var(--success);">VOUCHER PRONTO PER L'USO!</p>
-                <button class="btn-teal" onclick="contattaAttivita()">PRENOTA IL TUO PREMIO</button>
+            <div id="box-sbloccato" style="display:none; margin-top:20px;">
+                <button class="btn-teal" onclick="contattaAttivita()">PRENOTA ORA</button>
             </div>
         </div>
     </main>
-    
+
     <footer class="footer">
-        SPICH. BUSINESS SYSTEM v3.0<br>
-        DEVICE ID: <span id="id-display">INIZIALIZZAZIONE...</span><br>
-        &copy; 2026 TUTTI I DIRITTI RISERVATI
+        SPICH. BUSINESS SYSTEM 3.0<br>
+        ID: <span id="id-display">...</span><br>
+        &copy; 2026
     </footer>
 </div>
 
 <script>
-    /* ==============================================
-       LOGICA APPLICATIVA INTEGRALE (Anticrash)
-       ============================================== */
+    const G_URL = "https://script.google.com/macros/s/AKfycbyL97dtvTa7WzRFGpXSFcxgNYlpn844ft-ZQA49bBLhjDe5qzQ_26rYU9XtViMZr36zFA/exec";
+    let devId = localStorage.getItem('spich_id') || ('SP-' + Math.random().toString(36).substr(2,6).toUpperCase());
+    localStorage.setItem('spich_id', devId);
     
-    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyL97dtvTa7WzRFGpXSFcxgNYlpn844ft-ZQA49bBLhjDe5qzQ_26rYU9XtViMZr36zFA/exec";
-
-    let deviceId = localStorage.getItem('spich_id');
-    if (!deviceId) {
-        deviceId = 'SP-' + Math.random().toString(36).substr(2, 6).toUpperCase();
-        localStorage.setItem('spich_id', deviceId);
-    }
-
-    let businessConfig = null;
-    try {
-        const rawCfg = localStorage.getItem('spich_cfg');
-        if(rawCfg) businessConfig = JSON.parse(rawCfg);
-    } catch(e) { businessConfig = null; }
-    
-    // Sitema Anticrash in caso di dati salvati corrotti
-    let listaPazienti = [];
-    try {
-        const rawList = localStorage.getItem('spich_list');
-        if(rawList) {
-            listaPazienti = JSON.parse(rawList);
-            if (!Array.isArray(listaPazienti)) listaPazienti = []; 
-        }
-    } catch(e) { listaPazienti = []; }
-    
-    let isProUser = false;
+    let config = JSON.parse(localStorage.getItem('spich_cfg') || '{}');
+    let lista = JSON.parse(localStorage.getItem('spich_list') || '[]');
+    let isPro = false;
 
     window.onload = function() {
-        document.getElementById('id-display').innerText = deviceId;
-        const parametri = new URLSearchParams(window.location.search);
+        document.getElementById('id-display').innerText = devId;
+        const p = new URLSearchParams(window.location.search);
         
-        if (parametri.get('v') === 'gift') {
-            switchPannello('regalo');
-            buildVistaRegalo(parametri);
-        } else if (!businessConfig || !businessConfig.n) {
-            switchPannello('setup');
+        if (p.get('v') === 'gift') {
+            show('regalo');
+            buildGift(p);
+        } else if (!config.n) {
+            show('setup');
         } else {
-            switchPannello('dash');
-            renderizzaDashboard();
-            verificaStatusProServer();
+            show('dash');
+            renderDash();
+            checkPro();
         }
     };
 
-    function switchPannello(id) {
+    function show(id) {
         document.querySelectorAll('.scena').forEach(s => s.classList.remove('active'));
-        const target = document.getElementById('scena-' + id);
-        if(target) target.classList.add('active');
-        window.scrollTo(0,0);
+        document.getElementById('scena-' + id).classList.add('active');
     }
 
     function eseguiSetup() {
-        const nomeA = document.getElementById('setup-nome').value.trim();
-        const waA = document.getElementById('setup-wa').value.trim();
-        const settoreA = document.getElementById('setup-settore').value;
-        
-        if (!nomeA || !waA) {
-            alert("Attenzione: devi inserire il nome dell'attività e il numero WhatsApp Business.");
-            return;
-        }
-        
-        businessConfig = { n: nomeA, w: waA, s: settoreA };
-        localStorage.setItem('spich_cfg', JSON.stringify(businessConfig));
-        
-        fetch(GOOGLE_SCRIPT_URL, { 
-            method: "POST", 
-            mode: "no-cors", 
-            body: JSON.stringify({ tipo: 'REG_ESERCENTE', deviceId: deviceId, nomeAtt: nomeA, wa: waA }) 
-        }).then(() => {
-            location.reload();
-        });
+        const n = document.getElementById('setup-nome').value;
+        const w = document.getElementById('setup-wa').value;
+        if(!n || !w) return alert("Inserisci i dati");
+        config = { n, w, s: document.getElementById('setup-settore').value };
+        localStorage.setItem('spich_cfg', JSON.stringify(config));
+        fetch(G_URL, { method: "POST", mode: "no-cors", body: JSON.stringify({tipo:'REG', devId, n, w}) });
+        location.reload();
     }
 
-    function renderizzaDashboard() {
-        let labelP = "PAZIENTI", labelS = "NOME E COGNOME";
-        if(businessConfig && businessConfig.s !== "Medica") {
-            labelP = "CLIENTI";
-        }
-        document.getElementById('label-plurale').innerText = labelP;
-        document.getElementById('label-singolare').innerText = labelS;
-        stampaLista();
+    function renderDash() {
+        const area = document.getElementById('lista-render');
+        area.innerHTML = "";
+        lista.forEach((p, i) => {
+            area.innerHTML += `<div class="p-item">
+                <div><b>${p.nome}</b><br><small>${p.ref}/5 Punti</small></div>
+                <div style="display:flex; gap:10px;">
+                    <a class="btn-wa" href="${linkWA(p)}" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                    <button class="btn-ref" onclick="addPt(${i})">+1</button>
+                </div>
+            </div>`;
+        });
+        document.getElementById('contatore-num').innerText = lista.length;
+        const limit = document.getElementById('area-limite');
+        const btnS = document.getElementById('btn-salva');
+        if(!isPro && lista.length >= 10) { limit.style.display='block'; btnS.style.display='none'; }
+        else { limit.style.display='none'; btnS.style.display='block'; }
+    }
+
+    function linkWA(p) {
+        const b = window.location.href.split('?')[0];
+        const l = `${b}?v=gift&id=${p.id}&n=${encodeURIComponent(p.nome)}&st=${encodeURIComponent(config.n)}&wa=${config.w}&pr=${encodeURIComponent(p.premio)}&ref=${p.ref}`;
+        return `https://wa.me/${p.tel}?text=${encodeURIComponent("Ciao! Ecco il tuo pass: " + l)}`;
+    }
+
+    function addPt(i) {
+        lista[i].ref++;
+        localStorage.setItem('spich_list', JSON.stringify(lista));
+        renderDash();
+        fetch(G_URL, { method: "POST", mode: "no-cors", body: JSON.stringify({tipo:'PT', ...lista[i]}) });
     }
 
     function creaNuovoContatto() {
-        if (!isProUser && listaPazienti.length >= 10) return;
-        const nome = document.getElementById('p-nome').value.trim();
-        const tel = document.getElementById('p-tel').value.trim();
+        const nome = document.getElementById('p-nome').value;
+        const tel = document.getElementById('p-tel').value;
         let premio = document.getElementById('p-premio').value;
-        if (premio === 'CUSTOM') premio = document.getElementById('p-custom').value.trim();
-        
-        if (!nome || !tel) { alert("Completa i dati!"); return; }
-
-        const ogg = {
-            id: 'REF-' + Date.now(),
-            nome: nome, tel: tel, premio: premio, ref: 0,
-            owner: deviceId, att: businessConfig.n, wa: businessConfig.w
-        };
-        
-        listaPazienti.push(ogg);
-        localStorage.setItem('spich_list', JSON.stringify(listaPazienti));
-        stampaLista();
-        
-        fetch(GOOGLE_SCRIPT_URL, { 
-            method: "POST", 
-            mode: "no-cors", 
-            body: JSON.stringify({ tipo: 'ADD_PAZIENTE', ...ogg }) 
-        });
-        
-        document.getElementById('p-nome').value = "";
-        document.getElementById('p-tel').value = "";
+        if(premio === 'CUSTOM') premio = document.getElementById('p-custom').value;
+        if(!nome || !tel) return alert("Dati mancanti");
+        lista.push({ id:'R'+Date.now(), nome, tel, premio, ref:0 });
+        localStorage.setItem('spich_list', JSON.stringify(lista));
+        renderDash();
     }
 
-    function stampaLista() {
-        const area = document.getElementById('lista-render');
-        area.innerHTML = "";
-        listaPazienti.forEach((p, idx) => {
-            area.innerHTML += `<div class="p-item">
-                <div style="flex:1;">
-                    <b style="color:var(--primary);">${p.nome}</b><br>
-                    <small>${p.ref}/5 Punti accumulati</small>
-                </div>
-                <div style="display:flex
+    function buildGift(p) {
+        document.getElementById('view-studio').innerText = p.get('st');
+        document.getElementById('banner-info-premio').innerText = "IL TUO PREMIO: " + p.get('pr');
+        const ref = parseInt(p.get('ref') || 0);
+        const dots = document.querySelectorAll('.dot');
+        for(let i=0; i<ref && i<5; i++) dots[i].classList.add('fill');
+        if(ref >= 5) {
+            document.getElementById('area-qr-view').style.display='none';
+            document.getElementById('box-sbloccato').style.display='block';
+        } else {
+            new QRCode(document.getElementById("qrcode"), { text: window.location.href, width: 160, height: 160 });
+        }
+    }
+
+    function condividiPassWA() {
+        window.open(`https://wa.me/?text=${encodeURIComponent("Guarda che regalo! " + window.location.href)}`);
+    }
+
+    function contattaAttivita() {
+        const u = new URLSearchParams(window.location.search);
+        window.open(`https://wa.me/${u.get('wa')}?text=Ho completato i 5 punti!`);
+    }
+
+    async function checkPro() {
+        try {
+            const r = await fetch(G_URL + "?checkPro=" + devId);
+            const d = await r.json();
+            if(d.isPro === "SI") {
+                isPro = true;
+                document.getElementById('badge-pro').innerText = "PRO";
+                document.getElementById('badge-pro').classList.add('is-pro');
+                renderDash();
+            }
+        } catch(e) {}
+    }
+
+    function togglePremioCustom() {
+        document.getElementById('p-custom').style.display = (document.getElementById('p-premio').value === 'CUSTOM') ? 'block' : 'none';
+    }
+
+    function confermaLogout() { if(confirm("Resettare tutto?")) { localStorage.clear(); location.reload(); } }
+</script>
+</body>
+                </html>
+                
