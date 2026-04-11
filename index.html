@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>SPICH. - Business Growth Hub</title>
+    <title>SPICH. - Professional Gateway V.8</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -11,26 +11,25 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     
     <style>
-        /* SISTEMA DI DESIGN SPICH.
-           Colori Principali: Teal (#008080) e Gold (#d4af37)
-           Stile: Moderno, Pulito, Professionale
+        /* =========================================================
+           SISTEMA DI STILE - SPICH. PREMIUM DESIGN
+           =========================================================
         */
         :root { 
-            --primary-teal: #008080; 
+            --teal-primary: #008080; 
             --gold-premium: #d4af37;
-            --gold-light: #f4e3b1;
-            --bg-canvas: #f8fafc;
+            --gold-soft: #f4e3b1;
             --white: #ffffff;
-            --text-main: #1e293b;
-            --text-muted: #64748b;
+            --bg-light: #f8fafc;
+            --slate-800: #1e293b;
+            --slate-500: #64748b;
             --danger: #ef4444;
             --success: #10b981;
-            --shadow: 0 15px 35px rgba(0,0,0,0.06);
-            --radius-xl: 35px;
-            --radius-md: 20px;
+            --shadow-soft: 0 10px 30px rgba(0,0,0,0.05);
+            --radius-main: 30px;
         }
 
-        /* Reset e Base Layout */
+        /* Reset Universale */
         * { 
             box-sizing: border-box; 
             -webkit-tap-highlight-color: transparent; 
@@ -39,277 +38,221 @@
         }
 
         body { 
-            background: var(--bg-canvas); 
+            background: var(--bg-light); 
             font-family: 'Montserrat', sans-serif; 
-            color: var(--text-main); 
+            color: var(--slate-800); 
             min-height: 100vh; 
             display: flex; 
             justify-content: center; 
-            overflow-x: hidden;
         }
 
-        /* Contenitore Principale dell'App */
-        .app-wrapper { 
+        /* Contenitore Principale */
+        .app-container { 
             width: 100%; 
             max-width: 480px; 
             background: var(--white); 
             min-height: 100vh; 
             display: flex; 
             flex-direction: column; 
+            box-shadow: 0 0 60px rgba(0,0,0,0.03); 
             position: relative;
-            box-shadow: 0 0 80px rgba(0,0,0,0.04); 
         }
 
-        /* Header e Branding */
-        .header-section { 
-            padding: 45px 20px; 
+        /* Header Branding */
+        .app-header { 
+            padding: 40px 20px; 
             text-align: center; 
             background: var(--white); 
             border-bottom: 1px solid #f1f5f9; 
             cursor: pointer;
-            transition: all 0.3s ease;
-            z-index: 100;
+            transition: transform 0.2s ease;
         }
-        .header-section:active { transform: scale(0.96); }
+        .app-header:active { transform: scale(0.97); }
         
-        .main-logo { 
+        .logo-text { 
             font-family: 'Comfortaa', cursive; 
             font-size: 3.5rem; 
-            color: var(--primary-teal); 
+            color: var(--teal-primary); 
             letter-spacing: -3px;
             font-weight: 700;
         }
-        .main-logo span { color: var(--gold-premium); }
-        .tagline { 
-            font-size: 0.75rem; 
+        .logo-text span { color: var(--gold-premium); }
+        .logo-sub { 
+            font-size: 0.7rem; 
             font-weight: 800; 
-            color: var(--text-muted); 
+            color: var(--slate-500); 
             letter-spacing: 5px; 
             text-transform: uppercase; 
-            margin-top: -12px; 
+            margin-top: -10px; 
         }
 
-        /* Gestione Navigazione Scene */
-        .scene { 
+        /* Gestione Scene / Viste */
+        .view-scene { 
             display: none; 
-            padding: 30px 25px; 
-            animation: sceneFadeIn 0.6s cubic-bezier(0.23, 1, 0.32, 1) forwards; 
+            padding: 25px; 
+            animation: viewFadeIn 0.5s ease forwards; 
             flex: 1; 
         }
-        .scene.active { display: flex; flex-direction: column; }
-        @keyframes sceneFadeIn { 
-            from { opacity: 0; transform: translateY(30px); } 
+        .view-scene.active { display: flex; flex-direction: column; }
+        @keyframes viewFadeIn { 
+            from { opacity: 0; transform: translateY(15px); } 
             to { opacity: 1; transform: translateY(0); } 
         }
 
-        /* Dashboard Statistiche */
-        .stats-card { 
+        /* Card Statistiche */
+        .hero-stats { 
             background: var(--white); 
-            padding: 40px 20px; 
-            border-radius: var(--radius-xl); 
+            padding: 45px 20px; 
+            border-radius: var(--radius-main); 
             text-align: center; 
             border-bottom: 8px solid var(--gold-premium); 
-            margin-bottom: 35px; 
-            box-shadow: var(--shadow); 
-            position: relative;
-            overflow: hidden;
-        }
-        .stats-card b { font-size: 5rem; color: var(--primary-teal); display: block; line-height: 1; font-weight: 800; }
-        .stats-card span { font-weight: 700; color: var(--text-muted); text-transform: uppercase; font-size: 0.8rem; letter-spacing: 2px; }
-
-        .pro-status-label { 
-            position: absolute; top: 15px; right: 20px; font-size: 0.65rem; 
-            font-weight: 900; padding: 10px 18px; border-radius: 15px; 
-            background: #f1f5f9; color: var(--text-muted); border: 1px solid #e2e8f0;
-        }
-        .pro-status-label.active-pro { 
-            background: var(--gold-premium); 
-            color: var(--white); 
-            border: none; 
-            box-shadow: 0 5px 15px rgba(212,175,55,0.3); 
-        }
-
-        /* UI Elementi: Card, Input, Bottoni */
-        .content-card { 
-            background: var(--white); 
-            padding: 30px; 
-            border-radius: 30px; 
-            border: 1px solid #f1f5f9; 
             margin-bottom: 30px; 
-            box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+            box-shadow: var(--shadow-soft); 
+            position: relative;
+        }
+        .hero-stats b { font-size: 5.5rem; color: var(--teal-primary); display: block; line-height: 1; font-weight: 800; }
+        .hero-stats span { font-weight: 700; color: var(--slate-500); text-transform: uppercase; font-size: 0.8rem; letter-spacing: 2px; }
+
+        .badge-status { 
+            position: absolute; top: 15px; right: 20px; font-size: 0.6rem; 
+            font-weight: 900; padding: 8px 15px; border-radius: 12px; 
+            background: #f1f5f9; color: var(--slate-500);
+        }
+        .badge-status.pro-mode { 
+            background: var(--gold-premium); color: white; box-shadow: 0 4px 10px rgba(212,175,55,0.3); 
+        }
+
+        /* Componenti Form */
+        .card-ui { 
+            background: var(--white); 
+            padding: 25px; 
+            border-radius: 25px; 
+            border: 1px solid #f1f5f9; 
+            margin-bottom: 25px; 
         }
         
-        .field-label { 
-            font-size: 0.72rem; 
+        .label-ui { 
+            font-size: 0.7rem; 
             font-weight: 800; 
-            color: var(--primary-teal); 
+            color: var(--teal-primary); 
             text-transform: uppercase; 
-            margin: 20px 0 8px 5px; 
+            margin: 15px 0 5px 5px; 
             display: block; 
             letter-spacing: 1px;
         }
 
         input, select { 
             width: 100%; 
-            padding: 22px; 
-            border-radius: 22px; 
+            padding: 20px; 
+            border-radius: 20px; 
             border: 2px solid #f1f5f9; 
-            font-family: 'Montserrat', sans-serif; 
+            font-family: inherit; 
             font-size: 1rem; 
-            margin-bottom: 6px; 
+            margin-bottom: 5px; 
             outline: none; 
-            transition: all 0.3s ease;
+            transition: 0.3s;
             background: #fafafa;
         }
-        input:focus { 
-            border-color: var(--gold-premium); 
-            background: var(--white); 
-            box-shadow: 0 0 0 4px rgba(212,175,55,0.08); 
-        }
+        input:focus { border-color: var(--gold-premium); background: white; }
 
-        .btn-action { 
-            background: var(--primary-teal); 
-            color: var(--white); 
+        .btn-premium { 
+            background: var(--teal-primary); 
+            color: white; 
             border: none; 
-            padding: 24px; 
-            border-radius: 25px; 
+            padding: 22px; 
+            border-radius: 20px; 
             font-weight: 800; 
             width: 100%; 
             cursor: pointer; 
             font-size: 1.2rem;
-            box-shadow: 0 12px 25px rgba(0,128,128,0.15); 
-            transition: all 0.3s ease;
-            margin-top: 15px;
-            letter-spacing: 1px;
+            box-shadow: 0 10px 20px rgba(0,128,128,0.1); 
+            margin-top: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 12px;
+            gap: 10px;
         }
-        .btn-action:active { transform: translateY(4px); box-shadow: none; }
-        .btn-action:disabled { background: #cbd5e1; cursor: not-allowed; box-shadow: none; }
+        .btn-premium:active { transform: scale(0.98); }
+        .btn-premium:disabled { background: #e2e8f0; cursor: not-allowed; }
 
-        /* Lista Pazienti Custom */
-        .patient-item { 
-            background: var(--white); 
-            padding: 25px; 
-            border-radius: 28px; 
-            margin-bottom: 18px; 
+        /* Lista Pazienti */
+        .patient-row { 
+            background: white; 
+            padding: 20px; 
+            border-radius: 25px; 
+            margin-bottom: 15px; 
             display: flex; 
             justify-content: space-between; 
             align-items: center; 
             border: 1px solid #f1f5f9; 
-            box-shadow: 0 8px 20px rgba(0,0,0,0.03);
-            animation: slideIn 0.4s ease-out;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.02);
         }
-        @keyframes slideIn { from { opacity: 0; transform: translateX(-20px); } to { opacity: 1; transform: translateX(0); } }
-
-        .patient-info b { font-size: 1.2rem; color: var(--primary-teal); display: block; }
-        .patient-info small { font-weight: 700; color: var(--text-muted); text-transform: uppercase; font-size: 0.7rem; letter-spacing: 1px; }
+        .p-info b { font-size: 1.1rem; color: var(--teal-primary); display: block; }
+        .p-info small { font-weight: 700; color: var(--slate-500); text-transform: uppercase; font-size: 0.65rem; }
         
-        .wa-link { 
-            background: #25D366; 
-            color: var(--white); 
-            width: 55px; 
-            height: 55px; 
-            border-radius: 50%; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            text-decoration: none; 
-            font-size: 1.7rem; 
-            box-shadow: 0 8px 15px rgba(37,211,102,0.2); 
+        .action-wa { 
+            background: #25D366; color: white; width: 50px; height: 50px; 
+            border-radius: 50%; display: flex; align-items: center; 
+            justify-content: center; text-decoration: none; font-size: 1.5rem; 
+        }
+        .action-point { 
+            background: var(--gold-premium); border: none; padding: 10px 15px; 
+            border-radius: 12px; color: white; font-weight: 900; cursor: pointer; 
         }
 
-        .point-trigger { 
-            background: var(--gold-premium); 
-            border: none; 
-            padding: 12px 18px; 
-            border-radius: 16px; 
-            color: var(--white); 
-            font-weight: 900; 
-            cursor: pointer; 
-            box-shadow: 0 6px 12px rgba(212,175,55,0.2);
-            transition: 0.2s;
-        }
-        .point-trigger:active { transform: scale(0.9); }
-
-        /* Sistema Fedeltà: I 5 Pallini */
-        .loyalty-grid { 
+        /* Sistema 5 Pallini (Paziente) */
+        .pallini-wrap { 
             display: flex; 
             justify-content: center; 
-            gap: 15px; 
-            margin: 40px 0 25px 0; 
+            gap: 12px; 
+            margin: 30px 0; 
         }
-        .pallino { 
-            width: 26px; 
-            height: 26px; 
+        .pallino-item { 
+            width: 24px; 
+            height: 24px; 
             border-radius: 50%; 
             border: 3px solid var(--gold-premium); 
-            background: transparent; 
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             position: relative;
         }
-        .pallino.active { 
+        .pallino-item.filled { 
             background: var(--gold-premium); 
-            transform: scale(1.25); 
-            box-shadow: 0 0 15px var(--gold-premium); 
+            transform: scale(1.2); 
+            box-shadow: 0 0 10px rgba(212,175,55,0.5);
         }
-        .pallino.active::after { 
-            content: '✓'; 
-            color: var(--white); 
-            font-size: 12px; 
-            position: absolute; 
-            top: 50%; left: 50%; 
-            transform: translate(-50%, -50%); 
-            font-weight: 900; 
+        .pallino-item.filled::after {
+            content: '✓'; color: white; font-size: 10px; position: absolute;
+            top: 50%; left: 50%; transform: translate(-50%, -50%); font-weight: 900;
         }
 
-        /* QR Code & Gift Visual */
-        .gift-icon-hero { font-size: 4rem; color: var(--gold-premium); margin-bottom: 20px; }
-        
-        .qr-container {
-            background: var(--white); 
+        /* Sezione QR Code */
+        .qr-card {
+            background: white; 
             padding: 20px; 
-            border-radius: 30px; 
+            border-radius: 25px; 
             display: inline-block; 
             margin: 20px 0; 
-            box-shadow: var(--shadow); 
-            border: 1px solid #f1f5f9;
+            box-shadow: var(--shadow-soft);
         }
 
-        /* Banner PRO Upgrade */
-        .upgrade-banner {
+        /* Banner Limitazione */
+        .limit-alert {
             display: none; 
-            padding: 25px; 
+            padding: 20px; 
             background: #fff5f5; 
-            border-radius: 25px; 
-            border: 2px dashed var(--danger); 
-            margin-bottom: 25px; 
+            border-radius: 20px; 
+            border: 1px dashed var(--danger); 
+            margin-bottom: 20px; 
             text-align: center;
         }
 
-        .win-announcement {
-            display: none; 
-            margin-top: 30px; 
-            padding: 30px; 
-            background: linear-gradient(135deg, #fffcf5 0%, #fff4d6 100%); 
-            border: 2px solid var(--gold-premium); 
-            border-radius: 30px; 
-            font-weight: 800; 
-            color: var(--primary-teal);
+        .footer-credits { 
+            font-size: 0.65rem; 
+            color: #cbd5e1; 
             text-align: center; 
-            animation: pulseBanner 2s infinite;
-        }
-        @keyframes pulseBanner { 0% { transform: scale(1); } 50% { transform: scale(1.02); } 100% { transform: scale(1); } }
-
-        .footer-info { 
-            font-size: 0.7rem; 
-            color: #a0aec0; 
-            text-align: center; 
-            padding: 40px; 
+            padding: 35px; 
             margin-top: auto; 
-            font-weight: 600; 
+            font-weight: 700; 
             text-transform: uppercase; 
             letter-spacing: 2px; 
         }
@@ -318,422 +261,397 @@
 </head>
 <body>
 
-<div class="app-wrapper">
+<div class="app-container">
     
-    <header class="header-section" id="nav-home" onclick="handleLogoClick()">
-        <h1 class="main-logo">SPICH<span>.</span></h1>
-        <p class="tagline">Excellence Hub</p>
+    <header class="app-header" onclick="handleSystemReset()">
+        <h1 class="logo-text">SPICH<span>.</span></h1>
+        <div class="logo-sub">Premium Network</div>
     </header>
 
-    <main id="scene-setup" class="scene">
-        <div style="text-align:center; margin-bottom:30px;">
-            <i class="fas fa-gem gift-icon-hero"></i>
-            <h2 style="font-weight:800; color:var(--primary-teal); font-size: 1.6rem;">Attiva il tuo Hub</h2>
-            <p style="color:var(--text-muted); font-size: 0.9rem; margin-top: 5px;">Configura la tua attività in pochi secondi.</p>
+    <main id="view-setup" class="view-scene">
+        <div style="text-align:center; margin-bottom:25px;">
+            <i class="fas fa-rocket" style="font-size:3rem; color:var(--gold-premium); margin-bottom:15px;"></i>
+            <h2 style="font-weight:800; color:var(--teal-primary);">Attivazione Profilo</h2>
         </div>
-        <div class="content-card">
-            <label class="field-label">Nome Attività / Studio</label>
-            <input type="text" id="setup-biz-name" placeholder="Es: Studio Medico Rossi">
+        <div class="card-ui">
+            <label class="label-ui">Nome Attività Professionale</label>
+            <input type="text" id="set-biz-name" placeholder="Esempio: Studio Dentistico Rossi">
             
-            <label class="field-label">WhatsApp Business (es: 39347...)</label>
-            <input type="tel" id="setup-biz-wa" placeholder="393471234567">
+            <label class="label-ui">WhatsApp Business (es. 39...)</label>
+            <input type="tel" id="set-biz-wa" placeholder="393470000000">
             
-            <label class="field-label">Settore Professionale</label>
-            <select id="setup-biz-sector">
-                <option value="Medicina">Medicina / Odontoiatria</option>
-                <option value="Estetica">Estetica & Benessere</option>
-                <option value="Legale">Consulenza Professionale</option>
-                <option value="Altro">Altro Settore</option>
+            <label class="label-ui">Settore di Competenza</label>
+            <select id="set-biz-sector">
+                <option value="Salute">Salute & Benessere</option>
+                <option value="Estetica">Estetica Professionale</option>
+                <option value="Legale">Consulenza / Legale</option>
+                <option value="Food">Food & Beverage</option>
             </select>
             
-            <button class="btn-action" onclick="performInitialSetup()">
-                <i class="fas fa-check-circle"></i> ATTIVA ORA
+            <button class="btn-premium" onclick="processRegistration()">
+                <i class="fas fa-check-circle"></i> REGISTRA ATTIVITÀ
             </button>
         </div>
     </main>
 
-    <main id="scene-merchant" class="scene">
-        <div class="stats-card">
-            <div id="pro-badge" class="pro-status-label">FREE VERSION</div>
-            <b id="stats-total-patients">0</b>
-            <span>Pazienti in Anagrafica</span>
+    <main id="view-dash" class="view-scene">
+        <div class="hero-stats">
+            <div id="badge-pro-ui" class="badge-status">FREE VERSION</div>
+            <b id="count-patients-ui">0</b>
+            <span>Pazienti Registrati</span>
         </div>
         
-        <div class="content-card">
-            <h4 style="margin-bottom:20px; font-weight:800; color:var(--primary-teal); border-left: 5px solid var(--gold-premium); padding-left: 15px;">Nuovo Paziente</h4>
+        <div class="card-ui">
+            <h4 style="margin-bottom:15px; color:var(--teal-primary); font-weight:800; border-left: 4px solid var(--gold-premium); padding-left: 10px;">Nuovo Referall</h4>
             
-            <label class="field-label">Nome e Cognome Paziente</label>
-            <input type="text" id="input-p-name" placeholder="Inserisci nome completo">
+            <label class="label-ui">Nome Paziente</label>
+            <input type="text" id="new-p-name" placeholder="Nome e Cognome">
             
-            <label class="field-label">Cellulare WhatsApp (39...)</label>
-            <input type="tel" id="input-p-tel" placeholder="393481234567">
+            <label class="label-ui">Numero WhatsApp</label>
+            <input type="tel" id="new-p-tel" placeholder="39...">
             
-            <div id="logic-reward-container">
-                <label class="field-label">Sconto Benvenuto Amico</label>
-                <div id="wrap-sconto-amico">
-                    <select id="select-free-discount">
-                        <option value="Sconto del 10%">10% di Sconto</option>
-                        <option value="Sconto del 20%">20% di Sconto</option>
-                        <option value="Sconto del 50%">50% di Sconto</option>
+            <div id="dynamic-rewards-box">
+                <label class="label-ui">Sconto Amico (Benvenuto)</label>
+                <div id="friend-discount-input">
+                    <select id="select-free-sc">
+                        <option value="10% di Sconto">Sconto del 10%</option>
+                        <option value="20% di Sconto">Sconto del 20%</option>
+                        <option value="50% di Sconto">Sconto del 50%</option>
                     </select>
                 </div>
                 
-                <label class="field-label">Premio Finale (5° Punto)</label>
-                <div id="wrap-premio-finale">
-                    <input type="text" id="input-final-reward" value="50% di sconto sul trattamento" readonly style="background:#f8fafc; color:#94a3b8;">
+                <label class="label-ui">Premio Raccolta (5° Punto)</label>
+                <div id="final-reward-input">
+                    <input type="text" id="input-free-pr" value="Trattamento con sconto 50%" readonly style="color:#94a3b8;">
                 </div>
             </div>
 
-            <div id="upgrade-alert" class="upgrade-banner">
-                <i class="fas fa-lock" style="color:var(--danger); margin-bottom:10px;"></i><br>
-                <b style="color:var(--danger);">LIMITE 10 PAZIENTI RAGGIUNTO</b><br>
-                <p style="font-size:0.75rem; margin:10px 0;">Passa alla versione PRO per gestire infiniti pazienti e personalizzare i premi.</p>
-                <button onclick="sendProRequest()" style="background:var(--primary-teal); color:white; border:none; padding:10px 20px; border-radius:12px; font-weight:800; cursor:pointer;">RICHIEDI PRO</button>
+            <div id="limit-box" class="limit-alert">
+                <i class="fas fa-exclamation-triangle" style="color:var(--danger); margin-bottom:8px;"></i><br>
+                <b style="color:var(--danger); font-size:0.8rem;">LIMITE FREE RAGGIUNTO (10)</b><br>
+                <button onclick="requestUpgrade()" style="margin-top:10px; background:var(--teal-primary); color:white; border:none; padding:8px 15px; border-radius:10px; font-weight:800; cursor:pointer; font-size:0.7rem;">PASSA A PRO</button>
             </div>
             
-            <button id="btn-submit-patient" class="btn-action" onclick="createNewReferral()">
-                <i class="fas fa-plus-circle"></i> CREA PASS DIGITALE
+            <button id="btn-add-p" class="btn-premium" onclick="handleNewPatient()">
+                <i class="fas fa-user-plus"></i> GENERA PASS
             </button>
         </div>
         
-        <h3 style="color:var(--primary-teal); margin-bottom:20px; font-weight:800; display: flex; align-items: center; gap: 10px;">
-            <i class="fas fa-users" style="color:var(--gold-premium);"></i> Elenco Pazienti
-        </h3>
-        <div id="list-patients-render">
+        <h3 style="color:var(--teal-primary); margin-bottom:15px; font-weight:800;">Registro Anagrafica</h3>
+        <div id="render-list-patients">
             </div>
     </main>
 
-    <main id="scene-patient-pass" class="scene">
+    <main id="view-pass" class="view-scene">
         <div style="text-align:center;">
-            <i class="fas fa-gift gift-icon-hero"></i>
-            <h2 id="pass-biz-name" style="color:var(--primary-teal); font-family:'Comfortaa'; margin-bottom:5px;"></h2>
-            <p id="pass-welcome-msg" style="font-weight:700; color:var(--text-muted); margin-bottom:10px;"></p>
+            <i class="fas fa-gift" style="font-size:3.5rem; color:var(--gold-premium); margin-bottom:15px;"></i>
+            <h2 id="pass-biz-title" style="color:var(--teal-primary); font-family:'Comfortaa';"></h2>
+            <p id="pass-welcome-txt" style="font-weight:700; color:var(--slate-500); margin-top:5px;"></p>
             
-            <div class="loyalty-grid" id="pallini-container">
-                <div class="pallino"></div>
-                <div class="pallino"></div>
-                <div class="pallino"></div>
-                <div class="pallino"></div>
-                <div class="pallino"></div>
+            <div class="pallini-wrap" id="pallini-container">
+                <div class="pallino-item"></div>
+                <div class="pallino-item"></div>
+                <div class="pallino-item"></div>
+                <div class="pallino-item"></div>
+                <div class="pallino-item"></div>
             </div>
 
-            <div class="qr-container">
-                <div id="qrcode-output"></div>
-                <p style="font-size:0.6rem; font-weight:900; margin-top:15px; color:var(--primary-teal); letter-spacing:2px;">ID: <span id="label-patient-cid"></span></p>
+            <div class="qr-card">
+                <div id="qr-render"></div>
+                <p style="font-size:0.6rem; font-weight:900; margin-top:12px; color:var(--teal-primary); letter-spacing:2px;">PASS ID: <span id="pass-cid-label"></span></p>
             </div>
             
-            <button class="btn-action" style="background:var(--gold-premium); box-shadow: 0 10px 25px rgba(212,175,55,0.2);" onclick="shareVoucherToFriend()">
-                <i class="fab fa-whatsapp"></i> INVITA UN AMICO
+            <button class="btn-premium" style="background:var(--gold-premium);" onclick="sendGiftToFriend()">
+                <i class="fab fa-whatsapp"></i> REGALA SCONTO A UN AMICO
             </button>
             
-            <div id="final-win-card" class="win-announcement">
-                <i class="fas fa-trophy" style="font-size:2rem; margin-bottom:10px; display:block; color:var(--gold-premium);"></i>
-                BRAVO!<br>Hai completato la tua raccolta.<br>Mostra lo schermo per il tuo premio finale!
+            <div id="win-overlay" style="display:none; margin-top:25px; padding:20px; background:#fffcf5; border:2px solid var(--gold-premium); border-radius:25px;">
+                <b style="color:var(--teal-primary);">COMPLIMENTI! 🏆</b><br>
+                <small>Hai completato la tessera. Mostra questo schermo alla cassa!</small>
             </div>
         </div>
     </main>
 
-    <main id="scene-friend-voucher" class="scene">
-        <div style="background:white; border:8px dashed var(--gold-light); padding:50px 30px; border-radius:45px; text-align:center; box-shadow: var(--shadow);">
-            <div class="main-logo" style="font-size:2.5rem;">SPICH<span>.</span></div>
-            <h2 style="color:var(--primary-teal); font-weight:800; margin-top:20px;">REGALO PER TE</h2>
-            <p id="friend-msg-body" style="margin:25px 0; font-weight:600; color:var(--text-muted); line-height:1.6;"></p>
+    <main id="view-voucher" class="view-scene">
+        <div style="background:white; border:8px dashed var(--gold-soft); padding:40px 25px; border-radius:40px; text-align:center; box-shadow: var(--shadow-soft);">
+            <h2 style="color:var(--teal-primary); font-weight:900; font-size:1.8rem;">GIFT CARD</h2>
+            <p id="v-friend-msg" style="margin:20px 0; font-weight:600; color:var(--slate-500); line-height:1.5;"></p>
             
-            <div style="background:#f8fafc; padding:30px; border-radius:25px; border:2px solid var(--gold-light); margin-bottom:35px;">
-                <span style="font-size:0.75rem; font-weight:900; color:var(--gold-premium); text-transform:uppercase; letter-spacing:2px;">Il tuo Bonus:</span>
-                <h2 id="friend-reward-value" style="color:var(--primary-teal); font-size:2rem; margin-top:5px;"></h2>
+            <div style="background:#f8fafc; padding:25px; border-radius:25px; border:1px solid var(--gold-soft); margin-bottom:25px;">
+                <span style="font-size:0.7rem; font-weight:800; color:var(--gold-premium); text-transform:uppercase;">Valore Bonus:</span>
+                <h2 id="v-friend-val" style="color:var(--teal-primary); font-size:2rem; margin-top:5px;"></h2>
             </div>
             
-            <button class="btn-action" onclick="redirectToBooking()">
-                <i class="fab fa-whatsapp"></i> PRENOTA ORA IL TUO POSTO
+            <button class="btn-premium" onclick="bookFriendVoucher()">
+                <i class="fab fa-whatsapp"></i> PRENOTA ORA
             </button>
         </div>
     </main>
 
-    <footer class="footer-info">
-        SECURITY DEVICE ID: <span id="display-did">...</span><br>
-        &copy; 2026 SPICH. DIGITAL ASSET MANAGEMENT
+    <footer class="footer-credits">
+        SECURE DEVICE ID: <span id="did-display">...</span><br>
+        &copy; 2026 SPICH. SISTEMA REFERRAL PRO
     </footer>
 </div>
 
 <script>
-    /* SPICH. CORE LOGIC V.7
-       Sincronizzazione Cloud e Gestione Stato Locale
+    /* =========================================================
+       LOGICA CORE SPICH. V.8
+       =========================================================
     */
 
-    // --- CONFIGURAZIONE ENDPOINT GOOGLE SCRIPT ---
-    const GOOGLE_API_ENDPOINT = "https://script.google.com/macros/s/AKfycbxMv0akM1a1VI4-KO9r4O_2gdzAWW8Ve2gnBVvJPHzPcy76gJUMyyJyOAIg3MNXsofw8w/exec";
+    const API_URL = "https://script.google.com/macros/s/AKfycbwWFA28ko71ow6kzvDYpQBhWru1WIAU2wD4YMgCaTArReLgAZSvDxJMwDqkDKqdQ8f-7g/exec";
 
-    // Generazione o Recupero Identificativo Dispositivo (Immutabile)
-    let deviceUniqueId = localStorage.getItem('spich_device_id');
-    if (!deviceUniqueId) {
-        deviceUniqueId = 'DEV-' + Math.random().toString(36).substr(2, 10).toUpperCase();
-        localStorage.setItem('spich_device_id', deviceUniqueId);
+    // Identità Unica Dispositivo
+    let deviceID = localStorage.getItem('spich_did');
+    if (!deviceID) {
+        deviceID = 'SID-' + Math.random().toString(36).substr(2, 9).toUpperCase();
+        localStorage.setItem('spich_did', deviceID);
     }
 
-    // Variabili di Stato Applicazione
-    let merchantProfile = JSON.parse(localStorage.getItem('spich_biz_cfg') || 'null');
-    let patientsArchive = JSON.parse(localStorage.getItem('spich_patients_db') || '[]');
-    let isProUser = false;
+    // Database Locale
+    let bizProfile = JSON.parse(localStorage.getItem('spich_biz_data') || 'null');
+    let patientsDB = JSON.parse(localStorage.getItem('spich_p_list') || '[]');
+    let isPro = false;
 
-    // --- INIZIALIZZAZIONE ---
+    // Inizializzazione App
     window.onload = async function() {
-        document.getElementById('display-did').innerText = deviceUniqueId;
-        const urlParams = new URLSearchParams(window.location.search);
+        document.getElementById('did-display').innerText = deviceID;
+        const q = new URLSearchParams(window.location.search);
 
-        // Routing Dinamico basato sui parametri URL
-        if (urlParams.get('v') === 'voucher') {
-            initializeFriendVoucher(urlParams);
-        } else if (urlParams.get('v') === 'gift') {
-            initializePatientPass(urlParams);
-        } else if (!merchantProfile) {
-            activateScene('setup');
+        if (q.get('v') === 'voucher') {
+            initVoucher(q);
+        } else if (q.get('v') === 'gift') {
+            initPass(q);
+        } else if (!bizProfile) {
+            switchView('setup');
         } else {
-            activateScene('merchant');
-            await refreshProStatus();
-            syncMerchantUI();
-            renderPatientsList();
+            switchView('dash');
+            await syncCloudStatus();
+            refreshMerchantUI();
+            renderPatients();
         }
     };
 
-    function activateScene(id) {
-        document.querySelectorAll('.scene').forEach(s => s.classList.remove('active'));
-        document.getElementById('scene-' + id).classList.add('active');
+    function switchView(id) {
+        document.querySelectorAll('.view-scene').forEach(v => v.classList.remove('active'));
+        document.getElementById('view-' + id).classList.add('active');
         window.scrollTo(0,0);
     }
 
-    /* --- LOGICA LATO ESERCENTE --- */
+    /* --- GESTIONE ESERCENTE --- */
 
-    async function refreshProStatus() {
+    async function syncCloudStatus() {
         try {
-            const response = await fetch(`${GOOGLE_API_ENDPOINT}?checkPro=${deviceUniqueId}`);
-            const data = await response.json();
-            if (data.isPro === "PRO") {
-                isProUser = true;
-                merchantProfile.nome = data.bizName; // Aggiorna se cambiato da remoto
-                localStorage.setItem('spich_biz_cfg', JSON.stringify(merchantProfile));
+            const r = await fetch(`${API_URL}?checkPro=${deviceID}`);
+            const d = await r.json();
+            if (d.isPro === "PRO") {
+                isPro = true;
+                bizProfile.nome = d.bizName; 
+                localStorage.setItem('spich_biz_data', JSON.stringify(bizProfile));
             }
-        } catch (error) {
-            console.error("Errore sincronizzazione Cloud Pro:", error);
-        }
+        } catch (e) { console.warn("Cloud offline"); }
     }
 
-    function syncMerchantUI() {
-        const proBadge = document.getElementById('pro-badge');
-        const containerAmico = document.getElementById('wrap-sconto-amico');
-        const containerFinal = document.getElementById('wrap-premio-finale');
-        const upgradeAlert = document.getElementById('upgrade-alert');
-        const btnSubmit = document.getElementById('btn-submit-patient');
+    function refreshMerchantUI() {
+        const badge = document.getElementById('badge-pro-ui');
+        const scBox = document.getElementById('friend-discount-input');
+        const prBox = document.getElementById('final-reward-input');
+        const limitBanner = document.getElementById('limit-box');
+        const btnAdd = document.getElementById('btn-add-p');
 
-        if (isProUser) {
-            proBadge.innerText = "PRO ACCOUNT";
-            proBadge.classList.add('active-pro');
-            upgradeAlert.style.display = "none";
-            btnSubmit.disabled = false;
+        if (isPro) {
+            badge.innerText = "PRO ACCOUNT";
+            badge.classList.add('pro-mode');
+            limitBanner.style.display = "none";
+            btnAdd.disabled = false;
             
-            // Abilita Input Liberi per utenti PRO
-            containerAmico.innerHTML = `<input type="text" id="select-free-discount" placeholder="Es: Sconto 30% o Kit Omaggio">`;
-            containerFinal.innerHTML = `<input type="text" id="input-final-reward" placeholder="Es: Seduta Gratis o Trattamento">`;
+            // Sblocca input per PRO
+            scBox.innerHTML = `<input type="text" id="select-free-sc" placeholder="Es: Sconto 30% o Regalo">`;
+            prBox.innerHTML = `<input type="text" id="input-free-pr" placeholder="Es: Trattamento Omaggio">`;
         } else {
-            if (patientsArchive.length >= 10) {
-                upgradeAlert.style.display = "block";
-                btnSubmit.disabled = true;
+            if (patientsDB.length >= 10) {
+                limitBanner.style.display = "block";
+                btnAdd.disabled = true;
             }
         }
     }
 
-    function performInitialSetup() {
-        const nome = document.getElementById('setup-biz-name').value.trim();
-        const wa = document.getElementById('setup-biz-wa').value.trim();
-        const settore = document.getElementById('setup-biz-sector').value;
+    async function processRegistration() {
+        const n = document.getElementById('set-biz-name').value.trim();
+        const w = document.getElementById('set-biz-wa').value.trim();
+        const s = document.getElementById('set-biz-sector').value;
 
-        if (!nome || !wa) return alert("Completa tutti i campi prima di continuare.");
+        if (!n || !w) return alert("Dati obbligatori mancanti.");
 
-        merchantProfile = { nome, wa, settore };
-        localStorage.setItem('spich_biz_cfg', JSON.stringify(merchantProfile));
+        // Chiamata di registrazione protetta
+        try {
+            await fetch(API_URL, { 
+                method: "POST", 
+                mode: "no-cors", 
+                body: JSON.stringify({t: "REG_BIZ", id: deviceID, nome: n, settore: s}) 
+            });
+        } catch(e) {}
 
-        // Notifica Google Sheets
-        fetch(GOOGLE_API_ENDPOINT, { 
-            method: "POST", 
-            mode: "no-cors", 
-            body: JSON.stringify({t: "REG_BIZ", id: deviceUniqueId, nome: nome, settore: settore}) 
-        });
-
+        bizProfile = { nome: n, wa: w, settore: s };
+        localStorage.setItem('spich_biz_data', JSON.stringify(bizProfile));
         location.reload();
     }
 
-    function renderPatientsList() {
-        const container = document.getElementById('list-patients-render');
-        container.innerHTML = "";
+    function renderPatients() {
+        const list = document.getElementById('render-list-patients');
+        list.innerHTML = "";
         
-        patientsArchive.forEach((p, index) => {
-            const item = document.createElement('div');
-            item.className = 'patient-item';
-            item.innerHTML = `
-                <div class="patient-info">
+        patientsDB.forEach((p, i) => {
+            const row = document.createElement('div');
+            row.className = 'patient-row';
+            row.innerHTML = `
+                <div class="p-info">
                     <b>${p.nome}</b>
-                    <small>${p.punti} Punti / ${p.premio}</small>
+                    <small>${p.pts} Punti / ${p.premio}</small>
                 </div>
                 <div style="display:flex; gap:10px;">
-                    <a class="wa-link" href="${generatePatientWaLink(p)}" target="_blank"><i class="fab fa-whatsapp"></i></a>
-                    <button class="point-trigger" onclick="addPointToPatient(${index})">+1</button>
+                    <a class="action-wa" href="${genWaLink(p)}" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                    <button class="action-point" onclick="incrementPt(${i})">+1</button>
                 </div>
             `;
-            container.appendChild(item);
+            list.appendChild(row);
         });
-
-        document.getElementById('stats-total-patients').innerText = patientsArchive.length;
+        document.getElementById('count-patients-ui').innerText = patientsDB.length;
     }
 
-    async function createNewReferral() {
-        const name = document.getElementById('input-p-name').value.trim();
-        const tel = document.getElementById('input-p-tel').value.trim();
-        const scontoAmico = document.getElementById('select-free-discount').value;
-        const premioFinale = document.getElementById('input-final-reward').value.trim();
+    async function handleNewPatient() {
+        const n = document.getElementById('new-p-name').value.trim();
+        const t = document.getElementById('new-p-tel').value.trim();
+        const sc = document.getElementById('select-free-sc').value;
+        const pr = document.getElementById('input-free-pr').value.trim();
 
-        if (!name || !tel || !premioFinale) return alert("Assicurati di inserire Nome, Telefono e Premio Finale.");
+        if (!n || !t || !pr) return alert("Compila tutti i campi del paziente.");
 
-        const cid = 'P-' + Date.now().toString(36).toUpperCase();
-        const newPatient = { cid, nome: name, tel: tel, sconto: scontoAmico, premio: premioFinale, punti: 0 };
+        const cid = 'CID-' + Date.now().toString(36).toUpperCase();
+        const pObj = { cid, nome: n, tel: t, sconto: sc, premio: pr, pts: 0 };
 
-        patientsArchive.push(newPatient);
-        localStorage.setItem('spich_patients_db', JSON.stringify(patientsArchive));
+        patientsDB.push(pObj);
+        localStorage.setItem('spich_p_list', JSON.stringify(patientsDB));
 
-        // Sync Cloud
-        fetch(GOOGLE_API_ENDPOINT, { 
+        // Sync Cloud Log
+        fetch(API_URL, { 
             method: "POST", 
             mode: "no-cors", 
             body: JSON.stringify({
                 t: "ADD_CLIENT", 
-                bizId: deviceUniqueId, 
-                bizName: merchantProfile.nome, 
-                clientName: name, 
-                clientTel: tel, 
-                premio: premioFinale, 
+                bizId: deviceID, 
+                bizName: bizProfile.nome, 
+                clientName: n, 
+                clientTel: t, 
+                premio: pr, 
                 cid: cid, 
                 pts: 0
             }) 
         });
 
-        renderPatientsList();
-        syncMerchantUI();
-
-        // Reset Form
-        document.getElementById('input-p-name').value = "";
-        document.getElementById('input-p-tel').value = "";
+        renderPatients();
+        refreshMerchantUI();
+        
+        document.getElementById('new-p-name').value = "";
+        document.getElementById('new-p-tel').value = "";
     }
 
-    async function addPointToPatient(idx) {
-        const p = patientsArchive[idx];
-        p.punti++;
-        localStorage.setItem('spich_patients_db', JSON.stringify(patientsArchive));
+    async function incrementPt(idx) {
+        const p = patientsDB[idx];
+        p.pts++;
+        localStorage.setItem('spich_p_list', JSON.stringify(patientsDB));
         
-        // Sync Cloud Aggiornamento Punti
-        await fetch(GOOGLE_API_ENDPOINT, { 
+        await fetch(API_URL, { 
             method: "POST", 
             mode: "no-cors", 
             body: JSON.stringify({
                 t: "UPDATE_POINTS", 
-                bizId: deviceUniqueId, 
-                bizName: merchantProfile.nome, 
+                bizId: deviceID, 
+                bizName: bizProfile.nome, 
                 cid: p.cid, 
                 clientName: p.nome, 
-                pts: p.punti, 
+                pts: p.pts, 
                 premio: p.premio
             }) 
         });
-
-        renderPatientsList();
-        alert(`Punto aggiunto a ${p.nome}! Il suo pass digitale si aggiornerà automaticamente.`);
+        
+        renderPatients();
+        alert("Punto aggiunto e sincronizzato!");
     }
 
-    function generatePatientWaLink(p) {
-        const base = window.location.href.split('?')[0];
-        const link = `${base}?v=gift&st=${encodeURIComponent(merchantProfile.nome)}&wa=${merchantProfile.wa}&cid=${p.cid}&pr=${encodeURIComponent(p.premio)}&n=${encodeURIComponent(p.nome)}&sc=${encodeURIComponent(p.sconto)}`;
-        const text = `Ciao ${p.nome}! Grazie per averci scelto. Questo è il tuo Pass Fedeltà digitale: ${link}`;
-        return `https://wa.me/${p.tel}?text=${encodeURIComponent(text)}`;
+    function genWaLink(p) {
+        const u = window.location.href.split('?')[0];
+        const link = `${u}?v=gift&st=${encodeURIComponent(bizProfile.nome)}&wa=${bizProfile.wa}&cid=${p.cid}&pr=${encodeURIComponent(p.premio)}&n=${encodeURIComponent(p.nome)}&sc=${encodeURIComponent(p.sconto)}`;
+        const msg = `Ciao ${p.nome}, ecco il tuo Pass Fedeltà digitale per ${bizProfile.nome}: ${link}`;
+        return `https://wa.me/${p.tel}?text=${encodeURIComponent(msg)}`;
     }
 
-    /* --- LOGICA LATO PAZIENTE (SYCHRONIZED PASS) --- */
+    /* --- GESTIONE PAZIENTE --- */
 
-    async function initializePatientPass(params) {
-        activateScene('patient-pass');
-        const bizName = params.get('st');
-        const pName = params.get('n');
-        const cid = params.get('cid');
+    async function initPass(q) {
+        switchView('pass');
+        document.getElementById('pass-biz-title').innerText = q.get('st');
+        document.getElementById('pass-welcome-txt').innerText = "Benvenuto " + q.get('n');
+        document.getElementById('pass-cid-label').innerText = q.get('cid');
 
-        document.getElementById('pass-biz-name').innerText = bizName;
-        document.getElementById('pass-welcome-msg').innerText = "Ciao " + pName + ", ecco i tuoi punti!";
-        document.getElementById('label-patient-cid').innerText = cid;
-
-        // Genera QR Code (Indirizza a questo stesso URL)
-        new QRCode(document.getElementById("qrcode-output"), {
+        new QRCode(document.getElementById("qr-render"), {
             text: window.location.href,
-            width: 180,
-            height: 180,
+            width: 170,
+            height: 170,
             colorDark: "#008080"
         });
 
-        // Polling dei punti dal Cloud
+        // Recupero Punti Real Time da Google
         try {
-            const resp = await fetch(`${GOOGLE_API_ENDPOINT}?getCid=${cid}`);
-            const data = await resp.json();
-            const currentPoints = parseInt(data.pts || 0);
-
-            const pallini = document.querySelectorAll('.pallino');
-            for(let i=0; i < currentPoints && i < 5; i++) {
-                pallini[i].classList.add('active');
-            }
-
-            if (currentPoints >= 5) {
-                document.getElementById('final-win-card').style.display = "block";
-            }
-        } catch (e) {
-            console.log("Offline mode o errore sync punti.");
-        }
+            const r = await fetch(`${API_URL}?getCid=${q.get('cid')}`);
+            const d = await r.json();
+            const current = parseInt(d.pts || 0);
+            const palli = document.querySelectorAll('.pallino-item');
+            for(let i=0; i<current && i<5; i++) palli[i].classList.add('filled');
+            if(current >= 5) document.getElementById('win-overlay').style.display = "block";
+        } catch(e) {}
     }
 
-    function shareVoucherToFriend() {
-        const params = new URLSearchParams(window.location.search);
+    function sendGiftToFriend() {
+        const q = new URLSearchParams(window.location.search);
         const base = window.location.href.split('?')[0];
-        const friendLink = `${base}?v=voucher&st=${encodeURIComponent(params.get('st'))}&wa=${params.get('wa')}&da=${encodeURIComponent(params.get('n'))}&pr=${encodeURIComponent(params.get('sc'))}`;
-        const msg = `Ciao! Ti invio un regalo speciale da parte di ${params.get('n')} da utilizzare presso ${params.get('st')}: ${friendLink}`;
+        const link = `${base}?v=voucher&st=${encodeURIComponent(q.get('st'))}&wa=${q.get('wa')}&da=${encodeURIComponent(q.get('n'))}&pr=${encodeURIComponent(q.get('sc'))}`;
+        const msg = `Ciao! Ti invio un regalo da parte di ${q.get('n')} da usare presso ${q.get('st')}: ${link}`;
         window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`);
     }
 
-    /* --- LOGICA LATO AMICO (VOUCHER NUOVO CLIENTE) --- */
+    /* --- GESTIONE VOUCHER --- */
 
-    function initializeFriendVoucher(params) {
-        activateScene('friend-voucher');
-        document.getElementById('friend-msg-body').innerText = `${params.get('da')} ha pensato a te e ti ha regalato un bonus da utilizzare presso lo studio ${params.get('st')}!`;
-        document.getElementById('friend-reward-value').innerText = params.get('pr');
+    function initVoucher(q) {
+        switchView('voucher');
+        document.getElementById('v-friend-msg').innerText = `${q.get('da')} ti ha regalato un bonus speciale presso lo studio ${q.get('st')}!`;
+        document.getElementById('v-friend-val').innerText = q.get('pr');
     }
 
-    function redirectToBooking() {
-        const params = new URLSearchParams(window.location.search);
-        const text = `Ciao! Ho ricevuto un voucher regalo da ${params.get('da')} per ${params.get('st')}. Vorrei prenotare il mio bonus: ${params.get('pr')}`;
-        window.open(`https://wa.me/${params.get('wa')}?text=${encodeURIComponent(text)}`);
+    function bookFriendVoucher() {
+        const q = new URLSearchParams(window.location.search);
+        const msg = `Ciao! Ho ricevuto un voucher regalo da ${q.get('da')} per lo studio ${q.get('st')}. Vorrei prenotare il mio bonus: ${q.get('pr')}`;
+        window.open(`https://wa.me/${q.get('wa')}?text=${encodeURIComponent(msg)}`);
     }
 
-    /* --- FUNZIONI DI SERVIZIO --- */
+    /* --- UTILITY --- */
 
-    function handleLogoClick() {
-        if (merchantProfile) {
-            const confirmReset = confirm("Vuoi uscire dal pannello attuale? I dati locali verranno nascosti.");
-            if (confirmReset) {
-                localStorage.removeItem('spich_biz_cfg');
-                location.href = window.location.href.split('?')[0];
-            }
+    function handleSystemReset() {
+        if (bizProfile && confirm("Vuoi sincronizzare il profilo? I dati dei pazienti rimarranno salvati sul cloud.")) {
+            syncCloudStatus().then(() => {
+                alert("Sincronizzazione completata.");
+                location.reload();
+            });
         }
     }
 
-    function sendProRequest() {
-        const subject = encodeURIComponent("RICHIESTA UPGRADE PRO - ID: " + deviceUniqueId);
-        const body = encodeURIComponent("Salve,\n\nRichiedo l'attivazione della versione PRO per l'attività: " + merchantProfile.nome + "\nSettore: " + merchantProfile.settore + "\nDevice ID: " + deviceUniqueId);
-        window.location.href = `mailto:spich.admin@gmail.com?subject=${subject}&body=${body}`;
+    function requestUpgrade() {
+        const sub = encodeURIComponent("UPGRADE PRO - ID: " + deviceID);
+        const body = encodeURIComponent("Richiedo attivazione PRO per: " + bizProfile.nome + "\nID: " + deviceID);
+        window.location.href = `mailto:spich.admin@gmail.com?subject=${sub}&body=${body}`;
     }
 
 </script>
-
 </body>
 </html>
