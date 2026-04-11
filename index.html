@@ -7,6 +7,7 @@
     
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     
     <style>
@@ -15,23 +16,28 @@
            =====================================================================
         */
         :root { 
+            /* Colori Principali */
             --primary-teal: #008080; 
             --dark-teal: #006666;
             --premium-gold: #d4af37;
             --deep-blue: #003366; 
             --soft-gold: #f4e3b1;
+            
+            /* Colori di Sfondo e Testo */
             --pure-white: #ffffff;
             --bg-canvas: #f8fafc;
             --slate-gray: #64748b;
             --dark-text: #1e293b;
+            
+            /* Colori di Allerta */
             --danger-red: #ef4444;
             --success-green: #10b981;
             
-            /* Elevation & Shadows */
-            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            /* Elevation & Shadows (Rinforzate per eleganza) */
+            --shadow-sm: 0 2px 4px 0 rgba(0, 0, 0, 0.05);
             --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
             --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-            --card-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            --card-shadow: 0 12px 35px rgba(0,0,0,0.06);
             
             /* Border Radius */
             --radius-lg: 24px;
@@ -89,6 +95,7 @@
             text-align: center;
         }
 
+        /* Aggiunto cursor:pointer per indicare che è cliccabile (Sincronizzazione) */
         .brand-logo {
             font-family: 'Comfortaa', cursive;
             font-size: 3.5rem;
@@ -96,6 +103,12 @@
             font-weight: 700;
             letter-spacing: -3px;
             display: inline-block;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .brand-logo:active {
+            transform: scale(0.95);
         }
 
         .brand-logo span {
@@ -140,7 +153,8 @@
             background: var(--pure-white);
             padding: 25px;
             border-radius: var(--radius-lg);
-            border: 1px solid #f1f5f9;
+            /* Bordo più definito ed elegante come richiesto */
+            border: 2px solid #e2e8f0; 
             margin-bottom: 25px;
             box-shadow: var(--card-shadow);
         }
@@ -160,13 +174,14 @@
             letter-spacing: 1px;
         }
 
+        /* Campi di testo con bordi marcati per un look pulito */
         input[type="text"],
         input[type="tel"],
         select {
             width: 100%;
             padding: 18px 22px;
             border-radius: var(--radius-md);
-            border: 2px solid #f1f5f9;
+            border: 2px solid #e2e8f0;
             font-family: 'Montserrat', sans-serif;
             font-size: 1rem;
             font-weight: 500;
@@ -179,7 +194,7 @@
         input:focus, select:focus {
             border-color: var(--primary-teal);
             background: var(--pure-white);
-            box-shadow: 0 0 0 5px rgba(0, 128, 128, 0.08);
+            box-shadow: 0 0 0 4px rgba(0, 128, 128, 0.1);
         }
 
         .btn-action {
@@ -256,15 +271,19 @@
             align-items: center;
             padding: 18px 22px;
             background: var(--pure-white);
-            border: 1px solid #f1f5f9;
+            /* Ripristinato il contorno strutturato elegante */
+            border: 1px solid #e2e8f0;
+            border-left: 5px solid var(--primary-teal);
             border-radius: var(--radius-md);
             margin-bottom: 15px;
             transition: 0.3s ease;
+            box-shadow: var(--shadow-sm);
         }
 
         .row-item:hover {
-            border-color: var(--soft-gold);
+            border-left-color: var(--premium-gold);
             transform: translateX(5px);
+            box-shadow: var(--shadow-md);
         }
 
         .row-info b {
@@ -311,38 +330,22 @@
             padding: 10px 0;
         }
 
-        /* Small Elegant Gift Icon */
-        .gift-box-icon {
-            width: 70px;
-            height: 70px;
-            margin: 0 auto 25px;
-            position: relative;
-            background: var(--deep-blue);
-            border-radius: 15px;
-            border: 3.5px solid var(--premium-gold);
-            box-shadow: 0 8px 20px rgba(0, 51, 102, 0.15);
+        /* NUOVA ICONA REGALO A TINTA UNITA CON FIOCCO 
+           Sostituisce il vecchio CSS box per una grafica FontAwesome pulita
+        */
+        .premium-gift-icon-wrapper {
+            font-size: 4.5rem;
+            color: var(--primary-teal);
+            margin: 0 auto 20px auto;
+            display: inline-block;
+            filter: drop-shadow(0 8px 15px rgba(0, 128, 128, 0.2));
+            animation: floatGift 3s ease-in-out infinite;
         }
 
-        .gift-box-icon::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 0;
-            width: 100%;
-            height: 10px;
-            background: var(--premium-gold);
-            transform: translateY(-50%);
-        }
-
-        .gift-box-icon::after {
-            content: '';
-            position: absolute;
-            left: 50%;
-            top: 0;
-            width: 10px;
-            height: 100%;
-            background: var(--premium-gold);
-            transform: translateX(-50%);
+        @keyframes floatGift {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+            100% { transform: translateY(0px); }
         }
 
         .v-biz-name {
@@ -401,7 +404,7 @@
             background: white;
             display: inline-block;
             border-radius: var(--radius-md);
-            border: 1px solid #f1f5f9;
+            border: 2px solid #e2e8f0;
             box-shadow: var(--shadow-md);
         }
 
@@ -477,7 +480,7 @@
     <div class="app-container">
         
         <header class="header-main">
-            <h1 class="brand-logo">SPICH<span>.</span></h1>
+            <h1 class="brand-logo" onclick="forceAppSync()" title="Tocca per sincronizzare i dati">SPICH<span>.</span></h1>
             <p class="brand-sub">Premium Network</p>
         </header>
 
@@ -581,7 +584,9 @@
         <main id="view-voucher" class="view-scene">
             <div class="voucher-wrap">
                 
-                <div class="gift-box-icon"></div>
+                <div class="premium-gift-icon-wrapper">
+                    <i class="fas fa-gift"></i>
+                </div>
 
                 <h2 id="display-biz-name" class="v-biz-name">STUDIO</h2>
                 
@@ -691,7 +696,10 @@
             const toast = document.getElementById('sys-toast');
             toast.innerText = message;
             toast.style.display = 'block';
-            setTimeout(() => { toast.style.display = 'none'; }, 2800);
+            
+            // Pulisce timeout precedenti se si clicca più volte
+            if(window.toastTimeout) clearTimeout(window.toastTimeout);
+            window.toastTimeout = setTimeout(() => { toast.style.display = 'none'; }, 2800);
         }
 
         /**
@@ -748,6 +756,26 @@
             } catch (err) {
                 console.warn("Cloud offline. Opero in locale.");
             }
+        }
+
+        /**
+         * FUNZIONE DI SINCRONIZZAZIONE MANUALE (CLIC SU LOGO)
+         */
+        async function forceAppSync() {
+            // Impedisce il sync se l'utente è nella vista Voucher o Setup
+            if(!state.bizProfile || document.getElementById('view-voucher').classList.contains('active')) {
+                return;
+            }
+            
+            triggerToast("Sincronizzazione in corso...");
+            
+            // Richiama il controllo di rete e aggiorna la UI
+            await checkCloudStatus();
+            refreshPatientUI();
+            
+            setTimeout(() => {
+                triggerToast("Dati sincronizzati con successo!");
+            }, 800);
         }
 
         /**
