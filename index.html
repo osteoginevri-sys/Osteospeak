@@ -269,7 +269,6 @@
             50% { transform: translateY(-25px) rotate(5deg); } 
         }
         
-        /* I 5 PALLINI PROGRESSIVI */
         .dots-wrapper { 
             display: flex; 
             justify-content: center; 
@@ -325,7 +324,6 @@
 
         #qrcode canvas, #qrcode img { margin: 0 auto; border: 12px solid white; border-radius: 20px; box-shadow: var(--shadow-main); }
         
-        /* FOOTER */
         .footer { 
             font-size: 0.55rem; 
             color: #cbd5e0; 
@@ -429,7 +427,7 @@
                 <div id="qrcode"></div>
                 
                 <button class="btn-share-wa" onclick="condividiPassWA()">
-                    <i class="fab fa-whatsapp"></i> INVIA AD UN AMICO
+                    <i class="fab fa-whatsapp"></i> INVITA UN AMICO
                 </button>
             </div>
 
@@ -451,7 +449,7 @@
 
 <script>
     /* ==============================================
-       LOGICA APPLICATIVA INTEGRALE
+       LOGICA APPLICATIVA INTEGRALE (Anticrash)
        ============================================== */
     
     const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyL97dtvTa7WzRFGpXSFcxgNYlpn844ft-ZQA49bBLhjDe5qzQ_26rYU9XtViMZr36zFA/exec";
@@ -468,10 +466,14 @@
         if(rawCfg) businessConfig = JSON.parse(rawCfg);
     } catch(e) { businessConfig = null; }
     
+    // Sitema Anticrash in caso di dati salvati corrotti
     let listaPazienti = [];
     try {
         const rawList = localStorage.getItem('spich_list');
-        if(rawList) listaPazienti = JSON.parse(rawList);
+        if(rawList) {
+            listaPazienti = JSON.parse(rawList);
+            if (!Array.isArray(listaPazienti)) listaPazienti = []; 
+        }
     } catch(e) { listaPazienti = []; }
     
     let isProUser = false;
@@ -523,7 +525,7 @@
 
     function renderizzaDashboard() {
         let labelP = "PAZIENTI", labelS = "NOME E COGNOME";
-        if(businessConfig.s !== "Medica") {
+        if(businessConfig && businessConfig.s !== "Medica") {
             labelP = "CLIENTI";
         }
         document.getElementById('label-plurale').innerText = labelP;
@@ -533,19 +535,12 @@
 
     function creaNuovoContatto() {
         if (!isProUser && listaPazienti.length >= 10) return;
-        
         const nome = document.getElementById('p-nome').value.trim();
         const tel = document.getElementById('p-tel').value.trim();
         let premio = document.getElementById('p-premio').value;
+        if (premio === 'CUSTOM') premio = document.getElementById('p-custom').value.trim();
         
-        if (premio === 'CUSTOM') {
-            premio = document.getElementById('p-custom').value.trim();
-        }
-        
-        if (!nome || !tel) { 
-            alert("Completa i dati!"); 
-            return; 
-        }
+        if (!nome || !tel) { alert("Completa i dati!"); return; }
 
         const ogg = {
             id: 'REF-' + Date.now(),
@@ -570,12 +565,10 @@
     function stampaLista() {
         const area = document.getElementById('lista-render');
         area.innerHTML = "";
-        
         listaPazienti.forEach((p, idx) => {
             area.innerHTML += `<div class="p-item">
                 <div style="flex:1;">
                     <b style="color:var(--primary);">${p.nome}</b><br>
                     <small>${p.ref}/5 Punti accumulati</small>
                 </div>
-                <div style="display:flex;">
-                    <a class
+                <div style="display:flex
