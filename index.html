@@ -67,7 +67,7 @@
         }
 
         /* =====================================================================
-           [SECTION 3] - CORE LAYOUT (CONTAINER CON CORNICETTE)
+           [SECTION 3] - CORE LAYOUT
            =====================================================================
         */
         .app-container {
@@ -149,14 +149,14 @@
         }
 
         /* =====================================================================
-           [SECTION 6] - UI COMPONENTS (INPUTS, BUTTONS, CARDS)
+           [SECTION 6] - UI COMPONENTS
            =====================================================================
         */
         .card-ui {
             background: var(--pure-white);
             padding: 25px;
             border-radius: var(--radius-lg);
-            border: 2px solid var(--soft-gold); /* Cornicetta sottile dorata */
+            border: 2px solid var(--soft-gold);
             margin-bottom: 25px;
             box-shadow: var(--card-shadow);
             position: relative;
@@ -230,15 +230,8 @@
             transform: scale(0.96);
         }
 
-        .btn-action:disabled {
-            background: #e2e8f0;
-            color: #94a3b8;
-            cursor: not-allowed;
-            box-shadow: none;
-        }
-
         /* =====================================================================
-           [SECTION 7] - DASHBOARD SPECIFIC ELEMENTS
+           [SECTION 7] - DASHBOARD ELEMENTS
            =====================================================================
         */
         .counter-display {
@@ -252,7 +245,6 @@
             font-weight: 800;
             color: var(--primary-teal);
             line-height: 1;
-            font-family: 'Montserrat', sans-serif;
         }
 
         .counter-label {
@@ -279,11 +271,6 @@
             transition: 0.3s ease;
         }
 
-        .row-item:hover {
-            border-color: var(--soft-gold);
-            transform: translateX(5px);
-        }
-
         .row-info b {
             color: var(--primary-teal);
             font-size: 1.1rem;
@@ -294,11 +281,6 @@
             color: var(--slate-gray);
             font-size: 0.85rem;
             font-weight: 600;
-        }
-
-        .row-tools {
-            display: flex;
-            gap: 10px;
         }
 
         .tool-btn {
@@ -320,7 +302,7 @@
         .btn-del-action { background: #fee2e2; color: var(--danger-red); }
 
         /* =====================================================================
-           [SECTION 8] - VOUCHER DESIGN (CON PACCO REGALO)
+           [SECTION 8] - PREMIUM GIFT ICON DESIGN
            =====================================================================
         */
         .voucher-wrap {
@@ -328,51 +310,81 @@
             padding: 10px 0;
         }
 
-        /* Gift Icon with Ribbon */
-        .gift-box-icon {
-            width: 80px;
-            height: 80px;
-            margin: 0 auto 25px;
+        .gift-container {
             position: relative;
-            background: var(--deep-blue);
-            border-radius: 15px;
-            border: 4px solid var(--premium-gold);
-            box-shadow: 0 8px 20px rgba(0, 51, 102, 0.2);
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 30px;
         }
 
-        .gift-box-icon::before {
+        /* Il Fiocco Premium */
+        .gift-bow {
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 25px;
+            z-index: 5;
+        }
+
+        .gift-bow::before, .gift-bow::after {
             content: '';
             position: absolute;
-            top: 50%;
-            left: 0;
-            width: 100%;
-            height: 10px;
+            width: 25px;
+            height: 20px;
             background: var(--premium-gold);
-            transform: translateY(-50%);
+            border-radius: 50% 50% 0 50%;
+            border: 2px solid var(--dark-teal);
         }
 
-        .gift-box-icon::after {
+        .gift-bow::before {
+            left: 0;
+            transform: rotate(-10deg);
+        }
+
+        .gift-bow::after {
+            right: 0;
+            transform: rotate(100deg);
+            border-radius: 50% 50% 50% 0;
+        }
+
+        /* La Scatola Premium */
+        .gift-box-main {
+            width: 100%;
+            height: 80px;
+            background: var(--deep-blue);
+            border-radius: 12px;
+            border: 3px solid var(--premium-gold);
+            position: absolute;
+            bottom: 0;
+            box-shadow: 0 10px 20px rgba(0, 51, 102, 0.2);
+            overflow: hidden;
+        }
+
+        /* Il nastro dorato verticale */
+        .gift-box-main::before {
             content: '';
             position: absolute;
             left: 50%;
             top: 0;
-            width: 10px;
+            width: 15px;
             height: 100%;
             background: var(--premium-gold);
             transform: translateX(-50%);
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
         }
 
-        /* Il fiocco sopra il pacco */
-        .gift-ribbon {
+        /* Il nastro dorato orizzontale */
+        .gift-box-main::after {
+            content: '';
             position: absolute;
-            top: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 40px;
-            height: 20px;
+            top: 35%;
+            left: 0;
+            width: 100%;
+            height: 12px;
             background: var(--premium-gold);
-            border-radius: 20px 20px 0 0;
-            z-index: 10;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
         }
 
         .v-biz-name {
@@ -390,7 +402,6 @@
             margin-bottom: 30px;
         }
 
-        /* The 5 Dots Hierarchy */
         .dots-grid {
             display: flex;
             justify-content: center;
@@ -424,7 +435,6 @@
             font-weight: 900;
         }
 
-        /* QR Core */
         .qr-output-box {
             margin: 35px auto;
             padding: 20px;
@@ -436,7 +446,7 @@
         }
 
         /* =====================================================================
-           [SECTION 9] - ALERTS & NOTIFICATIONS
+           [SECTION 9] - ALERTS & TOASTS
            =====================================================================
         */
         .pro-upgrade-banner {
@@ -482,10 +492,6 @@
             box-shadow: var(--shadow-lg);
         }
 
-        /* =====================================================================
-           [SECTION 10] - FOOTER
-           =====================================================================
-        */
         .footer-branding {
             padding: 50px 20px;
             text-align: center;
@@ -542,14 +548,9 @@
                     ATTIVA ORA <i class="fas fa-check-circle"></i>
                 </button>
             </div>
-            
-            <p style="text-align:center; font-size:0.75rem; color:var(--slate-gray);">
-                Accedendo accetti i termini di gestione del Network Premium SPICH.
-            </p>
         </main>
 
         <main id="view-dash" class="view-scene">
-            
             <div class="counter-display">
                 <div class="counter-number" id="stats-total">0</div>
                 <div class="counter-label" id="stats-label">Pazienti nel Cloud</div>
@@ -589,7 +590,7 @@
                     <i class="fas fa-crown" style="font-size:1.8rem; color:var(--premium-gold); margin-bottom:10px;"></i>
                     <h4 style="color:var(--danger-red); font-weight:800;">LIMITE FREE RAGGIUNTO</h4>
                     <p style="font-size:0.8rem; color:var(--slate-gray); margin: 10px 0 20px;">
-                        Hai gestito i tuoi primi 10 pazienti. Passa alla versione PRO per sbloccare database illimitato e premi personalizzati.
+                        Passa alla versione PRO per sbloccare database illimitato.
                     </p>
                     <button class="btn-action btn-gold" onclick="sendProUpgradeRequest()">
                         SBLOCCA VERSIONE PRO
@@ -601,25 +602,18 @@
                 </button>
             </div>
 
-            <div style="display:flex; justify-content:space-between; align-items:center; margin: 15px 5px;">
-                <h4 style="font-weight:800; color:var(--primary-teal); text-transform:uppercase; font-size:0.85rem;">Anagrafica Attiva</h4>
-                <span id="session-tag" style="font-size:0.6rem; background:#f1f5f9; padding:4px 10px; border-radius:10px; font-weight:700;">LIVE SYNC</span>
-            </div>
-            
-            <div id="main-list-render" class="list-container">
-            </div>
+            <div id="main-list-render" class="list-container"></div>
         </main>
 
         <main id="view-voucher" class="view-scene">
             <div class="voucher-wrap">
                 
-                <div style="position:relative; width:80px; height:80px; margin: 0 auto 30px;">
-                    <div class="gift-ribbon"></div>
-                    <div class="gift-box-icon"></div>
+                <div class="gift-container">
+                    <div class="gift-bow"></div>
+                    <div class="gift-box-main"></div>
                 </div>
 
                 <h2 id="display-biz-name" class="v-biz-name">STUDIO</h2>
-                
                 <p id="display-user-name" class="v-user-welcome">Benvenuto</p>
 
                 <div class="dots-grid" id="display-dots-ui">
@@ -639,10 +633,6 @@
                     <div id="qrcode-canvas"></div>
                 </div>
 
-                <p style="font-size:0.75rem; color:var(--slate-gray); padding:0 30px; margin: 15px 0 30px;">
-                    Presenta questo Pass al desk. Ad ogni visita accumuli punti per il tuo premio fedeltà.
-                </p>
-
                 <button class="btn-action btn-gold" onclick="shareVoucherLink()">
                     REGALA SCONTO A UN AMICO <i class="fab fa-whatsapp"></i>
                 </button>
@@ -659,16 +649,11 @@
     <script>
         /**
          * =====================================================================
-         * CONFIGURAZIONE DI SISTEMA (Google Apps Script Endpoint)
+         * CONFIGURAZIONE SISTEMA
          * =====================================================================
          */
         const GOOGLE_ENDPOINT = "https://script.google.com/macros/s/AKfycbyh4CGnWQWyvztKvTkbQ9_TOUMb3EQaB6bZySuamZeRkYSe_1VBvWJYXc2LcESKWS1sdg/exec";
         
-        /**
-         * =====================================================================
-         * STATO DELL'APPLICAZIONE
-         * =====================================================================
-         */
         let state = {
             deviceID: localStorage.getItem('spich_v18_device_id') || generateUID(),
             bizProfile: JSON.parse(localStorage.getItem('spich_v18_biz_data') || 'null'),
@@ -678,30 +663,23 @@
 
         /**
          * =====================================================================
-         * INIZIALIZZAZIONE AL CARICAMENTO
+         * INIZIALIZZAZIONE
          * =====================================================================
          */
         window.addEventListener('DOMContentLoaded', async () => {
-            
             if(!localStorage.getItem('spich_v18_device_id')) {
                 localStorage.setItem('spich_v18_device_id', state.deviceID);
             }
-            
             document.getElementById('debug-info').innerText = "SESSION ID: " + state.deviceID;
             
             const urlParams = new URLSearchParams(window.location.search);
             
             if (urlParams.get('v') === 'gift') {
-                // MODALITÀ PAZIENTE
                 initVoucherMode(urlParams);
             } else if (!state.bizProfile) {
-                // MODALITÀ SETUP
                 navigateTo('setup');
             } else {
-                // MODALITÀ DASHBOARD
                 navigateTo('dash');
-                
-                // [FIX] Mostra nome attività in Dashboard
                 const bizTitle = document.getElementById('display-dash-biz-name');
                 bizTitle.innerText = state.bizProfile.name;
                 bizTitle.style.display = 'block';
@@ -717,8 +695,7 @@
         }
 
         function navigateTo(sceneId) {
-            const scenes = document.querySelectorAll('.view-scene');
-            scenes.forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.view-scene').forEach(s => s.classList.remove('active'));
             document.getElementById('view-' + sceneId).classList.add('active');
             window.scrollTo(0, 0);
         }
@@ -732,7 +709,7 @@
 
         /**
          * =====================================================================
-         * LOGICA DI BUSINESS
+         * LOGICA CORE (MAI MINIMIZZARE!)
          * =====================================================================
          */
         function initBusinessProfile() {
@@ -741,7 +718,7 @@
             const sectorValue = document.getElementById('setup-type').value;
 
             if (!nameValue || !phoneValue) {
-                alert("Attenzione: Tutti i campi sono obbligatori.");
+                alert("Tutti i campi sono obbligatori.");
                 return;
             }
 
@@ -753,15 +730,11 @@
 
             localStorage.setItem('spich_v18_biz_data', JSON.stringify(state.bizProfile));
 
-            // Notifica al Cloud
             fetch(GOOGLE_ENDPOINT, {
                 method: "POST",
                 mode: "no-cors",
                 body: JSON.stringify({
-                    t: "REG_BIZ",
-                    id: state.deviceID,
-                    nome: nameValue,
-                    settore: sectorValue
+                    t: "REG_BIZ", id: state.deviceID, nome: nameValue, settore: sectorValue
                 })
             });
 
@@ -773,30 +746,26 @@
             try {
                 const response = await fetch(`${GOOGLE_ENDPOINT}?checkPro=${state.deviceID}`);
                 const cloudData = await response.json();
-
                 if (cloudData.isPro === "PRO") {
                     state.isProActive = true;
                     unlockProFeatures();
                 }
-                
                 toggleLimitWarnings();
             } catch (err) {
-                console.warn("Cloud offline.");
+                console.warn("Offline.");
             }
         }
 
         function applyTerminology() {
             if (!state.bizProfile) return;
-            const labelCount = document.getElementById('stats-label');
-            const labelInput = document.getElementById('label-client-name');
             const maps = {
                 "Ristorazione": { plural: "Ospiti Registrati", singular: "Nome Ospite" },
                 "Wellness": { plural: "Clienti nel Database", singular: "Nome Cliente" },
                 "Salute": { plural: "Pazienti Registrati", singular: "Nome Paziente" }
             };
             const selected = maps[state.bizProfile.sector] || maps["Salute"];
-            labelCount.innerText = selected.plural;
-            labelInput.innerText = selected.singular;
+            document.getElementById('stats-label').innerText = selected.plural;
+            document.getElementById('label-client-name').innerText = selected.singular;
         }
 
         function toggleLimitWarnings() {
@@ -812,10 +781,8 @@
         }
 
         function unlockProFeatures() {
-            const refSlot = document.getElementById('slot-referral');
-            const loySlot = document.getElementById('slot-loyalty');
-            refSlot.innerHTML = `<input type="text" id="val-referral" placeholder="Esempio: 15% Sconto">`;
-            loySlot.innerHTML = `<input type="text" id="val-loyalty" placeholder="Esempio: Kit Omaggio">`;
+            document.getElementById('slot-referral').innerHTML = `<input type="text" id="val-referral" placeholder="Esempio: 15% Sconto">`;
+            document.getElementById('slot-loyalty').innerHTML = `<input type="text" id="val-loyalty" placeholder="Esempio: Kit Omaggio">`;
         }
 
         function registerNewPatient() {
@@ -825,7 +792,7 @@
             const cLoy = document.getElementById('val-loyalty').value;
 
             if (!cName || !cTel) {
-                alert("Inserire Nome e Cellulare.");
+                alert("Nome e Cellulare richiesti.");
                 return;
             }
 
@@ -869,11 +836,6 @@
             listArea.innerHTML = "";
             document.getElementById('stats-total').innerText = state.patientDb.length;
 
-            if (state.patientDb.length === 0) {
-                listArea.innerHTML = `<p style="text-align:center; color:#94a3b8; padding:30px;">Database vuoto.</p>`;
-                return;
-            }
-
             state.patientDb.forEach((entry, i) => {
                 const element = document.createElement('div');
                 element.className = 'row-item';
@@ -888,11 +850,7 @@
                             <i class="fab fa-whatsapp"></i>
                         </a>
                         <button class="tool-btn btn-pts-action" onclick="updatePoints(${i})">+1</button>
-                        ${state.isProActive ? `
-                            <button class="tool-btn btn-del-action" onclick="removeEntry(${i})">
-                                <i class="fas fa-trash-alt"></i>
-                            </button>
-                        ` : ''}
+                        ${state.isProActive ? `<button class="tool-btn btn-del-action" onclick="removeEntry(${i})"><i class="fas fa-trash-alt"></i></button>` : ''}
                     </div>
                 `;
                 listArea.appendChild(element);
@@ -917,7 +875,7 @@
         }
 
         function removeEntry(index) {
-            if (confirm("Rimuovere il record?")) {
+            if (confirm("Eliminare il record?")) {
                 state.patientDb.splice(index, 1);
                 localStorage.setItem('spich_v18_db', JSON.stringify(state.patientDb));
                 refreshPatientUI();
@@ -928,8 +886,7 @@
         function buildWhatsAppMessage(patient) {
             const root = window.location.href.split('?')[0];
             const voucherParams = `?v=gift&st=${encodeURIComponent(state.bizProfile.name)}&wa=${state.bizProfile.phone}&n=${encodeURIComponent(patient.nome)}&cid=${patient.cid}&pr=${encodeURIComponent(patient.premio)}&sc=${encodeURIComponent(patient.sconto)}`;
-            const finalLink = root + voucherParams;
-            const text = `Ciao ${patient.nome}! 🎉 Ecco il tuo Pass Regalo di ${state.bizProfile.name}: ${finalLink}`;
+            const text = `Ciao ${patient.nome}! 🎉 Ecco il tuo Pass Regalo di ${state.bizProfile.name}: ${root + voucherParams}`;
             return `https://wa.me/${patient.tel}?text=${encodeURIComponent(text)}`;
         }
 
