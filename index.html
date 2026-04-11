@@ -12,11 +12,10 @@
     
     <style>
         /* =====================================================================
-           [CSS SECTION 1] - DESIGN SYSTEM & COLOR PALETTE
+           [SECTION 1] - DESIGN SYSTEM & VARIABLES
            =====================================================================
         */
         :root { 
-            /* Colori Identitari */
             --primary-teal: #008080; 
             --dark-teal: #006666;
             --premium-gold: #d4af37;
@@ -30,20 +29,20 @@
             --danger-red: #ef4444;
             --success-green: #10b981;
             
-            /* Ombre e Profondità Premium */
+            /* Elevation & Shadows */
             --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
             --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
             --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-            --card-shadow: 0 10px 40px rgba(0,0,0,0.06);
+            --card-shadow: 0 10px 30px rgba(0,0,0,0.05);
             
-            /* Bordi Arrotondati */
+            /* Border Radius */
             --radius-lg: 24px;
             --radius-md: 16px;
             --radius-sm: 12px;
         }
 
         /* =====================================================================
-           [CSS SECTION 2] - RESET E BOILERPLATE
+           [SECTION 2] - RESET & BOILERPLATE
            =====================================================================
         */
         * { 
@@ -68,7 +67,10 @@
             justify-content: center;
         }
 
-        /* Container dell'app con bordi laterali dorati */
+        /* =====================================================================
+           [SECTION 3] - CORE LAYOUT (CONTAINER CON CORNICETTE)
+           =====================================================================
+        */
         .app-container {
             width: 100%;
             max-width: 500px;
@@ -77,13 +79,15 @@
             display: flex;
             flex-direction: column;
             position: relative;
-            box-shadow: 0 0 50px rgba(0,0,0,0.05);
-            border-left: 6px solid var(--premium-gold);
-            border-right: 6px solid var(--premium-gold);
+            box-shadow: 0 0 40px rgba(0,0,0,0.03);
+            
+            /* Cornicette laterali eleganti stabilite */
+            border-left: 5px solid var(--premium-gold);
+            border-right: 5px solid var(--premium-gold);
         }
 
         /* =====================================================================
-           [CSS SECTION 3] - HEADER E BRANDING
+           [SECTION 4] - HEADER & BRANDING
            =====================================================================
         */
         .header-main {
@@ -114,7 +118,6 @@
             margin-bottom: 20px;
         }
 
-        /* Nome Attività visualizzato in dashboard */
         .biz-display-header {
             font-weight: 800;
             color: var(--premium-gold);
@@ -126,14 +129,14 @@
         }
 
         /* =====================================================================
-           [CSS SECTION 4] - LOGICA DELLE VISTE (SCENES)
+           [SECTION 5] - VIEW CONTROLLER (SCENES)
            =====================================================================
         */
         .view-scene {
             display: none;
             padding: 30px;
             flex-direction: column;
-            animation: fadeInTransition 0.5s ease-out;
+            animation: fadeInTransition 0.4s ease-out;
         }
 
         .view-scene.active {
@@ -146,14 +149,14 @@
         }
 
         /* =====================================================================
-           [CSS SECTION 5] - COMPONENTI UI (CARDS, INPUTS, BUTTONS)
+           [SECTION 6] - UI COMPONENTS (INPUTS, BUTTONS, CARDS)
            =====================================================================
         */
         .card-ui {
             background: var(--pure-white);
             padding: 25px;
             border-radius: var(--radius-lg);
-            border: 2px solid var(--soft-gold);
+            border: 2px solid var(--soft-gold); 
             margin-bottom: 25px;
             box-shadow: var(--card-shadow);
             position: relative;
@@ -183,14 +186,14 @@
             border: 2px solid #f1f5f9;
             font-family: 'Montserrat', sans-serif;
             font-size: 1rem;
-            font-weight: 600;
+            font-weight: 500;
             color: var(--dark-text);
             background: #f8fafc;
             transition: all 0.3s ease;
             outline: none;
         }
 
-        input:focus {
+        input:focus, select:focus {
             border-color: var(--primary-teal);
             background: var(--pure-white);
             box-shadow: 0 0 0 5px rgba(0, 128, 128, 0.08);
@@ -213,48 +216,91 @@
             box-shadow: var(--shadow-md);
         }
 
-        .btn-primary {
-            background: var(--primary-teal);
-            color: var(--pure-white);
-        }
-
-        .btn-gold {
-            background: var(--premium-gold);
-            color: var(--pure-white);
-        }
-
-        .btn-action:active {
-            transform: scale(0.96);
-        }
+        .btn-primary { background: var(--primary-teal); color: var(--pure-white); }
+        .btn-gold { background: var(--premium-gold); color: var(--pure-white); }
 
         /* =====================================================================
-           [CSS SECTION 6] - DASHBOARD & LISTE
+           [SECTION 7] - IL PACCO REGALO MASTER (TEAL/ORO CON FIOCCO)
            =====================================================================
         */
-        .counter-display {
-            text-align: center;
-            padding: 40px 0;
-            margin-bottom: 20px;
+        .gift-box-scene {
+            position: relative;
+            width: 130px;
+            height: 130px;
+            margin: 0 auto 30px;
+            animation: giftFloat 3s ease-in-out infinite;
         }
 
-        .counter-number {
-            font-size: 5rem;
-            font-weight: 800;
-            color: var(--primary-teal);
-            line-height: 1;
+        @keyframes giftFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .box-base {
+            position: absolute;
+            bottom: 0;
+            left: 15px;
+            width: 100px;
+            height: 85px;
+            background: var(--primary-teal);
+            border-radius: 12px;
+            border: 3px solid var(--premium-gold);
+            z-index: 2;
         }
 
-        .counter-label {
-            font-weight: 700;
-            color: var(--slate-gray);
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            font-size: 0.85rem;
+        /* Nastro Oro Verticale */
+        .box-base::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 22px;
+            height: 100%;
+            background: var(--gold-gradient);
         }
 
-        .list-container {
-            margin-top: 10px;
+        /* Nastro Oro Orizzontale */
+        .box-base::after {
+            content: '';
+            position: absolute;
+            top: 35%;
+            width: 100%;
+            height: 14px;
+            background: var(--gold-gradient);
         }
+
+        /* Fiocco Superiore */
+        .box-top-ribbon {
+            position: absolute;
+            top: 18px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 70px;
+            height: 35px;
+            z-index: 5;
+        }
+
+        .box-top-ribbon::before,
+        .box-top-ribbon::after {
+            content: '';
+            position: absolute;
+            width: 38px;
+            height: 28px;
+            background: var(--gold-gradient);
+            border-radius: 50% 50% 10% 50%;
+            border: 1.5px solid rgba(0,0,0,0.1);
+        }
+
+        .box-top-ribbon::before { left: -8px; transform: rotate(-15deg); }
+        .box-top-ribbon::after { right: -8px; transform: rotate(105deg); border-radius: 50% 50% 50% 10%; }
+
+        /* =====================================================================
+           [SECTION 8] - DASHBOARD & LISTS
+           =====================================================================
+        */
+        .counter-display { text-align: center; padding: 40px 0; }
+        .counter-number { font-size: 5rem; font-weight: 800; color: var(--primary-teal); line-height: 1; }
+        .counter-label { font-weight: 700; color: var(--slate-gray); text-transform: uppercase; letter-spacing: 3px; font-size: 0.85rem; }
 
         .row-item {
             display: flex;
@@ -268,225 +314,41 @@
             transition: 0.3s ease;
         }
 
-        .row-info b {
-            color: var(--primary-teal);
-            font-size: 1.1rem;
-            display: block;
-        }
-
-        .row-info span {
-            color: var(--slate-gray);
-            font-size: 0.85rem;
-            font-weight: 600;
-        }
+        .row-info b { color: var(--primary-teal); font-size: 1.1rem; display: block; }
+        .row-info span { color: var(--slate-gray); font-size: 0.85rem; font-weight: 600; }
 
         .tool-btn {
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            border: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            color: white;
-            font-size: 1.2rem;
-            transition: 0.2s;
+            width: 45px; height: 45px; border-radius: 50%; border: none;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; color: white; font-size: 1.2rem;
         }
 
         .btn-wa-action { background: #25D366; }
         .btn-pts-action { background: var(--premium-gold); font-weight: 900; }
 
         /* =====================================================================
-           [CSS SECTION 7] - PACCO REGALO PREMIUM (STILIZZATO & ANIMATO)
+           [SECTION 9] - FIDELITY DOTS & QR
            =====================================================================
         */
-        .gift-container {
-            position: relative;
-            width: 140px;
-            height: 140px;
-            margin: 0 auto 30px;
-            animation: floatingGift 3.5s ease-in-out infinite;
-        }
+        .dots-grid { display: flex; justify-content: center; gap: 15px; margin: 25px 0; }
+        .fidelity-point { width: 30px; height: 30px; border-radius: 50%; border: 2.5px solid var(--premium-gold); position: relative; }
+        .fidelity-point.filled { background: var(--premium-gold); transform: scale(1.2); }
+        .fidelity-point.filled::after { content: '✓'; color: white; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); font-weight: 900; }
+        
+        .qr-output-box { margin: 35px auto; padding: 20px; background: white; border-radius: var(--radius-md); border: 1px solid #f1f5f9; }
 
-        @keyframes floatingGift {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-12px) rotate(2deg); }
-        }
-
-        /* Scatola Stilizzata Blu */
-        .gift-box-premium {
-            position: absolute;
-            bottom: 10px;
-            left: 20px;
-            width: 100px;
-            height: 85px;
-            background: var(--deep-blue);
-            border-radius: 12px;
-            border: 3px solid var(--premium-gold);
-            box-shadow: 0 15px 35px rgba(0, 51, 102, 0.4);
-            overflow: hidden;
-            z-index: 2;
-        }
-
-        /* Nastro Dorato Verticale */
-        .gift-box-premium::before {
-            content: '';
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 22px;
-            height: 100%;
-            background: var(--gold-gradient);
-        }
-
-        /* Nastro Dorato Orizzontale */
-        .gift-box-premium::after {
-            content: '';
-            position: absolute;
-            top: 32%;
-            width: 100%;
-            height: 14px;
-            background: var(--gold-gradient);
-        }
-
-        /* Fiocco Superiore Stilizzato Oro */
-        .gift-bow-premium {
-            position: absolute;
-            top: 15px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 70px;
-            height: 40px;
-            z-index: 5;
-        }
-
-        .gift-bow-premium::before, .gift-bow-premium::after {
-            content: '';
-            position: absolute;
-            width: 38px;
-            height: 30px;
-            background: var(--gold-gradient);
-            border-radius: 50% 50% 10% 50%;
-            border: 1.5px solid rgba(0,0,0,0.1);
-        }
-
-        .gift-bow-premium::before {
-            left: -8px;
-            transform: rotate(-15deg);
-        }
-
-        .gift-bow-premium::after {
-            right: -8px;
-            transform: rotate(105deg);
-            border-radius: 50% 50% 50% 10%;
-        }
-
-        /* =====================================================================
-           [CSS SECTION 8] - VOUCHER E QR CODE
-           =====================================================================
-        */
-        .voucher-wrap {
-            text-align: center;
-        }
-
-        .v-biz-name {
-            font-family: 'Comfortaa', cursive;
-            font-size: 2.6rem;
-            color: var(--primary-teal);
-            margin-bottom: 5px;
-            font-weight: 700;
-        }
-
-        .v-user-welcome {
-            font-weight: 700;
-            color: var(--slate-gray);
-            font-size: 1.2rem;
-            margin-bottom: 30px;
-        }
-
-        .dots-grid {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin: 25px 0;
-        }
-
-        .fidelity-point {
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            border: 2.5px solid var(--premium-gold);
-            position: relative;
-        }
-
-        .fidelity-point.filled {
-            background: var(--premium-gold);
-            transform: scale(1.2);
-            box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
-        }
-
-        .fidelity-point.filled::after {
-            content: '✓';
-            color: white;
-            font-size: 14px;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-weight: 900;
-        }
-
-        .qr-output-box {
-            margin: 35px auto;
-            padding: 20px;
-            background: white;
-            display: inline-block;
-            border-radius: var(--radius-md);
-            border: 1px solid #f1f5f9;
-            box-shadow: var(--shadow-md);
-        }
-
-        /* =====================================================================
-           [CSS SECTION 9] - SISTEMA DI NOTIFICHE E FEEDBACK
-           =====================================================================
-        */
         .toast-system {
-            position: fixed;
-            bottom: 40px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--dark-text);
-            color: white;
-            padding: 15px 30px;
-            border-radius: 50px;
-            font-size: 0.95rem;
-            font-weight: 700;
-            display: none;
-            z-index: 9999;
-            box-shadow: var(--shadow-lg);
+            position: fixed; bottom: 40px; left: 50%; transform: translateX(-50%);
+            background: var(--dark-text); color: white; padding: 15px 30px;
+            border-radius: 50px; font-weight: 700; display: none; z-index: 9999;
         }
 
-        .footer-branding {
-            padding: 50px 20px;
-            text-align: center;
-            margin-top: auto;
-        }
-
-        .footer-branding p {
-            font-size: 0.7rem;
-            color: var(--slate-gray);
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-        }
-
-        #debug-info {
-            font-size: 0.5rem;
-            color: #cbd5e1;
-            margin-top: 10px;
-            letter-spacing: 1px;
-        }
+        /* =====================================================================
+           [SECTION 10] - FOOTER
+           =====================================================================
+        */
+        .footer-branding { padding: 50px 20px; text-align: center; margin-top: auto; }
+        .footer-branding p { font-size: 0.7rem; color: var(--slate-gray); font-weight: 800; text-transform: uppercase; letter-spacing: 3px; }
 
     </style>
 </head>
@@ -504,30 +366,24 @@
 
         <main id="view-setup" class="view-scene">
             <div class="card-ui">
-                <h3 style="margin-bottom:25px; color:var(--primary-teal); font-weight:800;">Benvenuto nel Network</h3>
-                
+                <h3 style="margin-bottom:25px; color:var(--primary-teal); font-weight:800;">Attivazione Account</h3>
                 <div class="field-group">
-                    <label class="field-label">Nome della tua Attività</label>
-                    <input type="text" id="setup-name" placeholder="Esempio: Studio Spich">
+                    <label class="field-label">Nome Attività</label>
+                    <input type="text" id="setup-name" placeholder="Esempio: Studio Medico Rossi">
                 </div>
-
                 <div class="field-group">
                     <label class="field-label">WhatsApp Business</label>
-                    <input type="tel" id="setup-phone" placeholder="3331234567">
+                    <input type="tel" id="setup-phone" placeholder="333...">
                 </div>
-
                 <div class="field-group">
-                    <label class="field-label">Settore Operativo</label>
+                    <label class="field-label">Settore</label>
                     <select id="setup-type">
                         <option value="Salute">Settore Sanitario</option>
                         <option value="Ristorazione">Food & Beverage</option>
                         <option value="Wellness">Benessere & Estetica</option>
                     </select>
                 </div>
-
-                <button class="btn-action btn-primary" onclick="initBusinessProfile()">
-                    ATTIVA NETWORK <i class="fas fa-check-circle"></i>
-                </button>
+                <button class="btn-action btn-primary" onclick="initBusinessProfile()">ATTIVA ORA <i class="fas fa-check-circle"></i></button>
             </div>
         </main>
 
@@ -536,358 +392,189 @@
                 <div class="counter-number" id="stats-total">0</div>
                 <div class="counter-label" id="stats-label">Pazienti nel Cloud</div>
             </div>
-
             <div class="card-ui">
                 <div class="field-group">
-                    <label class="field-label" id="label-client-name">Nome Completo</label>
+                    <label class="field-label" id="label-client-name">Nome Paziente</label>
                     <input type="text" id="new-client-name" placeholder="Cognome e Nome">
                 </div>
-                
                 <div class="field-group">
-                    <label class="field-label">Cellulare WhatsApp</label>
+                    <label class="field-label">WhatsApp Cliente</label>
                     <input type="tel" id="new-client-tel" placeholder="3XXXXXXXXX">
                 </div>
-
-                <button id="btn-submit-main" class="btn-action btn-primary" onclick="registerNewPatient()">
-                    CREA PASS REGALO <i class="fas fa-plus-circle"></i>
-                </button>
+                <button class="btn-action btn-primary" onclick="registerNewPatient()">CREA PASS REGALO <i class="fas fa-plus-circle"></i></button>
             </div>
-
             <div id="main-list-render" class="list-container"></div>
         </main>
 
         <main id="view-voucher" class="view-scene">
-            <div class="voucher-wrap">
-                
-                <div class="gift-container">
-                    <div class="gift-bow-premium"></div>
-                    <div class="gift-box-premium"></div>
+            <div style="text-align:center;">
+                <div class="gift-box-scene">
+                    <div class="box-top-ribbon"></div>
+                    <div class="box-base"></div>
                 </div>
-
-                <h2 id="display-biz-name" class="v-biz-name">STUDIO</h2>
-                <p id="display-user-name" class="v-user-welcome">Benvenuto</p>
-
+                <h2 id="display-biz-name" style="font-family:'Comfortaa'; color:var(--primary-teal); font-size:2.6rem;"></h2>
+                <p id="display-user-name" style="font-weight:700; color:var(--slate-gray); font-size:1.2rem;"></p>
                 <div class="dots-grid" id="display-dots-ui">
-                    <div class="fidelity-point"></div>
-                    <div class="fidelity-point"></div>
-                    <div class="fidelity-point"></div>
-                    <div class="fidelity-point"></div>
-                    <div class="fidelity-point"></div>
+                    <div class="fidelity-point"></div><div class="fidelity-point"></div><div class="fidelity-point"></div><div class="fidelity-point"></div><div class="fidelity-point"></div>
                 </div>
-
                 <div class="qr-output-box">
                     <div id="qrcode-canvas"></div>
                 </div>
-
-                <button class="btn-action btn-gold" onclick="shareVoucherLink()">
-                    REGALA SCONTO A UN AMICO <i class="fab fa-whatsapp"></i>
-                </button>
+                <button class="btn-action btn-gold" onclick="shareVoucherLink()">REGALA SCONTO A UN AMICO <i class="fab fa-whatsapp"></i></button>
             </div>
         </main>
 
         <footer class="footer-branding">
             <p>&copy; 2026 SPICH. DIGITAL NETWORK</p>
-            <div id="debug-info">SESSION ID: --</div>
+            <div id="debug-info" style="font-size:0.5rem; color:#cbd5e1; margin-top:10px;"></div>
         </footer>
 
     </div>
 
     <script>
-        /**
-         * CONFIGURAZIONE ENDPOINT GOOGLE APPS SCRIPT
-         */
         const GOOGLE_ENDPOINT = "https://script.google.com/macros/s/AKfycbyh4CGnWQWyvztKvTkbQ9_TOUMb3EQaB6bZySuamZeRkYSe_1VBvWJYXc2LcESKWS1sdg/exec";
         
         let state = {
-            deviceID: localStorage.getItem('spich_v18_device_id') || generateUID(),
+            deviceID: localStorage.getItem('spich_v18_device_id') || ('SP-' + Math.random().toString(36).substr(2, 9).toUpperCase()),
             bizProfile: JSON.parse(localStorage.getItem('spich_v18_biz_data') || 'null'),
             patientDb: JSON.parse(localStorage.getItem('spich_v18_db') || '[]')
         };
 
-        /**
-         * INIZIALIZZAZIONE APP AL CARICAMENTO
-         */
         window.addEventListener('DOMContentLoaded', async () => {
-            if(!localStorage.getItem('spich_v18_device_id')) {
-                localStorage.setItem('spich_v18_device_id', state.deviceID);
-            }
-            document.getElementById('debug-info').innerText = "SESSION ID: " + state.deviceID;
-            
+            if(!localStorage.getItem('spich_v18_device_id')) localStorage.setItem('spich_v18_device_id', state.deviceID);
+            document.getElementById('debug-info').innerText = "DEVICE ID: " + state.deviceID;
             const urlParams = new URLSearchParams(window.location.search);
             
-            // Caso 1: L'utente sta visualizzando un voucher regalo
             if (urlParams.get('v') === 'gift') {
                 initVoucherMode(urlParams);
-            } 
-            // Caso 2: Primo accesso esercente (Setup)
-            else if (!state.bizProfile) {
+            } else if (!state.bizProfile) {
                 navigateTo('setup');
-            } 
-            // Caso 3: Dashboard Esercente
-            else {
+            } else {
                 navigateTo('dash');
                 const bizTitle = document.getElementById('display-dash-biz-name');
                 bizTitle.innerText = state.bizProfile.name;
                 bizTitle.style.display = 'block';
-                
                 applyTerminology();
-                await checkCloudStatus(); // Verifica se l'account è ancora attivo sul cloud
                 refreshPatientUI();
+                await checkCloudStatus(); 
             }
         });
 
-        /**
-         * LOGICA DI CONTROLLO REMOTO (KILL-SWITCH)
-         * Se il nome o l'ID vengono rimossi dallo Script, l'app si resetta.
-         */
         async function checkCloudStatus() {
+            if(!state.bizProfile) return;
             try {
                 const response = await fetch(`${GOOGLE_ENDPOINT}?checkPro=${state.deviceID}`);
                 const cloudData = await response.json();
-
-                // Logica di autorizzazione remota
-                if (cloudData.status === "UNAUTHORIZED" || cloudData.status === "DELETED" || !cloudData.exists) {
-                    console.log("Account disattivato dal pannello centrale.");
-                    triggerToast("Account non autorizzato.");
-                    setTimeout(() => {
-                        localStorage.clear();
-                        location.reload();
-                    }, 2500);
+                if (cloudData.status === "UNAUTHORIZED" || cloudData.exists === false) {
+                    triggerToast("Account rimosso dal cloud.");
+                    setTimeout(() => { localStorage.clear(); location.reload(); }, 2500);
                 }
-            } catch (err) {
-                console.warn("Lavorando in modalità offline.");
-            }
+            } catch (err) { console.warn("Cloud offline."); }
         }
 
-        /**
-         * GENERATORE ID UNIVOCO DISPOSITIVO
-         */
-        function generateUID() {
-            return 'SP-' + Math.random().toString(36).substr(2, 9).toUpperCase();
-        }
-
-        /**
-         * CONTROLLER DELLE VISTE
-         */
-        function navigateTo(sceneId) {
+        function navigateTo(id) {
             document.querySelectorAll('.view-scene').forEach(s => s.classList.remove('active'));
-            const target = document.getElementById('view-' + sceneId);
-            if(target) target.classList.add('active');
+            document.getElementById('view-' + id).classList.add('active');
             window.scrollTo(0, 0);
         }
 
-        /**
-         * SISTEMA DI NOTIFICA TOAST
-         */
-        function triggerToast(message) {
+        function triggerToast(m) {
             const toast = document.getElementById('sys-toast');
-            toast.innerText = message;
-            toast.style.display = 'block';
+            toast.innerText = m; toast.style.display = 'block';
             setTimeout(() => { toast.style.display = 'none'; }, 2800);
         }
 
-        /**
-         * CREAZIONE PROFILO ESERCENTE
-         */
         function initBusinessProfile() {
-            const nameValue = document.getElementById('setup-name').value.trim();
-            const phoneValue = document.getElementById('setup-phone').value.trim();
-            const sectorValue = document.getElementById('setup-type').value;
+            const n = document.getElementById('setup-name').value.trim();
+            const p = document.getElementById('setup-phone').value.trim();
+            const s = document.getElementById('setup-type').value;
+            if(!n || !p) return alert("Inserire tutti i dati.");
 
-            if (!nameValue || !phoneValue) {
-                alert("Tutti i campi sono obbligatori.");
-                return;
-            }
-
-            state.bizProfile = {
-                name: nameValue,
-                phone: '39' + phoneValue.replace(/\D/g, ''),
-                sector: sectorValue
-            };
-
+            state.bizProfile = { name: n, phone: '39'+p.replace(/\D/g,''), sector: s };
             localStorage.setItem('spich_v18_biz_data', JSON.stringify(state.bizProfile));
 
-            // Sincronizzazione Cloud Profilo
             fetch(GOOGLE_ENDPOINT, {
-                method: "POST",
-                mode: "no-cors",
-                body: JSON.stringify({
-                    t: "REG_BIZ", id: state.deviceID, nome: nameValue, settore: sectorValue
-                })
+                method: "POST", mode: "no-cors",
+                body: JSON.stringify({ t: "REG_BIZ", id: state.deviceID, nome: n, settore: s })
             });
 
             triggerToast("Network Attivato!");
             setTimeout(() => { location.reload(); }, 1200);
         }
 
-        /**
-         * PERSONALIZZAZIONE TERMINOLOGIA IN BASE AL SETTORE
-         */
-        function applyTerminology() {
-            if (!state.bizProfile) return;
-            const maps = {
-                "Ristorazione": { plural: "Ospiti nel Database", singular: "Nome Ospite" },
-                "Wellness": { plural: "Clienti nel Database", singular: "Nome Cliente" },
-                "Salute": { plural: "Pazienti nel Database", singular: "Nome Paziente" }
-            };
-            const selected = maps[state.bizProfile.sector] || maps["Salute"];
-            document.getElementById('stats-label').innerText = selected.plural;
-            document.getElementById('label-client-name').innerText = selected.singular;
-        }
-
-        /**
-         * REGISTRAZIONE NUOVO CLIENTE E GENERAZIONE PASS
-         */
         function registerNewPatient() {
-            const cName = document.getElementById('new-client-name').value.trim();
-            const cTel = document.getElementById('new-client-tel').value.trim();
+            const n = document.getElementById('new-client-name').value.trim();
+            const t = document.getElementById('new-client-tel').value.trim();
+            if(!n || !t) return alert("Dati mancanti.");
 
-            if (!cName || !cTel) {
-                alert("Nome e Cellulare richiesti.");
-                return;
-            }
-
-            const uniqueCID = 'CID-' + Date.now().toString(36).toUpperCase();
-            const patientRecord = {
-                cid: uniqueCID,
-                nome: cName,
-                tel: '39' + cTel.replace(/\D/g, ''),
-                pts: 0
-            };
-
-            // Salvataggio Locale
-            state.patientDb.unshift(patientRecord);
+            const cid = 'CID-' + Date.now().toString(36).toUpperCase();
+            const rec = { cid, nome: n, tel: '39'+t.replace(/\D/g,''), pts: 0 };
+            state.patientDb.unshift(rec);
             localStorage.setItem('spich_v18_db', JSON.stringify(state.patientDb));
 
-            // Sincronizzazione Cloud Cliente
             fetch(GOOGLE_ENDPOINT, {
-                method: "POST",
-                mode: "no-cors",
-                body: JSON.stringify({
-                    t: "ADD_CLIENT",
-                    bizId: state.deviceID,
-                    bizName: state.bizProfile.name,
-                    clientName: cName,
-                    clientTel: patientRecord.tel,
-                    cid: uniqueCID,
-                    pts: 0
-                })
+                method: "POST", mode: "no-cors",
+                body: JSON.stringify({ t: "ADD_CLIENT", bizId: state.deviceID, bizName: state.bizProfile.name, clientName: n, clientTel: rec.tel, cid: cid })
             });
 
-            triggerToast("Pass Creato!");
+            triggerToast("Inviato!");
             refreshPatientUI();
-            
-            // Pulizia Form
             document.getElementById('new-client-name').value = "";
             document.getElementById('new-client-tel').value = "";
         }
 
-        /**
-         * RENDERING LISTA UTENTI IN DASHBOARD
-         */
         function refreshPatientUI() {
             const listArea = document.getElementById('main-list-render');
-            if(!listArea) return;
-            
             listArea.innerHTML = "";
             document.getElementById('stats-total').innerText = state.patientDb.length;
-
-            state.patientDb.forEach((entry, i) => {
+            state.patientDb.forEach((p, i) => {
                 const element = document.createElement('div');
                 element.className = 'row-item';
-                const whatsappUrl = buildWhatsAppMessage(entry);
-                element.innerHTML = `
-                    <div class="row-info">
-                        <b>${entry.nome}</b>
-                        <span>${entry.pts} Punti Registrati</span>
-                    </div>
+                element.innerHTML = `<div class="row-info"><b>${p.nome}</b><span>${p.pts} Punti</span></div>
                     <div style="display:flex; gap:10px;">
-                        <a href="${whatsappUrl}" target="_blank" class="tool-btn btn-wa-action">
-                            <i class="fab fa-whatsapp"></i>
-                        </a>
-                        <button class="tool-btn btn-pts-action" onclick="updatePoints(${i})">+1</button>
-                    </div>
-                `;
+                        <a href="${buildWa(p)}" target="_blank" class="tool-btn btn-wa-action"><i class="fab fa-whatsapp"></i></a>
+                        <button class="tool-btn btn-pts-action" onclick="addPt(${i})">+1</button>
+                    </div>`;
                 listArea.appendChild(element);
             });
         }
 
-        /**
-         * INCREMENTO PUNTI FIDELITY
-         */
-        function updatePoints(index) {
-            state.patientDb[index].pts++;
+        function addPt(i) {
+            state.patientDb[i].pts++;
             localStorage.setItem('spich_v18_db', JSON.stringify(state.patientDb));
-            
-            // Sincronizzazione Punti nel Cloud
-            fetch(GOOGLE_ENDPOINT, {
-                method: "POST",
-                mode: "no-cors",
-                body: JSON.stringify({
-                    t: "UPDATE_POINTS",
-                    bizId: state.deviceID,
-                    cid: state.patientDb[index].cid,
-                    pts: state.patientDb[index].pts
-                })
-            });
-            
-            triggerToast("Punto Registrato!");
+            fetch(GOOGLE_ENDPOINT, { method: "POST", mode: "no-cors", body: JSON.stringify({ t: "UPDATE_POINTS", bizId: state.deviceID, cid: state.patientDb[i].cid, pts: state.patientDb[i].pts }) });
+            triggerToast("+1 Punto!");
             refreshPatientUI();
         }
 
-        /**
-         * COSTRUZIONE MESSAGGIO WHATSAPP CON LINK VOUCHER
-         */
-        function buildWhatsAppMessage(patient) {
-            const root = window.location.href.split('?')[0];
-            const voucherParams = `?v=gift&st=${encodeURIComponent(state.bizProfile.name)}&n=${encodeURIComponent(patient.nome)}&cid=${patient.cid}`;
-            const text = `Ciao ${patient.nome}! 🎉 Ecco il tuo Pass Regalo di ${state.bizProfile.name}: ${root + voucherParams}`;
-            return `https://wa.me/${patient.tel}?text=${encodeURIComponent(text)}`;
+        function buildWa(p) {
+            const url = window.location.href.split('?')[0] + `?v=gift&st=${encodeURIComponent(state.bizProfile.name)}&n=${encodeURIComponent(p.nome)}&cid=${p.cid}`;
+            return `https://wa.me/${p.tel}?text=${encodeURIComponent("Ciao " + p.nome + "! Ecco il tuo regalo: " + url)}`;
         }
 
-        /**
-         * INIZIALIZZAZIONE VISTA VOUCHER (LATO CLIENTE)
-         */
-        async function initVoucherMode(params) {
+        async function initVoucherMode(p) {
             navigateTo('voucher');
-            const bizName = params.get('st') || "SPICH.";
-            const userName = params.get('n') || "Cliente";
-            
-            document.getElementById('display-biz-name').innerText = bizName;
-            document.getElementById('display-user-name').innerText = "Ciao, " + userName;
-
-            // Generazione QR Code
-            new QRCode(document.getElementById("qrcode-canvas"), {
-                text: window.location.href,
-                width: 170, height: 170,
-                colorDark: "#003366", colorLight: "#ffffff",
-                correctLevel: QRCode.CorrectLevel.H
-            });
-
-            // Recupero Punti dal Cloud per il voucher
+            document.getElementById('display-biz-name').innerText = p.get('st');
+            document.getElementById('display-user-name').innerText = "Ciao, " + p.get('n');
+            new QRCode(document.getElementById("qrcode-canvas"), { text: window.location.href, width: 160, height: 160 });
             try {
-                const cloudRes = await fetch(`${GOOGLE_ENDPOINT}?getCid=${params.get('cid')}`);
-                const data = await cloudRes.json();
-                const currentPoints = parseInt(data.pts || 0);
-                const dotElements = document.querySelectorAll('.fidelity-point');
-                for (let j = 0; j < currentPoints && j < 5; j++) {
-                    dotElements[j].classList.add('filled');
-                }
-            } catch (error) {
-                console.error("Errore recupero punti cloud.");
-            }
+                const res = await fetch(`${GOOGLE_ENDPOINT}?getCid=${p.get('cid')}`);
+                const data = await res.json();
+                const pts = parseInt(data.pts || 0);
+                const dots = document.querySelectorAll('.fidelity-point');
+                for (let j = 0; j < pts && j < 5; j++) dots[j].classList.add('filled');
+            } catch (e) {}
         }
 
-        /**
-         * CONDIVISIONE VOUCHER AD AMICI (REFERRAL)
-         */
+        function applyTerminology() {
+            const maps = { "Ristorazione": "Ospiti", "Wellness": "Clienti", "Salute": "Pazienti" };
+            document.getElementById('stats-label').innerText = maps[state.bizProfile.sector] || "Utenti";
+        }
+
         function shareVoucherLink() {
-            const currentParams = new URLSearchParams(window.location.search);
-            const biz = currentParams.get('st');
-            const msgToShare = `Ehi! Guarda questo regalo che ho ricevuto da ${biz}! Puoi riceverlo anche tu qui: ${window.location.href}`;
-            window.open(`https://wa.me/?text=${encodeURIComponent(msgToShare)}`);
+            const p = new URLSearchParams(window.location.search);
+            window.open(`https://wa.me/?text=${encodeURIComponent("Guarda che regalo da " + p.get('st') + ": " + window.location.href)}`);
         }
-
     </script>
 </body>
 </html>
