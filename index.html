@@ -3,444 +3,580 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>SPICH. - Business & Referral System</title>
+    <title>SPICH. - Business & Referral Excellence</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     
     <style>
+        /* SISTEMA DI DESIGN SPICH. 
+           Colori: Teal (Blu/Verde) e Oro (Gold)
+        */
         :root { 
-            --primary: #008080; /* Teal Professionale */
-            --gold: #d4af37;    /* Oro Premium */
-            --gold-light: #f4e3b1;
-            --bg-body: #f1f5f9;
-            --bg-card: #ffffff; 
-            --text-dark: #1a202c;
-            --text-muted: #718096;
-            --danger: #e53e3e;
-            --wa-green: #25D366;
-            --radius-lg: 35px;
-            --shadow: 0 15px 35px rgba(0,0,0,0.05);
+            --primary-teal: #008080; 
+            --gold-premium: #d4af37;
+            --gold-soft: #f4e3b1;
+            --bg-canvas: #f8fafc;
+            --white: #ffffff;
+            --text-deep: #1a202c;
+            --text-light: #718096;
+            --danger-red: #e53e3e;
+            --success-green: #25D366;
+            --shadow-premium: 0 15px 35px rgba(0,0,0,0.06);
+            --radius-main: 35px;
         }
         
+        /* Reset e Base */
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; margin: 0; padding: 0; }
         
         body { 
-            background: var(--bg-body); 
+            background: var(--bg-canvas); 
             font-family: 'Montserrat', sans-serif; 
-            color: var(--text-dark); 
+            color: var(--text-deep); 
             min-height: 100vh;
             display: flex;
             justify-content: center;
+            overflow-x: hidden;
         }
         
-        /* Container Principale */
-        .app-shell { 
-            background: var(--bg-card); 
+        /* Struttura Applicazione */
+        .app-container { 
+            background: var(--white); 
             width: 100%; 
-            max-width: 480px; 
+            max-width: 500px; 
             min-height: 100vh; 
             display: flex; 
             flex-direction: column; 
             position: relative;
-            box-shadow: 0 0 60px rgba(0,0,0,0.08); 
+            box-shadow: 0 0 80px rgba(0,0,0,0.05); 
         }
         
-        /* Header con Funzione Reset */
-        .main-header { 
-            padding: 40px 20px; 
+        /* Header con Funzione Reset Integrata */
+        .header-brand { 
+            padding: 45px 20px; 
             text-align: center; 
-            background: white; 
-            border-bottom: 1px solid #edf2f7; 
+            background: var(--white); 
+            border-bottom: 1px solid #f1f5f9; 
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 1000;
         }
-        .main-header:active { transform: scale(0.96); }
+        .header-brand:active { transform: scale(0.95); }
         
-        .logo-text { 
+        .logo-main { 
             font-family: 'Comfortaa', cursive; 
-            font-size: 3.5rem; 
-            color: var(--primary); 
+            font-size: 3.8rem; 
+            color: var(--primary-teal); 
             letter-spacing: -3px;
             font-weight: 700;
         }
-        .logo-text span { color: var(--gold); }
-        .sub-logo { font-size: 0.7rem; font-weight: 800; color: var(--text-muted); letter-spacing: 4px; text-transform: uppercase; margin-top: -8px; }
-        
-        /* Gestione View */
-        .view { display: none; padding: 25px; animation: slideIn 0.5s ease-out forwards; flex: 1; }
-        .view.active { display: flex; flex-direction: column; }
-        @keyframes slideIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
-        
-        /* Card Statistiche */
-        .stat-box { 
-            background: white; padding: 50px 20px; border-radius: var(--radius-lg); 
-            text-align: center; border-bottom: 6px solid var(--gold); 
-            margin-bottom: 30px; box-shadow: var(--shadow); position: relative;
+        .logo-main span { color: var(--gold-premium); }
+        .tagline-brand { 
+            font-size: 0.75rem; 
+            font-weight: 800; 
+            color: var(--text-light); 
+            letter-spacing: 4px; 
+            text-transform: uppercase; 
+            margin-top: -12px; 
         }
-        .stat-box b { font-size: 5rem; color: var(--primary); display: block; line-height: 1; font-weight: 800; }
-        .stat-box span { font-weight: 700; color: var(--text-muted); text-transform: uppercase; font-size: 0.8rem; letter-spacing: 2px; }
+        
+        /* Gestione Transizioni Scene */
+        .view-scene { 
+            display: none; 
+            padding: 30px 25px; 
+            animation: fadeIn 0.6s ease-out forwards; 
+            flex: 1; 
+        }
+        .view-scene.active { display: flex; flex-direction: column; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        
+        /* Dashboard Statistiche */
+        .dashboard-stat { 
+            background: var(--white); 
+            padding: 50px 20px; 
+            border-radius: var(--radius-main); 
+            text-align: center; 
+            border-bottom: 8px solid var(--gold-premium); 
+            margin-bottom: 35px; 
+            box-shadow: var(--shadow-premium); 
+            position: relative;
+            overflow: hidden;
+        }
+        .dashboard-stat::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 6px;
+            background: linear-gradient(90deg, var(--primary-teal), var(--gold-premium));
+        }
+        .dashboard-stat b { font-size: 5.5rem; color: var(--primary-teal); display: block; line-height: 1; font-weight: 800; }
+        .dashboard-stat span { font-weight: 700; color: var(--text-light); text-transform: uppercase; font-size: 0.85rem; letter-spacing: 2px; }
 
-        .status-badge { 
+        .pro-status-badge { 
             position: absolute; top: 15px; right: 20px; font-size: 0.65rem; 
-            font-weight: 900; padding: 8px 16px; border-radius: 12px; 
-            background: #f7fafc; color: var(--text-muted); border: 1px solid #edf2f7;
+            font-weight: 900; padding: 10px 18px; border-radius: 14px; 
+            background: #f1f5f9; color: var(--text-light); border: 1px solid #e2e8f0;
         }
-        .status-badge.pro { background: var(--gold); color: white; border: none; box-shadow: 0 4px 10px rgba(212,175,55,0.3); }
+        .pro-status-badge.active-pro { background: var(--gold-premium); color: var(--white); border: none; box-shadow: 0 5px 15px rgba(212,175,55,0.3); }
 
-        /* Elementi Form */
-        .content-box { background: white; padding: 30px; border-radius: 30px; border: 1px solid #f1f5f9; margin-bottom: 30px; }
-        label { font-size: 0.7rem; font-weight: 800; color: var(--primary); text-transform: uppercase; margin: 18px 0 6px 5px; display: block; }
+        /* Blocchi Contenuto e Form */
+        .ui-card { 
+            background: var(--white); 
+            padding: 30px; 
+            border-radius: 30px; 
+            border: 1px solid #f1f5f9; 
+            margin-bottom: 35px; 
+            box-shadow: 0 5px 15px rgba(0,0,0,0.02);
+        }
+        label { 
+            font-size: 0.72rem; 
+            font-weight: 800; 
+            color: var(--primary-teal); 
+            text-transform: uppercase; 
+            margin: 20px 0 8px 5px; 
+            display: block; 
+            letter-spacing: 1px;
+        }
         input, select { 
-            width: 100%; padding: 20px; border-radius: 18px; border: 2px solid #f1f5f9; 
-            font-family: inherit; font-size: 1rem; margin-bottom: 4px; outline: none; transition: 0.3s;
+            width: 100%; 
+            padding: 22px; 
+            border-radius: 22px; 
+            border: 2px solid #f1f5f9; 
+            font-family: 'Montserrat', sans-serif; 
+            font-size: 1.05rem; 
+            margin-bottom: 6px; 
+            outline: none; 
+            transition: all 0.3s ease;
             background: #fafafa;
         }
-        input:focus { border-color: var(--gold); background: white; }
+        input:focus { border-color: var(--gold-premium); background: var(--white); box-shadow: 0 0 0 4px rgba(212,175,55,0.05); }
         
-        .btn-action { 
-            background: var(--primary); color: white; border: none; padding: 22px; 
-            border-radius: 20px; font-weight: 800; width: 100%; cursor: pointer; font-size: 1.2rem;
-            box-shadow: 0 10px 20px rgba(0,128,128,0.1); transition: 0.3s;
-            margin-top: 10px;
+        /* Bottoni */
+        .btn-premium { 
+            background: var(--primary-teal); 
+            color: var(--white); 
+            border: none; 
+            padding: 24px; 
+            border-radius: 24px; 
+            font-weight: 800; 
+            width: 100%; 
+            cursor: pointer; 
+            font-size: 1.25rem;
+            box-shadow: 0 12px 25px rgba(0,128,128,0.15); 
+            transition: all 0.3s ease;
+            margin-top: 15px;
+            letter-spacing: 1px;
         }
-        .btn-action:active { transform: translateY(2px); }
+        .btn-premium:active { transform: translateY(3px); box-shadow: none; }
 
-        /* Lista Patient Card */
-        .patient-card { 
-            background: white; padding: 22px; border-radius: 25px; margin-bottom: 18px; 
-            display: flex; justify-content: space-between; align-items: center; 
-            border: 1px solid #f1f5f9; box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+        /* Lista Pazienti Custom */
+        .patient-row { 
+            background: var(--white); 
+            padding: 25px; 
+            border-radius: 28px; 
+            margin-bottom: 20px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            border: 1px solid #f1f5f9; 
+            box-shadow: var(--shadow-premium);
         }
-        .patient-card b { font-size: 1.2rem; color: var(--primary); display: block; }
-        .patient-card small { font-weight: 700; color: var(--text-muted); text-transform: uppercase; font-size: 0.7rem; }
+        .patient-row .info b { font-size: 1.3rem; color: var(--primary-teal); display: block; margin-bottom: 2px; }
+        .patient-row .info small { font-weight: 700; color: var(--text-light); text-transform: uppercase; font-size: 0.7rem; letter-spacing: 1px; }
         
-        .wa-circle { background: var(--wa-green); color: white; width: 55px; height: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 1.7rem; box-shadow: 0 6px 12px rgba(37,211,102,0.2); }
-        .add-point-btn { background: var(--gold); border: none; padding: 12px 20px; border-radius: 15px; color: white; font-weight: 900; cursor: pointer; }
+        .action-circle { 
+            background: var(--success-green); 
+            color: var(--white); 
+            width: 60px; 
+            height: 60px; 
+            border-radius: 50%; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            text-decoration: none; 
+            font-size: 1.8rem; 
+            box-shadow: 0 8px 20px rgba(37,211,102,0.25); 
+        }
+        .btn-point { 
+            background: var(--gold-premium); 
+            border: none; 
+            padding: 14px 22px; 
+            border-radius: 18px; 
+            color: var(--white); 
+            font-weight: 900; 
+            cursor: pointer; 
+            box-shadow: 0 6px 15px rgba(212,175,55,0.2);
+            transition: 0.2s;
+        }
+        .btn-point:active { transform: scale(0.9); }
 
-        /* Pallini Sincronizzati */
-        .loyalty-dots { display: flex; justify-content: center; gap: 15px; margin: 35px 0; }
-        .dot-item { 
-            width: 24px; height: 24px; border-radius: 50%; 
-            border: 3px solid var(--gold); background: transparent; 
-            transition: all 0.5s ease;
+        /* Pallini Fedeltà Sincronizzati */
+        .loyalty-container { display: flex; justify-content: center; gap: 18px; margin: 45px 0; }
+        .loyalty-dot { 
+            width: 26px; height: 26px; border-radius: 50%; 
+            border: 3.5px solid var(--gold-premium); background: transparent; 
+            transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             position: relative;
         }
-        .dot-item.active { background: var(--gold); transform: scale(1.2); box-shadow: 0 0 15px var(--gold); }
-        .dot-item.active::after { content: '✓'; color: white; font-size: 12px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-weight: 900; }
-
-        /* Sezione Voucher e Regalo */
-        .gift-header-icon { font-size: 3.5rem; color: var(--gold); margin-bottom: 15px; }
-        
-        .voucher-wrap {
-            background: white; border: 6px dashed var(--gold-light); padding: 45px 25px;
-            border-radius: 40px; text-align: center; position: relative;
-            box-shadow: var(--shadow);
+        .loyalty-dot.filled { background: var(--gold-premium); transform: scale(1.25); box-shadow: 0 0 20px var(--gold-premium); }
+        .loyalty-dot.filled::after { 
+            content: '✓'; color: var(--white); font-size: 13px; 
+            position: absolute; top: 50%; left: 50%; 
+            transform: translate(-50%, -50%); font-weight: 900; 
         }
+
+        /* Grafica Regalo e Voucher */
+        .gift-icon-hero { font-size: 4.5rem; color: var(--gold-premium); margin-bottom: 20px; filter: drop-shadow(0 8px 15px rgba(0,0,0,0.08)); }
         
-        .win-message {
-            display: none; margin-top: 25px; padding: 25px; background: #fffaf0; 
-            border: 2px solid var(--gold); border-radius: 25px; font-weight: 800; color: var(--primary);
+        .voucher-card-friend {
+            background: var(--white); border: 8px dashed var(--gold-soft); padding: 55px 35px;
+            border-radius: 45px; text-align: center; position: relative;
+            box-shadow: var(--shadow-premium);
+        }
+        .voucher-card-friend::before, .voucher-card-friend::after {
+            content: ''; position: absolute; width: 45px; height: 45px; 
+            background: var(--bg-canvas); border-radius: 50%; top: 50%; transform: translateY(-50%);
+        }
+        .voucher-card-friend::before { left: -30px; }
+        .voucher-card-friend::after { right: -30px; }
+
+        .reward-banner {
+            display: none; margin-top: 35px; padding: 30px; 
+            background: linear-gradient(135deg, #fffcf5 0%, #fff4d6 100%); 
+            border: 2px solid var(--gold-premium); border-radius: 30px; 
+            font-weight: 800; color: var(--primary-teal);
             text-align: center; animation: pulse 2s infinite;
         }
         @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.03); } 100% { transform: scale(1); } }
 
-        /* Limitazione PRO */
-        .pro-lock-zone {
-            display: none; padding: 25px; background: #fff5f5; border-radius: 25px; 
-            border: 1px dashed var(--danger); margin-bottom: 20px; text-align: center;
+        /* Sistema Lock PRO */
+        .lock-notice-box {
+            display: none; padding: 30px; background: #fff5f5; border-radius: 28px; 
+            border: 2px solid var(--danger-red); margin-bottom: 25px; text-align: center;
         }
 
-        .app-footer { font-size: 0.7rem; color: #a0aec0; text-align: center; padding: 40px; margin-top: auto; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+        .app-footer { 
+            font-size: 0.75rem; color: #a0aec0; text-align: center; 
+            padding: 50px; margin-top: auto; font-weight: 600; 
+            text-transform: uppercase; letter-spacing: 2px; 
+        }
     </style>
 </head>
 <body>
 
-<div class="app-shell">
-    <header class="main-header" onclick="triggerReset()">
-        <h1 class="logo-text">SPICH<span>.</span></h1>
-        <div class="sub-logo">Premium Business Solution</div>
+<div class="app-container">
+    
+    <header class="header-brand" id="brand-logo" onclick="handleSystemReset()">
+        <h1 class="logo-main">SPICH<span>.</span></h1>
+        <p class="tagline-brand">Excellence Business Hub</p>
     </header>
 
-    <main id="view-setup" class="view">
-        <div style="text-align:center; margin-bottom:30px;">
-            <i class="fas fa-rocket gift-header-icon"></i>
-            <h2 style="font-weight:800; color:var(--primary);">Configurazione Studio</h2>
-            <p style="color:var(--text-muted); font-size: 0.9rem;">Crea il tuo ecosistema di referral in pochi secondi.</p>
+    <main id="scene-setup" class="view-scene">
+        <div style="text-align:center; margin-bottom:35px;">
+            <i class="fas fa-gem gift-icon-hero"></i>
+            <h2 style="font-weight:800; color:var(--primary-teal); font-size: 1.8rem;">Benvenuto in SPICH.</h2>
+            <p style="color:var(--text-light); font-size: 0.95rem; margin-top: 5px;">Configura il tuo studio professionale in 30 secondi.</p>
         </div>
-        <div class="content-box">
-            <label>Nome dello Studio / Attività</label>
-            <input type="text" id="setup-name" placeholder="Esempio: Studio Dentistico Rossi">
-            <label>WhatsApp Business (es. 393471234567)</label>
-            <input type="tel" id="setup-whatsapp" placeholder="39...">
-            <label>Settore Professionale</label>
-            <select id="setup-sector">
-                <option value="Odontoiatria">Odontoiatria / Medicina</option>
-                <option value="Estetica">Estetica / Benessere</option>
-                <option value="Legale">Consulenza / Legale</option>
+        <div class="ui-card">
+            <label>Nome Attività / Studio Professionale</label>
+            <input type="text" id="setup-biz-name" placeholder="Es: Dental Studio Rossi">
+            
+            <label>WhatsApp Business (es: 393471234567)</label>
+            <input type="tel" id="setup-biz-wa" placeholder="Codice nazione + numero">
+            
+            <label>Settore di Riferimento</label>
+            <select id="setup-biz-sector">
+                <option value="Odontoiatrico">Settore Odontoiatrico</option>
+                <option value="Medicina">Medicina Specialistica</option>
+                <option value="Estetica">Estetica & Wellness</option>
+                <option value="Consulenza">Consulenza Professionale</option>
                 <option value="Altro">Altro Settore</option>
             </select>
-            <button class="btn-action" onclick="saveInitialSetup()">ATTIVA SISTEMA SPICH.</button>
+            
+            <button class="btn-premium" onclick="completeInitialSetup()">ATTIVA ORA IL SISTEMA</button>
         </div>
     </main>
 
-    <main id="view-dash" class="view">
-        <div class="stat-box">
-            <div id="badge-pro-status" class="status-badge">FREE ACCOUNT</div>
-            <b id="total-patients">0</b>
-            <span id="label-users">Pazienti nel Sistema</span>
+    <main id="scene-dashboard" class="view-scene">
+        <div class="dashboard-stat">
+            <div id="pro-badge" class="pro-status-badge">FREE VERSION</div>
+            <b id="stats-count">0</b>
+            <span id="label-stats">Pazienti / Clienti Attivi</span>
         </div>
         
-        <div class="content-box">
-            <h4 style="margin-bottom:15px; font-weight:800; color:var(--primary);">Registra Nuovo Paziente</h4>
-            <label>Nome e Cognome Paziente</label>
-            <input type="text" id="reg-name" placeholder="Mario Rossi">
-            <label>Telefono WhatsApp (39...)</label>
-            <input type="tel" id="reg-tel" placeholder="39...">
+        <div class="ui-card">
+            <h4 style="margin-bottom:20px; font-weight:800; color:var(--primary-teal); border-left: 4px solid var(--gold-premium); padding-left: 15px;">Registra Nuovo Referral</h4>
             
-            <div id="reward-selector-zone">
+            <label>Nome e Cognome Paziente</label>
+            <input type="text" id="new-p-name" placeholder="Inserisci nome completo">
+            
+            <label>Telefono WhatsApp (39...)</label>
+            <input type="tel" id="new-p-tel" placeholder="393471234567">
+            
+            <div id="reward-configuration-ui">
                 <label>Sconto Amico (Primo Accesso)</label>
-                <select id="reg-discount-free">
-                    <option value="10%">Sconto del 10%</option>
-                    <option value="20%">Sconto del 20%</option>
-                    <option value="50%">Sconto del 50%</option>
-                </select>
+                <div id="container-discount-amico">
+                    <select id="select-discount-amico">
+                        <option value="Sconto del 10%">Sconto del 10%</option>
+                        <option value="Sconto del 20%">Sconto del 20%</option>
+                        <option value="Sconto del 50%">Sconto del 50%</option>
+                    </select>
+                </div>
                 
-                <label>Premio Finale (al 5° punto)</label>
-                <div id="reward-final-container">
-                    <input type="text" id="reg-final-reward" value="50% di sconto sul trattamento" readonly style="background:#f1f5f9; color:#718096;">
+                <label>Premio Finale (5° Punto)</label>
+                <div id="container-reward-final">
+                    <input type="text" id="input-reward-final" value="50% di sconto sul trattamento" readonly style="background:#f1f5f9; color:#94a3b8;">
                 </div>
             </div>
 
-            <div id="lock-pro-banner" class="pro-lock-zone">
-                <i class="fas fa-crown" style="font-size:1.2rem; color:var(--gold); margin-bottom:8px;"></i><br>
-                <b style="color:var(--danger); font-size:0.8rem;">LIMITE 10 CONTATTI RAGGIUNTO</b><br>
-                <p style="font-size:0.75rem; margin:8px 0;">Passa a PRO per contatti illimitati e premi personalizzati.</p>
-                <button onclick="requestProActivation()" style="background:var(--primary); color:white; border:none; padding:8px 15px; border-radius:10px; font-weight:800; cursor:pointer; font-size:0.7rem;">PASSA A PRO VIA EMAIL</button>
+            <div id="lock-pro-notice" class="lock-notice-box">
+                <i class="fas fa-crown" style="font-size:1.8rem; color:var(--gold-premium); margin-bottom:12px;"></i><br>
+                <b style="color:var(--danger-red);">LIMITE DI 10 CONTATTI RAGGIUNTO</b><br>
+                <p style="font-size:0.8rem; margin:10px 0; line-height: 1.4;">La versione Free permette di gestire fino a 10 contatti. Per sbloccare il sistema illimitato e i premi personalizzati, passa a PRO.</p>
+                <button onclick="requestProUpgrade()" style="background:var(--primary-teal); color:white; border:none; padding:12px 25px; border-radius:15px; font-weight:800; cursor:pointer; font-size:0.8rem; margin-top: 10px;">RICHIEDI UPGRADE ORA</button>
             </div>
             
-            <button id="btn-submit-patient" class="btn-action" onclick="registerNewPatient()">GENERA E INVIA PASS</button>
+            <button id="btn-add-p" class="btn-premium" onclick="createNewReferral()">GENERA PASS DIGITALE</button>
         </div>
         
-        <h3 style="color:var(--primary); margin-bottom:15px; font-weight:800; padding-left:5px;">Anagrafica Pazienti</h3>
-        <div id="patients-list-render"></div>
+        <h3 style="color:var(--primary-teal); margin-bottom:20px; font-weight:800; display: flex; align-items: center; gap: 10px;">
+            <i class="fas fa-users" style="color:var(--gold-premium);"></i> Elenco Anagrafico
+        </h3>
+        <div id="render-patients-list">
+            </div>
     </main>
 
-    <main id="view-patient-pass" class="view">
+    <main id="scene-patient-pass" class="view-scene">
         <div style="text-align:center;">
-            <i class="fas fa-heart gift-header-icon" style="font-size:2.5rem;"></i>
-            <h2 id="pass-studio-name" style="color:var(--primary); font-family:'Comfortaa'; margin-bottom:5px;"></h2>
-            <p id="pass-welcome-msg" style="font-weight:700; color:var(--text-muted); margin-bottom:5px;"></p>
+            <i class="fas fa-gift gift-icon-hero" style="font-size:3.5rem;"></i>
+            <h2 id="pass-biz-name" style="color:var(--primary-teal); font-family:'Comfortaa'; margin-bottom:10px;"></h2>
+            <p id="pass-welcome-txt" style="font-weight:700; color:var(--text-light); margin-bottom:10px;"></p>
             
-            <div class="loyalty-dots" id="loyalty-dots-container">
-                <div class="dot-item"></div><div class="dot-item"></div><div class="dot-item"></div><div class="dot-item"></div><div class="dot-item"></div>
+            <div class="loyalty-container" id="dots-grid">
+                <div class="loyalty-dot"></div><div class="loyalty-dot"></div><div class="loyalty-dot"></div><div class="loyalty-dot"></div><div class="loyalty-dot"></div>
             </div>
 
-            <div style="background:white; padding:20px; border-radius:30px; display:inline-block; margin-bottom:30px; box-shadow: var(--shadow);">
-                <div id="qrcode-box"></div>
-                <p style="font-size:0.65rem; font-weight:900; margin-top:12px; color:var(--primary); letter-spacing:1px;">ID PAZIENTE: <span id="display-cid"></span></p>
+            <div style="background:var(--white); padding:25px; border-radius:35px; display:inline-block; margin-bottom:35px; box-shadow: var(--shadow-premium); border: 1px solid #f1f5f9;">
+                <div id="qrcode-target"></div>
+                <p style="font-size:0.65rem; font-weight:900; margin-top:15px; color:var(--primary-teal); letter-spacing:2px;">ID UNICO: <span id="label-cid"></span></p>
             </div>
             
-            <button class="btn-action" style="background:var(--gold); box-shadow: 0 10px 20px rgba(212,175,55,0.2);" onclick="shareReferralToFriend()">
+            <button class="btn-premium" style="background:var(--gold-premium); box-shadow: 0 10px 25px rgba(212,175,55,0.25);" onclick="shareToFriend()">
                 <i class="fab fa-whatsapp"></i> REGALA LO SCONTO A UN AMICO
             </button>
             
-            <div id="win-banner-success" class="win-message">
-                <i class="fas fa-star" style="font-size:1.8rem; margin-bottom:10px; display:block; color:var(--gold);"></i>
-                OBIETTIVO RAGGIUNTO!<br>Hai completato la tua scheda punti.<br>Mostra questo schermo per riscattare il premio.
+            <div id="win-message-final" class="reward-banner">
+                <i class="fas fa-trophy" style="font-size:2.2rem; margin-bottom:15px; display:block; color:var(--gold-premium);"></i>
+                COMPLIMENTI!<br>Hai completato la tua scheda punti.<br>Mostra questo schermo in reception per il tuo premio.
             </div>
         </div>
     </main>
 
-    <main id="view-friend-voucher" class="view">
-        <div class="voucher-wrap">
-            <div class="logo-text" style="font-size:2.5rem;">SPICH<span>.</span></div>
-            <h2 style="color:var(--primary); font-weight:800; margin-top:15px;">UN REGALO PER TE</h2>
-            <p id="friend-msg-body" style="margin:20px 0; font-weight:600; color:var(--text-muted); line-height:1.5;"></p>
+    <main id="scene-friend-voucher" class="view-scene">
+        <div class="voucher-card-friend">
+            <div class="logo-main" style="font-size:2.8rem;">SPICH<span>.</span></div>
+            <h2 style="color:var(--primary-teal); font-weight:800; margin-top:20px; letter-spacing: -1px;">VOUCHER REGALO</h2>
+            <p id="friend-intro-msg" style="margin:25px 0; font-weight:600; color:var(--text-light); line-height:1.6;"></p>
             
-            <div style="background:#f8fafc; padding:25px; border-radius:25px; border:2px solid var(--gold-light); margin-bottom:25px;">
-                <span style="font-size:0.7rem; font-weight:900; color:var(--gold); text-transform:uppercase; letter-spacing:2px;">Il tuo bonus esclusivo:</span>
-                <h2 id="friend-reward-value" style="color:var(--primary); font-size:2rem; margin-top:5px;"></h2>
+            <div style="background:#f8fafc; padding:30px; border-radius:30px; border:2px solid var(--gold-soft); margin-bottom:35px;">
+                <span style="font-size:0.75rem; font-weight:900; color:var(--gold-premium); text-transform:uppercase; letter-spacing:2px;">Il tuo Bonus di Benvenuto:</span>
+                <h2 id="friend-reward-val" style="color:var(--primary-teal); font-size:2.2rem; margin-top:10px;"></h2>
             </div>
             
-            <button class="btn-action" onclick="bookWithVoucher()">
-                <i class="fab fa-whatsapp"></i> PRENOTA IL TUO POSTO ORA
+            <button class="btn-premium" onclick="bookAppointmentNow()">
+                <i class="fab fa-whatsapp"></i> PRENOTA IL TUO REGALO ORA
             </button>
         </div>
-        <p style="text-align:center; margin-top:30px; font-size:0.7rem; color:var(--text-muted); font-weight:700;">POWERED BY SPICH. SYSTEM 2026</p>
+        <p style="text-align:center; margin-top:40px; font-size:0.75rem; color:var(--text-light); font-weight:700;">POWERED BY SPICH. DIGITAL SOLUTIONS</p>
     </main>
 
     <footer class="app-footer">
-        DEVICE SECURITY ID: <span id="device-id-label">...</span><br>
-        &copy; 2026 SPICH. DIGITAL EXCELLENCE
+        SECURITY DEVICE ID: <span id="label-dev-id">...</span><br>
+        &copy; 2026 SPICH. ALL RIGHTS RESERVED
     </footer>
 </div>
 
 <script>
-    /* SPICH. CORE LOGIC - FULL VERSION
-       URL Script Google aggiornato dall'utente
+    /* SPICH. CORE ENGINE V.4
+       Gestione Sincronizzazione Real-Time e Logica Business
     */
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzoH_Qc4qharAQENILKqXeSeMWKlUkAE5HqQcQHqQ84d5_mTE69bZiDJ2TVPFLbOxeMIw/exec";
     
-    // Identificazione Dispositivo
-    let deviceId = localStorage.getItem('spich_dev_id') || ('SID-' + Math.random().toString(36).substr(2, 8).toUpperCase());
-    localStorage.setItem('spich_dev_id', deviceId);
+    // Configurazione Endpoint Google Script fornito dall'utente
+    const CLOUD_API_URL = "https://script.google.com/macros/s/AKfycbwmwR9NJN9EzUPMkqGqHJfxk4_U16eenHS0DrVR8zE7BfB0aqsnH0Z_V46eZ6JiVJVnow/exec";
+    
+    // Persistenza ID Dispositivo
+    let spichDeviceId = localStorage.getItem('spich_did') || ('SP-' + Math.random().toString(36).substr(2, 9).toUpperCase());
+    localStorage.setItem('spich_did', spichDeviceId);
 
-    // Dati Applicazione
-    let appConfig = JSON.parse(localStorage.getItem('spich_app_cfg') || 'null');
-    let patientsDb = JSON.parse(localStorage.getItem('spich_app_db') || '[]');
-    let isProUser = false;
+    // Memoria Locale Applicativa
+    let currentConfig = JSON.parse(localStorage.getItem('spich_cfg') || 'null');
+    let localDatabase = JSON.parse(localStorage.getItem('spich_db') || '[]');
+    let isProEnabled = false;
 
     window.onload = async function() {
-        document.getElementById('device-id-label').innerText = deviceId;
-        const urlParams = new URLSearchParams(window.location.search);
+        // Inizializzazione UI
+        document.getElementById('label-dev-id').innerText = spichDeviceId;
+        const queryParams = new URLSearchParams(window.location.search);
 
-        // Controllo Routing URL
-        if (urlParams.get('v') === 'voucher') {
-            renderFriendVoucher(urlParams);
-        } else if (urlParams.get('v') === 'gift') {
-            renderPatientPass(urlParams);
-        } else if (!appConfig) {
-            activateView('setup');
+        // Routing Dinamico in base all'URL
+        if (queryParams.get('v') === 'voucher') {
+            setupFriendVoucher(queryParams);
+        } else if (queryParams.get('v') === 'gift') {
+            setupPatientPass(queryParams);
+        } else if (!currentConfig) {
+            navigateTo('setup');
         } else {
-            activateView('dash');
-            await checkProStatusCloud();
-            updateUIAfterProCheck();
-            renderPatientsList();
+            navigateTo('dashboard');
+            await verifyProStatus();
+            refreshProUI();
+            renderPatientsUI();
         }
     };
 
-    function activateView(viewId) {
-        document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-        document.getElementById('view-' + viewId).classList.add('active');
+    function navigateTo(id) {
+        document.querySelectorAll('.view-scene').forEach(v => v.classList.remove('active'));
+        document.getElementById('scene-' + id).classList.add('active');
         window.scrollTo(0,0);
     }
 
-    /* --- GESTIONE ESERCENTE --- */
+    /* --- LOGICA LATO ESERCENTE --- */
 
-    function saveInitialSetup() {
-        const name = document.getElementById('setup-name').value.trim();
-        const wa = document.getElementById('setup-whatsapp').value.trim();
-        const sector = document.getElementById('setup-sector').value;
+    function completeInitialSetup() {
+        const nome = document.getElementById('setup-biz-name').value.trim();
+        const wa = document.getElementById('setup-biz-wa').value.trim();
+        const settore = document.getElementById('setup-biz-sector').value;
         
-        if(!name || !wa) return alert("Inserisci i dati dello studio per procedere.");
+        if(!nome || !wa) return alert("Per favore, inserisci nome dello studio e numero WhatsApp.");
         
-        appConfig = { name, wa, sector };
-        localStorage.setItem('spich_app_cfg', JSON.stringify(appConfig));
+        currentConfig = { nome, wa, settore };
+        localStorage.setItem('spich_cfg', JSON.stringify(currentConfig));
         
-        // Registrazione su Sheets
-        fetch(SCRIPT_URL, { 
+        // Registrazione Silenziosa su Google Sheets (Cartella Esercenti)
+        fetch(CLOUD_API_URL, { 
             method: "POST", 
             mode: "no-cors", 
-            body: JSON.stringify({t:"REG_BIZ", id:deviceId, nome:name, settore:sector}) 
+            body: JSON.stringify({t:"REG_BIZ", id:spichDeviceId, nome:nome, settore:settore}) 
         });
         
         location.reload();
     }
 
-    async function checkProStatusCloud() {
+    async function verifyProStatus() {
         try {
-            const res = await fetch(`${SCRIPT_URL}?checkPro=${deviceId}`);
+            const res = await fetch(`${CLOUD_API_URL}?checkPro=${spichDeviceId}`);
             const data = await res.json();
-            if(data.isPro === "SI") isProUser = true;
-        } catch(e) { console.warn("Cloud Check Error"); }
+            if(data.isPro === "SI") isProEnabled = true;
+        } catch(e) { console.log("Errore connessione Cloud Status."); }
     }
 
-    function updateUIAfterProCheck() {
-        const badge = document.getElementById('badge-pro-status');
-        const finalRewardContainer = document.getElementById('reward-final-container');
-        
-        if(isProUser) {
+    function refreshProUI() {
+        const badge = document.getElementById('pro-badge');
+        const containerAmico = document.getElementById('container-discount-amico');
+        const containerFinal = document.getElementById('container-reward-final');
+        const lockBanner = document.getElementById('lock-pro-notice');
+        const btnSubmit = document.getElementById('btn-add-p');
+
+        if(isProEnabled) {
             badge.innerText = "PRO ACCOUNT";
-            badge.classList.add('pro');
-            document.getElementById('lock-pro-banner').style.display = "none";
-            document.getElementById('btn-submit-patient').style.display = "block";
+            badge.classList.add('active-pro');
+            lockBanner.style.display = "none";
+            btnSubmit.style.display = "block";
             
-            // Abilita input libero per premio finale
-            finalRewardContainer.innerHTML = `<input type="text" id="reg-final-reward" placeholder="Esempio: Pulizia Denti Gratis">`;
+            // Sblocca input libero per PRO
+            containerAmico.innerHTML = `<input type="text" id="select-discount-amico" placeholder="Es: Sconto 30% o Kit Omaggio">`;
+            containerFinal.innerHTML = `<input type="text" id="input-reward-final" placeholder="Es: Pulizia Denti o Trattamento Laser">`;
         } else {
-            // Se Free, limita i primi 10 contatti
-            if(patientsDb.length >= 10) {
-                document.getElementById('lock-pro-banner').style.display = "block";
-                document.getElementById('btn-submit-patient').style.display = "none";
+            // Controllo Limite Free
+            if(localDatabase.length >= 10) {
+                lockBanner.style.display = "block";
+                btnSubmit.style.display = "none";
             }
         }
     }
 
-    function renderPatientsList() {
-        const listContainer = document.getElementById('patients-list-render');
+    function renderPatientsUI() {
+        const listContainer = document.getElementById('render-patients-list');
         listContainer.innerHTML = "";
         
-        patientsDb.forEach((p, index) => {
+        localDatabase.forEach((p, idx) => {
             const card = document.createElement('div');
-            card.className = 'patient-card';
+            card.className = 'patient-row';
             card.innerHTML = `
-                <div class="patient-info">
+                <div class="info">
                     <b>${p.nome}</b>
-                    <small>${p.punti} Punti / Premio: ${p.premioFinale}</small>
+                    <small>${p.punti} Punti Accumulati</small>
                 </div>
-                <div style="display:flex; gap:10px;">
-                    <a class="wa-circle" href="${generateWaLink(p)}" target="_blank"><i class="fab fa-whatsapp"></i></a>
-                    <button class="add-point-btn" onclick="addLoyaltyPoint(${index})">+1</button>
+                <div style="display:flex; gap:12px;">
+                    <a class="action-circle" href="${generateInviteLink(p)}" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                    <button class="btn-point" onclick="incrementPoint(${idx})">+1</button>
                 </div>
             `;
             listContainer.appendChild(card);
         });
 
-        document.getElementById('total-patients').innerText = patientsDb.length;
+        document.getElementById('stats-count').innerText = localDatabase.length;
     }
 
-    async function registerNewPatient() {
-        const name = document.getElementById('reg-name').value.trim();
-        const tel = document.getElementById('reg-tel').value.trim();
-        const discount = document.getElementById('reg-discount-free').value;
-        const finalReward = document.getElementById('reg-final-reward').value.trim();
+    async function createNewReferral() {
+        const pName = document.getElementById('new-p-name').value.trim();
+        const pTel = document.getElementById('new-p-tel').value.trim();
+        const pAmicoSconto = document.getElementById('select-discount-amico').value;
+        const pFinalReward = document.getElementById('input-reward-final').value.trim();
         
-        if(!name || !tel || !finalReward) return alert("Compila tutti i campi del paziente.");
+        if(!pName || !pTel || !pFinalReward) return alert("Dati mancanti. Assicurati di compilare tutti i campi.");
 
-        const cid = 'P-' + Date.now().toString(36).toUpperCase();
-        const newEntry = { cid, nome: name, tel: tel, scontoAmico: discount, premioFinale: finalReward, punti: 0 };
+        const cid = 'REF-' + Date.now().toString(36).toUpperCase();
+        const newRef = { 
+            cid, 
+            nome: pName, 
+            tel: pTel, 
+            scontoAmico: pAmicoSconto, 
+            premioFinale: pFinalReward, 
+            punti: 0 
+        };
         
-        patientsDb.push(newEntry);
-        localStorage.setItem('spich_app_db', JSON.stringify(patientsDb));
+        localDatabase.push(newRef);
+        localStorage.setItem('spich_db', JSON.stringify(localDatabase));
         
-        // Log Cloud
-        fetch(SCRIPT_URL, { 
+        // Log nel Foglio Google (Cartella Log Referral)
+        fetch(CLOUD_API_URL, { 
             method: "POST", 
             mode: "no-cors", 
             body: JSON.stringify({
                 t:"ADD_CLIENT", 
-                bizId:deviceId, 
-                bizName:appConfig.name, 
-                clientName:name, 
-                clientTel:tel, 
-                premio:finalReward, 
+                bizId:spichDeviceId, 
+                bizName:currentConfig.nome, 
+                clientName:pName, 
+                clientTel:pTel, 
+                premio:pFinalReward, 
                 cid: cid, 
                 pts: 0
             }) 
         });
 
-        renderPatientsList();
-        updateUIAfterProCheck();
-        document.getElementById('reg-name').value = "";
-        document.getElementById('reg-tel').value = "";
+        renderPatientsUI();
+        refreshProUI();
+        
+        // Reset Input
+        document.getElementById('new-p-name').value = "";
+        document.getElementById('new-p-tel').value = "";
     }
 
-    async function addLoyaltyPoint(idx) {
-        patientsDb[idx].punti++;
-        localStorage.setItem('spich_app_db', JSON.stringify(patientsDb));
+    async function incrementPoint(idx) {
+        localDatabase[idx].punti++;
+        localStorage.setItem('spich_db', JSON.stringify(localDatabase));
         
-        const p = patientsDb[idx];
+        const p = localDatabase[idx];
         
-        // Sincronizzazione in tempo reale per i pallini
-        await fetch(SCRIPT_URL, { 
+        // Sincronizzazione Punti Real-Time su Google Sheets
+        await fetch(CLOUD_API_URL, { 
             method: "POST", 
             mode: "no-cors", 
             body: JSON.stringify({
                 t:"UPDATE_POINTS", 
-                bizId:deviceId, 
-                bizName:appConfig.name, 
+                bizId:spichDeviceId, 
+                bizName:currentConfig.nome, 
                 cid: p.cid, 
                 clientName: p.nome, 
                 pts: p.punti, 
@@ -448,80 +584,81 @@
             }) 
         });
         
-        renderPatientsList();
-        alert("Punto assegnato con successo! Il paziente vedrà l'aggiornamento sul suo link.");
+        renderPatientsUI();
+        alert("Punto assegnato! Il paziente vedrà l'aggiornamento in tempo reale sul suo link.");
     }
 
-    function generateWaLink(p) {
+    function generateInviteLink(p) {
         const baseUrl = window.location.href.split('?')[0];
-        const passLink = `${baseUrl}?v=gift&st=${encodeURIComponent(appConfig.name)}&wa=${appConfig.wa}&cid=${p.cid}&pr=${encodeURIComponent(p.premioFinale)}&n=${encodeURIComponent(p.nome)}&sc=${p.scontoAmico}`;
-        const text = `Ciao ${p.nome}! Benvenuto nello studio ${appConfig.name}. Ecco il tuo Pass Fedeltà digitale: ${passLink}`;
+        const fullLink = `${baseUrl}?v=gift&st=${encodeURIComponent(currentConfig.nome)}&wa=${currentConfig.wa}&cid=${p.cid}&pr=${encodeURIComponent(p.premioFinale)}&n=${encodeURIComponent(p.nome)}&sc=${encodeURIComponent(p.scontoAmico)}`;
+        const text = `Ciao ${p.nome}! Grazie per aver scelto ${currentConfig.nome}. Ecco il tuo Pass Fedeltà digitale per accumulare premi: ${fullLink}`;
         return `https://wa.me/${p.tel}?text=${encodeURIComponent(text)}`;
     }
 
-    /* --- LATO PAZIENTE (REALE TIME SYNC) --- */
+    /* --- LOGICA LATO PAZIENTE (SYCHRONIZED) --- */
 
-    async function renderPatientPass(params) {
-        activateView('patient-pass');
-        document.getElementById('pass-studio-name').innerText = params.get('st');
-        document.getElementById('pass-welcome-msg').innerText = "Benvenuto, " + params.get('n');
-        document.getElementById('display-cid').innerText = params.get('cid');
+    async function setupPatientPass(params) {
+        navigateTo('patient-pass');
+        document.getElementById('pass-biz-name').innerText = params.get('st');
+        document.getElementById('pass-welcome-txt').innerText = "Ciao, " + params.get('n') + "!";
+        document.getElementById('label-cid').innerText = params.get('cid');
         
-        // QR Code
-        new QRCode(document.getElementById("qrcode-box"), { text: window.location.href, width: 160, height: 160, colorDark: "#008080" });
+        // Creazione QR Code del Link Attuale
+        new QRCode(document.getElementById("qrcode-target"), { text: window.location.href, width: 180, height: 180, colorDark: "#008080" });
         
-        // Sincronizzazione Punti dal Foglio Google
+        // Sincronizzazione Real-Time dei Punti dal Cloud
         try {
-            const response = await fetch(`${SCRIPT_URL}?getCid=${params.get('cid')}`);
+            const response = await fetch(`${CLOUD_API_URL}?getCid=${params.get('cid')}`);
             const data = await response.json();
-            const currentPoints = parseInt(data.pts || 0);
+            const realTimePoints = parseInt(data.pts || 0);
             
-            const dots = document.querySelectorAll('.dot-item');
-            for(let i=0; i<currentPoints && i<5; i++) {
-                dots[i].classList.add('active');
+            const dots = document.querySelectorAll('.loyalty-dot');
+            for(let i=0; i<realTimePoints && i<5; i++) {
+                dots[i].classList.add('filled');
             }
             
-            if(currentPoints >= 5) {
-                document.getElementById('win-banner-success').style.display = 'block';
-                document.getElementById('loyalty-dots-container').style.opacity = '0.4';
+            if(realTimePoints >= 5) {
+                document.getElementById('win-message-final').style.display = 'block';
+                document.getElementById('dots-grid').style.opacity = '0.4';
             }
-        } catch(e) { console.error("Sync Punti Fallito"); }
+        } catch(e) { console.error("Sync Cloud Offline"); }
     }
 
-    function shareReferralToFriend() {
+    function shareToFriend() {
         const p = new URLSearchParams(window.location.search);
         const baseUrl = window.location.href.split('?')[0];
-        const referralLink = `${baseUrl}?v=voucher&st=${encodeURIComponent(p.get('st'))}&wa=${p.get('wa')}&da=${encodeURIComponent(p.get('n'))}&pr=${p.get('sc')}`;
-        const msg = `Ciao! Ti regalo uno ${p.get('sc')} da ${p.get('st')}. Clicca qui per attivarlo: ${referralLink}`;
+        const referralLink = `${baseUrl}?v=voucher&st=${encodeURIComponent(p.get('st'))}&wa=${p.get('wa')}&da=${encodeURIComponent(p.get('n'))}&pr=${encodeURIComponent(p.get('sc'))}`;
+        const msg = `Ciao! Ti invio un regalo speciale da parte di ${p.get('n')}. Clicca qui per ricevere lo ${p.get('sc')} presso ${p.get('st')}: ${referralLink}`;
         window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`);
     }
 
-    /* --- LATO AMICO (VOUCHER) --- */
+    /* --- LOGICA LATO AMICO (VOUCHER) --- */
 
-    function renderFriendVoucher(params) {
-        activateView('friend-voucher');
-        document.getElementById('friend-msg-body').innerText = `Il tuo amico ${params.get('da')} ti ha inviato un regalo speciale da utilizzare presso ${params.get('st')}!`;
-        document.getElementById('friend-reward-value').innerText = params.get('pr') + " DI SCONTO";
+    function setupFriendVoucher(params) {
+        navigateTo('friend-voucher');
+        document.getElementById('friend-intro-msg').innerText = `${params.get('da')} ti ha inviato un pensiero speciale da utilizzare presso lo studio ${params.get('st')}!`;
+        document.getElementById('friend-reward-val').innerText = params.get('pr');
     }
 
-    function bookWithVoucher() {
+    function bookAppointmentNow() {
         const p = new URLSearchParams(window.location.search);
-        const msg = `Ciao! Ho ricevuto un voucher regalo da ${p.get('da')} per uno ${p.get('pr')} presso ${p.get('st')}. Vorrei prenotare un appuntamento!`;
+        const msg = `Ciao! Ho ricevuto un voucher regalo da ${p.get('da')} per ${p.get('st')}. Vorrei prenotare un appuntamento per riscattare lo ${p.get('pr')}!`;
         window.open(`https://wa.me/${p.get('wa')}?text=${encodeURIComponent(msg)}`);
     }
 
-    /* --- UTILITIES --- */
+    /* --- SISTEMA RESET E UPGRADE --- */
 
-    function triggerReset() {
-        if(confirm("Vuoi uscire dal profilo attuale e tornare alla configurazione?\n(I dati dei pazienti salvati su questo dispositivo rimarranno in memoria)")) {
-            localStorage.removeItem('spich_app_cfg');
+    function handleSystemReset() {
+        const check = confirm("ATTENZIONE: Stai uscendo dal profilo attuale.\n\nI dati dei pazienti rimarranno salvati in locale, ma dovrai riconfigurare il nome dello studio se desideri cambiare profilo.");
+        if(check) {
+            localStorage.removeItem('spich_cfg');
             location.href = window.location.href.split('?')[0];
         }
     }
 
-    function requestProActivation() {
-        const subject = encodeURIComponent("RICHIESTA PRO SPICH - ID: " + deviceId);
-        const body = encodeURIComponent("Salve,\n\nRichiedo l'attivazione PRO per lo studio: " + appConfig.name + "\nID Dispositivo: " + deviceId);
+    function requestProUpgrade() {
+        const subject = encodeURIComponent("RICHIESTA ATTIVAZIONE PRO - ID: " + spichDeviceId);
+        const body = encodeURIComponent("Salve,\n\nRichiedo l'attivazione della versione PRO per lo studio: " + currentConfig.nome + "\nID Dispositivo: " + spichDeviceId + "\nSettore: " + currentConfig.settore);
         window.location.href = `mailto:spich.admin@gmail.com?subject=${subject}&body=${body}`;
     }
 
