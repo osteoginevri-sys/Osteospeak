@@ -16,28 +16,23 @@
            =====================================================================
         */
         :root { 
-            /* Colori Principali */
             --primary-teal: #008080; 
             --dark-teal: #006666;
             --premium-gold: #d4af37;
             --deep-blue: #003366; 
             --soft-gold: #f4e3b1;
-            
-            /* Colori di Sfondo e Testo */
             --pure-white: #ffffff;
             --bg-canvas: #f8fafc;
             --slate-gray: #64748b;
             --dark-text: #1e293b;
-            
-            /* Colori di Allerta */
             --danger-red: #ef4444;
             --success-green: #10b981;
             
-            /* Elevation & Shadows (Rinforzate per eleganza) */
-            --shadow-sm: 0 2px 4px 0 rgba(0, 0, 0, 0.05);
+            /* Elevation & Shadows */
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
             --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
             --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-            --card-shadow: 0 12px 35px rgba(0,0,0,0.06);
+            --card-shadow: 0 10px 30px rgba(0,0,0,0.05);
             
             /* Border Radius */
             --radius-lg: 24px;
@@ -72,7 +67,7 @@
         }
 
         /* =====================================================================
-           [SECTION 3] - CORE LAYOUT
+           [SECTION 3] - CORE LAYOUT (CONTAINER CON CORNICETTE)
            =====================================================================
         */
         .app-container {
@@ -84,6 +79,10 @@
             flex-direction: column;
             position: relative;
             box-shadow: 0 0 40px rgba(0,0,0,0.03);
+            
+            /* Cornicette laterali eleganti */
+            border-left: 5px solid var(--premium-gold);
+            border-right: 5px solid var(--premium-gold);
         }
 
         /* =====================================================================
@@ -95,7 +94,6 @@
             text-align: center;
         }
 
-        /* Aggiunto cursor:pointer per indicare che è cliccabile (Sincronizzazione) */
         .brand-logo {
             font-family: 'Comfortaa', cursive;
             font-size: 3.5rem;
@@ -103,12 +101,6 @@
             font-weight: 700;
             letter-spacing: -3px;
             display: inline-block;
-            cursor: pointer;
-            transition: transform 0.2s ease;
-        }
-
-        .brand-logo:active {
-            transform: scale(0.95);
         }
 
         .brand-logo span {
@@ -122,6 +114,17 @@
             letter-spacing: 5px;
             text-transform: uppercase;
             margin-top: -5px;
+            margin-bottom: 20px;
+        }
+
+        /* Nome Attività visibile in Dashboard */
+        .biz-display-header {
+            font-weight: 800;
+            color: var(--premium-gold);
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            margin-top: -10px;
             margin-bottom: 20px;
         }
 
@@ -153,10 +156,10 @@
             background: var(--pure-white);
             padding: 25px;
             border-radius: var(--radius-lg);
-            /* Bordo più definito ed elegante come richiesto */
-            border: 2px solid #e2e8f0; 
+            border: 2px solid var(--soft-gold); /* Cornicetta sottile dorata */
             margin-bottom: 25px;
             box-shadow: var(--card-shadow);
+            position: relative;
         }
 
         .field-group {
@@ -174,14 +177,13 @@
             letter-spacing: 1px;
         }
 
-        /* Campi di testo con bordi marcati per un look pulito */
         input[type="text"],
         input[type="tel"],
         select {
             width: 100%;
             padding: 18px 22px;
             border-radius: var(--radius-md);
-            border: 2px solid #e2e8f0;
+            border: 2px solid #f1f5f9;
             font-family: 'Montserrat', sans-serif;
             font-size: 1rem;
             font-weight: 500;
@@ -194,7 +196,7 @@
         input:focus, select:focus {
             border-color: var(--primary-teal);
             background: var(--pure-white);
-            box-shadow: 0 0 0 4px rgba(0, 128, 128, 0.1);
+            box-shadow: 0 0 0 5px rgba(0, 128, 128, 0.08);
         }
 
         .btn-action {
@@ -271,19 +273,15 @@
             align-items: center;
             padding: 18px 22px;
             background: var(--pure-white);
-            /* Ripristinato il contorno strutturato elegante */
-            border: 1px solid #e2e8f0;
-            border-left: 5px solid var(--primary-teal);
+            border: 1px solid #f1f5f9;
             border-radius: var(--radius-md);
             margin-bottom: 15px;
             transition: 0.3s ease;
-            box-shadow: var(--shadow-sm);
         }
 
         .row-item:hover {
-            border-left-color: var(--premium-gold);
+            border-color: var(--soft-gold);
             transform: translateX(5px);
-            box-shadow: var(--shadow-md);
         }
 
         .row-info b {
@@ -322,7 +320,7 @@
         .btn-del-action { background: #fee2e2; color: var(--danger-red); }
 
         /* =====================================================================
-           [SECTION 8] - VOUCHER DESIGN (THE CORE VISUAL)
+           [SECTION 8] - VOUCHER DESIGN (CON PACCO REGALO)
            =====================================================================
         */
         .voucher-wrap {
@@ -330,22 +328,51 @@
             padding: 10px 0;
         }
 
-        /* NUOVA ICONA REGALO A TINTA UNITA CON FIOCCO 
-           Sostituisce il vecchio CSS box per una grafica FontAwesome pulita
-        */
-        .premium-gift-icon-wrapper {
-            font-size: 4.5rem;
-            color: var(--primary-teal);
-            margin: 0 auto 20px auto;
-            display: inline-block;
-            filter: drop-shadow(0 8px 15px rgba(0, 128, 128, 0.2));
-            animation: floatGift 3s ease-in-out infinite;
+        /* Gift Icon with Ribbon */
+        .gift-box-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 25px;
+            position: relative;
+            background: var(--deep-blue);
+            border-radius: 15px;
+            border: 4px solid var(--premium-gold);
+            box-shadow: 0 8px 20px rgba(0, 51, 102, 0.2);
         }
 
-        @keyframes floatGift {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-8px); }
-            100% { transform: translateY(0px); }
+        .gift-box-icon::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            height: 10px;
+            background: var(--premium-gold);
+            transform: translateY(-50%);
+        }
+
+        .gift-box-icon::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            width: 10px;
+            height: 100%;
+            background: var(--premium-gold);
+            transform: translateX(-50%);
+        }
+
+        /* Il fiocco sopra il pacco */
+        .gift-ribbon {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 20px;
+            background: var(--premium-gold);
+            border-radius: 20px 20px 0 0;
+            z-index: 10;
         }
 
         .v-biz-name {
@@ -377,11 +404,11 @@
             border-radius: 50%;
             border: 2.5px solid var(--premium-gold);
             transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
         }
 
         .fidelity-point.filled {
             background: var(--premium-gold);
-            position: relative;
             transform: scale(1.2);
             box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
         }
@@ -404,7 +431,7 @@
             background: white;
             display: inline-block;
             border-radius: var(--radius-md);
-            border: 2px solid #e2e8f0;
+            border: 1px solid #f1f5f9;
             box-shadow: var(--shadow-md);
         }
 
@@ -480,8 +507,10 @@
     <div class="app-container">
         
         <header class="header-main">
-            <h1 class="brand-logo" onclick="forceAppSync()" title="Tocca per sincronizzare i dati">SPICH<span>.</span></h1>
+            <h1 class="brand-logo">SPICH<span>.</span></h1>
             <p class="brand-sub">Premium Network</p>
+            
+            <div id="display-dash-biz-name" class="biz-display-header" style="display:none;"></div>
         </header>
 
         <div id="sys-toast" class="toast-system">Azione eseguita</div>
@@ -578,14 +607,15 @@
             </div>
             
             <div id="main-list-render" class="list-container">
-                </div>
+            </div>
         </main>
 
         <main id="view-voucher" class="view-scene">
             <div class="voucher-wrap">
                 
-                <div class="premium-gift-icon-wrapper">
-                    <i class="fas fa-gift"></i>
+                <div style="position:relative; width:80px; height:80px; margin: 0 auto 30px;">
+                    <div class="gift-ribbon"></div>
+                    <div class="gift-box-icon"></div>
                 </div>
 
                 <h2 id="display-biz-name" class="v-biz-name">STUDIO</h2>
@@ -628,13 +658,16 @@
 
     <script>
         /**
-         * CONFIGURAZIONE DI SISTEMA
-         * Collegamento con Google Apps Script
+         * =====================================================================
+         * CONFIGURAZIONE DI SISTEMA (Google Apps Script Endpoint)
+         * =====================================================================
          */
         const GOOGLE_ENDPOINT = "https://script.google.com/macros/s/AKfycbyh4CGnWQWyvztKvTkbQ9_TOUMb3EQaB6bZySuamZeRkYSe_1VBvWJYXc2LcESKWS1sdg/exec";
         
         /**
-         * STATO DELL'APPLICAZIONE (REACTIVE STATE)
+         * =====================================================================
+         * STATO DELL'APPLICAZIONE
+         * =====================================================================
          */
         let state = {
             deviceID: localStorage.getItem('spich_v18_device_id') || generateUID(),
@@ -644,44 +677,45 @@
         };
 
         /**
+         * =====================================================================
          * INIZIALIZZAZIONE AL CARICAMENTO
+         * =====================================================================
          */
         window.addEventListener('DOMContentLoaded', async () => {
-            // Salvataggio ID Dispositivo se nuovo
+            
             if(!localStorage.getItem('spich_v18_device_id')) {
                 localStorage.setItem('spich_v18_device_id', state.deviceID);
             }
             
             document.getElementById('debug-info').innerText = "SESSION ID: " + state.deviceID;
             
-            // Gestione Rotte tramite parametri URL
             const urlParams = new URLSearchParams(window.location.search);
             
             if (urlParams.get('v') === 'gift') {
-                // Modalità Visualizzazione Voucher (Paziente)
+                // MODALITÀ PAZIENTE
                 initVoucherMode(urlParams);
             } else if (!state.bizProfile) {
-                // Modalità Primo Avvio (Setup)
+                // MODALITÀ SETUP
                 navigateTo('setup');
             } else {
-                // Modalità Amministratore (Dashboard)
+                // MODALITÀ DASHBOARD
                 navigateTo('dash');
+                
+                // [FIX] Mostra nome attività in Dashboard
+                const bizTitle = document.getElementById('display-dash-biz-name');
+                bizTitle.innerText = state.bizProfile.name;
+                bizTitle.style.display = 'block';
+                
                 applyTerminology();
                 await checkCloudStatus();
                 refreshPatientUI();
             }
         });
 
-        /**
-         * GENERATORE ID UNICO
-         */
         function generateUID() {
             return 'SP-' + Math.random().toString(36).substr(2, 9).toUpperCase();
         }
 
-        /**
-         * NAVIGAZIONE TRA LE VISTE
-         */
         function navigateTo(sceneId) {
             const scenes = document.querySelectorAll('.view-scene');
             scenes.forEach(s => s.classList.remove('active'));
@@ -689,21 +723,17 @@
             window.scrollTo(0, 0);
         }
 
-        /**
-         * NOTIFICHE TOAST
-         */
         function triggerToast(message) {
             const toast = document.getElementById('sys-toast');
             toast.innerText = message;
             toast.style.display = 'block';
-            
-            // Pulisce timeout precedenti se si clicca più volte
-            if(window.toastTimeout) clearTimeout(window.toastTimeout);
-            window.toastTimeout = setTimeout(() => { toast.style.display = 'none'; }, 2800);
+            setTimeout(() => { toast.style.display = 'none'; }, 2800);
         }
 
         /**
-         * LOGICA DI SETUP INIZIALE
+         * =====================================================================
+         * LOGICA DI BUSINESS
+         * =====================================================================
          */
         function initBusinessProfile() {
             const nameValue = document.getElementById('setup-name').value.trim();
@@ -711,7 +741,7 @@
             const sectorValue = document.getElementById('setup-type').value;
 
             if (!nameValue || !phoneValue) {
-                alert("Attenzione: Tutti i campi sono obbligatori per l'attivazione.");
+                alert("Attenzione: Tutti i campi sono obbligatori.");
                 return;
             }
 
@@ -723,7 +753,7 @@
 
             localStorage.setItem('spich_v18_biz_data', JSON.stringify(state.bizProfile));
 
-            // Notifica silente a Google Cloud
+            // Notifica al Cloud
             fetch(GOOGLE_ENDPOINT, {
                 method: "POST",
                 mode: "no-cors",
@@ -735,13 +765,10 @@
                 })
             });
 
-            triggerToast("Network Attivato con Successo!");
+            triggerToast("Network Attivato!");
             setTimeout(() => { location.reload(); }, 1200);
         }
 
-        /**
-         * CONTROLLO STATO PRO DAL CLOUD
-         */
         async function checkCloudStatus() {
             try {
                 const response = await fetch(`${GOOGLE_ENDPOINT}?checkPro=${state.deviceID}`);
@@ -754,57 +781,27 @@
                 
                 toggleLimitWarnings();
             } catch (err) {
-                console.warn("Cloud offline. Opero in locale.");
+                console.warn("Cloud offline.");
             }
         }
 
-        /**
-         * FUNZIONE DI SINCRONIZZAZIONE MANUALE (CLIC SU LOGO)
-         */
-        async function forceAppSync() {
-            // Impedisce il sync se l'utente è nella vista Voucher o Setup
-            if(!state.bizProfile || document.getElementById('view-voucher').classList.contains('active')) {
-                return;
-            }
-            
-            triggerToast("Sincronizzazione in corso...");
-            
-            // Richiama il controllo di rete e aggiorna la UI
-            await checkCloudStatus();
-            refreshPatientUI();
-            
-            setTimeout(() => {
-                triggerToast("Dati sincronizzati con successo!");
-            }, 800);
-        }
-
-        /**
-         * APPLICA TERMINOLOGIA SETTORE
-         */
         function applyTerminology() {
             if (!state.bizProfile) return;
-
             const labelCount = document.getElementById('stats-label');
             const labelInput = document.getElementById('label-client-name');
-
             const maps = {
                 "Ristorazione": { plural: "Ospiti Registrati", singular: "Nome Ospite" },
                 "Wellness": { plural: "Clienti nel Database", singular: "Nome Cliente" },
                 "Salute": { plural: "Pazienti Registrati", singular: "Nome Paziente" }
             };
-
             const selected = maps[state.bizProfile.sector] || maps["Salute"];
             labelCount.innerText = selected.plural;
             labelInput.innerText = selected.singular;
         }
 
-        /**
-         * GESTIONE LIMITI UI (FREE VS PRO)
-         */
         function toggleLimitWarnings() {
             const banner = document.getElementById('alert-limit-reached');
             const btnSubmit = document.getElementById('btn-submit-main');
-
             if (!state.isProActive && state.patientDb.length >= 10) {
                 banner.style.display = 'block';
                 btnSubmit.disabled = true;
@@ -814,21 +811,13 @@
             }
         }
 
-        /**
-         * SBLOCCO FUNZIONALITA PRO
-         */
         function unlockProFeatures() {
             const refSlot = document.getElementById('slot-referral');
             const loySlot = document.getElementById('slot-loyalty');
-
-            // Trasformazione select/read-only in input liberi
             refSlot.innerHTML = `<input type="text" id="val-referral" placeholder="Esempio: 15% Sconto">`;
             loySlot.innerHTML = `<input type="text" id="val-loyalty" placeholder="Esempio: Kit Omaggio">`;
         }
 
-        /**
-         * REGISTRAZIONE NUOVO RECORD
-         */
         function registerNewPatient() {
             const cName = document.getElementById('new-client-name').value.trim();
             const cTel = document.getElementById('new-client-tel').value.trim();
@@ -836,7 +825,7 @@
             const cLoy = document.getElementById('val-loyalty').value;
 
             if (!cName || !cTel) {
-                alert("Inserire Nome e Cellulare per procedere.");
+                alert("Inserire Nome e Cellulare.");
                 return;
             }
 
@@ -853,7 +842,6 @@
             state.patientDb.unshift(patientRecord);
             localStorage.setItem('spich_v18_db', JSON.stringify(state.patientDb));
 
-            // Invio Dati a Google Sheets
             fetch(GOOGLE_ENDPOINT, {
                 method: "POST",
                 mode: "no-cors",
@@ -869,35 +857,27 @@
                 })
             });
 
-            triggerToast("Pass Creato Correttamente!");
+            triggerToast("Pass Creato!");
             refreshPatientUI();
             toggleLimitWarnings();
-            
-            // Pulizia Campi
             document.getElementById('new-client-name').value = "";
             document.getElementById('new-client-tel').value = "";
         }
 
-        /**
-         * RENDERIZZAZIONE LISTA DASHBOARD
-         */
         function refreshPatientUI() {
             const listArea = document.getElementById('main-list-render');
             listArea.innerHTML = "";
-            
             document.getElementById('stats-total').innerText = state.patientDb.length;
 
             if (state.patientDb.length === 0) {
-                listArea.innerHTML = `<p style="text-align:center; color:#94a3b8; padding:30px; font-size:0.9rem;">Il tuo database è vuoto.</p>`;
+                listArea.innerHTML = `<p style="text-align:center; color:#94a3b8; padding:30px;">Database vuoto.</p>`;
                 return;
             }
 
             state.patientDb.forEach((entry, i) => {
                 const element = document.createElement('div');
                 element.className = 'row-item';
-                
                 const whatsappUrl = buildWhatsAppMessage(entry);
-
                 element.innerHTML = `
                     <div class="row-info">
                         <b>${entry.nome}</b>
@@ -907,9 +887,7 @@
                         <a href="${whatsappUrl}" target="_blank" class="tool-btn btn-wa-action">
                             <i class="fab fa-whatsapp"></i>
                         </a>
-                        <button class="tool-btn btn-pts-action" onclick="updatePoints(${i})">
-                            +1
-                        </button>
+                        <button class="tool-btn btn-pts-action" onclick="updatePoints(${i})">+1</button>
                         ${state.isProActive ? `
                             <button class="tool-btn btn-del-action" onclick="removeEntry(${i})">
                                 <i class="fas fa-trash-alt"></i>
@@ -921,19 +899,9 @@
             });
         }
 
-        /**
-         * AGGIORNAMENTO PUNTI FEDELTA
-         */
         function updatePoints(index) {
-            if (state.patientDb[index].pts >= 10) {
-                alert("Punteggio massimo (10) raggiunto per questo utente.");
-                return;
-            }
-
             state.patientDb[index].pts++;
             localStorage.setItem('spich_v18_db', JSON.stringify(state.patientDb));
-
-            // Sincronizzazione Punti su Google
             fetch(GOOGLE_ENDPOINT, {
                 method: "POST",
                 mode: "no-cors",
@@ -944,98 +912,62 @@
                     pts: state.patientDb[index].pts
                 })
             });
-
             triggerToast("Punto Registrato!");
             refreshPatientUI();
         }
 
-        /**
-         * ELIMINAZIONE RECORD (PRO ONLY)
-         */
         function removeEntry(index) {
-            if (confirm("Sei sicuro di voler eliminare questo record dall'anagrafica locale?")) {
+            if (confirm("Rimuovere il record?")) {
                 state.patientDb.splice(index, 1);
                 localStorage.setItem('spich_v18_db', JSON.stringify(state.patientDb));
                 refreshPatientUI();
                 toggleLimitWarnings();
-                triggerToast("Record rimosso.");
             }
         }
 
-        /**
-         * COSTRUZIONE LINK WHATSAPP
-         */
         function buildWhatsAppMessage(patient) {
             const root = window.location.href.split('?')[0];
             const voucherParams = `?v=gift&st=${encodeURIComponent(state.bizProfile.name)}&wa=${state.bizProfile.phone}&n=${encodeURIComponent(patient.nome)}&cid=${patient.cid}&pr=${encodeURIComponent(patient.premio)}&sc=${encodeURIComponent(patient.sconto)}`;
             const finalLink = root + voucherParams;
-            
-            const text = `Ciao ${patient.nome}! 🎉 Ecco il tuo Pass Digitale Regalo di ${state.bizProfile.name}: ${finalLink}`;
+            const text = `Ciao ${patient.nome}! 🎉 Ecco il tuo Pass Regalo di ${state.bizProfile.name}: ${finalLink}`;
             return `https://wa.me/${patient.tel}?text=${encodeURIComponent(text)}`;
         }
 
-        /**
-         * LOGICA MODALITA VOUCHER (LATO PAZIENTE)
-         */
         async function initVoucherMode(params) {
             navigateTo('voucher');
-            
-            const bName = params.get('st');
-            const uName = params.get('n');
-            const rewardDesc = params.get('pr');
-            const cid = params.get('cid');
+            document.getElementById('display-biz-name').innerText = params.get('st');
+            document.getElementById('display-user-name').innerText = "Ciao, " + params.get('n');
+            document.getElementById('display-reward-desc').innerText = params.get('pr');
 
-            document.getElementById('display-biz-name').innerText = bName;
-            document.getElementById('display-user-name').innerText = "Ciao, " + uName;
-            document.getElementById('display-reward-desc').innerText = rewardDesc;
-
-            // Generazione QR Code con parametri elevati
             new QRCode(document.getElementById("qrcode-canvas"), {
                 text: window.location.href,
-                width: 170,
-                height: 170,
-                colorDark: "#003366",
-                colorLight: "#ffffff",
+                width: 170, height: 170,
+                colorDark: "#003366", colorLight: "#ffffff",
                 correctLevel: QRCode.CorrectLevel.H
             });
 
-            // Recupero Punti in Tempo Reale dal Cloud
             try {
-                const cloudRes = await fetch(`${GOOGLE_ENDPOINT}?getCid=${cid}`);
+                const cloudRes = await fetch(`${GOOGLE_ENDPOINT}?getCid=${params.get('cid')}`);
                 const data = await cloudRes.json();
                 const currentPoints = parseInt(data.pts || 0);
-
                 const dotElements = document.querySelectorAll('.fidelity-point');
                 for (let j = 0; j < currentPoints && j < 5; j++) {
                     dotElements[j].classList.add('filled');
                 }
-
                 if (currentPoints >= 5) {
                     document.getElementById('display-win-box').style.display = "block";
                 }
-            } catch (error) {
-                console.log("Visualizzazione offline.");
-            }
+            } catch (error) {}
         }
 
-        /**
-         * CONDIVISIONE VOUCHER AD AMICI
-         */
         function shareVoucherLink() {
             const currentParams = new URLSearchParams(window.location.search);
-            const b = currentParams.get('st');
-            const s = currentParams.get('sc');
-            
-            const msgToShare = `Ehi! Ti regalo uno ${s} presso ${b}! Guarda qui il pass: ${window.location.href}`;
+            const msgToShare = `Ehi! Ti regalo uno ${currentParams.get('sc')} presso ${currentParams.get('st')}! Pass: ${window.location.href}`;
             window.open(`https://wa.me/?text=${encodeURIComponent(msgToShare)}`);
         }
 
-        /**
-         * RICHIESTA UPGRADE PRO (VIA GOOGLE SCRIPT)
-         */
         function sendProUpgradeRequest() {
-            triggerToast("Invio richiesta in corso...");
-
+            triggerToast("Invio richiesta...");
             fetch(GOOGLE_ENDPOINT, {
                 method: "POST",
                 mode: "no-cors",
@@ -1045,8 +977,7 @@
                     nome: state.bizProfile.name
                 })
             });
-
-            alert("RICHIESTA INVIATA!\nAbbiamo ricevuto la tua richiesta per l'account: " + state.bizProfile.name + ".\n\nTi contatteremo su WhatsApp o Email per l'attivazione immediata.");
+            alert("RICHIESTA INVIATA!\nTi contatteremo su WhatsApp per l'attivazione PRO.");
         }
 
     </script>
