@@ -18,12 +18,14 @@
         :root { 
             --primary-teal: #008080; 
             --dark-teal: #006666;
-            --premium-gold: #d4af37;
             
-            /* Gradiente oro premium per pacco stilizzato */
-            --gold-gradient: linear-gradient(135deg, #fbf5b7 0%, #d4af37 50%, #a67c00 100%);
+            /* Oro opaco e solido (niente sfumature "finte") */
+            --premium-gold: #cda93d;
+            --gold-matte: #dfbc55;
             
+            /* Blu scuro per i nastri e i dettagli */
             --deep-blue: #003366; 
+            
             --soft-gold: #f4e3b1;
             --pure-white: #ffffff;
             --bg-canvas: #f8fafc;
@@ -68,7 +70,7 @@
         }
 
         /* =====================================================================
-           [SECTION 3] - CORE LAYOUT (CORNICETTE LATERALI)
+           [SECTION 3] - CORE LAYOUT
            ===================================================================== */
         .app-container {
             width: 100%; 
@@ -144,7 +146,7 @@
         }
 
         /* =====================================================================
-           [SECTION 6] - UI COMPONENTS (INPUT, SELECT, BUTTONS)
+           [SECTION 6] - UI COMPONENTS
            ===================================================================== */
         .card-ui { 
             background: var(--pure-white); 
@@ -233,12 +235,18 @@
         }
 
         /* =====================================================================
-           [SECTION 7] - DASHBOARD LISTS E CONTATORI
+           [SECTION 7] - DASHBOARD LISTS, BADGE E CONTATORI
            ===================================================================== */
         .counter-display { 
             text-align: center; 
             padding: 40px 0; 
             margin-bottom: 20px; 
+        }
+        
+        .counter-wrap {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
         }
 
         .counter-number { 
@@ -247,6 +255,21 @@
             color: var(--primary-teal); 
             line-height: 1; 
         }
+        
+        /* BADGE PRO/FREE */
+        .status-badge {
+            padding: 6px 12px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 800;
+            margin-left: 10px;
+            margin-top: 10px;
+            color: white;
+            letter-spacing: 1px;
+        }
+        
+        .badge-free { background-color: var(--slate-gray); }
+        .badge-pro { background-color: var(--premium-gold); }
 
         .counter-label { 
             font-weight: 700; 
@@ -254,6 +277,7 @@
             text-transform: uppercase; 
             letter-spacing: 3px; 
             font-size: 0.85rem; 
+            margin-top: 10px;
         }
 
         .row-item { 
@@ -304,27 +328,17 @@
             transition: 0.2s; 
         }
 
-        .btn-wa-action { 
-            background: #25D366; 
-        }
-        
-        .btn-pts-action { 
-            background: var(--premium-gold); 
-            font-weight: 900; 
-        }
-        
-        .btn-del-action { 
-            background: #fee2e2; 
-            color: var(--danger-red); 
-        }
+        .btn-wa-action { background: #25D366; }
+        .btn-pts-action { background: var(--premium-gold); font-weight: 900; }
+        .btn-del-action { background: #fee2e2; color: var(--danger-red); }
 
         /* =====================================================================
-           [SECTION 8] - IL PACCO REGALO STILIZZATO (MONOCROMATICO ORO)
+           [SECTION 8] - IL PACCO REGALO (STILIZZATO E OPACO CON FARFALLINA)
            ===================================================================== */
         .gift-container {
-            margin: 0 auto 45px; 
-            width: 140px; 
-            height: 140px;
+            margin: 0 auto 40px; 
+            width: 120px; 
+            height: 120px;
             position: relative;
             animation: giftFloat 3s ease-in-out infinite;
         }
@@ -334,82 +348,90 @@
             50% { transform: translateY(-12px); }
         }
 
-        /* Scatola principale (Oro sfumato Premium) */
+        /* Scatola solida (Oro opaco, niente gradienti eccessivi) */
         .gift-box-premium {
-            width: 100px;
-            height: 85px;
-            background: var(--gold-gradient);
-            border-radius: 12px;
+            width: 90px;
+            height: 75px;
+            background: var(--gold-matte); 
+            border-radius: 4px;
             position: absolute;
             bottom: 0;
             left: 50%;
             transform: translateX(-50%);
-            border: 3px solid var(--deep-blue);
+            border: 2.5px solid var(--deep-blue);
             z-index: 2;
-            box-shadow: 0 15px 35px rgba(212, 175, 55, 0.3);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
         }
 
-        /* Nastro Verticale (Blu scuro per contrasto elegante) */
+        /* Nastri blu scuro, incrociati dritti */
+        .gift-box-premium::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            height: 14px;
+            background: var(--deep-blue);
+            transform: translateY(-50%);
+        }
+
         .gift-box-premium::after {
             content: '';
             position: absolute;
             left: 50%;
             top: 0;
-            width: 12px;
+            width: 14px;
             height: 100%;
             background: var(--deep-blue);
             transform: translateX(-50%);
             z-index: 3;
-            border-radius: 2px;
         }
 
-        /* Il Fiocco Superiore (Oro Premium) */
+        /* Fiocco a Farfallina Classica */
         .gift-bow-premium {
             position: absolute;
-            top: -10px;
+            top: -16px;
             left: 50%;
             transform: translateX(-50%);
-            width: 80px;
-            height: 40px;
+            width: 70px;
+            height: 30px;
             z-index: 5;
         }
 
-        /* Occhielli del fiocco */
+        /* Ali della farfallina (sx e dx) */
         .gift-bow-premium::before,
         .gift-bow-premium::after {
             content: '';
             position: absolute;
-            width: 42px;
-            height: 32px;
-            background: var(--gold-gradient);
-            border-radius: 50% 50% 10% 50%; 
-            border: 1.5px solid var(--deep-blue);
-            box-shadow: inset 0 -3px 8px rgba(0,0,0,0.1);
+            width: 32px;
+            height: 22px;
+            background: var(--gold-matte);
+            border: 2.5px solid var(--deep-blue);
+            border-radius: 12px; /* Rende morbido l'occhiello */
+            top: 5px;
         }
 
         .gift-bow-premium::before {
-            left: -8px;
+            left: 0;
             transform: rotate(-15deg);
         }
 
         .gift-bow-premium::after {
-            right: -8px;
-            transform: rotate(105deg);
-            border-radius: 50% 50% 50% 10%;
+            right: 0;
+            transform: rotate(15deg);
         }
 
-        /* Nodo centrale del fiocco (Saldato) */
+        /* Nodo centrale della farfallina */
         .gift-bow-center {
             position: absolute;
-            top: 12px;
+            top: 6px;
             left: 50%;
             transform: translateX(-50%);
-            width: 16px;
-            height: 16px;
+            width: 18px;
+            height: 20px;
             background: var(--deep-blue);
             border-radius: 4px;
             z-index: 10;
-            box-shadow: 0 3px 5px rgba(0,0,0,0.2);
         }
 
         /* =====================================================================
@@ -435,13 +457,13 @@
             margin-bottom: 30px;
         }
 
-        /* The 5 Dots Hierarchy - Voucher Elegante (Con Bordino Inferiore) */
+        /* The 5 Dots Hierarchy - Bordino Inferiore Mantenuto */
         .dots-grid {
             display: flex;
             justify-content: center;
             gap: 15px;
             margin: 25px auto;
-            padding-bottom: 25px; /* Spazio per il bordino inferiore elegante */
+            padding-bottom: 25px; 
             width: 80%; 
             border-bottom: 2px solid #f1f5f9;
         }
@@ -536,7 +558,6 @@
             letter-spacing: 3px;
         }
 
-        /* Testo informativo sotto il QR per il paziente */
         .qr-info-text {
             font-size: 0.75rem; 
             color: var(--slate-gray); 
@@ -595,7 +616,10 @@
         <main id="view-dash" class="view-scene">
             
             <div class="counter-display">
-                <div class="counter-number" id="stats-total">0</div>
+                <div class="counter-wrap">
+                    <div class="counter-number" id="stats-total">0</div>
+                    <span id="plan-badge" class="status-badge badge-free">FREE</span>
+                </div>
                 <div class="counter-label" id="stats-label">Pazienti nel Cloud</div>
             </div>
 
@@ -650,7 +674,7 @@
                     Anagrafica Attiva
                 </h4>
                 <span id="session-tag" style="font-size:0.6rem; background:#f1f5f9; padding:4px 10px; border-radius:10px; font-weight:700;">
-                    LIVE SYNC attivo
+                    LIVE SYNC
                 </span>
             </div>
             
@@ -833,7 +857,7 @@
 
         /**
          * ---------------------------------------------------------------------
-         * LOGICA DI CONTROLLO REMOTO (KILL-SWITCH & SBLOCCO PRO)
+         * LOGICA DI CONTROLLO REMOTO (KILL-SWITCH, SBLOCCO PRO E BADGE)
          * ---------------------------------------------------------------------
          */
         async function checkCloudStatus() {
@@ -857,11 +881,28 @@
                     return;
                 }
                 
+                const badgeElement = document.getElementById('plan-badge');
+
                 // VERIFICA STATUS PRO
                 if (cloudData.isPro === "PRO") {
                     console.log("Account PRO verificato. Sblocco funzionalità estese.");
                     state.isProActive = true; 
+                    
+                    // Aggiornamento Badge visivo
+                    if (badgeElement) {
+                        badgeElement.innerText = "PRO";
+                        badgeElement.classList.remove('badge-free');
+                        badgeElement.classList.add('badge-pro');
+                    }
+                    
                     unlockProFeatures();
+                } else {
+                    // Mantenimento Badge FREE
+                    if (badgeElement) {
+                        badgeElement.innerText = "FREE";
+                        badgeElement.classList.remove('badge-pro');
+                        badgeElement.classList.add('badge-free');
+                    }
                 }
                 
                 // Aggiorna la UI per eventuali limiti
@@ -926,14 +967,14 @@
 
         /**
          * ---------------------------------------------------------------------
-         * CREAZIONE NUOVO PAZIENTE (DASHBOARD)
+         * CREAZIONE NUOVO PAZIENTE E AGGIORNAMENTO MESSAGGI (EMOJI FIX)
          * ---------------------------------------------------------------------
          */
         function registerNewPatient() {
             const clientName = document.getElementById('new-client-name').value.trim();
             const clientTel = document.getElementById('new-client-tel').value.trim();
             
-            // Lettura valori dinamici (Possono essere Select o Input a seconda se FREE o PRO)
+            // Lettura valori dinamici
             const refElement = document.getElementById('val-referral');
             const loyElement = document.getElementById('val-loyalty');
             
@@ -999,7 +1040,7 @@
 
         /**
          * ---------------------------------------------------------------------
-         * AGGIORNAMENTO LISTA UI (RENDER PAZIENTI)
+         * AGGIORNAMENTO LISTA UI (RENDER PAZIENTI & EMOJI FIX)
          * ---------------------------------------------------------------------
          */
         function refreshPatientUI() {
@@ -1018,6 +1059,11 @@
                 statsTotal.innerText = state.patientDb.length;
             }
             
+            if(state.patientDb.length === 0) {
+                listArea.innerHTML = `<p style="text-align:center; color:#94a3b8; font-weight:600; padding:30px;">Nessun record presente.</p>`;
+                return;
+            }
+
             // Loop costruzione righe HTML
             state.patientDb.forEach((entry, index) => {
                 
@@ -1028,8 +1074,10 @@
                 const voucherParams = `?v=gift&st=${encodeURIComponent(state.bizProfile.name)}&wa=${state.bizProfile.phone}&n=${encodeURIComponent(entry.nome)}&cid=${entry.cid}&pr=${encodeURIComponent(entry.premio)}&sc=${encodeURIComponent(entry.sconto)}`;
                 const finalLink = rootUrl + voucherParams;
                 
-                // Composizione Testo Messaggio WhatsApp
-                const whatsappText = `Ciao ${entry.nome}! 🎉 Ecco il tuo Pass Regalo speciale di ${state.bizProfile.name}!\n\nUtilizzalo per accumulare punti o regalarlo a un amico.\n\nVisualizza il pass qui:\n${finalLink}`;
+                // Composizione Testo Messaggio WhatsApp con EMOJI PULITE e Universali
+                const whatsappText = `Ciao ${entry.nome}! 🎁 Ecco il tuo Pass Regalo speciale di ${state.bizProfile.name}!\n\nUtilizzalo per accumulare punti o regalarlo a un amico 🎉.\n\nVisualizza il pass qui:\n${finalLink}`;
+                
+                // L'encoding garantisce che le emoji non si rompano
                 const waUrl = `https://wa.me/${entry.tel}?text=${encodeURIComponent(whatsappText)}`;
                 
                 // Generazione Tasto Eliminazione (Solo se l'utente è PRO)
@@ -1042,7 +1090,7 @@
                     `;
                 }
 
-                // Iniezione Struttura Riga (Completamente Esplosa)
+                // Iniezione Struttura Riga
                 const rowHTML = `
                     <div class="row-item">
                         <div class="row-info">
@@ -1123,7 +1171,7 @@
 
         /**
          * ---------------------------------------------------------------------
-         * GESTIONE LIMITI PER UTENTI FREE (MAX 10 PAZIENTI)
+         * GESTIONE LIMITI PER UTENTI FREE E BADGES
          * ---------------------------------------------------------------------
          */
         function toggleLimitWarnings() {
@@ -1282,7 +1330,7 @@
 
         /**
          * ---------------------------------------------------------------------
-         * SISTEMA DI REFERRAL (CONDIVISIONE DA PARTE DEL PAZIENTE)
+         * SISTEMA DI REFERRAL (CONDIVISIONE DA PARTE DEL PAZIENTE) - EMOJI FIX
          * ---------------------------------------------------------------------
          */
         function shareVoucherLink() {
@@ -1296,16 +1344,16 @@
             const nomeStudio = currentUrl.searchParams.get('st') || "questo studio";
             const scontoAmico = currentUrl.searchParams.get('sc') || "un vantaggio speciale";
             
-            // Costruzione Messaggio
-            const messageText = `Ehi! Guarda che regalo ho ricevuto da ${nomeStudio}: uno ${scontoAmico} per te!\n\n🎁 Clicca su questo link per ottenerlo subito:\n${currentUrl.toString()}`;
+            // Costruzione Messaggio con EMOJI PULITE E UNIVERSALI (🎁)
+            const messageText = `Ehi! Guarda che regalo ho ricevuto da ${nomeStudio}: uno ${scontoAmico} per te! 🎁\n\nClicca su questo link per ottenerlo subito:\n${currentUrl.toString()}`;
             
-            // Esecuzione chiamata API nativa WhatsApp
+            // Esecuzione chiamata API nativa WhatsApp codificata in modo sicuro
             window.open(`https://wa.me/?text=${encodeURIComponent(messageText)}`);
         }
 
         /**
          * ---------------------------------------------------------------------
-         * IMPOSTAZIONE TERMINOLOGIA DINAMICA DASHBOARD
+         * IMPOSTAZIONE TERMINOLOGIA DINAMICA DASHBOARD E ETICHETTE
          * ---------------------------------------------------------------------
          */
         function applyTerminology() {
