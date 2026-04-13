@@ -19,11 +19,8 @@
             --primary-teal: #008080; 
             --dark-teal: #006666;
             
-            /* Oro opaco e solido (niente sfumature "finte") */
-            --premium-gold: #cda93d;
-            --gold-matte: #dfbc55;
-            
-            /* Blu scuro per i nastri e i dettagli */
+            /* Colori Premium per il pacco regalo */
+            --premium-gold: #d4af37;
             --deep-blue: #003366; 
             
             --soft-gold: #f4e3b1;
@@ -235,7 +232,7 @@
         }
 
         /* =====================================================================
-           [SECTION 7] - DASHBOARD LISTS, BADGE E CONTATORI
+           [SECTION 7] - DASHBOARD LISTS E BADGE
            ===================================================================== */
         .counter-display { 
             text-align: center; 
@@ -268,8 +265,13 @@
             letter-spacing: 1px;
         }
         
-        .badge-free { background-color: var(--slate-gray); }
-        .badge-pro { background-color: var(--premium-gold); }
+        .badge-free { 
+            background-color: var(--slate-gray); 
+        }
+        
+        .badge-pro { 
+            background-color: var(--premium-gold); 
+        }
 
         .counter-label { 
             font-weight: 700; 
@@ -328,19 +330,31 @@
             transition: 0.2s; 
         }
 
-        .btn-wa-action { background: #25D366; }
-        .btn-pts-action { background: var(--premium-gold); font-weight: 900; }
-        .btn-del-action { background: #fee2e2; color: var(--danger-red); }
+        .btn-wa-action { 
+            background: #25D366; 
+        }
+        
+        .btn-pts-action { 
+            background: var(--premium-gold); 
+            font-weight: 900; 
+        }
+        
+        .btn-del-action { 
+            background: #fee2e2; 
+            color: var(--danger-red); 
+        }
 
         /* =====================================================================
-           [SECTION 8] - IL PACCO REGALO (STILIZZATO E OPACO CON FARFALLINA)
+           [SECTION 8] - IL NUOVO PACCO REGALO (ELEGANTE, ORO E BLU, UNITO)
            ===================================================================== */
         .gift-container {
             margin: 0 auto 40px; 
-            width: 120px; 
-            height: 120px;
+            width: 100px; 
+            height: 100px;
             position: relative;
             animation: giftFloat 3s ease-in-out infinite;
+            display: flex;
+            justify-content: center;
         }
 
         @keyframes giftFloat {
@@ -348,90 +362,85 @@
             50% { transform: translateY(-12px); }
         }
 
-        /* Scatola solida (Oro opaco, niente gradienti eccessivi) */
+        /* La scatola è il contenitore principale, il fiocco è ANNIDATO dentro */
         .gift-box-premium {
-            width: 90px;
-            height: 75px;
-            background: var(--gold-matte); 
-            border-radius: 4px;
+            width: 80px;
+            height: 70px;
+            background: var(--premium-gold); /* Oro elegante e solido */
+            border-radius: 6px;
             position: absolute;
             bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            border: 2.5px solid var(--deep-blue);
-            z-index: 2;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 25px rgba(212, 175, 55, 0.4);
+            display: flex;
+            justify-content: center;
         }
 
-        /* Nastri blu scuro, incrociati dritti */
+        /* Nastro verticale blu scuro */
         .gift-box-premium::before {
             content: '';
             position: absolute;
-            top: 50%;
-            left: 0;
-            width: 100%;
-            height: 14px;
-            background: var(--deep-blue);
-            transform: translateY(-50%);
-        }
-
-        .gift-box-premium::after {
-            content: '';
-            position: absolute;
-            left: 50%;
-            top: 0;
             width: 14px;
             height: 100%;
             background: var(--deep-blue);
-            transform: translateX(-50%);
-            z-index: 3;
+            top: 0;
+            z-index: 2;
         }
 
-        /* Fiocco a Farfallina Classica */
-        .gift-bow-premium {
-            position: absolute;
-            top: -16px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 70px;
-            height: 30px;
-            z-index: 5;
-        }
-
-        /* Ali della farfallina (sx e dx) */
-        .gift-bow-premium::before,
-        .gift-bow-premium::after {
+        /* Nastro orizzontale blu scuro */
+        .gift-box-premium::after {
             content: '';
             position: absolute;
-            width: 32px;
-            height: 22px;
-            background: var(--gold-matte);
-            border: 2.5px solid var(--deep-blue);
-            border-radius: 12px; /* Rende morbido l'occhiello */
-            top: 5px;
+            height: 14px;
+            width: 100%;
+            background: var(--deep-blue);
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1;
         }
 
-        .gift-bow-premium::before {
+        /* Il Fiocco a Farfallina (Posizionato rispetto alla scatola, non vola via) */
+        .gift-bow-premium {
+            position: absolute;
+            top: -20px; /* Perfettamente appoggiato sul bordo superiore */
+            width: 60px;
+            height: 25px;
+            z-index: 10;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* Le due asole della farfallina */
+        .gift-bow-left, 
+        .gift-bow-right {
+            width: 32px;
+            height: 24px;
+            background: var(--premium-gold);
+            border: 3px solid var(--deep-blue);
+            position: absolute;
+            top: 2px;
+        }
+
+        .gift-bow-left {
             left: 0;
+            border-radius: 15px 15px 0 15px; /* Arrotondamento a petalo */
             transform: rotate(-15deg);
         }
 
-        .gift-bow-premium::after {
+        .gift-bow-right {
             right: 0;
+            border-radius: 15px 15px 15px 0;
             transform: rotate(15deg);
         }
 
-        /* Nodo centrale della farfallina */
+        /* Nodo centrale tondo */
         .gift-bow-center {
+            width: 16px;
+            height: 16px;
+            background: var(--deep-blue);
+            border-radius: 50%;
             position: absolute;
             top: 6px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 18px;
-            height: 20px;
-            background: var(--deep-blue);
-            border-radius: 4px;
-            z-index: 10;
+            z-index: 11;
         }
 
         /* =====================================================================
@@ -686,10 +695,13 @@
             <div class="voucher-wrap">
                 
                 <div class="gift-container">
-                    <div class="gift-bow-premium">
-                        <div class="gift-bow-center"></div>
+                    <div class="gift-box-premium">
+                        <div class="gift-bow-premium">
+                            <div class="gift-bow-left"></div>
+                            <div class="gift-bow-right"></div>
+                            <div class="gift-bow-center"></div>
+                        </div>
                     </div>
-                    <div class="gift-box-premium"></div>
                 </div>
 
                 <h2 id="display-biz-name" class="v-biz-name">STUDIO</h2>
@@ -967,7 +979,7 @@
 
         /**
          * ---------------------------------------------------------------------
-         * CREAZIONE NUOVO PAZIENTE E AGGIORNAMENTO MESSAGGI (EMOJI FIX)
+         * CREAZIONE NUOVO PAZIENTE E AGGIORNAMENTO MESSAGGI (EMOJI RIMOSSE)
          * ---------------------------------------------------------------------
          */
         function registerNewPatient() {
@@ -1040,7 +1052,7 @@
 
         /**
          * ---------------------------------------------------------------------
-         * AGGIORNAMENTO LISTA UI (RENDER PAZIENTI & EMOJI FIX)
+         * AGGIORNAMENTO LISTA UI (RENDER PAZIENTI & TESTI PULITI DA EMOJI)
          * ---------------------------------------------------------------------
          */
         function refreshPatientUI() {
@@ -1074,10 +1086,10 @@
                 const voucherParams = `?v=gift&st=${encodeURIComponent(state.bizProfile.name)}&wa=${state.bizProfile.phone}&n=${encodeURIComponent(entry.nome)}&cid=${entry.cid}&pr=${encodeURIComponent(entry.premio)}&sc=${encodeURIComponent(entry.sconto)}`;
                 const finalLink = rootUrl + voucherParams;
                 
-                // Composizione Testo Messaggio WhatsApp con EMOJI PULITE e Universali
-                const whatsappText = `Ciao ${entry.nome}! 🎁 Ecco il tuo Pass Regalo speciale di ${state.bizProfile.name}!\n\nUtilizzalo per accumulare punti o regalarlo a un amico 🎉.\n\nVisualizza il pass qui:\n${finalLink}`;
+                // Composizione Testo Messaggio WhatsApp (PULITO: NESSUNA EMOJI PER EVITARE I PUNTI INTERROGATIVI)
+                const whatsappText = `Ciao ${entry.nome}! Ecco il tuo Pass Regalo speciale di ${state.bizProfile.name}!\n\nUtilizzalo per accumulare punti o regalarlo a un amico.\n\nVisualizza il pass qui:\n${finalLink}`;
                 
-                // L'encoding garantisce che le emoji non si rompano
+                // L'encoding assicura che gli spazi e il testo siano perfetti
                 const waUrl = `https://wa.me/${entry.tel}?text=${encodeURIComponent(whatsappText)}`;
                 
                 // Generazione Tasto Eliminazione (Solo se l'utente è PRO)
@@ -1330,7 +1342,7 @@
 
         /**
          * ---------------------------------------------------------------------
-         * SISTEMA DI REFERRAL (CONDIVISIONE DA PARTE DEL PAZIENTE) - EMOJI FIX
+         * SISTEMA DI REFERRAL (CONDIVISIONE DA PARTE DEL PAZIENTE SENZA EMOJI)
          * ---------------------------------------------------------------------
          */
         function shareVoucherLink() {
@@ -1344,8 +1356,8 @@
             const nomeStudio = currentUrl.searchParams.get('st') || "questo studio";
             const scontoAmico = currentUrl.searchParams.get('sc') || "un vantaggio speciale";
             
-            // Costruzione Messaggio con EMOJI PULITE E UNIVERSALI (🎁)
-            const messageText = `Ehi! Guarda che regalo ho ricevuto da ${nomeStudio}: uno ${scontoAmico} per te! 🎁\n\nClicca su questo link per ottenerlo subito:\n${currentUrl.toString()}`;
+            // Costruzione Messaggio (PULITO: NESSUNA EMOJI PER EVITARE BUG)
+            const messageText = `Ehi! Guarda che regalo ho ricevuto da ${nomeStudio}: uno ${scontoAmico} per te!\n\nClicca su questo link per ottenerlo subito:\n${currentUrl.toString()}`;
             
             // Esecuzione chiamata API nativa WhatsApp codificata in modo sicuro
             window.open(`https://wa.me/?text=${encodeURIComponent(messageText)}`);
