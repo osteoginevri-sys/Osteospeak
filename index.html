@@ -6,82 +6,505 @@
     <title>SPICH. - Premium Network</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     
     <style>
         /* =====================================================================
            [SECTION 1] - DESIGN SYSTEM & VARIABLES
-           =====================================================================
-        */
+           ===================================================================== */
         :root { 
             --primary-teal: #008080; 
+            --dark-teal: #006666;
             --premium-gold: #d4af37;
             --gold-gradient: linear-gradient(135deg, #fbf5b7 0%, #d4af37 50%, #a67c00 100%);
+            --deep-blue: #003366; 
             --soft-gold: #f4e3b1;
             --pure-white: #ffffff;
             --bg-canvas: #f8fafc;
             --slate-gray: #64748b;
             --dark-text: #1e293b;
             --danger-red: #ef4444;
+            --success-green: #10b981;
+            
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --card-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            
             --radius-lg: 24px;
             --radius-md: 16px;
+            --radius-sm: 12px;
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-        body { background: var(--bg-canvas); font-family: 'Montserrat', sans-serif; color: var(--dark-text); display: flex; justify-content: center; }
+        /* =====================================================================
+           [SECTION 2] - RESET
+           ===================================================================== */
+        * { 
+            box-sizing: border-box; 
+            margin: 0; 
+            padding: 0; 
+            -webkit-tap-highlight-color: transparent; 
+        }
 
+        html { 
+            scroll-behavior: smooth; 
+        }
+
+        body { 
+            height: 100%; 
+            background: var(--bg-canvas); 
+            font-family: 'Montserrat', sans-serif; 
+            color: var(--dark-text); 
+            line-height: 1.6; 
+            -webkit-font-smoothing: antialiased; 
+            display: flex; 
+            justify-content: center; 
+        }
+
+        /* =====================================================================
+           [SECTION 3] - CORE LAYOUT
+           ===================================================================== */
         .app-container {
-            width: 100%; max-width: 500px; min-height: 100vh; background: var(--pure-white);
-            display: flex; flex-direction: column; position: relative;
-            border-left: 5px solid var(--premium-gold); border-right: 5px solid var(--premium-gold);
+            width: 100%; 
+            max-width: 500px; 
+            min-height: 100vh; 
+            background: var(--pure-white); 
+            display: flex; 
+            flex-direction: column; 
+            position: relative;
+            box-shadow: 0 0 40px rgba(0,0,0,0.03);
+            border-left: 5px solid var(--premium-gold); 
+            border-right: 5px solid var(--premium-gold);
         }
 
-        .header-main { padding: 60px 20px 20px; text-align: center; }
-        .brand-logo { font-family: 'Comfortaa', cursive; font-size: 3.5rem; color: var(--primary-teal); font-weight: 700; letter-spacing: -3px; }
-        .brand-logo span { color: var(--premium-gold); }
-        .brand-sub { font-size: 0.8rem; font-weight: 800; color: var(--slate-gray); letter-spacing: 5px; text-transform: uppercase; margin-top: -5px; }
-        .biz-display-header { font-weight: 800; color: var(--premium-gold); text-transform: uppercase; font-size: 0.9rem; letter-spacing: 2px; margin-top: 10px; }
+        /* =====================================================================
+           [SECTION 4] - HEADER & BRANDING
+           ===================================================================== */
+        .header-main { 
+            padding: 60px 20px 20px; 
+            text-align: center; 
+        }
 
-        .view-scene { display: none; padding: 30px; flex-direction: column; }
-        .view-scene.active { display: flex; }
+        .brand-logo { 
+            font-family: 'Comfortaa', cursive; 
+            font-size: 3.5rem; 
+            color: var(--primary-teal); 
+            font-weight: 700; 
+            letter-spacing: -3px; 
+            display: inline-block; 
+        }
 
-        .card-ui { background: var(--pure-white); padding: 25px; border-radius: var(--radius-lg); border: 2px solid var(--soft-gold); margin-bottom: 25px; }
-        .field-group { margin-bottom: 20px; }
-        .field-label { display: block; font-size: 0.75rem; font-weight: 800; text-transform: uppercase; color: var(--primary-teal); margin-bottom: 10px; }
-        
-        input, select { width: 100%; padding: 18px 22px; border-radius: var(--radius-md); border: 2px solid #f1f5f9; font-family: 'Montserrat', sans-serif; font-size: 1rem; background: #f8fafc; outline: none; }
+        .brand-logo span { 
+            color: var(--premium-gold); 
+        }
 
-        .btn-action { width: 100%; padding: 22px; border-radius: var(--radius-md); border: none; font-family: 'Montserrat', sans-serif; font-size: 1.1rem; font-weight: 800; cursor: pointer; text-transform: uppercase; }
-        .btn-primary { background: var(--primary-teal); color: var(--pure-white); }
-        .btn-gold { background: var(--premium-gold); color: var(--pure-white); }
+        .brand-sub { 
+            font-size: 0.8rem; 
+            font-weight: 800; 
+            color: var(--slate-gray); 
+            letter-spacing: 5px; 
+            text-transform: uppercase; 
+            margin-top: -5px; 
+            margin-bottom: 20px; 
+        }
 
-        .counter-display { text-align: center; padding: 40px 0; }
-        .counter-number { font-size: 5rem; font-weight: 800; color: var(--primary-teal); }
-        .counter-label { font-weight: 700; color: var(--slate-gray); text-transform: uppercase; letter-spacing: 3px; font-size: 0.85rem; }
+        .biz-display-header { 
+            font-weight: 800; 
+            color: var(--premium-gold); 
+            text-transform: uppercase; 
+            font-size: 0.9rem; 
+            letter-spacing: 2px; 
+            margin-top: -10px; 
+            margin-bottom: 20px; 
+        }
 
-        .row-item { display: flex; justify-content: space-between; align-items: center; padding: 18px 22px; border: 1px solid #f1f5f9; border-radius: var(--radius-md); margin-bottom: 15px; }
-        .row-info b { color: var(--primary-teal); display: block; }
-        .row-tools { display: flex; gap: 10px; }
-        
-        .tool-link { padding: 10px 15px; background: #25D366; color: white; text-decoration: none; border-radius: 8px; font-weight: 800; font-size: 0.8rem; }
-        .tool-btn-pts { padding: 10px 15px; background: var(--premium-gold); color: white; border: none; border-radius: 8px; font-weight: 800; cursor: pointer; }
+        /* =====================================================================
+           [SECTION 5] - VIEW CONTROLLER
+           ===================================================================== */
+        .view-scene { 
+            display: none; 
+            padding: 30px; 
+            flex-direction: column; 
+            animation: fadeInTransition 0.4s ease-out; 
+        }
 
-        /* PACCO REGALO */
-        .gift-container { margin: 0 auto 35px; width: 100px; height: 100px; position: relative; }
-        .gift-box-premium { width: 80px; height: 65px; background: var(--primary-teal); border-radius: 8px; position: absolute; bottom: 0; left: 10px; border: 2px solid var(--premium-gold); }
-        .gift-box-premium::before { content: ''; position: absolute; top: 50%; left: 0; width: 100%; height: 8px; background: var(--gold-gradient); transform: translateY(-50%); }
-        .gift-box-premium::after { content: ''; position: absolute; left: 50%; top: 0; width: 8px; height: 100%; background: var(--gold-gradient); transform: translateX(-50%); }
+        .view-scene.active { 
+            display: flex; 
+        }
 
-        .dots-grid { display: flex; justify-content: center; gap: 15px; margin: 25px 0; }
-        .fidelity-point { width: 30px; height: 30px; border-radius: 50%; border: 2px solid var(--premium-gold); position: relative; }
-        .fidelity-point.filled { background: var(--premium-gold); }
-        .fidelity-point.filled::after { content: 'X'; color: white; font-size: 12px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-weight: 900; }
+        @keyframes fadeInTransition { 
+            from { opacity: 0; transform: translateY(15px); } 
+            to { opacity: 1; transform: translateY(0); } 
+        }
 
-        .qr-output-box { margin: 30px auto; padding: 15px; background: white; border: 1px solid #f1f5f9; }
-        .win-notif-box { background: #fffcf0; border: 2px solid var(--premium-gold); padding: 20px; border-radius: var(--radius-lg); margin-top: 20px; display: none; text-align: center; }
-        
-        .footer-branding { padding: 40px 20px; text-align: center; margin-top: auto; font-size: 0.7rem; color: var(--slate-gray); font-weight: 800; letter-spacing: 2px; }
+        /* =====================================================================
+           [SECTION 6] - UI COMPONENTS
+           ===================================================================== */
+        .card-ui { 
+            background: var(--pure-white); 
+            padding: 25px; 
+            border-radius: var(--radius-lg); 
+            border: 2px solid var(--soft-gold); 
+            margin-bottom: 25px; 
+            box-shadow: var(--card-shadow); 
+            position: relative; 
+        }
+
+        .field-group { 
+            margin-bottom: 20px; 
+        }
+
+        .field-label { 
+            display: block; 
+            font-size: 0.75rem; 
+            font-weight: 800; 
+            text-transform: uppercase; 
+            color: var(--primary-teal); 
+            margin-bottom: 10px; 
+            margin-left: 4px; 
+            letter-spacing: 1px; 
+        }
+
+        input[type="text"], 
+        input[type="tel"], 
+        select { 
+            width: 100%; 
+            padding: 18px 22px; 
+            border-radius: var(--radius-md); 
+            border: 2px solid #f1f5f9; 
+            font-family: 'Montserrat', sans-serif; 
+            font-size: 1rem; 
+            font-weight: 500; 
+            color: var(--dark-text); 
+            background: #f8fafc; 
+            transition: all 0.3s ease; 
+            outline: none; 
+        }
+
+        input:focus, 
+        select:focus { 
+            border-color: var(--primary-teal); 
+            background: var(--pure-white); 
+            box-shadow: 0 0 0 5px rgba(0, 128, 128, 0.08); 
+        }
+
+        .btn-action { 
+            width: 100%; 
+            padding: 22px; 
+            border-radius: var(--radius-md); 
+            border: none; 
+            font-family: 'Montserrat', sans-serif; 
+            font-size: 1.1rem; 
+            font-weight: 800; 
+            cursor: pointer; 
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            gap: 12px; 
+            box-shadow: var(--shadow-md); 
+        }
+
+        .btn-primary { 
+            background: var(--primary-teal); 
+            color: var(--pure-white); 
+        }
+
+        .btn-gold { 
+            background: var(--premium-gold); 
+            color: var(--pure-white); 
+        }
+
+        .btn-action:active { 
+            transform: scale(0.96); 
+        }
+
+        .btn-action:disabled { 
+            background: #e2e8f0; 
+            color: #94a3b8; 
+            cursor: not-allowed; 
+            box-shadow: none; 
+        }
+
+        /* =====================================================================
+           [SECTION 7] - DASHBOARD LISTS
+           ===================================================================== */
+        .counter-display { 
+            text-align: center; 
+            padding: 40px 0; 
+            margin-bottom: 20px; 
+        }
+
+        .counter-number { 
+            font-size: 5rem; 
+            font-weight: 800; 
+            color: var(--primary-teal); 
+            line-height: 1; 
+        }
+
+        .counter-label { 
+            font-weight: 700; 
+            color: var(--slate-gray); 
+            text-transform: uppercase; 
+            letter-spacing: 3px; 
+            font-size: 0.85rem; 
+        }
+
+        .row-item { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            padding: 18px 22px; 
+            background: var(--pure-white); 
+            border: 1px solid #f1f5f9; 
+            border-radius: var(--radius-md); 
+            margin-bottom: 15px; 
+            transition: 0.3s ease; 
+        }
+
+        .row-item:hover { 
+            border-color: var(--soft-gold); 
+            transform: translateX(5px); 
+        }
+
+        .row-info b { 
+            color: var(--primary-teal); 
+            font-size: 1.1rem; 
+            display: block; 
+        }
+
+        .row-info span { 
+            color: var(--slate-gray); 
+            font-size: 0.85rem; 
+            font-weight: 600; 
+        }
+
+        .row-tools { 
+            display: flex; 
+            gap: 10px; 
+        }
+
+        .tool-btn { 
+            width: 45px; 
+            height: 45px; 
+            border-radius: 50%; 
+            border: none; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            cursor: pointer; 
+            color: white; 
+            font-size: 1.2rem; 
+            transition: 0.2s; 
+        }
+
+        .btn-wa-action { background: #25D366; }
+        .btn-pts-action { background: var(--premium-gold); font-weight: 900; }
+        .btn-del-action { background: #fee2e2; color: var(--danger-red); }
+
+        /* =====================================================================
+           [SECTION 8] - PACCO REGALO STILIZZATO (CSS PURO, NO ICONE)
+           ===================================================================== */
+        .gift-container {
+            margin: 0 auto 40px;
+            width: 120px;
+            height: 120px;
+            position: relative;
+            animation: giftFloat 3s ease-in-out infinite;
+        }
+
+        @keyframes giftFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-12px); }
+        }
+
+        /* Scatola principale */
+        .gift-box-premium {
+            width: 90px;
+            height: 75px;
+            background: var(--primary-teal);
+            border-radius: 8px;
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 3px solid var(--premium-gold);
+            z-index: 2;
+            box-shadow: 0 15px 30px rgba(0, 128, 128, 0.25);
+        }
+
+        /* Nastro Orizzontale */
+        .gift-box-premium::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            height: 12px;
+            background: var(--gold-gradient);
+            transform: translateY(-50%);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        /* Nastro Verticale */
+        .gift-box-premium::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            width: 12px;
+            height: 100%;
+            background: var(--gold-gradient);
+            transform: translateX(-50%);
+            box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+        }
+
+        /* Fiocco superiore saldato */
+        .gift-bow-premium {
+            position: absolute;
+            top: 15px; /* Appoggiato perfettamente sulla scatola */
+            left: 50%;
+            transform: translateX(-50%);
+            width: 70px;
+            height: 35px;
+            z-index: 5;
+        }
+
+        /* Occhielli del fiocco */
+        .gift-bow-premium::before, 
+        .gift-bow-premium::after {
+            content: '';
+            position: absolute;
+            width: 36px;
+            height: 28px;
+            background: var(--gold-gradient);
+            border-radius: 50% 50% 10% 50%;
+            border: 1.5px solid rgba(0,0,0,0.15);
+            box-shadow: inset 0 -3px 5px rgba(0,0,0,0.1);
+        }
+
+        .gift-bow-premium::before {
+            left: -2px;
+            transform: rotate(-15deg);
+        }
+
+        .gift-bow-premium::after {
+            right: -2px;
+            transform: rotate(105deg);
+            border-radius: 50% 50% 50% 10%;
+        }
+
+        /* Nodo centrale del fiocco */
+        .gift-bow-center {
+            position: absolute;
+            top: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 14px;
+            height: 14px;
+            background: var(--premium-gold);
+            border-radius: 3px;
+            z-index: 10;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        /* =====================================================================
+           [SECTION 9] - VOUCHER & DOTS
+           ===================================================================== */
+        .dots-grid { 
+            display: flex; 
+            justify-content: center; 
+            gap: 15px; 
+            margin: 25px 0; 
+        }
+
+        .fidelity-point { 
+            width: 32px; 
+            height: 32px; 
+            border-radius: 50%; 
+            border: 2.5px solid var(--premium-gold); 
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+            position: relative; 
+        }
+
+        .fidelity-point.filled { 
+            background: var(--premium-gold); 
+            transform: scale(1.2); 
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.3); 
+        }
+
+        .fidelity-point.filled::after { 
+            content: '✓'; 
+            color: white; 
+            font-size: 14px; 
+            position: absolute; 
+            top: 50%; 
+            left: 50%; 
+            transform: translate(-50%, -50%); 
+            font-weight: 900; 
+        }
+
+        .qr-output-box { 
+            margin: 35px auto; 
+            padding: 20px; 
+            background: white; 
+            display: inline-block; 
+            border-radius: var(--radius-md); 
+            border: 1px solid #f1f5f9; 
+            box-shadow: var(--shadow-md); 
+        }
+
+        /* =====================================================================
+           [SECTION 10] - ALERTS & FOOTER
+           ===================================================================== */
+        .pro-upgrade-banner { 
+            background: #fff5f5; 
+            border: 2px dashed var(--danger-red); 
+            padding: 25px; 
+            border-radius: var(--radius-lg); 
+            margin-top: 25px; 
+            text-align: center; 
+            display: none; 
+        }
+
+        .win-notif-box { 
+            background: #fffcf0; 
+            border: 2px solid var(--premium-gold); 
+            padding: 25px; 
+            border-radius: var(--radius-lg); 
+            margin-top: 25px; 
+            display: none; 
+            text-align: center; 
+        }
+
+        .toast-system { 
+            position: fixed; 
+            bottom: 40px; 
+            left: 50%; 
+            transform: translateX(-50%); 
+            background: var(--dark-text); 
+            color: white; 
+            padding: 15px 30px; 
+            border-radius: 50px; 
+            display: none; 
+            z-index: 9999; 
+            font-weight: 700;
+        }
+
+        .footer-branding { 
+            padding: 50px 20px; 
+            text-align: center; 
+            margin-top: auto; 
+        }
+
+        .footer-branding p { 
+            font-size: 0.7rem; 
+            color: var(--slate-gray); 
+            font-weight: 800; 
+            text-transform: uppercase; 
+            letter-spacing: 3px; 
+        }
     </style>
 </head>
 <body>
@@ -89,117 +512,643 @@
     <div class="app-container">
         
         <header class="header-main">
-            <div class="brand-logo">SPICH<span>.</span></div>
-            <div class="brand-sub">Premium Network</div>
+            <h1 class="brand-logo">SPICH<span>.</span></h1>
+            <p class="brand-sub">Premium Network</p>
             <div id="display-dash-biz-name" class="biz-display-header" style="display:none;"></div>
         </header>
 
+        <div id="sys-toast" class="toast-system">Azione eseguita</div>
+
         <main id="view-setup" class="view-scene">
             <div class="card-ui">
-                <div class="field-group"><label class="field-label">Nome Attività</label><input type="text" id="setup-name"></div>
-                <div class="field-group"><label class="field-label">WhatsApp Business</label><input type="tel" id="setup-phone"></div>
-                <div class="field-group"><label class="field-label">Settore</label><select id="setup-type"><option value="Salute">Sanitario</option><option value="Ristorazione">Food</option><option value="Wellness">Wellness</option></select></div>
-                <button class="btn-action btn-primary" onclick="initBusinessProfile()">ATTIVA PROFILO</button>
+                <h3 style="margin-bottom:25px; color:var(--primary-teal); font-weight:800; text-align:center;">Benvenuto nel Network</h3>
+                
+                <div class="field-group">
+                    <label class="field-label">Nome della tua Attività</label>
+                    <input type="text" id="setup-name" placeholder="Esempio: Studio Medico Spich">
+                </div>
+                
+                <div class="field-group">
+                    <label class="field-label">Contatto WhatsApp Business</label>
+                    <input type="tel" id="setup-phone" placeholder="3331234567">
+                </div>
+                
+                <div class="field-group">
+                    <label class="field-label">Settore Operativo</label>
+                    <select id="setup-type">
+                        <option value="Salute">Settore Sanitario</option>
+                        <option value="Ristorazione">Food & Beverage</option>
+                        <option value="Wellness">Benessere & Estetica</option>
+                    </select>
+                </div>
+                
+                <button class="btn-action btn-primary" onclick="initBusinessProfile()">
+                    ATTIVA ORA <i class="fas fa-check-circle"></i>
+                </button>
             </div>
+            <p style="text-align:center; font-size:0.75rem; color:var(--slate-gray); padding: 0 20px;">
+                Accedendo accetti i termini di gestione del Network Premium SPICH.
+            </p>
         </main>
 
         <main id="view-dash" class="view-scene">
+            
             <div class="counter-display">
                 <div class="counter-number" id="stats-total">0</div>
-                <div class="counter-label" id="stats-label">Database</div>
+                <div class="counter-label" id="stats-label">Pazienti nel Cloud</div>
             </div>
+
             <div class="card-ui">
-                <div class="field-group"><label class="field-label" id="label-client-name">Nome</label><input type="text" id="new-client-name"></div>
-                <div class="field-group"><label class="field-label">WhatsApp</label><input type="tel" id="new-client-tel"></div>
                 <div class="field-group">
-                    <label class="field-label">Sconto Amico</label>
-                    <select id="val-referral"><option value="Sconto 10%">10%</option><option value="Sconto 20%">20%</option></select>
+                    <label class="field-label" id="label-client-name">Nome Completo</label>
+                    <input type="text" id="new-client-name" placeholder="Cognome e Nome">
                 </div>
-                <input type="hidden" id="val-loyalty" value="Trattamento Omaggio">
-                <button id="btn-submit-main" class="btn-action btn-primary" onclick="registerNewPatient()">CREA VOUCHER</button>
+                
+                <div class="field-group">
+                    <label class="field-label">Cellulare WhatsApp</label>
+                    <input type="tel" id="new-client-tel" placeholder="3XXXXXXXXX">
+                </div>
+
+                <div id="reward-logic-panel">
+                    <div class="field-group">
+                        <label class="field-label">Benefit Amico (Sconto Referral)</label>
+                        <div id="slot-referral">
+                            <select id="val-referral">
+                                <option value="Sconto 10%">Sconto 10% (Default)</option>
+                                <option value="Sconto 20%">Sconto 20% (Premium)</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="field-group">
+                        <label class="field-label">Premio Fedeltà (5° Punto)</label>
+                        <div id="slot-loyalty">
+                            <input type="text" id="val-loyalty" value="Trattamento Omaggio" readonly style="opacity:0.6;">
+                        </div>
+                    </div>
+                </div>
+
+                <div id="alert-limit-reached" class="pro-upgrade-banner">
+                    <h4 style="color:var(--danger-red); font-weight:800;">LIMITE FREE RAGGIUNTO</h4>
+                    <p style="font-size:0.8rem; color:var(--slate-gray); margin: 10px 0 20px;">
+                        Hai gestito i tuoi primi 10 pazienti. Passa alla versione PRO per sbloccare database illimitato e premi personalizzati.
+                    </p>
+                    <button class="btn-action btn-gold" onclick="sendProUpgradeRequest()">
+                        SBLOCCA VERSIONE PRO
+                    </button>
+                </div>
+
+                <button id="btn-submit-main" class="btn-action btn-primary" style="margin-top:10px;" onclick="registerNewPatient()">
+                    CREA PASS REGALO <i class="fas fa-plus-circle"></i>
+                </button>
             </div>
-            <div id="main-list-render"></div>
+            
+            <div style="display:flex; justify-content:space-between; align-items:center; margin: 15px 5px;">
+                <h4 style="font-weight:800; color:var(--primary-teal); text-transform:uppercase; font-size:0.85rem;">Anagrafica Attiva</h4>
+                <span id="session-tag" style="font-size:0.6rem; background:#f1f5f9; padding:4px 10px; border-radius:10px; font-weight:700; color:#64748b;">LIVE SYNC</span>
+            </div>
+
+            <div id="main-list-render" class="list-container">
+                </div>
         </main>
 
         <main id="view-voucher" class="view-scene">
             <div style="text-align:center;">
-                <div class="gift-container"><div class="gift-box-premium"></div></div>
-                <h2 id="display-biz-name" style="color:var(--primary-teal);">STUDIO</h2>
-                <p id="display-user-name" style="margin-bottom:20px;">Benvenuto</p>
-                <div class="dots-grid"><div class="fidelity-point"></div><div class="fidelity-point"></div><div class="fidelity-point"></div><div class="fidelity-point"></div><div class="fidelity-point"></div></div>
-                <div id="display-win-box" class="win-notif-box"><p id="display-reward-desc"></p></div>
-                <div class="qr-output-box"><div id="qrcode-canvas"></div></div>
-                <button class="btn-action btn-gold" onclick="shareVoucherLink()">INVIA REGALO A UN AMICO</button>
+                
+                <div class="gift-container">
+                    <div class="gift-bow-premium">
+                        <div class="gift-bow-center"></div>
+                    </div>
+                    <div class="gift-box-premium"></div>
+                </div>
+
+                <h2 id="display-biz-name" style="font-family:'Comfortaa', cursive; font-size:2.8rem; color:var(--primary-teal); font-weight:700; margin-bottom:8px;">STUDIO</h2>
+                <p id="display-user-name" style="font-weight:700; color:var(--slate-gray); font-size:1.2rem; margin-bottom:30px;">Benvenuto</p>
+
+                <div class="dots-grid" id="display-dots-ui">
+                    <div class="fidelity-point"></div>
+                    <div class="fidelity-point"></div>
+                    <div class="fidelity-point"></div>
+                    <div class="fidelity-point"></div>
+                    <div class="fidelity-point"></div>
+                </div>
+
+                <div id="display-win-box" class="win-notif-box">
+                    <p style="color:var(--primary-teal); font-weight:800; font-size:1.1rem; text-transform:uppercase;">Vantaggio Sbloccato!</p>
+                    <p id="display-reward-desc" style="color:var(--premium-gold); font-weight:700; font-size:1.2rem; margin-top:5px;"></p>
+                </div>
+
+                <div class="qr-output-box">
+                    <div id="qrcode-canvas"></div>
+                </div>
+
+                <p style="font-size:0.75rem; color:var(--slate-gray); padding:0 30px; margin: 15px 0 30px;">
+                    Presenta questo Pass digitale al desk. Ad ogni visita accumuli punti per il tuo premio fedeltà.
+                </p>
+
+                <button class="btn-action btn-gold" onclick="shareVoucherLink()">
+                    REGALA SCONTO A UN AMICO <i class="fab fa-whatsapp"></i>
+                </button>
             </div>
         </main>
 
-        <footer class="footer-branding">SPICH. DIGITAL NETWORK</footer>
+        <footer class="footer-branding">
+            <p>&copy; 2026 SPICH. DIGITAL NETWORK</p>
+            <div id="debug-info">ID: --</div>
+        </footer>
+
     </div>
 
     <script>
+        /**
+         * ENDPOINT GOOGLE SCRIPT
+         * Questo URL gestisce la sincronizzazione cloud, il Kill-Switch
+         * e il recupero punti per il voucher tramite parametro getCid.
+         */
         const GOOGLE_ENDPOINT = "https://script.google.com/macros/s/AKfycbyh4CGnWQWyvztKvTkbQ9_TOUMb3EQaB6bZySuamZeRkYSe_1VBvWJYXc2LcESKWS1sdg/exec";
+        
+        /**
+         * STATO GLOBALE DELL'APPLICAZIONE
+         * Contiene l'ID univoco, i dati dell'esercente e il database pazienti.
+         */
         let state = {
-            deviceID: localStorage.getItem('spich_id') || 'ID-' + Math.random().toString(36).substr(2, 5).toUpperCase(),
-            bizProfile: JSON.parse(localStorage.getItem('spich_biz') || 'null'),
-            patientDb: JSON.parse(localStorage.getItem('spich_db') || '[]')
+            deviceID: localStorage.getItem('spich_v18_device_id') || generateUID(),
+            bizProfile: JSON.parse(localStorage.getItem('spich_v18_biz_data') || 'null'),
+            patientDb: JSON.parse(localStorage.getItem('spich_v18_db') || '[]'),
+            isProActive: false
         };
 
-        window.addEventListener('DOMContentLoaded', () => {
-            if(!localStorage.getItem('spich_id')) localStorage.setItem('spich_id', state.deviceID);
+        /**
+         * INIZIALIZZAZIONE AL CARICAMENTO
+         */
+        window.addEventListener('DOMContentLoaded', async () => {
+            // Salva l'ID dispositivo se non esiste
+            if(!localStorage.getItem('spich_v18_device_id')) {
+                localStorage.setItem('spich_v18_device_id', state.deviceID);
+            }
+            
+            // Aggiorna interfaccia debug
+            const debugElement = document.getElementById('debug-info');
+            if (debugElement) {
+                debugElement.innerText = "SESSION ID: " + state.deviceID;
+            }
+            
+            // Gestione Rotte tramite parametri URL
             const urlParams = new URLSearchParams(window.location.search);
-            if (urlParams.get('v') === 'gift') { initVoucherMode(urlParams); } 
-            else if (!state.bizProfile) { navigateTo('setup'); } 
-            else { navigateTo('dash'); refreshUI(); }
+            
+            if (urlParams.get('v') === 'gift') {
+                // MODALITÀ VOUCHER (LATO CLIENTE/PAZIENTE)
+                console.log("Avvio modalità Voucher");
+                initVoucherMode(urlParams);
+            } 
+            else if (!state.bizProfile) {
+                // MODALITÀ SETUP (PRIMO ACCESSO ESERCENTE)
+                console.log("Nessun profilo. Navigazione verso Setup.");
+                navigateTo('setup');
+            } 
+            else {
+                // MODALITÀ DASHBOARD (ESERCENTE LOGGATO)
+                console.log("Profilo trovato. Avvio Dashboard.");
+                navigateTo('dash');
+                
+                // Mostra nome attività nell'header
+                const bizTitle = document.getElementById('display-dash-biz-name');
+                if(bizTitle) { 
+                    bizTitle.innerText = state.bizProfile.name; 
+                    bizTitle.style.display = 'block'; 
+                }
+                
+                // Inizializza interfaccia e cloud sync
+                applyTerminology();
+                refreshPatientUI();
+                await checkCloudStatus(); 
+            }
         });
 
-        function navigateTo(id) { document.querySelectorAll('.view-scene').forEach(s => s.classList.remove('active')); document.getElementById('view-' + id).classList.add('active'); }
+        /**
+         * FUNZIONI DI UTILITÀ
+         */
+        function generateUID() {
+            return 'SP-' + Math.random().toString(36).substr(2, 9).toUpperCase();
+        }
 
+        function navigateTo(sceneId) {
+            const scenes = document.querySelectorAll('.view-scene');
+            scenes.forEach(s => s.classList.remove('active'));
+            
+            const target = document.getElementById('view-' + sceneId);
+            if(target) {
+                target.classList.add('active');
+            }
+            
+            window.scrollTo(0, 0);
+        }
+
+        function triggerToast(message) {
+            const toast = document.getElementById('sys-toast');
+            if(toast) {
+                toast.innerText = message; 
+                toast.style.display = 'block';
+                setTimeout(() => { 
+                    toast.style.display = 'none'; 
+                }, 3000);
+            }
+        }
+
+        /**
+         * CONTROLLO CLOUD E KILL-SWITCH
+         */
+        async function checkCloudStatus() {
+            if(!state.bizProfile) return;
+            
+            try {
+                console.log("Verifica stato Cloud per ID: " + state.deviceID);
+                const response = await fetch(`${GOOGLE_ENDPOINT}?checkPro=${state.deviceID}`);
+                const cloudData = await response.json();
+                
+                // Logica Kill-Switch
+                if (cloudData.status === "UNAUTHORIZED" || cloudData.exists === false) {
+                    console.warn("Account non autorizzato dal server remoto.");
+                    localStorage.clear(); 
+                    location.reload(); 
+                    return;
+                }
+                
+                // Logica Sblocco PRO
+                if (cloudData.isPro === "PRO") {
+                    console.log("Versione PRO attivata dal Cloud.");
+                    state.isProActive = true;
+                    unlockProFeatures();
+                }
+                
+                toggleLimitWarnings();
+            } catch (err) { 
+                console.warn("Errore di rete o Cloud offline. Esecuzione locale garantita."); 
+            }
+        }
+
+        /**
+         * SETUP PROFILO ATTIVITÀ
+         */
         function initBusinessProfile() {
-            const n = document.getElementById('setup-name').value;
-            const p = document.getElementById('setup-phone').value;
-            state.bizProfile = { name: n, phone: '39' + p, sector: document.getElementById('setup-type').value };
-            localStorage.setItem('spich_biz', JSON.stringify(state.bizProfile));
-            location.reload();
+            const nameInput = document.getElementById('setup-name').value.trim();
+            const phoneInput = document.getElementById('setup-phone').value.trim();
+            const sectorInput = document.getElementById('setup-type').value;
+            
+            // Validazione Base
+            if (nameInput.length < 3) {
+                alert("Inserire un nome attività valido (minimo 3 caratteri).");
+                return;
+            }
+            
+            const phoneRegex = /^[0-9]{8,11}$/;
+            if (!phoneRegex.test(phoneInput)) {
+                alert("Inserire un numero di cellulare valido (solo numeri).");
+                return;
+            }
+            
+            // Salvataggio Profilo
+            state.bizProfile = { 
+                name: nameInput, 
+                phone: '39' + phoneInput.replace(/\D/g, ''), 
+                sector: sectorInput,
+                created_at: new Date().toISOString()
+            };
+            
+            localStorage.setItem('spich_v18_biz_data', JSON.stringify(state.bizProfile));
+            
+            // Sincronizzazione Registrazione su Google Script
+            fetch(GOOGLE_ENDPOINT, { 
+                method: "POST", 
+                mode: "no-cors", 
+                body: JSON.stringify({ 
+                    t: "REG_BIZ", 
+                    id: state.deviceID, 
+                    nome: nameInput, 
+                    settore: sectorInput 
+                }) 
+            });
+            
+            triggerToast("NETWORK ATTIVATO CON SUCCESSO!");
+            
+            setTimeout(() => { 
+                location.reload(); 
+            }, 1500);
         }
 
+        /**
+         * REGISTRAZIONE NUOVO PAZIENTE
+         */
         function registerNewPatient() {
-            const cN = document.getElementById('new-client-name').value;
-            const cT = document.getElementById('new-client-tel').value;
-            const cR = document.getElementById('val-referral').value;
-            const cid = 'C-' + Date.now();
-            const rec = { cid, nome: cN, tel: '39' + cT.replace(/\D/g, ''), sconto: cR, pts: 0 };
-            state.patientDb.unshift(rec);
-            localStorage.setItem('spich_db', JSON.stringify(state.patientDb));
-            fetch(GOOGLE_ENDPOINT, { method: "POST", mode: "no-cors", body: JSON.stringify({ t: "ADD", biz: state.deviceID, nome: cN, tel: rec.tel, cid: cid }) });
-            refreshUI();
+            const clientName = document.getElementById('new-client-name').value.trim();
+            const clientTel = document.getElementById('new-client-tel').value.trim();
+            
+            const refElement = document.getElementById('val-referral');
+            const loyElement = document.getElementById('val-loyalty');
+            
+            const clientRef = refElement ? refElement.value : 'Sconto 10%';
+            const clientLoy = loyElement ? loyElement.value : 'Trattamento Omaggio';
+
+            // Validazione
+            if (clientName.length < 3) {
+                alert("Inserire il Nome completo.");
+                return;
+            }
+            
+            const telRegex = /^[0-9]{9,11}$/;
+            if (!telRegex.test(clientTel)) {
+                alert("Inserire un numero WhatsApp valido.");
+                return;
+            }
+            
+            // Generazione CID e Record
+            const uniqueCID = 'CID-' + Date.now().toString(36).toUpperCase();
+            
+            const newRecord = { 
+                cid: uniqueCID, 
+                nome: clientName, 
+                tel: '39' + clientTel.replace(/\D/g, ''), 
+                sconto: clientRef, 
+                premio: clientLoy, 
+                pts: 0,
+                created_at: new Date().toISOString()
+            };
+
+            // Aggiornamento Array Locale
+            state.patientDb.unshift(newRecord);
+            localStorage.setItem('spich_v18_db', JSON.stringify(state.patientDb));
+            
+            // Sincronizzazione Google Script (Aggiunta Riga)
+            fetch(GOOGLE_ENDPOINT, { 
+                method: "POST", 
+                mode: "no-cors", 
+                body: JSON.stringify({ 
+                    t: "ADD_CLIENT", 
+                    bizId: state.deviceID, 
+                    bizName: state.bizProfile.name, 
+                    clientName: clientName, 
+                    clientTel: newRecord.tel, 
+                    cid: uniqueCID, 
+                    sconto: clientRef, 
+                    premio: clientLoy 
+                }) 
+            });
+            
+            triggerToast("Pass Creato nel Database!");
+            
+            // Aggiorna UI e Limiti
+            refreshPatientUI();
+            toggleLimitWarnings();
+            
+            // Pulisci i campi input
+            document.getElementById('new-client-name').value = ""; 
+            document.getElementById('new-client-tel').value = "";
         }
 
-        function refreshUI() {
-            const area = document.getElementById('main-list-render'); area.innerHTML = "";
-            document.getElementById('stats-total').innerText = state.patientDb.length;
-            state.patientDb.forEach((p, i) => {
-                const link = `${window.location.href.split('?')[0]}?v=gift&st=${encodeURIComponent(state.bizProfile.name)}&n=${encodeURIComponent(p.nome)}&cid=${p.cid}&sc=${encodeURIComponent(p.sconto)}`;
-                area.innerHTML += `<div class="row-item"><div><b>${p.nome}</b><span>${p.pts} Punti</span></div><div class="row-tools"><a href="https://wa.me/${p.tel}?text=${encodeURIComponent(link)}" class="tool-link">WA</a><button class="tool-btn-pts" onclick="addPt(${i})">+1</button></div></div>`;
+        /**
+         * RENDER DELLA LISTA PAZIENTI
+         */
+        function refreshPatientUI() {
+            const listArea = document.getElementById('main-list-render');
+            if(!listArea) return;
+            
+            listArea.innerHTML = "";
+            
+            const totalElement = document.getElementById('stats-total');
+            if(totalElement) {
+                totalElement.innerText = state.patientDb.length;
+            }
+            
+            if(state.patientDb.length === 0) {
+                listArea.innerHTML = `<p style="text-align:center; color:#94a3b8; font-weight:600; padding:30px;">Nessun record presente.</p>`;
+                return;
+            }
+
+            state.patientDb.forEach((entry, index) => {
+                // Costruzione Link Voucher
+                const rootUrl = window.location.href.split('?')[0];
+                
+                // Parametri URL passati alla vista Cliente
+                const voucherParams = `?v=gift&st=${encodeURIComponent(state.bizProfile.name)}&wa=${state.bizProfile.phone}&n=${encodeURIComponent(entry.nome)}&cid=${entry.cid}&pr=${encodeURIComponent(entry.premio)}&sc=${encodeURIComponent(entry.sconto)}`;
+                
+                const finalLink = rootUrl + voucherParams;
+                
+                // Messaggio WhatsApp
+                const whatsappText = `Ciao ${entry.nome}! 🎉 Ecco il tuo Pass Regalo speciale di ${state.bizProfile.name}!\n\nUtilizzalo per accumulare punti o regalarlo a un amico.\n\nVisualizza il pass qui:\n${finalLink}`;
+                const waUrl = `https://wa.me/${entry.tel}?text=${encodeURIComponent(whatsappText)}`;
+                
+                // Costruzione Riga HTML
+                const rowHTML = `
+                    <div class="row-item">
+                        <div class="row-info">
+                            <b>${entry.nome}</b>
+                            <span>${entry.pts} Punti • ${entry.premio}</span>
+                        </div>
+                        <div class="row-tools">
+                            <a href="${waUrl}" target="_blank" class="tool-btn btn-wa-action">
+                                <i class="fab fa-whatsapp"></i>
+                            </a>
+                            <button class="tool-btn btn-pts-action" onclick="updatePoints(${index})">
+                                +1
+                            </button>
+                            ${state.isProActive ? `
+                                <button class="tool-btn btn-del-action" onclick="removeEntry(${index})">
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
+                            ` : ''}
+                        </div>
+                    </div>
+                `;
+                
+                listArea.innerHTML += rowHTML;
             });
         }
 
-        function addPt(i) {
-            state.patientDb[i].pts++;
-            localStorage.setItem('spich_db', JSON.stringify(state.patientDb));
-            refreshUI();
+        /**
+         * GESTIONE PUNTI
+         */
+        function updatePoints(index) {
+            console.log("Aggiunta punto per l'indice: " + index);
+            
+            state.patientDb[index].pts++;
+            localStorage.setItem('spich_v18_db', JSON.stringify(state.patientDb));
+            
+            // Sincronizzazione Cloud
+            fetch(GOOGLE_ENDPOINT, { 
+                method: "POST", 
+                mode: "no-cors", 
+                body: JSON.stringify({ 
+                    t: "UPDATE_POINTS", 
+                    bizId: state.deviceID, 
+                    cid: state.patientDb[index].cid, 
+                    pts: state.patientDb[index].pts 
+                }) 
+            });
+            
+            triggerToast("Punto Aggiunto con Successo!");
+            refreshPatientUI();
         }
 
-        function initVoucherMode(p) {
+        /**
+         * RIMOZIONE RECORD (SOLO PRO)
+         */
+        function removeEntry(index) {
+            if(!state.isProActive) return;
+            
+            if(confirm("Sei sicuro di voler rimuovere " + state.patientDb[index].nome + " dal database locale?")) {
+                state.patientDb.splice(index, 1);
+                localStorage.setItem('spich_v18_db', JSON.stringify(state.patientDb));
+                
+                refreshPatientUI();
+                toggleLimitWarnings();
+                triggerToast("Record rimosso.");
+            }
+        }
+
+        /**
+         * GESTIONE LIMITI VERSIONE FREE
+         */
+        function toggleLimitWarnings() {
+            if(state.isProActive) {
+                console.log("Versione PRO attiva: nessun limite.");
+                return;
+            }
+            
+            const banner = document.getElementById('alert-limit-reached');
+            const btnSubmit = document.getElementById('btn-submit-main');
+            
+            if(state.patientDb.length >= 10) {
+                if(banner) banner.style.display = 'block';
+                if(btnSubmit) btnSubmit.disabled = true;
+            } else {
+                if(banner) banner.style.display = 'none';
+                if(btnSubmit) btnSubmit.disabled = false;
+            }
+        }
+
+        function unlockProFeatures() {
+            const refSlot = document.getElementById('slot-referral');
+            const loySlot = document.getElementById('slot-loyalty');
+            
+            if(refSlot) {
+                refSlot.innerHTML = `<input type="text" id="val-referral" placeholder="Es: Sconto 15% Amico">`;
+            }
+            if(loySlot) {
+                loySlot.innerHTML = `<input type="text" id="val-loyalty" placeholder="Es: Trattamento in Omaggio">`;
+            }
+        }
+
+        /**
+         * INIZIALIZZAZIONE LATO PAZIENTE (VOUCHER CON PALLINI)
+         */
+        async function initVoucherMode(params) {
+            console.log("Inizializzazione VOUCHER per il paziente");
             navigateTo('voucher');
-            document.getElementById('display-biz-name').innerText = p.get('st');
-            document.getElementById('display-user-name').innerText = "Ciao, " + p.get('n');
-            new QRCode(document.getElementById("qrcode-canvas"), { text: window.location.href, width: 150, height: 150 });
+            
+            // Popolamento testi
+            const bizNameEl = document.getElementById('display-biz-name');
+            const userNameEl = document.getElementById('display-user-name');
+            const rewardDescEl = document.getElementById('display-reward-desc');
+            
+            if(bizNameEl) bizNameEl.innerText = params.get('st') || "SPICH NETWORK";
+            if(userNameEl) userNameEl.innerText = "Ciao, " + (params.get('n') || "Paziente");
+            if(rewardDescEl) rewardDescEl.innerText = params.get('pr') || "Premio Fedeltà";
+            
+            // Generazione QR
+            const qrCanvas = document.getElementById("qrcode-canvas");
+            if(qrCanvas) {
+                new QRCode(qrCanvas, { 
+                    text: window.location.href, 
+                    width: 170, 
+                    height: 170, 
+                    colorDark: "#003366",
+                    colorLight: "#ffffff"
+                });
+            }
+
+            // Sync Asincrono dei Pallini (Fidelity Dots)
+            try {
+                const targetCid = params.get('cid');
+                console.log("Recupero punti per CID: " + targetCid);
+                
+                const response = await fetch(`${GOOGLE_ENDPOINT}?getCid=${targetCid}`);
+                const data = await response.json();
+                
+                const cloudPoints = parseInt(data.pts || 0);
+                console.log("Punti recuperati dal Cloud: " + cloudPoints);
+                
+                const dotElements = document.querySelectorAll('.fidelity-point');
+                
+                for (let j = 0; j < cloudPoints && j < 5; j++) {
+                    dotElements[j].classList.add('filled');
+                }
+                
+                // Se i punti sono 5, mostra il box di vincita
+                if (cloudPoints >= 5) {
+                    const winBox = document.getElementById('display-win-box');
+                    if(winBox) winBox.style.display = "block";
+                }
+            } catch (error) { 
+                console.warn("Impossibile recuperare i punti: Cloud Offline o Errore di rete", error); 
+            }
         }
 
+        /**
+         * GESTIONE REFERRAL (CONDIVISIONE AMICO)
+         */
         function shareVoucherLink() {
-            const p = new URLSearchParams(window.location.search);
-            const msg = `Ciao! Guarda che regalo da ${p.get('st')}: ${p.get('sc')} per te! Clicca qui: ${window.location.href}`;
-            window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`);
+            const urlParams = new URLSearchParams(window.location.search);
+            const nomeStudio = urlParams.get('st') || "questo studio";
+            const scontoAmico = urlParams.get('sc') || "un vantaggio speciale";
+            
+            const message = `Ehi! Guarda che regalo ho ricevuto da ${nomeStudio}: uno ${scontoAmico} per te!\n\n🎁 Clicca su questo link per ottenerlo subito:\n${window.location.href}`;
+            
+            console.log("Apertura WhatsApp per Referral Link");
+            window.open(`https://wa.me/?text=${encodeURIComponent(message)}`);
+        }
+
+        /**
+         * TERMINOLOGIA DINAMICA IN BASE AL SETTORE
+         */
+        function applyTerminology() {
+            if(!state.bizProfile || !state.bizProfile.sector) return;
+            
+            const maps = { 
+                "Ristorazione": "Ospiti", 
+                "Wellness": "Clienti", 
+                "Salute": "Pazienti" 
+            };
+            
+            const term = maps[state.bizProfile.sector] || "Pazienti";
+            
+            const labelStats = document.getElementById('stats-label');
+            const labelInput = document.getElementById('label-client-name');
+            const placeholderInput = document.getElementById('new-client-name');
+            
+            if(labelStats) labelStats.innerText = term + " nel Cloud";
+            if(labelInput) labelInput.innerText = "Nome " + term;
+            if(placeholderInput) placeholderInput.placeholder = "Inserisci Nome " + term;
+        }
+
+        /**
+         * RICHIESTA VERSIONE PRO
+         */
+        function sendProUpgradeRequest() {
+            if(!state.deviceID || !state.bizProfile) return;
+            
+            console.log("Invio richiesta Upgrade PRO per: " + state.deviceID);
+            
+            fetch(GOOGLE_ENDPOINT, { 
+                method: "POST", 
+                mode: "no-cors", 
+                body: JSON.stringify({ 
+                    t: "REQ_PRO", 
+                    id: state.deviceID, 
+                    nome: state.bizProfile.name 
+                }) 
+            });
+            
+            alert("RICHIESTA INVIATA CON SUCCESSO!\n\nVerrai contattato su WhatsApp Business per l'attivazione della versione PRO e lo sblocco dei limiti.");
         }
     </script>
 </body>
