@@ -505,6 +505,14 @@
             text-transform: uppercase; 
             letter-spacing: 3px; 
         }
+
+        /* Testo info sotto il QR per il paziente */
+        .qr-info-text {
+            font-size:0.75rem; 
+            color:var(--slate-gray); 
+            padding:0 30px; 
+            margin: 15px 0 30px;
+        }
     </style>
 </head>
 <body>
@@ -624,6 +632,9 @@
 
                 <h2 id="display-biz-name" style="font-family:'Comfortaa', cursive; font-size:2.8rem; color:var(--primary-teal); font-weight:700; margin-bottom:8px;">STUDIO</h2>
                 <p id="display-user-name" style="font-weight:700; color:var(--slate-gray); font-size:1.2rem; margin-bottom:30px;">Benvenuto</p>
+                
+                <p id="display-friend-subtitle" style="display:none; color:var(--primary-teal); font-weight:800; text-transform:uppercase; margin-bottom:20px; font-size:1.3rem;">
+                    </p>
 
                 <div class="dots-grid" id="display-dots-ui">
                     <div class="fidelity-point"></div>
@@ -638,15 +649,15 @@
                     <p id="display-reward-desc" style="color:var(--premium-gold); font-weight:700; font-size:1.2rem; margin-top:5px;"></p>
                 </div>
 
-                <div class="qr-output-box">
+                <div class="qr-output-box" id="display-qr-box">
                     <div id="qrcode-canvas"></div>
                 </div>
 
-                <p style="font-size:0.75rem; color:var(--slate-gray); padding:0 30px; margin: 15px 0 30px;">
+                <p id="display-info-text" class="qr-info-text">
                     Presenta questo Pass digitale al desk. Ad ogni visita accumuli punti per il tuo premio fedeltà.
                 </p>
 
-                <button class="btn-action btn-gold" onclick="shareVoucherLink()">
+                <button id="btn-share-friend" class="btn-action btn-gold" onclick="shareVoucherLink()">
                     REGALA SCONTO A UN AMICO <i class="fab fa-whatsapp"></i>
                 </button>
             </div>
@@ -697,10 +708,15 @@
             const urlParams = new URLSearchParams(window.location.search);
             
             if (urlParams.get('v') === 'gift') {
-                // MODALITÀ VOUCHER (LATO CLIENTE/PAZIENTE)
-                console.log("Avvio modalità Voucher");
-                initVoucherMode(urlParams);
+                // MODALITÀ VOUCHER (LATO PAZIENTE)
+                console.log("Avvio modalità Voucher: Paziente");
+                initVoucherMode(urlParams, false);
             } 
+            else if (urlParams.get('v') === 'friend') {
+                // MODALITÀ VOUCHER (LATO AMICO)
+                console.log("Avvio modalità Voucher: Amico (Referral)");
+                initVoucherMode(urlParams, true);
+            }
             else if (!state.bizProfile) {
                 // MODALITÀ SETUP (PRIMO ACCESSO ESERCENTE)
                 console.log("Nessun profilo. Navigazione verso Setup.");
@@ -768,7 +784,7 @@
                 
                 // Logica Kill-Switch
                 if (cloudData.status === "UNAUTHORIZED" || cloudData.exists === false) {
-                    console.warn("Account non autorizzato dal server remoto.");
+                    console.warn("Account non autorizzato dal server remoto. Reset in corso.");
                     localStorage.clear(); 
                     location.reload(); 
                     return;
@@ -925,7 +941,7 @@
             }
 
             state.patientDb.forEach((entry, index) => {
-                // Costruzione Link Voucher
+                // Costruzione Link Voucher per Paziente
                 const rootUrl = window.location.href.split('?')[0];
                 
                 // Parametri URL passati alla vista Cliente
@@ -1039,69 +1055,89 @@
         }
 
         /**
-         * INIZIALIZZAZIONE LATO PAZIENTE (VOUCHER CON PALLINI)
+         * INIZIALIZZAZIONE LATO ESTERNO (VOUCHER PAZIENTE / REGALO AMICO)
          */
-        async function initVoucherMode(params) {
-            console.log("Inizializzazione VOUCHER per il paziente");
+        async function initVoucherMode(params, isFriendMode) {
+            console.log("Inizializzazione VOUCHER - Modalità Amico:", isFriendMode);
             navigateTo('voucher');
             
-            // Popolamento testi
+            // Popolamento testi Comuni
             const bizNameEl = document.getElementById('display-biz-name');
-            const userNameEl = document.getElementById('display-user-name');
-            const rewardDescEl = document.getElementById('display-reward-desc');
-            
             if(bizNameEl) bizNameEl.innerText = params.get('st') || "SPICH NETWORK";
-            if(userNameEl) userNameEl.innerText = "Ciao, " + (params.get('n') || "Paziente");
-            if(rewardDescEl) rewardDescEl.innerText = params.get('pr') || "Premio Fedeltà";
-            
-            // Generazione QR
-            const qrCanvas = document.getElementById("qrcode-canvas");
-            if(qrCanvas) {
-                new QRCode(qrCanvas, { 
-                    text: window.location.href, 
-                    width: 170, 
-                    height: 170, 
-                    colorDark: "#003366",
-                    colorLight: "#ffffff"
-                });
-            }
 
-            // Sync Asincrono dei Pallini (Fidelity Dots)
-            try {
-                const targetCid = params.get('cid');
-                console.log("Recupero punti per CID: " + targetCid);
+            if (isFriendMode) {
+                // LOGICA: VISTA AMICO (SOLO REGALO)
+                document.getElementById('display-user-name').innerText = "Un amico ti ha fatto un regalo!";
                 
-                const response = await fetch(`${GOOGLE_ENDPOINT}?getCid=${targetCid}`);
-                const data = await response.json();
-                
-                const cloudPoints = parseInt(data.pts || 0);
-                console.log("Punti recuperati dal Cloud: " + cloudPoints);
-                
-                const dotElements = document.querySelectorAll('.fidelity-point');
-                
-                for (let j = 0; j < cloudPoints && j < 5; j++) {
-                    dotElements[j].classList.add('filled');
+                const friendSubtitle = document.getElementById('display-friend-subtitle');
+                if(friendSubtitle) {
+                    friendSubtitle.innerText = params.get('sc') || "Vantaggio Esclusivo";
+                    friendSubtitle.style.display = "block";
                 }
+
+                // Nascondi elementi Paziente
+                document.getElementById('display-dots-ui').style.display = 'none';
+                document.getElementById('display-qr-box').style.display = 'none';
+                document.getElementById('btn-share-friend').style.display = 'none';
+                document.getElementById('display-info-text').innerText = "Mostra questa pagina alla reception per riscattare il tuo regalo di benvenuto.";
                 
-                // Se i punti sono 5, mostra il box di vincita
-                if (cloudPoints >= 5) {
-                    const winBox = document.getElementById('display-win-box');
-                    if(winBox) winBox.style.display = "block";
+            } else {
+                // LOGICA: VISTA PAZIENTE (PUNTI E QR)
+                document.getElementById('display-user-name').innerText = "Ciao, " + (params.get('n') || "Paziente");
+                
+                const rewardDescEl = document.getElementById('display-reward-desc');
+                if(rewardDescEl) rewardDescEl.innerText = params.get('pr') || "Premio Fedeltà";
+                
+                // Generazione QR
+                const qrCanvas = document.getElementById("qrcode-canvas");
+                if(qrCanvas) {
+                    new QRCode(qrCanvas, { 
+                        text: window.location.href, 
+                        width: 170, 
+                        height: 170, 
+                        colorDark: "#003366",
+                        colorLight: "#ffffff"
+                    });
                 }
-            } catch (error) { 
-                console.warn("Impossibile recuperare i punti: Cloud Offline o Errore di rete", error); 
+
+                // Sync Asincrono dei Pallini (Fidelity Dots)
+                try {
+                    const targetCid = params.get('cid');
+                    const response = await fetch(`${GOOGLE_ENDPOINT}?getCid=${targetCid}`);
+                    const data = await response.json();
+                    
+                    const cloudPoints = parseInt(data.pts || 0);
+                    const dotElements = document.querySelectorAll('.fidelity-point');
+                    
+                    for (let j = 0; j < cloudPoints && j < 5; j++) {
+                        dotElements[j].classList.add('filled');
+                    }
+                    
+                    if (cloudPoints >= 5) {
+                        const winBox = document.getElementById('display-win-box');
+                        if(winBox) winBox.style.display = "block";
+                    }
+                } catch (error) { 
+                    console.warn("Impossibile recuperare i punti", error); 
+                }
             }
         }
 
         /**
-         * GESTIONE REFERRAL (CONDIVISIONE AMICO)
+         * GESTIONE REFERRAL (CONDIVISIONE AMICO DAL PAZIENTE)
          */
         function shareVoucherLink() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const nomeStudio = urlParams.get('st') || "questo studio";
-            const scontoAmico = urlParams.get('sc') || "un vantaggio speciale";
+            // Prendo l'URL attuale del paziente
+            const currentUrl = new URL(window.location.href);
             
-            const message = `Ehi! Guarda che regalo ho ricevuto da ${nomeStudio}: uno ${scontoAmico} per te!\n\n🎁 Clicca su questo link per ottenerlo subito:\n${window.location.href}`;
+            // MODIFICA FONDAMENTALE: Cambio v=gift in v=friend per l'amico
+            currentUrl.searchParams.set('v', 'friend');
+            
+            const nomeStudio = currentUrl.searchParams.get('st') || "questo studio";
+            const scontoAmico = currentUrl.searchParams.get('sc') || "un vantaggio speciale";
+            
+            // Testo da inviare su WhatsApp
+            const message = `Ehi! Guarda che regalo ho ricevuto da ${nomeStudio}: uno ${scontoAmico} per te!\n\n🎁 Clicca su questo link per ottenerlo subito:\n${currentUrl.toString()}`;
             
             console.log("Apertura WhatsApp per Referral Link");
             window.open(`https://wa.me/?text=${encodeURIComponent(message)}`);
