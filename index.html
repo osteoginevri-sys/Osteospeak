@@ -6,7 +6,9 @@
     <title>SPICH. - Premium Network</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     
     <style>
@@ -17,7 +19,10 @@
             --primary-teal: #008080; 
             --dark-teal: #006666;
             --premium-gold: #d4af37;
+            
+            /* Gradiente oro premium per pacco stilizzato */
             --gold-gradient: linear-gradient(135deg, #fbf5b7 0%, #d4af37 50%, #a67c00 100%);
+            
             --deep-blue: #003366; 
             --soft-gold: #f4e3b1;
             --pure-white: #ffffff;
@@ -38,7 +43,7 @@
         }
 
         /* =====================================================================
-           [SECTION 2] - RESET
+           [SECTION 2] - RESET E IMPOSTAZIONI BASE
            ===================================================================== */
         * { 
             box-sizing: border-box; 
@@ -63,7 +68,7 @@
         }
 
         /* =====================================================================
-           [SECTION 3] - CORE LAYOUT
+           [SECTION 3] - CORE LAYOUT (CORNICETTE LATERALI)
            ===================================================================== */
         .app-container {
             width: 100%; 
@@ -120,7 +125,7 @@
         }
 
         /* =====================================================================
-           [SECTION 5] - VIEW CONTROLLER
+           [SECTION 5] - VIEW CONTROLLER (TRANSIZIONI SCENE)
            ===================================================================== */
         .view-scene { 
             display: none; 
@@ -139,7 +144,7 @@
         }
 
         /* =====================================================================
-           [SECTION 6] - UI COMPONENTS
+           [SECTION 6] - UI COMPONENTS (INPUT, SELECT, BUTTONS)
            ===================================================================== */
         .card-ui { 
             background: var(--pure-white); 
@@ -228,7 +233,7 @@
         }
 
         /* =====================================================================
-           [SECTION 7] - DASHBOARD LISTS
+           [SECTION 7] - DASHBOARD LISTS E CONTATORI
            ===================================================================== */
         .counter-display { 
             text-align: center; 
@@ -299,17 +304,27 @@
             transition: 0.2s; 
         }
 
-        .btn-wa-action { background: #25D366; }
-        .btn-pts-action { background: var(--premium-gold); font-weight: 900; }
-        .btn-del-action { background: #fee2e2; color: var(--danger-red); }
+        .btn-wa-action { 
+            background: #25D366; 
+        }
+        
+        .btn-pts-action { 
+            background: var(--premium-gold); 
+            font-weight: 900; 
+        }
+        
+        .btn-del-action { 
+            background: #fee2e2; 
+            color: var(--danger-red); 
+        }
 
         /* =====================================================================
-           [SECTION 8] - PACCO REGALO STILIZZATO (CSS PURO, NO ICONE)
+           [SECTION 8] - IL PACCO REGALO STILIZZATO (MONOCROMATICO ORO)
            ===================================================================== */
         .gift-container {
-            margin: 0 auto 40px;
-            width: 120px;
-            height: 120px;
+            margin: 0 auto 45px; 
+            width: 140px; 
+            height: 140px;
             position: relative;
             animation: giftFloat 3s ease-in-out infinite;
         }
@@ -319,35 +334,22 @@
             50% { transform: translateY(-12px); }
         }
 
-        /* Scatola principale */
+        /* Scatola principale (Oro sfumato Premium) */
         .gift-box-premium {
-            width: 90px;
-            height: 75px;
-            background: var(--primary-teal);
-            border-radius: 8px;
+            width: 100px;
+            height: 85px;
+            background: var(--gold-gradient);
+            border-radius: 12px;
             position: absolute;
             bottom: 0;
             left: 50%;
             transform: translateX(-50%);
-            border: 3px solid var(--premium-gold);
+            border: 3px solid var(--deep-blue);
             z-index: 2;
-            box-shadow: 0 15px 30px rgba(0, 128, 128, 0.25);
+            box-shadow: 0 15px 35px rgba(212, 175, 55, 0.3);
         }
 
-        /* Nastro Orizzontale */
-        .gift-box-premium::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 0;
-            width: 100%;
-            height: 12px;
-            background: var(--gold-gradient);
-            transform: translateY(-50%);
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-
-        /* Nastro Verticale */
+        /* Nastro Verticale (Blu scuro per contrasto elegante) */
         .gift-box-premium::after {
             content: '';
             position: absolute;
@@ -355,162 +357,190 @@
             top: 0;
             width: 12px;
             height: 100%;
-            background: var(--gold-gradient);
+            background: var(--deep-blue);
             transform: translateX(-50%);
-            box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+            z-index: 3;
+            border-radius: 2px;
         }
 
-        /* Fiocco superiore saldato */
+        /* Il Fiocco Superiore (Oro Premium) */
         .gift-bow-premium {
             position: absolute;
-            top: 15px; /* Appoggiato perfettamente sulla scatola */
+            top: -10px;
             left: 50%;
             transform: translateX(-50%);
-            width: 70px;
-            height: 35px;
+            width: 80px;
+            height: 40px;
             z-index: 5;
         }
 
         /* Occhielli del fiocco */
-        .gift-bow-premium::before, 
+        .gift-bow-premium::before,
         .gift-bow-premium::after {
             content: '';
             position: absolute;
-            width: 36px;
-            height: 28px;
+            width: 42px;
+            height: 32px;
             background: var(--gold-gradient);
-            border-radius: 50% 50% 10% 50%;
-            border: 1.5px solid rgba(0,0,0,0.15);
-            box-shadow: inset 0 -3px 5px rgba(0,0,0,0.1);
+            border-radius: 50% 50% 10% 50%; 
+            border: 1.5px solid var(--deep-blue);
+            box-shadow: inset 0 -3px 8px rgba(0,0,0,0.1);
         }
 
         .gift-bow-premium::before {
-            left: -2px;
+            left: -8px;
             transform: rotate(-15deg);
         }
 
         .gift-bow-premium::after {
-            right: -2px;
+            right: -8px;
             transform: rotate(105deg);
             border-radius: 50% 50% 50% 10%;
         }
 
-        /* Nodo centrale del fiocco */
+        /* Nodo centrale del fiocco (Saldato) */
         .gift-bow-center {
             position: absolute;
             top: 12px;
             left: 50%;
             transform: translateX(-50%);
-            width: 14px;
-            height: 14px;
-            background: var(--premium-gold);
-            border-radius: 3px;
+            width: 16px;
+            height: 16px;
+            background: var(--deep-blue);
+            border-radius: 4px;
             z-index: 10;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            box-shadow: 0 3px 5px rgba(0,0,0,0.2);
         }
 
         /* =====================================================================
-           [SECTION 9] - VOUCHER & DOTS
+           [SECTION 9] - VOUCHER INTERFACCIA E PALLINI
            ===================================================================== */
-        .dots-grid { 
-            display: flex; 
-            justify-content: center; 
-            gap: 15px; 
-            margin: 25px 0; 
+        .voucher-wrap {
+            text-align: center;
+            padding: 10px 0;
         }
 
-        .fidelity-point { 
-            width: 32px; 
-            height: 32px; 
-            border-radius: 50%; 
-            border: 2.5px solid var(--premium-gold); 
-            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
-            position: relative; 
-        }
-
-        .fidelity-point.filled { 
-            background: var(--premium-gold); 
-            transform: scale(1.2); 
-            box-shadow: 0 0 15px rgba(212, 175, 55, 0.3); 
-        }
-
-        .fidelity-point.filled::after { 
-            content: '✓'; 
-            color: white; 
-            font-size: 14px; 
-            position: absolute; 
-            top: 50%; 
-            left: 50%; 
-            transform: translate(-50%, -50%); 
-            font-weight: 900; 
-        }
-
-        .qr-output-box { 
-            margin: 35px auto; 
-            padding: 20px; 
-            background: white; 
-            display: inline-block; 
-            border-radius: var(--radius-md); 
-            border: 1px solid #f1f5f9; 
-            box-shadow: var(--shadow-md); 
-        }
-
-        /* =====================================================================
-           [SECTION 10] - ALERTS & FOOTER
-           ===================================================================== */
-        .pro-upgrade-banner { 
-            background: #fff5f5; 
-            border: 2px dashed var(--danger-red); 
-            padding: 25px; 
-            border-radius: var(--radius-lg); 
-            margin-top: 25px; 
-            text-align: center; 
-            display: none; 
-        }
-
-        .win-notif-box { 
-            background: #fffcf0; 
-            border: 2px solid var(--premium-gold); 
-            padding: 25px; 
-            border-radius: var(--radius-lg); 
-            margin-top: 25px; 
-            display: none; 
-            text-align: center; 
-        }
-
-        .toast-system { 
-            position: fixed; 
-            bottom: 40px; 
-            left: 50%; 
-            transform: translateX(-50%); 
-            background: var(--dark-text); 
-            color: white; 
-            padding: 15px 30px; 
-            border-radius: 50px; 
-            display: none; 
-            z-index: 9999; 
+        .v-biz-name {
+            font-family: 'Comfortaa', cursive;
+            font-size: 2.8rem;
+            color: var(--primary-teal);
+            margin-bottom: 8px;
             font-weight: 700;
         }
 
-        .footer-branding { 
-            padding: 50px 20px; 
-            text-align: center; 
-            margin-top: auto; 
+        .v-user-welcome {
+            font-weight: 700;
+            color: var(--slate-gray);
+            font-size: 1.2rem;
+            margin-bottom: 30px;
         }
 
-        .footer-branding p { 
-            font-size: 0.7rem; 
-            color: var(--slate-gray); 
-            font-weight: 800; 
-            text-transform: uppercase; 
-            letter-spacing: 3px; 
+        /* The 5 Dots Hierarchy - Voucher Elegante (Con Bordino Inferiore) */
+        .dots-grid {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 25px auto;
+            padding-bottom: 25px; /* Spazio per il bordino inferiore elegante */
+            width: 80%; 
+            border-bottom: 2px solid #f1f5f9;
         }
 
-        /* Testo info sotto il QR per il paziente */
+        .fidelity-point {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 2.5px solid var(--premium-gold);
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+        }
+
+        .fidelity-point.filled {
+            background: var(--premium-gold);
+            transform: scale(1.2);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+        }
+
+        .fidelity-point.filled::after {
+            content: '✓';
+            color: white;
+            font-size: 14px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-weight: 900;
+        }
+
+        /* QR Core Box */
+        .qr-output-box {
+            margin: 35px auto;
+            padding: 20px;
+            background: white;
+            display: inline-block;
+            border-radius: var(--radius-md);
+            border: 1px solid #f1f5f9;
+            box-shadow: var(--shadow-md);
+        }
+
+        /* =====================================================================
+           [SECTION 10] - ALERTS, NOTIFICATIONS & FOOTER
+           ===================================================================== */
+        .pro-upgrade-banner {
+            background: #fff5f5;
+            border: 2px dashed var(--danger-red);
+            padding: 25px;
+            border-radius: var(--radius-lg);
+            margin-top: 25px;
+            text-align: center;
+            display: none;
+        }
+
+        .win-notif-box {
+            background: #fffcf0;
+            border: 2px solid var(--premium-gold);
+            padding: 25px;
+            border-radius: var(--radius-lg);
+            margin-top: 25px;
+            display: none;
+            text-align: center;
+        }
+
+        .toast-system {
+            position: fixed;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--dark-text);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            display: none;
+            z-index: 9999;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .footer-branding {
+            padding: 50px 20px;
+            text-align: center;
+            margin-top: auto;
+        }
+
+        .footer-branding p {
+            font-size: 0.7rem;
+            color: var(--slate-gray);
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        /* Testo informativo sotto il QR per il paziente */
         .qr-info-text {
-            font-size:0.75rem; 
-            color:var(--slate-gray); 
-            padding:0 30px; 
+            font-size: 0.75rem; 
+            color: var(--slate-gray); 
+            padding: 0 30px; 
             margin: 15px 0 30px;
         }
     </style>
@@ -529,7 +559,9 @@
 
         <main id="view-setup" class="view-scene">
             <div class="card-ui">
-                <h3 style="margin-bottom:25px; color:var(--primary-teal); font-weight:800; text-align:center;">Benvenuto nel Network</h3>
+                <h3 style="margin-bottom:25px; color:var(--primary-teal); font-weight:800; text-align:center;">
+                    Benvenuto nel Network
+                </h3>
                 
                 <div class="field-group">
                     <label class="field-label">Nome della tua Attività</label>
@@ -554,6 +586,7 @@
                     ATTIVA ORA <i class="fas fa-check-circle"></i>
                 </button>
             </div>
+            
             <p style="text-align:center; font-size:0.75rem; color:var(--slate-gray); padding: 0 20px;">
                 Accedendo accetti i termini di gestione del Network Premium SPICH.
             </p>
@@ -591,12 +624,13 @@
                     <div class="field-group">
                         <label class="field-label">Premio Fedeltà (5° Punto)</label>
                         <div id="slot-loyalty">
-                            <input type="text" id="val-loyalty" value="Trattamento Omaggio" readonly style="opacity:0.6;">
+                            <input type="text" id="val-loyalty" value="Trattamento Omaggio" readonly style="opacity:0.6; cursor:not-allowed;">
                         </div>
                     </div>
                 </div>
 
                 <div id="alert-limit-reached" class="pro-upgrade-banner">
+                    <i class="fas fa-crown" style="font-size:1.8rem; color:var(--premium-gold); margin-bottom:10px;"></i>
                     <h4 style="color:var(--danger-red); font-weight:800;">LIMITE FREE RAGGIUNTO</h4>
                     <p style="font-size:0.8rem; color:var(--slate-gray); margin: 10px 0 20px;">
                         Hai gestito i tuoi primi 10 pazienti. Passa alla versione PRO per sbloccare database illimitato e premi personalizzati.
@@ -610,18 +644,22 @@
                     CREA PASS REGALO <i class="fas fa-plus-circle"></i>
                 </button>
             </div>
-            
-            <div style="display:flex; justify-content:space-between; align-items:center; margin: 15px 5px;">
-                <h4 style="font-weight:800; color:var(--primary-teal); text-transform:uppercase; font-size:0.85rem;">Anagrafica Attiva</h4>
-                <span id="session-tag" style="font-size:0.6rem; background:#f1f5f9; padding:4px 10px; border-radius:10px; font-weight:700; color:#64748b;">LIVE SYNC</span>
-            </div>
 
+            <div style="display:flex; justify-content:space-between; align-items:center; margin: 15px 5px;">
+                <h4 style="font-weight:800; color:var(--primary-teal); text-transform:uppercase; font-size:0.85rem;">
+                    Anagrafica Attiva
+                </h4>
+                <span id="session-tag" style="font-size:0.6rem; background:#f1f5f9; padding:4px 10px; border-radius:10px; font-weight:700;">
+                    LIVE SYNC attivo
+                </span>
+            </div>
+            
             <div id="main-list-render" class="list-container">
-                </div>
+            </div>
         </main>
 
         <main id="view-voucher" class="view-scene">
-            <div style="text-align:center;">
+            <div class="voucher-wrap">
                 
                 <div class="gift-container">
                     <div class="gift-bow-premium">
@@ -630,11 +668,11 @@
                     <div class="gift-box-premium"></div>
                 </div>
 
-                <h2 id="display-biz-name" style="font-family:'Comfortaa', cursive; font-size:2.8rem; color:var(--primary-teal); font-weight:700; margin-bottom:8px;">STUDIO</h2>
-                <p id="display-user-name" style="font-weight:700; color:var(--slate-gray); font-size:1.2rem; margin-bottom:30px;">Benvenuto</p>
+                <h2 id="display-biz-name" class="v-biz-name">STUDIO</h2>
+                <p id="display-user-name" class="v-user-welcome">Benvenuto</p>
                 
                 <p id="display-friend-subtitle" style="display:none; color:var(--primary-teal); font-weight:800; text-transform:uppercase; margin-bottom:20px; font-size:1.3rem;">
-                    </p>
+                </p>
 
                 <div class="dots-grid" id="display-dots-ui">
                     <div class="fidelity-point"></div>
@@ -645,7 +683,9 @@
                 </div>
 
                 <div id="display-win-box" class="win-notif-box">
-                    <p style="color:var(--primary-teal); font-weight:800; font-size:1.1rem; text-transform:uppercase;">Vantaggio Sbloccato!</p>
+                    <p style="color:var(--primary-teal); font-weight:800; font-size:1.1rem; text-transform:uppercase;">
+                        Vantaggio Sbloccato!
+                    </p>
                     <p id="display-reward-desc" style="color:var(--premium-gold); font-weight:700; font-size:1.2rem; margin-top:5px;"></p>
                 </div>
 
@@ -665,22 +705,23 @@
 
         <footer class="footer-branding">
             <p>&copy; 2026 SPICH. DIGITAL NETWORK</p>
-            <div id="debug-info">ID: --</div>
+            <div id="debug-info" style="font-size:0.5rem; color:#cbd5e1; margin-top:10px;">ID: --</div>
         </footer>
 
     </div>
 
     <script>
         /**
-         * ENDPOINT GOOGLE SCRIPT
-         * Questo URL gestisce la sincronizzazione cloud, il Kill-Switch
-         * e il recupero punti per il voucher tramite parametro getCid.
+         * ---------------------------------------------------------------------
+         * CONFIGURAZIONE ENDPOINT GOOGLE SCRIPT (NUOVO URL)
+         * ---------------------------------------------------------------------
          */
-        const GOOGLE_ENDPOINT = "https://script.google.com/macros/s/AKfycbyh4CGnWQWyvztKvTkbQ9_TOUMb3EQaB6bZySuamZeRkYSe_1VBvWJYXc2LcESKWS1sdg/exec";
+        const GOOGLE_ENDPOINT = "https://script.google.com/macros/s/AKfycbyTRUeTWnAIf3dJB11QnjqrULkR6LoHwVWhbopJnSxAEZtlA5NAdnGqIZidKcXnUVxeUw/exec";
         
         /**
-         * STATO GLOBALE DELL'APPLICAZIONE
-         * Contiene l'ID univoco, i dati dell'esercente e il database pazienti.
+         * ---------------------------------------------------------------------
+         * STATO GLOBALE DELL'APPLICAZIONE (Inizializzazione Sicura)
+         * ---------------------------------------------------------------------
          */
         let state = {
             deviceID: localStorage.getItem('spich_v18_device_id') || generateUID(),
@@ -690,150 +731,180 @@
         };
 
         /**
-         * INIZIALIZZAZIONE AL CARICAMENTO
+         * ---------------------------------------------------------------------
+         * BOOTSTRAP DELL'APP E ROUTING LOGICO
+         * ---------------------------------------------------------------------
          */
         window.addEventListener('DOMContentLoaded', async () => {
-            // Salva l'ID dispositivo se non esiste
-            if(!localStorage.getItem('spich_v18_device_id')) {
+            
+            // 1. Salvataggio sicuro dell'ID Dispositivo
+            if (!localStorage.getItem('spich_v18_device_id')) {
                 localStorage.setItem('spich_v18_device_id', state.deviceID);
             }
             
-            // Aggiorna interfaccia debug
+            // 2. Aggiornamento ID in UI per Debug
             const debugElement = document.getElementById('debug-info');
             if (debugElement) {
                 debugElement.innerText = "SESSION ID: " + state.deviceID;
             }
             
-            // Gestione Rotte tramite parametri URL
+            // 3. Analisi dei Parametri URL per il Routing
             const urlParams = new URLSearchParams(window.location.search);
             
             if (urlParams.get('v') === 'gift') {
-                // MODALITÀ VOUCHER (LATO PAZIENTE)
-                console.log("Avvio modalità Voucher: Paziente");
+                
+                // CASO A: VOUCHER PER IL PAZIENTE (Vede Punti e QR)
+                console.log("Routing: Modalità Voucher Paziente");
                 initVoucherMode(urlParams, false);
-            } 
-            else if (urlParams.get('v') === 'friend') {
-                // MODALITÀ VOUCHER (LATO AMICO)
-                console.log("Avvio modalità Voucher: Amico (Referral)");
+                
+            } else if (urlParams.get('v') === 'friend') {
+                
+                // CASO B: VOUCHER PER L'AMICO (Vede solo il Regalo)
+                console.log("Routing: Modalità Voucher Amico");
                 initVoucherMode(urlParams, true);
-            }
-            else if (!state.bizProfile) {
-                // MODALITÀ SETUP (PRIMO ACCESSO ESERCENTE)
-                console.log("Nessun profilo. Navigazione verso Setup.");
+                
+            } else if (!state.bizProfile) {
+                
+                // CASO C: ESERCENTE NON REGISTRATO
+                console.log("Routing: Navigazione verso Setup Esercente");
                 navigateTo('setup');
-            } 
-            else {
-                // MODALITÀ DASHBOARD (ESERCENTE LOGGATO)
-                console.log("Profilo trovato. Avvio Dashboard.");
+                
+            } else {
+                
+                // CASO D: ESERCENTE LOGGATO
+                console.log("Routing: Navigazione verso Dashboard Esercente");
                 navigateTo('dash');
                 
-                // Mostra nome attività nell'header
+                // Popolamento Header con nome Attività
                 const bizTitle = document.getElementById('display-dash-biz-name');
-                if(bizTitle) { 
+                if (bizTitle) { 
                     bizTitle.innerText = state.bizProfile.name; 
                     bizTitle.style.display = 'block'; 
                 }
                 
-                // Inizializza interfaccia e cloud sync
-                applyTerminology();
-                refreshPatientUI();
+                // Inizializzazione Interfaccia
+                applyTerminology(); 
+                refreshPatientUI(); 
+                
+                // Verifica di Sicurezza Remota (Kill-Switch)
                 await checkCloudStatus(); 
             }
         });
 
         /**
-         * FUNZIONI DI UTILITÀ
+         * ---------------------------------------------------------------------
+         * FUNZIONI DI UTILITÀ GENERALE
+         * ---------------------------------------------------------------------
          */
         function generateUID() {
+            // Genera una stringa unica basata su random e base36
             return 'SP-' + Math.random().toString(36).substr(2, 9).toUpperCase();
         }
 
         function navigateTo(sceneId) {
+            // Nasconde tutte le viste
             const scenes = document.querySelectorAll('.view-scene');
-            scenes.forEach(s => s.classList.remove('active'));
+            scenes.forEach(scene => {
+                scene.classList.remove('active');
+            });
             
-            const target = document.getElementById('view-' + sceneId);
-            if(target) {
-                target.classList.add('active');
+            // Mostra la vista target
+            const targetScene = document.getElementById('view-' + sceneId);
+            if (targetScene) {
+                targetScene.classList.add('active');
             }
             
+            // Riporta lo scroll in alto
             window.scrollTo(0, 0);
         }
 
         function triggerToast(message) {
-            const toast = document.getElementById('sys-toast');
-            if(toast) {
-                toast.innerText = message; 
-                toast.style.display = 'block';
+            const toastElement = document.getElementById('sys-toast');
+            if (toastElement) {
+                toastElement.innerText = message; 
+                toastElement.style.display = 'block';
+                
+                // Nascondi dopo 3 secondi
                 setTimeout(() => { 
-                    toast.style.display = 'none'; 
+                    toastElement.style.display = 'none'; 
                 }, 3000);
             }
         }
 
         /**
-         * CONTROLLO CLOUD E KILL-SWITCH
+         * ---------------------------------------------------------------------
+         * LOGICA DI CONTROLLO REMOTO (KILL-SWITCH & SBLOCCO PRO)
+         * ---------------------------------------------------------------------
          */
         async function checkCloudStatus() {
-            if(!state.bizProfile) return;
+            // Esegui controllo solo se esiste un profilo locale
+            if (!state.bizProfile) {
+                return;
+            }
             
             try {
-                console.log("Verifica stato Cloud per ID: " + state.deviceID);
+                console.log("Esecuzione Controllo Cloud per ID:", state.deviceID);
+                
                 const response = await fetch(`${GOOGLE_ENDPOINT}?checkPro=${state.deviceID}`);
                 const cloudData = await response.json();
                 
-                // Logica Kill-Switch
+                // VERIFICA KILL-SWITCH
+                // Se lo script Google risponde con exists: false o UNAUTHORIZED
                 if (cloudData.status === "UNAUTHORIZED" || cloudData.exists === false) {
-                    console.warn("Account non autorizzato dal server remoto. Reset in corso.");
+                    console.error("Accesso Remoto Revocato. Distruzione Sessione Locale.");
                     localStorage.clear(); 
                     location.reload(); 
                     return;
                 }
                 
-                // Logica Sblocco PRO
+                // VERIFICA STATUS PRO
                 if (cloudData.isPro === "PRO") {
-                    console.log("Versione PRO attivata dal Cloud.");
-                    state.isProActive = true;
+                    console.log("Account PRO verificato. Sblocco funzionalità estese.");
+                    state.isProActive = true; 
                     unlockProFeatures();
                 }
                 
+                // Aggiorna la UI per eventuali limiti
                 toggleLimitWarnings();
-            } catch (err) { 
-                console.warn("Errore di rete o Cloud offline. Esecuzione locale garantita."); 
+                
+            } catch (error) { 
+                console.warn("Errore di rete durante il controllo Cloud. Mantenimento operatività locale."); 
             }
         }
 
         /**
-         * SETUP PROFILO ATTIVITÀ
+         * ---------------------------------------------------------------------
+         * CREAZIONE PROFILO ESERCENTE (FASE DI SETUP)
+         * ---------------------------------------------------------------------
          */
         function initBusinessProfile() {
             const nameInput = document.getElementById('setup-name').value.trim();
             const phoneInput = document.getElementById('setup-phone').value.trim();
             const sectorInput = document.getElementById('setup-type').value;
-            
-            // Validazione Base
-            if (nameInput.length < 3) {
-                alert("Inserire un nome attività valido (minimo 3 caratteri).");
-                return;
+
+            // Validazioni
+            if (nameInput.length < 3) { 
+                alert("Il nome dell'attività deve contenere almeno 3 caratteri."); 
+                return; 
             }
             
             const phoneRegex = /^[0-9]{8,11}$/;
-            if (!phoneRegex.test(phoneInput)) {
-                alert("Inserire un numero di cellulare valido (solo numeri).");
-                return;
+            if (!phoneRegex.test(phoneInput)) { 
+                alert("Inserire un numero WhatsApp valido (solo numeri, senza prefissi internazionali)."); 
+                return; 
             }
-            
-            // Salvataggio Profilo
+
+            // Costruzione e Salvataggio Oggetto Profilo
             state.bizProfile = { 
                 name: nameInput, 
                 phone: '39' + phoneInput.replace(/\D/g, ''), 
-                sector: sectorInput,
-                created_at: new Date().toISOString()
+                sector: sectorInput, 
+                created_at: new Date().toISOString() 
             };
             
             localStorage.setItem('spich_v18_biz_data', JSON.stringify(state.bizProfile));
             
-            // Sincronizzazione Registrazione su Google Script
+            // Trasmissione Dati al Server Google (Asincrona, No-Cors per bypassare blocchi browser)
             fetch(GOOGLE_ENDPOINT, { 
                 method: "POST", 
                 mode: "no-cors", 
@@ -847,54 +918,58 @@
             
             triggerToast("NETWORK ATTIVATO CON SUCCESSO!");
             
+            // Reload della pagina per caricare la Dashboard
             setTimeout(() => { 
                 location.reload(); 
             }, 1500);
         }
 
         /**
-         * REGISTRAZIONE NUOVO PAZIENTE
+         * ---------------------------------------------------------------------
+         * CREAZIONE NUOVO PAZIENTE (DASHBOARD)
+         * ---------------------------------------------------------------------
          */
         function registerNewPatient() {
             const clientName = document.getElementById('new-client-name').value.trim();
             const clientTel = document.getElementById('new-client-tel').value.trim();
             
+            // Lettura valori dinamici (Possono essere Select o Input a seconda se FREE o PRO)
             const refElement = document.getElementById('val-referral');
             const loyElement = document.getElementById('val-loyalty');
             
             const clientRef = refElement ? refElement.value : 'Sconto 10%';
             const clientLoy = loyElement ? loyElement.value : 'Trattamento Omaggio';
 
-            // Validazione
-            if (clientName.length < 3) {
-                alert("Inserire il Nome completo.");
-                return;
-            }
-            
+            // Validazioni Paziente
             const telRegex = /^[0-9]{9,11}$/;
-            if (!telRegex.test(clientTel)) {
-                alert("Inserire un numero WhatsApp valido.");
-                return;
+
+            if (clientName.length < 3) { 
+                alert("Inserire il nome completo del paziente."); 
+                return; 
             }
             
-            // Generazione CID e Record
+            if (!telRegex.test(clientTel)) { 
+                alert("Inserire un numero WhatsApp valido per il paziente."); 
+                return; 
+            }
+
+            // Generazione Identificativo Unico Paziente
             const uniqueCID = 'CID-' + Date.now().toString(36).toUpperCase();
             
-            const newRecord = { 
+            const patientRecord = { 
                 cid: uniqueCID, 
                 nome: clientName, 
                 tel: '39' + clientTel.replace(/\D/g, ''), 
                 sconto: clientRef, 
                 premio: clientLoy, 
-                pts: 0,
-                created_at: new Date().toISOString()
+                pts: 0 
             };
 
-            // Aggiornamento Array Locale
-            state.patientDb.unshift(newRecord);
+            // Salvataggio nel Database Locale Array (In cima alla lista)
+            state.patientDb.unshift(patientRecord);
             localStorage.setItem('spich_v18_db', JSON.stringify(state.patientDb));
-            
-            // Sincronizzazione Google Script (Aggiunta Riga)
+
+            // Trasmissione Backup su Google Sheet
             fetch(GOOGLE_ENDPOINT, { 
                 method: "POST", 
                 mode: "no-cors", 
@@ -903,62 +978,76 @@
                     bizId: state.deviceID, 
                     bizName: state.bizProfile.name, 
                     clientName: clientName, 
-                    clientTel: newRecord.tel, 
+                    clientTel: patientRecord.tel, 
                     cid: uniqueCID, 
                     sconto: clientRef, 
                     premio: clientLoy 
                 }) 
             });
             
-            triggerToast("Pass Creato nel Database!");
+            // UI Feedback
+            triggerToast("Pass Creato e Sincronizzato!"); 
             
-            // Aggiorna UI e Limiti
-            refreshPatientUI();
+            // Aggiornamenti Vista
+            refreshPatientUI(); 
             toggleLimitWarnings();
             
-            // Pulisci i campi input
+            // Svuotamento Campi Form
             document.getElementById('new-client-name').value = ""; 
             document.getElementById('new-client-tel').value = "";
         }
 
         /**
-         * RENDER DELLA LISTA PAZIENTI
+         * ---------------------------------------------------------------------
+         * AGGIORNAMENTO LISTA UI (RENDER PAZIENTI)
+         * ---------------------------------------------------------------------
          */
         function refreshPatientUI() {
             const listArea = document.getElementById('main-list-render');
-            if(!listArea) return;
             
-            listArea.innerHTML = "";
-            
-            const totalElement = document.getElementById('stats-total');
-            if(totalElement) {
-                totalElement.innerText = state.patientDb.length;
-            }
-            
-            if(state.patientDb.length === 0) {
-                listArea.innerHTML = `<p style="text-align:center; color:#94a3b8; font-weight:600; padding:30px;">Nessun record presente.</p>`;
+            if (!listArea) {
                 return;
             }
-
+            
+            // Svuota lista attuale
+            listArea.innerHTML = "";
+            
+            // Aggiorna Contatore Globale
+            const statsTotal = document.getElementById('stats-total');
+            if (statsTotal) {
+                statsTotal.innerText = state.patientDb.length;
+            }
+            
+            // Loop costruzione righe HTML
             state.patientDb.forEach((entry, index) => {
-                // Costruzione Link Voucher per Paziente
+                
+                // Creazione Link Dinamico da Inviare
                 const rootUrl = window.location.href.split('?')[0];
                 
-                // Parametri URL passati alla vista Cliente
+                // Vengono inclusi tutti i parametri necessari per ricostruire il Voucher
                 const voucherParams = `?v=gift&st=${encodeURIComponent(state.bizProfile.name)}&wa=${state.bizProfile.phone}&n=${encodeURIComponent(entry.nome)}&cid=${entry.cid}&pr=${encodeURIComponent(entry.premio)}&sc=${encodeURIComponent(entry.sconto)}`;
-                
                 const finalLink = rootUrl + voucherParams;
                 
-                // Messaggio WhatsApp
+                // Composizione Testo Messaggio WhatsApp
                 const whatsappText = `Ciao ${entry.nome}! 🎉 Ecco il tuo Pass Regalo speciale di ${state.bizProfile.name}!\n\nUtilizzalo per accumulare punti o regalarlo a un amico.\n\nVisualizza il pass qui:\n${finalLink}`;
                 const waUrl = `https://wa.me/${entry.tel}?text=${encodeURIComponent(whatsappText)}`;
                 
-                // Costruzione Riga HTML
+                // Generazione Tasto Eliminazione (Solo se l'utente è PRO)
+                let deleteButtonHTML = "";
+                if (state.isProActive) {
+                    deleteButtonHTML = `
+                        <button class="tool-btn btn-del-action" onclick="removeEntry(${index})">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
+                    `;
+                }
+
+                // Iniezione Struttura Riga (Completamente Esplosa)
                 const rowHTML = `
                     <div class="row-item">
                         <div class="row-info">
                             <b>${entry.nome}</b>
-                            <span>${entry.pts} Punti • ${entry.premio}</span>
+                            <span>${entry.pts} Punti Registrati • ${entry.premio}</span>
                         </div>
                         <div class="row-tools">
                             <a href="${waUrl}" target="_blank" class="tool-btn btn-wa-action">
@@ -967,11 +1056,7 @@
                             <button class="tool-btn btn-pts-action" onclick="updatePoints(${index})">
                                 +1
                             </button>
-                            ${state.isProActive ? `
-                                <button class="tool-btn btn-del-action" onclick="removeEntry(${index})">
-                                    <i class="fas fa-trash-alt"></i>
-                                </button>
-                            ` : ''}
+                            ${deleteButtonHTML}
                         </div>
                     </div>
                 `;
@@ -981,15 +1066,18 @@
         }
 
         /**
-         * GESTIONE PUNTI
+         * ---------------------------------------------------------------------
+         * GESTIONE PUNTI (UPDATE E SINCRONIZZAZIONE)
+         * ---------------------------------------------------------------------
          */
         function updatePoints(index) {
-            console.log("Aggiunta punto per l'indice: " + index);
+            console.log("Aggiunta punto fedeltà per l'indice locale:", index);
             
-            state.patientDb[index].pts++;
+            // Aggiornamento dato locale
+            state.patientDb[index].pts++; 
             localStorage.setItem('spich_v18_db', JSON.stringify(state.patientDb));
             
-            // Sincronizzazione Cloud
+            // Trasmissione aggiornamento al Server Google
             fetch(GOOGLE_ENDPOINT, { 
                 method: "POST", 
                 mode: "no-cors", 
@@ -1001,96 +1089,156 @@
                 }) 
             });
             
-            triggerToast("Punto Aggiunto con Successo!");
+            triggerToast("Punto Aggiunto con Successo!"); 
             refreshPatientUI();
         }
 
         /**
-         * RIMOZIONE RECORD (SOLO PRO)
+         * ---------------------------------------------------------------------
+         * RIMOZIONE RECORD (FUNZIONE ESCLUSIVA VERSIONE PRO)
+         * ---------------------------------------------------------------------
          */
         function removeEntry(index) {
-            if(!state.isProActive) return;
+            // Controllo Sicurezza aggiuntivo
+            if (!state.isProActive) {
+                return;
+            }
             
-            if(confirm("Sei sicuro di voler rimuovere " + state.patientDb[index].nome + " dal database locale?")) {
-                state.patientDb.splice(index, 1);
-                localStorage.setItem('spich_v18_db', JSON.stringify(state.patientDb));
+            const clientName = state.patientDb[index].nome;
+            
+            if (confirm("Sei sicuro di voler rimuovere " + clientName + " dal database locale?")) {
                 
-                refreshPatientUI();
-                toggleLimitWarnings();
-                triggerToast("Record rimosso.");
+                // Rimuove elemento dall'array
+                state.patientDb.splice(index, 1); 
+                
+                // Salva array aggiornato
+                localStorage.setItem('spich_v18_db', JSON.stringify(state.patientDb)); 
+                
+                triggerToast("Record Rimosso Correttamente."); 
+                
+                refreshPatientUI(); 
+                toggleLimitWarnings(); 
             }
         }
 
         /**
-         * GESTIONE LIMITI VERSIONE FREE
+         * ---------------------------------------------------------------------
+         * GESTIONE LIMITI PER UTENTI FREE (MAX 10 PAZIENTI)
+         * ---------------------------------------------------------------------
          */
         function toggleLimitWarnings() {
-            if(state.isProActive) {
-                console.log("Versione PRO attiva: nessun limite.");
+            // Bypass se l'utente è premium
+            if (state.isProActive) {
+                console.log("Account PRO: Controllo Limiti disabilitato.");
                 return;
             }
             
-            const banner = document.getElementById('alert-limit-reached');
-            const btnSubmit = document.getElementById('btn-submit-main');
+            const bannerElement = document.getElementById('alert-limit-reached');
+            const submitButton = document.getElementById('btn-submit-main');
             
-            if(state.patientDb.length >= 10) {
-                if(banner) banner.style.display = 'block';
-                if(btnSubmit) btnSubmit.disabled = true;
+            // Verifica Limite Quantità Record Locali
+            if (state.patientDb.length >= 10) {
+                
+                // Attivazione Blocchi Visuali e Funzionali
+                if (bannerElement) {
+                    bannerElement.style.display = 'block';
+                }
+                if (submitButton) {
+                    submitButton.disabled = true;
+                }
+                
             } else {
-                if(banner) banner.style.display = 'none';
-                if(btnSubmit) btnSubmit.disabled = false;
+                
+                // Rimozione Blocchi
+                if (bannerElement) {
+                    bannerElement.style.display = 'none';
+                }
+                if (submitButton) {
+                    submitButton.disabled = false;
+                }
+                
             }
         }
 
+        /**
+         * ---------------------------------------------------------------------
+         * SBLOCCO INTERFACCIA PRO (SOSTITUZIONE SELECT CON INPUT LIBERI)
+         * ---------------------------------------------------------------------
+         */
         function unlockProFeatures() {
             const refSlot = document.getElementById('slot-referral');
             const loySlot = document.getElementById('slot-loyalty');
             
-            if(refSlot) {
-                refSlot.innerHTML = `<input type="text" id="val-referral" placeholder="Es: Sconto 15% Amico">`;
+            // Permette all'esercente PRO di scrivere testualmente qualsiasi premio
+            if (refSlot) {
+                refSlot.innerHTML = `<input type="text" id="val-referral" placeholder="Esempio: Sconto 15% Amico">`;
             }
-            if(loySlot) {
-                loySlot.innerHTML = `<input type="text" id="val-loyalty" placeholder="Es: Trattamento in Omaggio">`;
+            
+            if (loySlot) {
+                loySlot.innerHTML = `<input type="text" id="val-loyalty" placeholder="Esempio: Trattamento Omaggio">`;
             }
         }
 
         /**
-         * INIZIALIZZAZIONE LATO ESTERNO (VOUCHER PAZIENTE / REGALO AMICO)
+         * ---------------------------------------------------------------------
+         * INIZIALIZZAZIONE VISTE PUBBLICHE (PAZIENTE & AMICO)
+         * ---------------------------------------------------------------------
          */
         async function initVoucherMode(params, isFriendMode) {
-            console.log("Inizializzazione VOUCHER - Modalità Amico:", isFriendMode);
+            console.log("Avvio Generazione Vista Pubblica. Modalità Amico =", isFriendMode);
+            
             navigateTo('voucher');
             
-            // Popolamento testi Comuni
-            const bizNameEl = document.getElementById('display-biz-name');
-            if(bizNameEl) bizNameEl.innerText = params.get('st') || "SPICH NETWORK";
+            // 1. Lettura Parametri Comuni
+            const studioName = params.get('st') || "SPICH NETWORK";
+            
+            const bizNameElement = document.getElementById('display-biz-name');
+            if (bizNameElement) {
+                bizNameElement.innerText = studioName;
+            }
 
+            // 2. Differenziazione dell'Interfaccia in base al Ruolo
             if (isFriendMode) {
-                // LOGICA: VISTA AMICO (SOLO REGALO)
-                document.getElementById('display-user-name').innerText = "Un amico ti ha fatto un regalo!";
+                
+                // === VISTA AMICO (LANDING PAGE REGALO) ===
+                
+                const userNameElement = document.getElementById('display-user-name');
+                if (userNameElement) {
+                    userNameElement.innerText = "Un amico ti ha fatto un regalo!";
+                }
                 
                 const friendSubtitle = document.getElementById('display-friend-subtitle');
-                if(friendSubtitle) {
+                if (friendSubtitle) {
+                    // Mostra quale sconto è stato regalato
                     friendSubtitle.innerText = params.get('sc') || "Vantaggio Esclusivo";
                     friendSubtitle.style.display = "block";
                 }
 
-                // Nascondi elementi Paziente
+                // Nascondiamo gli elementi esclusivi del paziente
                 document.getElementById('display-dots-ui').style.display = 'none';
                 document.getElementById('display-qr-box').style.display = 'none';
                 document.getElementById('btn-share-friend').style.display = 'none';
-                document.getElementById('display-info-text').innerText = "Mostra questa pagina alla reception per riscattare il tuo regalo di benvenuto.";
+                
+                // Modifichiamo il testo informativo
+                document.getElementById('display-info-text').innerText = "Mostra questa schermata alla reception per riscattare il tuo regalo di benvenuto.";
                 
             } else {
-                // LOGICA: VISTA PAZIENTE (PUNTI E QR)
-                document.getElementById('display-user-name').innerText = "Ciao, " + (params.get('n') || "Paziente");
                 
-                const rewardDescEl = document.getElementById('display-reward-desc');
-                if(rewardDescEl) rewardDescEl.innerText = params.get('pr') || "Premio Fedeltà";
+                // === VISTA PAZIENTE (VOUCHER PERSONALE) ===
                 
-                // Generazione QR
+                const userNameElement = document.getElementById('display-user-name');
+                if (userNameElement) {
+                    userNameElement.innerText = "Ciao, " + (params.get('n') || "Paziente");
+                }
+                
+                const rewardDescElement = document.getElementById('display-reward-desc');
+                if (rewardDescElement) {
+                    rewardDescElement.innerText = params.get('pr') || "Premio Fedeltà";
+                }
+                
+                // Generazione Codice QR Autonomo
                 const qrCanvas = document.getElementById("qrcode-canvas");
-                if(qrCanvas) {
+                if (qrCanvas) {
                     new QRCode(qrCanvas, { 
                         text: window.location.href, 
                         width: 170, 
@@ -1100,80 +1248,109 @@
                     });
                 }
 
-                // Sync Asincrono dei Pallini (Fidelity Dots)
+                // Processo Asincrono: Recupero Punti dal Server per i Pallini
                 try {
                     const targetCid = params.get('cid');
-                    const response = await fetch(`${GOOGLE_ENDPOINT}?getCid=${targetCid}`);
-                    const data = await response.json();
                     
-                    const cloudPoints = parseInt(data.pts || 0);
-                    const dotElements = document.querySelectorAll('.fidelity-point');
-                    
-                    for (let j = 0; j < cloudPoints && j < 5; j++) {
-                        dotElements[j].classList.add('filled');
-                    }
-                    
-                    if (cloudPoints >= 5) {
-                        const winBox = document.getElementById('display-win-box');
-                        if(winBox) winBox.style.display = "block";
+                    if (targetCid) {
+                        const response = await fetch(`${GOOGLE_ENDPOINT}?getCid=${targetCid}`);
+                        const cloudData = await response.json();
+                        
+                        const cloudPoints = parseInt(cloudData.pts || 0);
+                        
+                        // Selezione dei pallini (Dots) per l'animazione
+                        const dotElements = document.querySelectorAll('.fidelity-point');
+                        
+                        for (let j = 0; j < cloudPoints && j < 5; j++) {
+                            // Aggiunge la classe che colora d'oro e mette la spunta
+                            dotElements[j].classList.add('filled');
+                        }
+                        
+                        // Rivelazione Box Vincita se traguardo raggiunto
+                        if (cloudPoints >= 5) {
+                            const winBox = document.getElementById('display-win-box');
+                            if (winBox) {
+                                winBox.style.display = "block";
+                            }
+                        }
                     }
                 } catch (error) { 
-                    console.warn("Impossibile recuperare i punti", error); 
+                    console.warn("Impossibile recuperare i punti: Network isolato", error); 
                 }
             }
         }
 
         /**
-         * GESTIONE REFERRAL (CONDIVISIONE AMICO DAL PAZIENTE)
+         * ---------------------------------------------------------------------
+         * SISTEMA DI REFERRAL (CONDIVISIONE DA PARTE DEL PAZIENTE)
+         * ---------------------------------------------------------------------
          */
         function shareVoucherLink() {
-            // Prendo l'URL attuale del paziente
+            // Analizza l'URL in cui si trova il paziente attualmente
             const currentUrl = new URL(window.location.href);
             
-            // MODIFICA FONDAMENTALE: Cambio v=gift in v=friend per l'amico
+            // OPERAZIONE CHIAVE: Trasforma l'URL da 'gift' a 'friend'
             currentUrl.searchParams.set('v', 'friend');
             
+            // Lettura Variabili per Costruzione Testo
             const nomeStudio = currentUrl.searchParams.get('st') || "questo studio";
             const scontoAmico = currentUrl.searchParams.get('sc') || "un vantaggio speciale";
             
-            // Testo da inviare su WhatsApp
-            const message = `Ehi! Guarda che regalo ho ricevuto da ${nomeStudio}: uno ${scontoAmico} per te!\n\n🎁 Clicca su questo link per ottenerlo subito:\n${currentUrl.toString()}`;
+            // Costruzione Messaggio
+            const messageText = `Ehi! Guarda che regalo ho ricevuto da ${nomeStudio}: uno ${scontoAmico} per te!\n\n🎁 Clicca su questo link per ottenerlo subito:\n${currentUrl.toString()}`;
             
-            console.log("Apertura WhatsApp per Referral Link");
-            window.open(`https://wa.me/?text=${encodeURIComponent(message)}`);
+            // Esecuzione chiamata API nativa WhatsApp
+            window.open(`https://wa.me/?text=${encodeURIComponent(messageText)}`);
         }
 
         /**
-         * TERMINOLOGIA DINAMICA IN BASE AL SETTORE
+         * ---------------------------------------------------------------------
+         * IMPOSTAZIONE TERMINOLOGIA DINAMICA DASHBOARD
+         * ---------------------------------------------------------------------
          */
         function applyTerminology() {
-            if(!state.bizProfile || !state.bizProfile.sector) return;
+            // Verifica disponibilità dati
+            if (!state.bizProfile || !state.bizProfile.sector) {
+                return;
+            }
             
-            const maps = { 
+            // Mappa Semantica Settoriale
+            const textMap = { 
                 "Ristorazione": "Ospiti", 
                 "Wellness": "Clienti", 
                 "Salute": "Pazienti" 
             };
             
-            const term = maps[state.bizProfile.sector] || "Pazienti";
+            const sectorTerm = textMap[state.bizProfile.sector] || "Pazienti";
             
+            // Iniezione Testi nel DOM
             const labelStats = document.getElementById('stats-label');
             const labelInput = document.getElementById('label-client-name');
             const placeholderInput = document.getElementById('new-client-name');
             
-            if(labelStats) labelStats.innerText = term + " nel Cloud";
-            if(labelInput) labelInput.innerText = "Nome " + term;
-            if(placeholderInput) placeholderInput.placeholder = "Inserisci Nome " + term;
+            if (labelStats) {
+                labelStats.innerText = sectorTerm + " nel Cloud";
+            }
+            if (labelInput) {
+                labelInput.innerText = "Nome " + sectorTerm;
+            }
+            if (placeholderInput) {
+                placeholderInput.placeholder = "Inserisci Nome " + sectorTerm;
+            }
         }
 
         /**
-         * RICHIESTA VERSIONE PRO
+         * ---------------------------------------------------------------------
+         * COMUNICAZIONE UPGRADE ACCOUNT
+         * ---------------------------------------------------------------------
          */
         function sendProUpgradeRequest() {
-            if(!state.deviceID || !state.bizProfile) return;
+            // Controllo Identità
+            if (!state.deviceID || !state.bizProfile) {
+                return;
+            }
             
-            console.log("Invio richiesta Upgrade PRO per: " + state.deviceID);
-            
+            // Notifica Webhook al Server
             fetch(GOOGLE_ENDPOINT, { 
                 method: "POST", 
                 mode: "no-cors", 
@@ -1184,7 +1361,8 @@
                 }) 
             });
             
-            alert("RICHIESTA INVIATA CON SUCCESSO!\n\nVerrai contattato su WhatsApp Business per l'attivazione della versione PRO e lo sblocco dei limiti.");
+            // Alert di Conferma all'Esercente
+            alert("RICHIESTA INVIATA CON SUCCESSO!\n\nIl nostro team riceverà una notifica immediata. Verrai contattato sul tuo numero WhatsApp Business per l'attivazione ufficiale della versione PRO e lo sblocco del database illimitato.");
         }
     </script>
 </body>
