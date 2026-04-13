@@ -130,9 +130,17 @@
             
             box-shadow: 0 0 40px rgba(0, 0, 0, 0.03);
             
-            border-left: 5px solid var(--premium-gold); 
+            border-left-width: 5px;
             
-            border-right: 5px solid var(--premium-gold);
+            border-left-style: solid;
+            
+            border-left-color: var(--premium-gold); 
+            
+            border-right-width: 5px;
+            
+            border-right-style: solid;
+            
+            border-right-color: var(--premium-gold);
         }
 
         /* =====================================================================
@@ -256,7 +264,13 @@
             
             padding-left: 25px;
             
-            border-radius: var(--radius-lg); 
+            border-top-left-radius: var(--radius-lg); 
+            
+            border-top-right-radius: var(--radius-lg);
+            
+            border-bottom-right-radius: var(--radius-lg);
+            
+            border-bottom-left-radius: var(--radius-lg);
             
             border-width: 2px;
             
@@ -306,7 +320,13 @@
             
             padding-left: 22px;
             
-            border-radius: var(--radius-md); 
+            border-top-left-radius: var(--radius-md); 
+            
+            border-top-right-radius: var(--radius-md);
+            
+            border-bottom-right-radius: var(--radius-md);
+            
+            border-bottom-left-radius: var(--radius-md);
             
             border-width: 2px;
             
@@ -349,7 +369,13 @@
             
             padding-bottom: 22px;
             
-            border-radius: var(--radius-md); 
+            border-top-left-radius: var(--radius-md); 
+            
+            border-top-right-radius: var(--radius-md);
+            
+            border-bottom-right-radius: var(--radius-md);
+            
+            border-bottom-left-radius: var(--radius-md);
             
             border: none; 
             
@@ -423,7 +449,7 @@
         }
 
         /* =====================================================================
-           [SECTION 7] - BADGE & DASHBOARD
+           [SECTION 7] - BADGE LATERALE FIXATO & DASHBOARD
            ===================================================================== */
         .counter-display { 
             text-align: center; 
@@ -461,12 +487,13 @@
             margin-top: 10px;
         }
 
+        /* FIX MOBILE: Posizionato a zero sul margine destro invece che fuori schermo */
         .status-badge {
             position: absolute;
             
             top: 25px;
             
-            right: -35px;
+            right: 0px; 
             
             padding-top: 8px;
             
@@ -474,7 +501,7 @@
             
             padding-bottom: 8px;
             
-            padding-left: 25px;
+            padding-left: 20px;
             
             border-top-left-radius: 20px;
             
@@ -511,6 +538,7 @@
             background-color: var(--premium-gold); 
         }
 
+        /* FIX MOBILE: Impaginazione Righe Pazienti */
         .row-item { 
             display: flex; 
             
@@ -551,20 +579,33 @@
             transform: translateX(5px); 
         }
 
+        .row-info {
+            display: flex;
+            
+            flex-direction: column;
+        }
+
         .row-info b { 
             color: var(--primary-teal); 
             
             font-size: 1.1rem; 
             
             display: block; 
+            
+            margin-bottom: 4px;
         }
 
+        /* FIX MOBILE: Incolonnamento Punti e Premio (Stacking) */
         .row-info span { 
             color: var(--slate-gray); 
             
             font-size: 0.85rem; 
             
             font-weight: 600; 
+            
+            display: block; 
+            
+            margin-bottom: 2px;
         }
 
         .row-tools { 
@@ -1857,7 +1898,8 @@
                 
                 const finalLink = rootUrl + voucherParams;
                 
-                const whatsappText = `Ciao ${entry.nome}! Ecco il tuo Pass Regalo speciale di ${state.bizProfile.name}!\n\nUtilizzalo per accumulare punti o regalarlo a un amico.\n\nVisualizza il pass qui:\n${finalLink}`;
+                // EMOJI FIX: Inserite le emoji all'interno del messaggio inviato su WhatsApp
+                const whatsappText = `Ciao ${entry.nome}! 🎁 Ecco il tuo Pass Regalo speciale di ${state.bizProfile.name}!\n\nUtilizzalo per accumulare punti o regalarlo a un amico. ✨\n\nVisualizza il pass qui:\n${finalLink}`;
                 
                 const waUrl = `https://wa.me/${entry.tel}?text=${encodeURIComponent(whatsappText)}`;
                 
@@ -1873,11 +1915,13 @@
                     `;
                 }
 
+                // UX FIX: Struttura a righe incolonnate per Punti e Premio sotto il Nome del Paziente
                 const rowHTML = `
                     <div class="row-item">
                         <div class="row-info">
                             <b>${entry.nome}</b>
-                            <span>${entry.pts} Punti • ${entry.premio}</span>
+                            <span>${entry.pts} Punti Registrati</span>
+                            <span>Premio: ${entry.premio}</span>
                         </div>
                         <div class="row-tools">
                             <a href="${waUrl}" target="_blank" class="tool-btn btn-wa-action">
@@ -2158,7 +2202,8 @@
             
             const sconto = currentUrl.searchParams.get('sc') || "un vantaggio speciale";
             
-            const msg = `Ehi! Guarda che regalo ho ricevuto da ${studio}: uno ${sconto} per te!\n\nClicca su questo link per ottenerlo subito:\n${currentUrl.toString()}`;
+            // EMOJI FIX: Inserite le emoji nel referral destinato all'amico
+            const msg = `Ehi! 👋 Guarda che regalo ho ricevuto da ${studio}: uno ${sconto} per te! 🎁\n\nClicca su questo link per ottenerlo subito 👇:\n${currentUrl.toString()}`;
             
             window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`);
         }
