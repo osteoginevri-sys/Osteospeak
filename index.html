@@ -655,6 +655,13 @@
             
             color: var(--danger-red); 
         }
+        
+        /* Tasto Elimina per i FREE (Lucchetto Grigio) */
+        .btn-lock-action {
+            background-color: #e2e8f0;
+            
+            color: #94a3b8;
+        }
 
         /* =====================================================================
            [SECTION 8] - PACCO REGALO SVG ORO
@@ -1416,7 +1423,13 @@
                     class="btn-action btn-gold" 
                     onclick="shareVoucherLink()"
                 >
-                    REGALA SCONTO A UN AMICO <i class="fab fa-whatsapp"></i>
+                    REGALA SCONTO A UN AMICO 
+                    
+                    <i 
+                        class="fab fa-whatsapp" 
+                        style="font-size: 1.8rem; margin-left: 8px;"
+                    >
+                    </i>
                 </button>
             </div>
         </main>
@@ -1898,24 +1911,38 @@
                 
                 const finalLink = rootUrl + voucherParams;
                 
-                // EMOJI FIX: Inserite le emoji all'interno del messaggio inviato su WhatsApp
+                // EMOJI REINSERITE NEL MESSAGGIO AL PAZIENTE
                 const whatsappText = `Ciao ${entry.nome}! 🎁 Ecco il tuo Pass Regalo speciale di ${state.bizProfile.name}!\n\nUtilizzalo per accumulare punti o regalarlo a un amico. ✨\n\nVisualizza il pass qui:\n${finalLink}`;
                 
                 const waUrl = `https://wa.me/${entry.tel}?text=${encodeURIComponent(whatsappText)}`;
                 
+                // FIX ELIMINA: Costruzione del pulsante visibile a tutti
                 let delBtn = "";
                 
                 if (
                     state.isProActive
                 ) {
+                    // Cestino Rosso (Attivo per utenti PRO)
                     delBtn = `
-                        <button class="tool-btn btn-del-action" onclick="removeEntry(${index})">
+                        <button 
+                            class="tool-btn btn-del-action" 
+                            onclick="removeEntry(${index})"
+                        >
                             <i class="fas fa-trash-alt"></i>
+                        </button>
+                    `;
+                } else {
+                    // Lucchetto Grigio (Visibile per utenti FREE ma inattivo)
+                    delBtn = `
+                        <button 
+                            class="tool-btn btn-lock-action" 
+                            onclick="alert('Funzione bloccata. Passa alla versione PRO per sbloccare l\\'eliminazione dei pazienti.')"
+                        >
+                            <i class="fas fa-lock"></i>
                         </button>
                     `;
                 }
 
-                // UX FIX: Struttura a righe incolonnate per Punti e Premio sotto il Nome del Paziente
                 const rowHTML = `
                     <div class="row-item">
                         <div class="row-info">
@@ -2202,7 +2229,7 @@
             
             const sconto = currentUrl.searchParams.get('sc') || "un vantaggio speciale";
             
-            // EMOJI FIX: Inserite le emoji nel referral destinato all'amico
+            // EMOJI REINSERITE NEL MESSAGGIO REFERRAL AMICO
             const msg = `Ehi! 👋 Guarda che regalo ho ricevuto da ${studio}: uno ${sconto} per te! 🎁\n\nClicca su questo link per ottenerlo subito 👇:\n${currentUrl.toString()}`;
             
             window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`);
